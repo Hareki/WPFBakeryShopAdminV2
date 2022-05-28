@@ -117,6 +117,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\NullToEnabledConverter.cs" />
     <Compile Include="Lists\LanguageList.cs" />
     <Compile Include="Lists\ProductTypeList.cs" />
     <Compile Include="Lists\RoleList.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="MVVM\ViewModels\NewAccountViewModel.cs" />
     <Compile Include="MVVM\ViewModels\NewProductViewModel.cs" />
     <Compile Include="MVVM\ViewModels\PersonalAccountViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\ProductVariantViewModel.cs" />
     <Compile Include="MVVM\ViewModels\ProductViewModel.cs" />
     <Compile Include="MVVM\Views\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
@@ -173,6 +175,9 @@
     </Compile>
     <Compile Include="MVVM\Views\PersonalAccountView.xaml.cs">
       <DependentUpon>PersonalAccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\ProductVariantView.xaml.cs">
+      <DependentUpon>ProductVariantView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\ProductView.xaml.cs">
       <DependentUpon>ProductView.xaml</DependentUpon>
@@ -281,6 +286,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\Views\PersonalAccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\ProductVariantView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

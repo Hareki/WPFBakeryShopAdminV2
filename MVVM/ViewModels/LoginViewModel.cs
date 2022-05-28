@@ -133,6 +133,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         public async Task ShowForgotPasswordDialog()
         {
             await this._windowManager.ShowWindowAsync(new ForgotPasswordViewModel(this, _windowManager));
+            //await this._windowManager.ShowWindowAsync(new NewProductViewModel());
             await this.DeactivateAsync(true);
         }
         #endregion

@@ -57,7 +57,7 @@
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     Margin="0 0 15 0"
                                     Foreground="{StaticResource InfoColorBrush}"
-                                    Content="{DynamicResource DialogButtoConfirm}"
+                                    Content="{DynamicResource DialogButtonConfirm}"
                                     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                                 <Button.CommandParameter>
                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">

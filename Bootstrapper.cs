@@ -18,7 +18,7 @@ namespace WPFBakeryShopAdminV2
             _container.PerRequest<ForgotPasswordViewModel>();
             _container.PerRequest<NewAccountViewModel>();
             _container.PerRequest<NewProductViewModel>();
-            //    _container.PerRequest<VariantAddEditDialogViewModel>();
+            _container.PerRequest<ProductVariantViewModel>();
 
             _container.Singleton<IWindowManager, WindowManager>();
             _container.Singleton<IEventAggregator, EventAggregator>();

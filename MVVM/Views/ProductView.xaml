@@ -19,238 +19,242 @@
     <UserControl.Resources>
         <converter:ReverseVisibilityToBoolConverter x:Key="reverseVisToBool" />
         <converter:SelectedItemToBoolConveter x:Key="selectedToBoolConverter" />
+        <converter:NullToEnabledConverter x:Key="nullToEnabled" />
     </UserControl.Resources>
-    <materialDesign:DialogHost CloseOnClickAway="True"
-                               x:Name="DialogContainer"
-                               OverlayBackground="Transparent">
-        <materialDesign:DialogHost.DialogContent>
-            <Border x:Name="DialogContent"
-                    Padding="20"
-                    CornerRadius="12"
-                    MaxWidth="400"
-                    TextElement.Foreground="{DynamicResource MaterialDesignBody}">
-                <StackPanel>
-                    <StackPanel x:Name="ConfirmContent">
-                        <Grid>
-                            <materialDesign:PackIcon Kind="HelpCircle"
-                                                     HorizontalAlignment="Right"
-                                                     Margin="0 0 0 20"
-                                                     Width="25"
-                                                     Height="25"
-                                                     Foreground="{StaticResource InfoColorBrush}" />
-                            <TextBlock x:Name="ConfirmTitleTB"
-                                       Text="Title confirm"
-                                       FontWeight="Bold"
-                                       FontSize="18"
-                                       Margin="0 0 0 20" />
-                        </Grid>
 
-                        <TextBlock x:Name="ConfirmMessageTB"
-                                   TextWrapping="Wrap"
-                                   Padding="0"
-                                   Margin="0"
-                                   LineHeight="25"
-                                   Text="Title message">
-                        </TextBlock>
-                        <StackPanel Margin="0 20 0 0"
-                                    Orientation="Horizontal"
-                                    HorizontalAlignment="Center">
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    Margin="0 0 15 0"
-                                    Foreground="{StaticResource InfoColorBrush}"
-                                    Content="{DynamicResource DialogButtoConfirm}"
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                <Button.CommandParameter>
-                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                        True
-                                    </system:Boolean>
-                                </Button.CommandParameter>
-                            </Button>
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    Margin="15 0 0 0"
-                                    Foreground="{StaticResource InfoColorBrush}"
-                                    Content="{DynamicResource DialogButtonCancel}"
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                <Button.CommandParameter>
-                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                        False
-                                    </system:Boolean>
-                                </Button.CommandParameter>
-                            </Button>
-                        </StackPanel>
+    <Grid>
+        <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide"
+                                             OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.3}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0"
+                      Grid.ColumnSpan="12">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                                   FontWeight="SemiBold"
+                                   Margin="{StaticResource TitleMargin}"
+                                   Text="Sản phẩm" />
+                        <Button x:Name="LoadPage"
+                                Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                ToolTip="MaterialDesignIconForegroundButton"
+                                Foreground="{DynamicResource MaterialDesignBody}"
+                                VerticalAlignment="Top"
+                                Margin="5 0 0 0 ">
+                            <materialDesign:PackIcon Kind="Reload" />
+                        </Button>
                     </StackPanel>
 
-                    <StackPanel x:Name="ErrorContent">
-                        <Grid>
-                            <materialDesign:PackIcon Kind="AlertCircle"
-                                                     HorizontalAlignment="Right"
-                                                     Margin="0 0 0 20"
-                                                     Width="25"
-                                                     Height="25"
-                                                     Foreground="{StaticResource ErrorColorBrush}" />
-                            <TextBlock x:Name="ErrorTitleTB"
-                                       Text="Title confirm"
-                                       FontWeight="Bold"
-                                       FontSize="18"
-                                       Margin="0 0 0 20" />
-                        </Grid>
-                        <TextBlock x:Name="ErrorMessageTB"
-                                   TextWrapping="Wrap"
-                                   Padding="0"
-                                   Margin="0"
-                                   LineHeight="25"
-                                   Text="Are you sure want to cancel this order? You can't undo this action">
-                        </TextBlock>
-                        <StackPanel Margin="0 20 0 0"
-                                    Orientation="Horizontal"
-                                    HorizontalAlignment="Center">
-                            <Button Style="{StaticResource CustomFlatButton}"
-                                    Margin="0 0 15 0"
-                                    Content="{DynamicResource DialogButtonOkay}"
-                                    Foreground="{StaticResource ErrorColorBrush}"
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                            </Button>
-                        </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right"
+                                Margin="{StaticResource TitleMargin}">
+                        <Button x:Name="ShowAddingProductDialog"
+                                Grid.Row="0"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                Style="{StaticResource CustomPrimaryButton}"
+                                Content="Thêm sản phẩm mới"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Margin="0 0 0 0" />
                     </StackPanel>
-                </StackPanel>
-            </Border>
-
-        </materialDesign:DialogHost.DialogContent>
-        <Grid>
-            <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide"
-                                                 OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.3}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0"
-                          Grid.ColumnSpan="12">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
-                                       FontWeight="SemiBold"
-                                       Margin="{StaticResource TitleMargin}"
-                                       Text="Sản phẩm" />
-                            <Button x:Name="LoadPage"
-                                    Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                    ToolTip="MaterialDesignIconForegroundButton"
-                                    Foreground="{DynamicResource MaterialDesignBody}"
-                                    VerticalAlignment="Top"
-                                    Margin="5 0 0 0 ">
-                                <materialDesign:PackIcon Kind="Reload" />
-                            </Button>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal"
-                                    HorizontalAlignment="Right"
-                                    Margin="{StaticResource TitleMargin}">
-                            <Button x:Name="ShowAddingProductDialog"
-                                    Grid.Row="0"
-                                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                    Style="{StaticResource CustomPrimaryButton}"
-                                    Content="Thêm sản phẩm mới"
-                                    HorizontalAlignment="Right"
+                    <materialDesign:Snackbar HorizontalAlignment="Center"
+                                             VerticalAlignment="Top"
+                                             Grid.ColumnSpan="12"
+                                             x:Name="GreenSB"
+                                             Background="#00b4d8"
+                                             MessageQueue="{materialDesign:MessageQueue}">
+                        <materialDesign:SnackbarMessage>
+                            <StackPanel Orientation="Horizontal"
+                                        x:Name="GreenContent">
+                                <materialDesign:PackIcon Kind="CheckCircle"
+                                                         Margin="0 3 10 0"
+                                                         VerticalAlignment="Center" />
+                                <TextBlock Text="Cập nhật trạng thái thành công"
+                                           FontWeight="SemiBold"
+                                           x:Name="GreenMessage" />
+                            </StackPanel>
+                        </materialDesign:SnackbarMessage>
+                    </materialDesign:Snackbar>
+                </Grid>
+                <Border Background="White"
+                        Padding="15 0"
+                        Grid.Row="1"
+                        CornerRadius="12">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="8*" />
+                            <RowDefinition Height="2*" />
+                        </Grid.RowDefinitions>
+                        <DataGrid x:Name="RowItemProducts"
+                                  IsEnabled="{Binding NotEditing}"
+                                  CanUserAddRows="False"
+                                  ScrollViewer.CanContentScroll="False"
+                                  IsReadOnly="True"
+                                  AutoGenerateColumns="False"
+                                  Background="White"
+                                  SelectionUnit="FullRow"
+                                  SelectionMode="Single"
+                                  SelectedItem="{Binding Path=SelectedProduct, Mode=TwoWay}"
+                                  cal:Message.Attach="[Event SelectionChanged] = [Action RowItemProducts_SelectionChanged]">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Mã"
+                                                    Width="*"
+                                                    Binding="{Binding Path=Id}" />
+                                <DataGridTextColumn Header="Tên sản phẩm"
+                                                    Width="4*"
+                                                    Binding="{Binding Path=Name}" />
+                                <DataGridTextColumn Header="Danh mục"
+                                                    Width="2*"
+                                                    Binding="{Binding Path=CategoryName}" />
+                                <DataGridTextColumn Header="Nguyên liệu"
+                                                    Width="3*"
+                                                    Binding="{Binding Path=Ingredients}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                     Value="0"
+                                     Visibility="{Binding Path=LoadingPageVis}"
+                                     IsIndeterminate="True" />
+                        <StackPanel HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
-                                    Margin="0 0 0 0" />
-                        </StackPanel>
-                        <materialDesign:Snackbar HorizontalAlignment="Center"
-                                                 VerticalAlignment="Top"
-                                                 Grid.ColumnSpan="12"
-                                                 x:Name="GreenSB"
-                                                 Background="#00b4d8"
-                                                 MessageQueue="{materialDesign:MessageQueue}">
-                            <materialDesign:SnackbarMessage>
-                                <StackPanel Orientation="Horizontal"
-                                            x:Name="GreenContent">
-                                    <materialDesign:PackIcon Kind="CheckCircle"
-                                                             Margin="0 3 10 0"
-                                                             VerticalAlignment="Center" />
-                                    <TextBlock Text="Cập nhật trạng thái thành công"
-                                               FontWeight="SemiBold"
-                                               x:Name="GreenMessage" />
-                                </StackPanel>
-                            </materialDesign:SnackbarMessage>
-                        </materialDesign:Snackbar>
-                    </Grid>
-                    <Border Background="White"
-                            Padding="15 0"
-                            Grid.Row="1"
-                            CornerRadius="12">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="8*" />
-                                <RowDefinition Height="2*" />
-                            </Grid.RowDefinitions>
-                            <DataGrid x:Name="RowItemProducts"
-                                      CanUserAddRows="False"
-                                      ScrollViewer.CanContentScroll="False"
-                                      IsReadOnly="True"
-                                      AutoGenerateColumns="False"
-                                      Background="White"
-                                      SelectionUnit="FullRow"
-                                      SelectionMode="Single"
-                                      SelectedItem="{Binding Path=SelectedProduct, Mode=TwoWay}"
-                                      cal:Message.Attach="[Event SelectionChanged] = [Action RowItemProducts_SelectionChanged]">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Mã"
-                                                        Width="*"
-                                                        Binding="{Binding Path=Id}" />
-                                    <DataGridTextColumn Header="Tên sản phẩm"
-                                                        Width="4*"
-                                                        Binding="{Binding Path=Name}" />
-                                    <DataGridTextColumn Header="Danh mục"
-                                                        Width="2*"
-                                                        Binding="{Binding Path=CategoryName}" />
-                                    <DataGridTextColumn Header="Nguyên liệu"
-                                                        Width="3*"
-                                                        Binding="{Binding Path=Ingredients}" />
-                                </DataGrid.Columns>
-                            </DataGrid>
-                            <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
-                                         Value="0"
-                                         Visibility="{Binding Path=LoadingPageVis}"
-                                         IsIndeterminate="True" />
-                            <StackPanel HorizontalAlignment="Right"
-                                        VerticalAlignment="Center"
+                                    Orientation="Horizontal"
+                                    IsEnabled="{Binding NotEditing}"
+                                    FlowDirection="RightToLeft"
+                                    Grid.Row="1">
+                            <Button  x:Name="LoadLastPage"
+                                     Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                     IsEnabled="{Binding Path=Pagination.CouldLoadLastPage}">
+                                <materialDesign:PackIcon Kind="PageLast" />
+                            </Button>
+                            <Button x:Name="LoadNextPage"
+                                    Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                    IsEnabled="{Binding Path=Pagination.CouldLoadNextPage}">
+                                <materialDesign:PackIcon Kind="ChevronRight" />
+                            </Button>
+                            <Button x:Name="LoadPreviousPage"
+                                    Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                    IsEnabled="{Binding Path=Pagination.CouldLoadPreviousPage}">
+                                <materialDesign:PackIcon Kind="ChevronLeft" />
+                            </Button>
+                            <Button x:Name="LoadFirstPage"
+                                    Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                    IsEnabled="{Binding Path=Pagination.CouldLoadFirstPage}">
+                                <materialDesign:PackIcon Kind="PageFirst" />
+                            </Button>
+                            <StackPanel FlowDirection="LeftToRight"
                                         Orientation="Horizontal"
-                                        FlowDirection="RightToLeft"
-                                        Grid.Row="1">
-                                <Button  x:Name="LoadLastPage"
-                                         Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                         IsEnabled="{Binding Path=Pagination.CouldLoadLastPage}">
-                                    <materialDesign:PackIcon Kind="PageLast" />
-                                </Button>
-                                <Button x:Name="LoadNextPage"
-                                        Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                        IsEnabled="{Binding Path=Pagination.CouldLoadNextPage}">
-                                    <materialDesign:PackIcon Kind="ChevronRight" />
-                                </Button>
-                                <Button x:Name="LoadPreviousPage"
-                                        Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                        IsEnabled="{Binding Path=Pagination.CouldLoadPreviousPage}">
-                                    <materialDesign:PackIcon Kind="ChevronLeft" />
-                                </Button>
-                                <Button x:Name="LoadFirstPage"
-                                        Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                        IsEnabled="{Binding Path=Pagination.CouldLoadFirstPage}">
-                                    <materialDesign:PackIcon Kind="PageFirst" />
-                                </Button>
-                                <StackPanel FlowDirection="LeftToRight"
-                                            Orientation="Horizontal"
-                                            Margin="10 0 0 0">
-                                    <TextBlock x:Name="Pagination_PageIndicator"
-                                               Text="1 - 11 của 44"
-                                               FontWeight="SemiBold"
-                                               VerticalAlignment="Center" />
+                                        Margin="10 0 0 0">
+                                <TextBlock x:Name="Pagination_PageIndicator"
+                                           Text="1 - 11 của 44"
+                                           FontWeight="SemiBold"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <materialDesign:DialogHost CloseOnClickAway="True"
+                                           OverlayBackground="Transparent"
+                                           Grid.Row="2">
+                    <materialDesign:DialogHost.DialogContent>
+                        <Border x:Name="DialogContent"
+                                Padding="20"
+                                CornerRadius="12"
+                                MaxWidth="400"
+                                TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+                            <StackPanel>
+                                <StackPanel x:Name="ConfirmContent">
+                                    <Grid>
+                                        <materialDesign:PackIcon Kind="HelpCircle"
+                                                                 HorizontalAlignment="Right"
+                                                                 Margin="0 0 0 20"
+                                                                 Width="25"
+                                                                 Height="25"
+                                                                 Foreground="{StaticResource InfoColorBrush}" />
+                                        <TextBlock x:Name="ConfirmTitleTB"
+                                                   Text="Title confirm"
+                                                   FontWeight="Bold"
+                                                   FontSize="18"
+                                                   Margin="0 0 0 20" />
+                                    </Grid>
+
+                                    <TextBlock x:Name="ConfirmMessageTB"
+                                               TextWrapping="Wrap"
+                                               Padding="0"
+                                               Margin="0"
+                                               LineHeight="25"
+                                               Text="Title message">
+                                    </TextBlock>
+                                    <StackPanel Margin="0 20 0 0"
+                                                Orientation="Horizontal"
+                                                HorizontalAlignment="Center">
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                Margin="0 0 15 0"
+                                                Foreground="{StaticResource InfoColorBrush}"
+                                                Content="{DynamicResource DialogButtonConfirm}"
+                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    True
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                Margin="15 0 0 0"
+                                                Foreground="{StaticResource InfoColorBrush}"
+                                                Content="{DynamicResource DialogButtonCancel}"
+                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                            <Button.CommandParameter>
+                                                <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                    False
+                                                </system:Boolean>
+                                            </Button.CommandParameter>
+                                        </Button>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel x:Name="ErrorContent">
+                                    <Grid>
+                                        <materialDesign:PackIcon Kind="AlertCircle"
+                                                                 HorizontalAlignment="Right"
+                                                                 Margin="0 0 0 20"
+                                                                 Width="25"
+                                                                 Height="25"
+                                                                 Foreground="{StaticResource ErrorColorBrush}" />
+                                        <TextBlock x:Name="ErrorTitleTB"
+                                                   Text="Title confirm"
+                                                   FontWeight="Bold"
+                                                   FontSize="18"
+                                                   Margin="0 0 0 20" />
+                                    </Grid>
+                                    <TextBlock x:Name="ErrorMessageTB"
+                                               TextWrapping="Wrap"
+                                               Padding="0"
+                                               Margin="0"
+                                               LineHeight="25"
+                                               Text="Are you sure want to cancel this order? You can't undo this action">
+                                    </TextBlock>
+                                    <StackPanel Margin="0 20 0 0"
+                                                Orientation="Horizontal"
+                                                HorizontalAlignment="Center">
+                                        <Button Style="{StaticResource CustomFlatButton}"
+                                                Margin="0 0 15 0"
+                                                Content="{DynamicResource DialogButtonOkay}"
+                                                Foreground="{StaticResource ErrorColorBrush}"
+                                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                                        </Button>
+                                    </StackPanel>
                                 </StackPanel>
                             </StackPanel>
-                        </Grid>
-                    </Border>
+                        </Border>
+
+                    </materialDesign:DialogHost.DialogContent>
                     <Border HorizontalAlignment="Stretch"
                             Margin="0 30 0 0"
-                            Grid.Row="2"
                             CornerRadius="12"
+                            Grid.Row="2"
                             Background="White"
                             Padding="0 0 0 0"
                             MaxHeight="350">
@@ -335,6 +339,7 @@
                                                                 <Button x:Name="RequestUpdateProductInfo"
                                                                         Style="{StaticResource CustomBorderButton}"
                                                                         Content="Cập nhật"
+                                                                        IsEnabled="{Binding ProductDetails, Converter={StaticResource nullToEnabled}}"
                                                                         VerticalAlignment="Top"
                                                                         Margin="0 0 15 0"
                                                                         materialDesign:ShadowAssist.ShadowDepth="Depth0" />
@@ -437,20 +442,23 @@
                                                                     FlowDirection="RightToLeft"
                                                                     Grid.Row="0"
                                                                     Grid.Column="1">
-                                                            <Button Style="{StaticResource CustomBorderButton}"
+                                                            <Button x:Name="ShowNewVariantDialog"
+                                                                    Style="{StaticResource CustomBorderButton}"
                                                                     Content="Thêm"
                                                                     Margin="0 0 15 0"
                                                                     MinWidth="100"
                                                                     materialDesign:ShadowAssist.ShadowDepth="Depth0" />
 
-                                                            <Button Style="{StaticResource CustomBorderButton}"
+                                                            <Button x:Name="ShowEditVariantDialog"
+                                                                    Style="{StaticResource CustomBorderButton}"
                                                                     Content="Cập nhật"
                                                                     IsEnabled="{Binding Path=SelectedItem, ElementName=RowItemVariants, Converter={StaticResource selectedToBoolConverter}}"
                                                                     Margin="0 0 15 0"
                                                                     MinWidth="100"
                                                                     materialDesign:ShadowAssist.ShadowDepth="Depth0" />
 
-                                                            <Button Style="{StaticResource CustomBorderButton}"
+                                                            <Button x:Name="DeleteVariant"
+                                                                    Style="{StaticResource CustomBorderButton}"
                                                                     Content="Xóa"
                                                                     IsEnabled="{Binding Path=SelectedItem, ElementName=RowItemVariants, Converter={StaticResource selectedToBoolConverter}}"
                                                                     Margin="0 0 15 0"
@@ -605,8 +613,9 @@
                             <!--</ScrollViewer>-->
                         </Expander>
                     </Border>
-                </Grid>
-            </materialDesign:TransitioningContent>
-        </Grid>
-    </materialDesign:DialogHost>
+                </materialDesign:DialogHost>
+            </Grid>
+        </materialDesign:TransitioningContent>
+    </Grid>
+    <!--</materialDesign:DialogHost>-->
 </UserControl>

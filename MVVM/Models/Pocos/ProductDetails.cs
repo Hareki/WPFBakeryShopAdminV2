@@ -26,5 +26,14 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
         public bool Available { get; set; }
         [JsonIgnore]
         public Category Category => Lists.CategoryList.FindCategoryById(CategoryId);
+
+        [JsonIgnore]
+        public ProductRowItem ProductRowItem
+        {
+            get
+            {
+                return new ProductRowItem(this.Id, this.Name, this.Category.Name, this.Ingredients);
+            }
+        }
     }
 }

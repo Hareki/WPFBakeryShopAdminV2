@@ -18,239 +18,160 @@
         ShowInTaskbar="False"
         Height="375"
         Width="750">
-    <materialDesign:DialogHost CloseOnClickAway="True"
-                               x:Name="DialogContainer"
-                               OverlayBackground="Transparent">
-        <materialDesign:DialogHost.DialogContent>
-            <Border x:Name="DialogContent"
-                    Padding="20"
-                    CornerRadius="12"
-                    MaxWidth="400"
-                    TextElement.Foreground="{DynamicResource MaterialDesignBody}">
-                <StackPanel>
-                    <StackPanel x:Name="ConfirmContent">
-                        <Grid>
-                            <materialDesign:PackIcon Kind="HelpCircle"
-                                                     HorizontalAlignment="Right"
-                                                     Margin="0 0 0 20"
-                                                     Width="25"
-                                                     Height="25"
-                                                     Foreground="{StaticResource InfoColorBrush}" />
-                            <TextBlock x:Name="ConfirmTitleTB"
-                                       Text="Title confirm"
-                                       FontWeight="Bold"
-                                       FontSize="18"
-                                       Margin="0 0 0 20" />
-                        </Grid>
 
-                        <TextBlock x:Name="ConfirmMessageTB"
-                                   TextWrapping="Wrap"
-                                   Padding="0"
-                                   Margin="0"
-                                   LineHeight="25"
-                                   Text="Title message">
-                        </TextBlock>
-                        <StackPanel Margin="0 20 0 0"
-                                    Orientation="Horizontal"
-                                    HorizontalAlignment="Center">
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    Margin="0 0 15 0"
-                                    Foreground="{StaticResource InfoColorBrush}"
-                                    Content="{DynamicResource DialogButtoConfirm}"
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                <Button.CommandParameter>
-                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                        True
-                                    </system:Boolean>
-                                </Button.CommandParameter>
-                            </Button>
-                            <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                    Margin="15 0 0 0"
-                                    Foreground="{StaticResource InfoColorBrush}"
-                                    Content="{DynamicResource DialogButtonCancel}"
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                                <Button.CommandParameter>
-                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                        False
-                                    </system:Boolean>
-                                </Button.CommandParameter>
-                            </Button>
-                        </StackPanel>
+    <Grid>
+        <Border Background="White"
+                Padding="20">
+            <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                 UniformCornerRadius="8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Row="0"
+                                Grid.ColumnSpan="12">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                                   FontWeight="SemiBold"
+                                   Margin="{StaticResource TitleMargin}"
+                                   Text="Thêm sản phẩm mới" />
                     </StackPanel>
 
-                    <StackPanel x:Name="ErrorContent">
-                        <Grid>
-                            <materialDesign:PackIcon Kind="AlertCircle"
-                                                     HorizontalAlignment="Right"
-                                                     Margin="0 0 0 20"
-                                                     Width="25"
-                                                     Height="25"
-                                                     Foreground="{StaticResource ErrorColorBrush}" />
-                            <TextBlock x:Name="ErrorTitleTB"
-                                       Text="Title confirm"
-                                       FontWeight="Bold"
-                                       FontSize="18"
-                                       Margin="0 0 0 20" />
-                        </Grid>
-                        <TextBlock x:Name="ErrorMessageTB"
-                                   TextWrapping="Wrap"
-                                   Padding="0"
-                                   Margin="0"
-                                   LineHeight="25"
-                                   Text="Are you sure want to cancel this order? You can't undo this action">
-                        </TextBlock>
-                        <StackPanel Margin="0 20 0 0"
-                                    Orientation="Horizontal"
-                                    HorizontalAlignment="Center">
-                            <Button Style="{StaticResource CustomFlatButton}"
-                                    Margin="0 0 15 0"
-                                    Content="{DynamicResource DialogButtonOkay}"
-                                    Foreground="{StaticResource ErrorColorBrush}"
-                                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                            </Button>
-                        </StackPanel>
-                    </StackPanel>
-                </StackPanel>
-            </Border>
+                    <Grid  Grid.Row="0"
+                           Grid.ColumnSpan="12">
+                        <materialDesign:Snackbar HorizontalAlignment="Right"
+                                                 VerticalAlignment="Top"
+                                                 Grid.ColumnSpan="12"
+                                                 x:Name="GreenSB"
+                                                 Background="#00b4d8"
+                                                 MessageQueue="{materialDesign:MessageQueue}">
+                            <materialDesign:SnackbarMessage>
+                                <StackPanel Orientation="Horizontal"
+                                            x:Name="GreenContent">
+                                    <materialDesign:PackIcon Kind="CheckCircle"
+                                                             Margin="0 3 10 0"
+                                                             VerticalAlignment="Center" />
+                                    <TextBlock x:Name="GreenMessage"
+                                               Text="Cập nhật trạng thái thành công"
+                                               FontWeight="SemiBold" />
+                                </StackPanel>
+                            </materialDesign:SnackbarMessage>
+                        </materialDesign:Snackbar>
 
-        </materialDesign:DialogHost.DialogContent>
-        <Grid>
-            <Border Background="White"
-                    Padding="20">
-                <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                     UniformCornerRadius="8">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="3*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                        </Grid.RowDefinitions>
-
-                        <StackPanel Orientation="Horizontal"
-                                    Grid.Row="0"
-                                    Grid.ColumnSpan="12">
-                            <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
-                                       FontWeight="SemiBold"
-                                       Margin="{StaticResource TitleMargin}"
-                                       Text="Thêm sản phẩm mới" />
-                        </StackPanel>
-
-                        <Grid Grid.Row="0"
-                              Grid.ColumnSpan="12"
-                              HorizontalAlignment="Center">
-                            <materialDesign:Snackbar HorizontalAlignment="Center"
-                                                     VerticalAlignment="Top"
-                                                     Grid.ColumnSpan="12"
-                                                     x:Name="GreenSB"
-                                                     Background="#00b4d8"
-                                                     MessageQueue="{materialDesign:MessageQueue}">
-                                <materialDesign:SnackbarMessage>
-                                    <StackPanel Orientation="Horizontal"
-                                                x:Name="GreenContent">
-                                        <materialDesign:PackIcon Kind="CheckCircle"
-                                                                 Margin="0 3 10 0"
-                                                                 VerticalAlignment="Center" />
-                                        <TextBlock x:Name="GreenMessage"
-                                                   Text="Cập nhật trạng thái thành công"
-                                                   FontWeight="SemiBold" />
-                                    </StackPanel>
-                                </materialDesign:SnackbarMessage>
-                            </materialDesign:Snackbar>
-                        </Grid>
-
-                        <TextBox Grid.Column="0"
-                                 Grid.Row="2"
-                                 Grid.ColumnSpan="3"
-                                 materialDesign:HintAssist.Hint="Tên sản phẩm*"
-                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                 Margin="0 0 15 30">
-                            <TextBox.Text>
-                                <Binding Path="ProductDetails.Name">
-                                    <Binding.ValidationRules>
-                                        <validation:NotEmptyValidationRule Message="Vui lòng nhập tên sản phẩm" />
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-
-                        <ComboBox x:Name="CategoryList"
-                                  SelectedItem="{Binding SelectedCategory}"
-                                  Grid.Column="4"
-                                  Grid.Row="2"
-                                  Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                  materialDesign:HintAssist.Hint="Danh mục"
-                                  Margin="15 0 0 30">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Name}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
-                        </ComboBox>
-
-                        <TextBox x:Name="ProductDetails_Ingredients"
-                                 Grid.Column="0"
-                                 Grid.Row="3"
-                                 Grid.ColumnSpan="2"
-                                 materialDesign:HintAssist.Hint="Nguyên liệu"
-                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                 Margin="0 0 15 30" />
-
-                        <TextBox x:Name="ProductDetails_Allergens"
-                                 Grid.Column="2"
-                                 Grid.Row="3"
-                                 materialDesign:HintAssist.Hint="Chất gây dị ứng"
-                                 Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                 Grid.ColumnSpan="2"
-                                 Margin="15 0 0 30" />
-
-                        <StackPanel Orientation="Horizontal"
-                                    Grid.Column="0"
-                                    Grid.Row="1"
-                                    Grid.ColumnSpan="2"
-                                    Margin="0 0 0 30">
-                            <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                                          ToolTip="MaterialDesignSwitchToggleButton"
-                                          IsChecked="True"
-                                          HorizontalAlignment="Left" />
-                            <TextBlock Margin="15 0 0 0"
-                                       Text="Tình trạng kinh doanh"
-                                       VerticalAlignment="Center" />
-                        </StackPanel>
-
-
-                        <StackPanel HorizontalAlignment="Right"
-                                    Grid.Column="2"
-                                    Grid.ColumnSpan="2"
-                                    Orientation="Horizontal"
-                                    Grid.Row="1"
-                                    Margin="0 0 0 30">
-                            <Button x:Name="AddNewProduct"
-                                    Style="{StaticResource CustomPrimaryButton}"
-                                    Content="Lưu"
-                                    MinWidth="75"
-                                    Margin="0 0 10 0" />
-                            <Button x:Name="CancelAdding"
-                                    Style="{StaticResource CustomSecondaryButton}"
-                                    Content="HỦY"
-                                    MinWidth="75"
-                                    Margin="10 0 0 0" />
-
-                        </StackPanel>
+                        <materialDesign:Snackbar x:Name="RedSB"
+                                                 HorizontalAlignment="Right"
+                                                 VerticalAlignment="Top"
+                                                 Grid.ColumnSpan="12"
+                                                 Background="{StaticResource ErrorColorBrush}"
+                                                 MessageQueue="{materialDesign:MessageQueue}">
+                            <materialDesign:SnackbarMessage>
+                                <StackPanel Orientation="Horizontal"
+                                            x:Name="RedContent">
+                                    <materialDesign:PackIcon Kind="CheckCircle"
+                                                             Margin="0 3 10 0"
+                                                             VerticalAlignment="Center" />
+                                    <TextBlock x:Name="RedMessage"
+                                               Text="Cập nhật trạng thái thành công"
+                                               FontWeight="SemiBold" />
+                                </StackPanel>
+                            </materialDesign:SnackbarMessage>
+                        </materialDesign:Snackbar>
                     </Grid>
-                </materialDesign:Card>
-            </Border>
 
-        </Grid>
-    </materialDesign:DialogHost>
+                    <TextBox Grid.Column="0"
+                             Grid.Row="2"
+                             Grid.ColumnSpan="3"
+                             materialDesign:HintAssist.Hint="Tên sản phẩm*"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Margin="0 0 15 30">
+                        <TextBox.Text>
+                            <Binding Path="ProductDetails.Name">
+                                <Binding.ValidationRules>
+                                    <validation:NotEmptyValidationRule Message="Vui lòng nhập tên sản phẩm" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <ComboBox x:Name="CategoryList"
+                              SelectedItem="{Binding SelectedCategory}"
+                              Grid.Column="4"
+                              Grid.Row="2"
+                              Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                              materialDesign:HintAssist.Hint="Danh mục"
+                              Margin="15 0 0 30">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                    <TextBox x:Name="ProductDetails_Ingredients"
+                             Grid.Column="0"
+                             Grid.Row="3"
+                             Grid.ColumnSpan="2"
+                             materialDesign:HintAssist.Hint="Nguyên liệu"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Margin="0 0 15 30" />
+
+                    <TextBox x:Name="ProductDetails_Allergens"
+                             Grid.Column="2"
+                             Grid.Row="3"
+                             materialDesign:HintAssist.Hint="Chất gây dị ứng"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             Grid.ColumnSpan="2"
+                             Margin="15 0 0 30" />
+
+                    <StackPanel Orientation="Horizontal"
+                                Grid.Column="0"
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Margin="0 0 0 30">
+                        <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                      ToolTip="MaterialDesignSwitchToggleButton"
+                                      IsChecked="{Binding ProductDetails.Available}"
+                                      HorizontalAlignment="Left" />
+                        <TextBlock Margin="15 0 0 0"
+                                   Text="Tình trạng kinh doanh"
+                                   VerticalAlignment="Center" />
+                    </StackPanel>
+
+
+                    <StackPanel HorizontalAlignment="Right"
+                                Grid.Column="2"
+                                Grid.ColumnSpan="2"
+                                Orientation="Horizontal"
+                                Grid.Row="1"
+                                Margin="0 0 0 30">
+                        <Button x:Name="AddNewProduct"
+                                Style="{StaticResource CustomPrimaryButton}"
+                                Content="Lưu"
+                                MinWidth="75"
+                                Margin="0 0 10 0" />
+                        <Button x:Name="CancelAdding"
+                                Style="{StaticResource CustomSecondaryButton}"
+                                Content="HỦY"
+                                MinWidth="75"
+                                Margin="10 0 0 0" />
+
+                    </StackPanel>
+                </Grid>
+            </materialDesign:Card>
+        </Border>
+    </Grid>
 </Window>

@@ -84,7 +84,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 GridRefresh(BillDetails.StatusId);
                 BillDetails.CanCancel = false;//Hard code, do nếu muốn cái này thay đổi tự động theo logic của webservice thì phải load lại từ db
                 NotifyOfPropertyChange(() => BillDetails);
-                MessageUtils.ShowSuccessMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, "Cập nhật trạng thái đơn hàng thành công");
+                MessageUtils.ShowSnackBarMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, "Cập nhật trạng thái đơn hàng thành công");
                 return;
             }
             await ShowErrorMessage("Lỗi cập nhật", "Đã xảy ra lỗi không xác định trong quá trình cập nhật trạng thái đơn hàng");
@@ -219,7 +219,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private void ShowSuccessMessage(string message)
         {
-            MessageUtils.ShowSuccessMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, message);
+            MessageUtils.ShowSnackBarMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, message);
         }
         #endregion
         #region Binding Properties

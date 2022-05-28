@@ -1,5 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,11 +15,11 @@ using System.Windows.Shapes;
 namespace WPFBakeryShopAdminV2.MVVM.Views
 {
     /// <summary>
-    /// Interaction logic for NewProductView.xaml
+    /// Interaction logic for ProductVariantView.xaml
     /// </summary>
-    public partial class NewProductView : Window
+    public partial class ProductVariantView : Window
     {
-        public NewProductView()
+        public ProductVariantView()
         {
             InitializeComponent();
         }

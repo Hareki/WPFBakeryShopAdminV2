@@ -145,6 +145,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             if (ProductInfoHasErrors()) return;
 
             LoadingInfoVis = Visibility.Visible;
+            ProductDetails.CategoryId = SelectedCategory.Id;
             string JSonProductInfo = StringUtils.SerializeObject(ProductDetails);
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Put, $"products/info", JSonProductInfo, "application/json");
             int statusCode = (int)response.StatusCode;
@@ -152,11 +153,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             switch (statusCode)
             {
                 case 200:
+                    RefreshProductRowItemGrid(ProductDetails.ProductRowItem);
                     ShowSuccessMessage("Cập nhật sản phẩm thành công");
                     Editing = false;
                     break;
                 case 404 when ProductNotFound(responseBody):
-                    await ShowErrorMessage("Lỗi cập nhật", "Sản phẩm không còn tồn tài, vui lòng tải lại trang");
+                    await ShowErrorMessage("Lỗi cập nhật", "Sản phẩm không còn tồn tại, vui lòng tải lại trang");
                     break;
                 case 404 when CategoryNotFound(responseBody):
                     await ShowErrorMessage("Lỗi cập nhật", "Danh mục không còn tồn tại, vui lòng tải lại trang");
@@ -167,12 +169,10 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             }
             LoadingInfoVis = Visibility.Hidden;
         }
-
         private bool ProductInfoHasErrors()
         {
             return string.IsNullOrEmpty(ProductDetails.Name);
         }
-
         private bool ProductNotFound(string responseBody)
         {
             return responseBody.Contains("product") && responseBody.Contains("notFoundId");
@@ -186,9 +186,67 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             Editing = false;
             ProductDetails = new ProductDetails(_productInfoBeforeEditing);
         }
-        public void ShowAddingProductDialog()
+        private void RefreshProductRowItemGrid(ProductRowItem productRowItem)
         {
-            _windowManager.ShowDialogAsync(new NewProductViewModel());
+            View.Dispatcher.Invoke(() =>
+            {
+                int selectedRow = View.RowItemProducts.SelectedIndex;
+
+                RowItemProducts[selectedRow] = productRowItem;
+                View.RowItemProducts.Items.Refresh();
+                View.RowItemProducts.SelectedIndex = selectedRow;
+            });
+        }
+        private void RefreshProductVariantItemGrid(ProductVariant productVariant)
+        {
+            View.Dispatcher.Invoke(() =>
+            {
+                int selectedRow = View.RowItemVariants.SelectedIndex;
+
+                RowItemVariants.RemoveAt(selectedRow);
+                NotifyOfPropertyChange(() => RowItemVariants);
+                View.RowItemVariants.Items.Refresh();
+            });
+        }
+        public async Task ShowAddingProductDialog()
+        {
+            await _windowManager.ShowDialogAsync(new NewProductViewModel(this));
+        }
+        public void FocusRowItem(ProductRowItem productRowItem)
+        {
+            List<ProductRowItem> currenItems = View.RowItemProducts.Items.OfType<ProductRowItem>().ToList();
+            int index = currenItems.FindIndex((element) => element.Name == productRowItem.Name);
+            View.RowItemProducts.SelectedIndex = index;
+        }
+        public void ShowNewVariantDialog()
+        {
+            _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, false, null,TypeList));
+        }
+        public void ShowEditVariantDialog()
+        {
+            _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, true, SelectedVariant, TypeList));
+        }
+        public async Task DeleteVariant()
+        {
+            if (SelectedVariant == null) return;
+
+            bool confirm = await ShowConfirmMessage("Xác nhận xóa loại", $"Bạn có chắc muốn {SelectedProduct.Name} {SelectedVariant.TypeName}?");
+            if (confirm)
+            {
+                var result = await RestConnection.ExecuteRequestAsync(_restClient, Method.Delete, $"variants/{SelectedVariant.Id}", null, null);
+                int statusCode = (int)result.StatusCode;
+                if (statusCode == 200)
+                {
+                    ShowSuccessMessage("Xóa loại sản phẩm đã chọn thành công");
+                }
+                else if (statusCode == 404)
+                {
+                    await ShowErrorMessage("Lỗi khi xóa loại", "Loại sản phẩm muốn xóa không còn tồn tại, vui lòng làm mới dữ liệu");
+                }else if (statusCode == 400)
+                {
+                    await ShowErrorMessage("Lỗi khi xóa loại", "Loại sản phẩm này đã được bán, không thể xóa");
+                }
+            }
         }
 
         #endregion
@@ -215,6 +273,10 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         public void LoadFirstPage()
         {
             Pagination.LoadFirstPage();
+        }
+        public void LoadPreviousPage()
+        {
+            Pagination.LoadPreviousPage();
         }
         public void LoadNextPage()
         {
@@ -427,7 +489,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private void ShowSuccessMessage(string message)
         {
-            MessageUtils.ShowSuccessMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, message);
+            MessageUtils.ShowSnackBarMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, message);
         }
         #endregion
 

@@ -8,36 +8,40 @@ namespace WPFBakeryShopAdminV2.Utilities
 {
     public class MessageUtils
     {
-        public static void ShowSuccessMessage(UserControl view, TextBlock greenMessage, Snackbar greenSB, StackPanel greenContent, string message)
+        public static void ShowSnackBarMessage(UserControl view, TextBlock greenMessage, Snackbar greenSB, StackPanel greenContent, string message)
         {
             view.Dispatcher.Invoke(() =>
             {
                 greenMessage.Text = message;
-
+                ClearSnackbar(greenSB);
                 greenSB.MessageQueue?.Enqueue(
                 greenContent,
+               null,
                 null,
-                null,
-                null,
+               null,
                 false,
                 true,
-                TimeSpan.FromSeconds(3));
+                TimeSpan.FromSeconds(4));
             });
         }
-        public static void ShowSuccessMessage(Window view, TextBlock greenMessage, Snackbar greenSB, StackPanel greenContent, string message)
+        private static void ClearSnackbar(Snackbar greenSB)
+        {
+            greenSB.MessageQueue?.Clear();
+        }
+        public static void ShowSnackBarMessage(Window view, TextBlock greenMessage, Snackbar greenSB, StackPanel greenContent, string message)
         {
             view.Dispatcher.Invoke(() =>
             {
                 greenMessage.Text = message;
-
+                ClearSnackbar(greenSB);
                 greenSB.MessageQueue?.Enqueue(
                 greenContent,
-                null,
+               null,
                 null,
                 null,
                 false,
                 true,
-                TimeSpan.FromSeconds(3));
+                TimeSpan.FromSeconds(4));
             });
         }
         public static async Task<bool> ShowConfirmMessage(Border dialogContent, TextBlock titleTB, TextBlock messageTB, StackPanel confirmContent

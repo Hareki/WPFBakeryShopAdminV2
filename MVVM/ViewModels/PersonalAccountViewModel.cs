@@ -87,6 +87,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 }
                 else
                 {
+                    await Task.Delay(10);
                     await ShowErrorMessage("Lỗi cập nhật ảnh", "Vui lòng chọn file có kích thước nhỏ hơn");
                 }
             }
@@ -242,7 +243,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private void ShowSuccessMessage(string message)
         {
-            MessageUtils.ShowSuccessMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, message);
+            MessageUtils.ShowSnackBarMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, message);
         }
         private async Task ShowLogoutMessage(string message)
         {

@@ -24,7 +24,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private BindableCollection<Category> _categoryList;
         private Category _selectedCategory;
         private ProductDetails _productDetails;
+        private ProductViewModel _productViewModel;
         #region Base
+        public NewProductViewModel(ProductViewModel productViewModel)
+        {
+            _productViewModel = productViewModel;
+        }
         protected override async Task OnActivateAsync(CancellationToken cancellationToken)
         {
             _restClient = RestConnection.ManagementRestClient;
@@ -47,27 +52,31 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         {
             if (SelectedCategory == null)
             {
-                await DialogHost.Show(View.DialogContent);
+                ShowErrorMessage("", "Không tìm thấy danh mục nào, vui lòng thử lại sau");
+                await Task.Delay(3000);
                 CancelAdding();
                 return;
             }
             if (ProductInfoHasErrors()) return;
 
+            ProductDetails.CategoryId = SelectedCategory.Id;
             string JSonAccountInfo = StringUtils.SerializeObject(ProductDetails);
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Post, "products", JSonAccountInfo, "application/json");
             int statusCode = (int)response.StatusCode;
-            if (statusCode == 201)
+            if (statusCode == 200)
             {
+                _productViewModel.LoadLastPage();
+                _productViewModel.FocusRowItem(ProductDetails.ProductRowItem);
                 ResetFields();
                 ShowSuccessMessage("Thêm sản phẩm thành công");
             }
             else if (statusCode == 400)
             {
-                await ShowErrorMessage("Xảy ra lỗi", "Tên sản phẩm đã tồn tại");
+                ShowErrorMessage("Xảy ra lỗi", "Tên sản phẩm đã tồn tại");
             }
             else if (statusCode == 404)
             {
-                await ShowErrorMessage("Xảy ra lỗi", "Danh mục không còn tồn tại, vui lòng khởi động lại hộp thoại này để nhận thông tin danh mục mới nhất");
+                ShowErrorMessage("Xảy ra lỗi", "Danh mục không còn tồn tại, vui lòng khởi động lại hộp thoại này để nhận thông tin danh mục mới nhất");
             }
         }
 
@@ -129,19 +138,13 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 
 
         #region Show Messages
-        private async Task ShowErrorMessage(string title, string message)
+        private void ShowErrorMessage(string title, string message)
         {
-            await MessageUtils.ShowErrorMessage(View.DialogContent, View.ErrorTitleTB, View.ErrorMessageTB,
-                   View.ConfirmContent, View.ErrorContent, title, message);
-        }
-        private async Task<bool> ShowConfirmMessage(string title, string message)
-        {
-            return await MessageUtils.ShowConfirmMessage(View.DialogContent, View.ConfirmTitleTB, View.ConfirmMessageTB, View.ConfirmContent, View.ErrorContent,
-               title, message);
+            MessageUtils.ShowSnackBarMessage(View, View.RedMessage, View.RedSB, View.RedContent, message);
         }
         private void ShowSuccessMessage(string message)
         {
-            MessageUtils.ShowSuccessMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, message);
+            MessageUtils.ShowSnackBarMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, message);
         }
         #endregion
     }
