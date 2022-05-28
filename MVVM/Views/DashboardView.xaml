@@ -1,0 +1,368 @@
+﻿<UserControl x:Class="WPFBakeryShopAdminV2.MVVM.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:WPFBakeryShopAdminV2.MVVM.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:viewmodels="clr-namespace:WPFBakeryShopAdminV2.MVVM.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:DashboardViewModel}"
+             Background="#F5F5FA"
+             TextElement.FontSize="15"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+    <Grid>
+        <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide"
+                                             OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.3}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="7*" />
+                </Grid.RowDefinitions>
+
+                <Border VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Grid.ColumnSpan="12"
+                        Grid.RowSpan="6"
+                        Background="White"
+                        Panel.ZIndex="0"
+                        Visibility="{Binding Path=LoadingPageVis}">
+                    <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                 Value="0"
+                                 IsIndeterminate="True" />
+                </Border>
+
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="12">
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                               FontWeight="SemiBold"
+                               Margin="{StaticResource TitleMargin}"
+                               Text="{DynamicResource Dashboard}" />
+                    <Button x:Name="LoadPage"
+                            Style="{StaticResource MaterialDesignIconForegroundButton}"
+                            ToolTip="MaterialDesignIconForegroundButton"
+                            Foreground="{DynamicResource MaterialDesignBody}"
+                            VerticalAlignment="Top"
+                            Margin="5 0 0 0 ">
+                        <materialDesign:PackIcon Kind="Reload" />
+                    </Button>
+                </StackPanel>
+
+                <Border Grid.Column="0"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="4"
+                        Padding="20"
+                        CornerRadius="12"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        Background="White"
+                        Margin="0 0 15 15">
+                    <StackPanel Orientation="Horizontal">
+                        <Image RenderOptions.BitmapScalingMode="HighQuality"
+                               RenderOptions.EdgeMode="Aliased"
+                               Source="/Resources/Images/bill-icon-512-brown.png"
+                               Height="35" />
+                        <StackPanel Margin="15 0 0 0"
+                                    VerticalAlignment="Center">
+                            <TextBlock Margin="0 0 0 15"
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center"
+                                       Text="{DynamicResource TotalOrdersNum}" />
+                            <TextBlock x:Name="Dashboard_TotalOrdersNum"
+                                       Text="0"
+                                       FontWeight="SemiBold" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="4"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="4"
+                        Padding="20"
+                        CornerRadius="12"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        Background="White"
+                        Margin="15 0 15 15">
+                    <StackPanel Orientation="Horizontal">
+                        <Image RenderOptions.BitmapScalingMode="HighQuality"
+                               RenderOptions.EdgeMode="Aliased"
+                               Source="/Resources/Images/product-icon-512-brown.png"
+                               Height="35" />
+                        <StackPanel Margin="15 0 0 0"
+                                    VerticalAlignment="Center">
+                            <TextBlock Margin="0 0 0 15"
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center"
+                                       Text="{DynamicResource TotalAvailableProductVariantsNum}" />
+                            <TextBlock x:Name="Dashboard_TotalAvailableProductVariantsNum"
+                                       Text="0"
+                                       FontWeight="SemiBold" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="8"
+                        Grid.Row="1"
+                        Grid.ColumnSpan="4"
+                        Padding="20"
+                        CornerRadius="12"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        Background="White"
+                        Margin="15 0 0 15">
+                    <StackPanel Orientation="Horizontal">
+                        <Image RenderOptions.BitmapScalingMode="HighQuality"
+                               RenderOptions.EdgeMode="Aliased"
+                               Source="/Resources/Images/cake-icon-512-brown.png"
+                               Height="35" />
+                        <StackPanel Margin="15 0 0 0"
+                                    VerticalAlignment="Center">
+                            <TextBlock Margin="0 0 0 15"
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center"
+                                       Text="{DynamicResource TotalSoldProductVariantsNum}" />
+                            <TextBlock x:Name="Dashboard_TotalSoldProductVariantsNum"
+                                       Text="0"
+                                       FontWeight="SemiBold" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="0"
+                        Grid.Row="2"
+                        Grid.ColumnSpan="4"
+                        Padding="20"
+                        CornerRadius="12"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                        Background="White"
+                        Margin="0 15 15 0">
+                    <Grid VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="2*" />
+                            <RowDefinition Height="2*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Margin="0 0 0 15"
+                                   TextWrapping="Wrap"
+                                   VerticalAlignment="Center"
+                                   Text="Số đơn hàng hôm nay" />
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image RenderOptions.BitmapScalingMode="HighQuality"
+                                   RenderOptions.EdgeMode="Aliased"
+                                   Source="/Resources/Images/pending-brown.png"
+                                   Height="35"
+                                   Grid.Column="0" />
+                            <StackPanel Grid.Column="1"
+                                        VerticalAlignment="Center">
+                                <TextBlock Margin="15 0 0 5"
+                                           TextWrapping="Wrap"
+                                           VerticalAlignment="Center"
+                                           Text="{DynamicResource Pending}" />
+                                <ProgressBar x:Name="PendingPercent"
+                                             Value="50"
+                                             Margin="15 0 0 0"
+                                             materialDesign:TransitionAssist.DisableTransitions="True" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image RenderOptions.BitmapScalingMode="HighQuality"
+                                   RenderOptions.EdgeMode="Aliased"
+                                   Source="/Resources/Images/shipping-brown.png"
+                                   Height="35"
+                                   Grid.Column="0" />
+                            <StackPanel Grid.Column="1"
+                                        VerticalAlignment="Center">
+                                <TextBlock Margin="15 0 0 5"
+                                           TextWrapping="Wrap"
+                                           VerticalAlignment="Center"
+                                           Text="{DynamicResource Shipping}" />
+                                <ProgressBar x:Name="ShippingPercent"
+                                             Value="50"
+                                             Margin="15 0 0 0"
+                                             materialDesign:TransitionAssist.DisableTransitions="True" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image RenderOptions.BitmapScalingMode="HighQuality"
+                                   RenderOptions.EdgeMode="Aliased"
+                                   Source="/Resources/Images/shipped-brown.png"
+                                   Height="35"
+                                   Grid.Column="0" />
+                            <StackPanel Grid.Column="1"
+                                        VerticalAlignment="Center">
+                                <TextBlock Margin="15 0 0 5"
+                                           TextWrapping="Wrap"
+                                           VerticalAlignment="Center"
+                                           Text="{DynamicResource Shipped}" />
+                                <ProgressBar x:Name="ShippedPercent"
+                                             Value="50"
+                                             Margin="15 0 0 0"
+                                             materialDesign:TransitionAssist.DisableTransitions="True" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image RenderOptions.BitmapScalingMode="HighQuality"
+                                   RenderOptions.EdgeMode="Aliased"
+                                   Source="/Resources/Images/cancelled-brown.png"
+                                   Height="35"
+                                   Grid.Column="0" />
+                            <StackPanel Grid.Column="1"
+                                        VerticalAlignment="Center">
+                                <TextBlock Margin="15 0 0 5"
+                                           TextWrapping="Wrap"
+                                           VerticalAlignment="Center"
+                                           Text="{DynamicResource Cancelled}" />
+                                <ProgressBar x:Name="CancelledPercent"
+                                             Value="50"
+                                             Margin="15 0 0 0"
+                                             materialDesign:TransitionAssist.DisableTransitions="True" />
+                            </StackPanel>
+                        </Grid>
+                        <Separator Grid.Row="5" />
+
+                        <Grid Grid.Row="6"
+                              HorizontalAlignment="Stretch">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0 0 10 0"
+                                        Grid.Column="0"
+                                        HorizontalAlignment="Center">
+                                <TextBlock Text="{DynamicResource Pending}"
+                                           Margin="0 0 0 5" />
+                                <TextBlock x:Name="Dashboard_TodayProcessingOrdersNum"
+                                           Text="4"
+                                           HorizontalAlignment="Center"
+                                           FontWeight="Bold" />
+                            </StackPanel>
+
+                            <StackPanel Margin="0 0 10 0"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Center">
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Shipping}"
+                                               Margin="0 0 0 5" />
+                                    <TextBlock x:Name="Dashboard_TodayDispatchOrdersNum"
+                                               Text="5"
+                                               HorizontalAlignment="Center"
+                                               FontWeight="Bold" />
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel Margin="0 0 10 0"
+                                        Grid.Column="2"
+                                        HorizontalAlignment="Center">
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Shipped}"
+                                               Margin="0 0 0 5" />
+                                    <TextBlock x:Name="Dashboard_TodayShippedOrdersNum"
+                                               Text="6"
+                                               HorizontalAlignment="Center"
+                                               FontWeight="Bold" />
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal"
+                                        Grid.Column="3"
+                                        HorizontalAlignment="Center">
+                                <StackPanel>
+                                    <TextBlock Text="{DynamicResource Cancelled}"
+                                               Margin="0 0 0 5" />
+                                    <TextBlock x:Name="Dashboard_TodayCancelOrdersNum"
+                                               Text="7"
+                                               HorizontalAlignment="Center"
+                                               FontWeight="Bold" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                </Border>
+
+                <Border Background="White"
+                        Padding="20"
+                        Grid.Row="2"
+                        Grid.Column="4"
+                        Grid.ColumnSpan="12"
+                        Margin="15 15 0 0"
+                        CornerRadius="12">
+                    <StackPanel>
+                        <TextBlock Text="{DynamicResource FiveMostRecentOrder}"
+                                   Margin="0 0 0 15" />
+
+                        <DataGrid x:Name="Dashboard_TopRecentOrders"
+                                  CanUserAddRows="False"
+                                  IsReadOnly="True"
+                                  AutoGenerateColumns="False"
+                                  Background="White"
+                                  SelectionUnit="FullRow"
+                                  SelectionMode="Single">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="{DynamicResource OrderID}"
+                                                    Width="2*"
+                                                    Binding="{Binding Path=OrderId}" />
+                                <DataGridTextColumn Header="{DynamicResource CustomerName}"
+                                                    Width="3*"
+                                                    Binding="{Binding Path=UserFullName}" />
+                                <DataGridTextColumn Header="{DynamicResource Total}"
+                                                    Width="3*"
+                                                    Binding="{Binding Path=FormattedOrderTotal}" />
+                                <DataGridTextColumn Header="{DynamicResource Status}"
+                                                    Width="2*"
+                                                    Binding="{Binding Path=StatusName}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+        </materialDesign:TransitioningContent>
+    </Grid>
+</UserControl>

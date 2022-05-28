@@ -1,0 +1,81 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="LoginGreeting1">Chào mừng trở lại</sys:String>
+    <sys:String x:Key="LoginGreeting2">Tiến hành đăng nhập</sys:String>
+    <sys:String x:Key="Login">Đăng nhập</sys:String>
+    <sys:String x:Key="ForgotPassword">Quên mật khẩu?</sys:String>
+    <sys:String x:Key="Email">Email</sys:String>
+    <sys:String x:Key="Password">Mật khẩu</sys:String>
+    <sys:String x:Key="RememberMe">Ghi nhớ đăng nhập</sys:String>
+
+    <sys:String x:Key="Dashboard">Bảng thống kê</sys:String>
+    <sys:String x:Key="Products">Sản phẩm</sys:String>
+    <sys:String x:Key="Orders">Đơn hàng</sys:String>
+    <sys:String x:Key="Accounts">Tài khoản</sys:String>
+    <sys:String x:Key="Logout">Đăng xuất</sys:String>
+
+    <sys:String x:Key="PersonalAccount">Tài khoản của bạn</sys:String>
+    <sys:String x:Key="LastName">Họ và tên lót*</sys:String>
+    <sys:String x:Key="FirstName">Tên*</sys:String>
+    <sys:String x:Key="Address">Địa chỉ</sys:String>
+    <sys:String x:Key="Phone">Số điện thoại</sys:String>
+    <sys:String x:Key="Language">Ngôn ngữ</sys:String>
+    <sys:String x:Key="Update">CẬP NHẬT</sys:String>
+    <sys:String x:Key="Cancel">HỦY</sys:String>
+    <sys:String x:Key="Save">LƯU</sys:String>
+
+    <sys:String x:Key="ChangePassword">ĐỔI MẬT KHẨU</sys:String>
+    <sys:String x:Key="CurrentPassword">Mật khẩu hiện tại*</sys:String>
+    <sys:String x:Key="NewPassword">Mật khẩu mới*</sys:String>
+    <sys:String x:Key="ConfirmNewPassword">Xác nhận mật khẩu mới*</sys:String>
+    <sys:String x:Key="ChangePasswordWarning">Bạn sẽ cần đăng nhập lại sau khi thay đổi mật khẩu thành công</sys:String>
+
+    <sys:String x:Key="TotalOrdersNum">Tổng số đơn hàng</sys:String>
+    <sys:String x:Key="TotalAvailableProductVariantsNum">Tổng số sản phẩm bày bán</sys:String>
+    <sys:String x:Key="TotalSoldProductVariantsNum">Tổng số sản phẩm đã bán</sys:String>
+    <sys:String x:Key="Pending">Chờ duyệt</sys:String>
+    <sys:String x:Key="Shipping">Đang giao</sys:String>
+    <sys:String x:Key="Shipped">Đã giao</sys:String>
+    <sys:String x:Key="Cancelled">Đã hủy</sys:String>
+    <sys:String x:Key="FiveMostRecentOrder">5 đơn hàng gần nhất</sys:String>
+    <sys:String x:Key="OrderID">Mã HĐ</sys:String>
+    <sys:String x:Key="CustomerName">Tên KH</sys:String>
+    <sys:String x:Key="Total">Tổng tiền</sys:String>
+    <sys:String x:Key="Status">Trạng thái</sys:String>
+
+    <sys:String x:Key="CustomerName2">Tên khách hàng:</sys:String>
+    <sys:String x:Key="Status2">Trạng thái:</sys:String>
+    <sys:String x:Key="ProductName">Tên sản phẩm</sys:String>
+    <sys:String x:Key="Category">Danh mục</sys:String>
+    <sys:String x:Key="Quantity">Số lượng</sys:String>
+    <sys:String x:Key="UnitPrice">Đơn giá</sys:String>
+    <sys:String x:Key="Subtotal">Thành tiền</sys:String>
+    <sys:String x:Key="Total2">Thành tiền:</sys:String>
+    <sys:String x:Key="PaymentMethod">Phương thức thanh toán</sys:String>
+    <sys:String x:Key="PurchaseDate">Ngày mua</sys:String>
+    <sys:String x:Key="ShipmentDetail">Thông tin giao hàng:</sys:String>
+    <sys:String x:Key="OrderDetail">CHI TIẾT THÔNG TIN ĐƠN HÀNG</sys:String>
+    <sys:String x:Key="Note">Ghi chú</sys:String>
+
+    <sys:String x:Key="AccountStatus">Trạng thái tài khoản</sys:String>
+    <sys:String x:Key="AccountID">Mã tài khoản</sys:String>
+    <sys:String x:Key="AccountID2">Mã TK</sys:String>
+    <sys:String x:Key="FullName">Họ và tên</sys:String>
+    <sys:String x:Key="Roles">Nhóm quyền</sys:String>
+    <sys:String x:Key="AccountDetail">CHI TIẾT THÔNG TIN TÀI KHOẢN</sys:String>
+    <sys:String x:Key="Activated">Đã kích hoạt</sys:String>
+    <sys:String x:Key="NewAccount">THÊM TÀI KHOẢN</sys:String>
+
+    <sys:String x:Key="CreateNewAccount">Tạo tài khoản mới</sys:String>
+    <sys:String x:Key="CreateAccount">Tạo tài khoản</sys:String>
+
+    <sys:String x:Key="LastName2">Họ và tên lót*</sys:String>
+    <sys:String x:Key="Email2">Email*</sys:String>
+    <sys:String x:Key="Phone2">Số điện thoại*</sys:String>
+    <sys:String x:Key="FirstName2">Tên*</sys:String>
+
+    <sys:String x:Key="DialogButtonConfirm">XÁC NHẬN</sys:String>
+    <sys:String x:Key="DialogButtonCancel">HỦY</sys:String>
+    <sys:String x:Key="DialogButtonOkay">ĐÃ HIỂU</sys:String>
+</ResourceDictionary>

@@ -1,0 +1,272 @@
+﻿<Window x:Class="WPFBakeryShopAdminV2.MVVM.Views.NewAccountView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFBakeryShopAdminV2.MVVM.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converter="clr-namespace:WPFBakeryShopAdminV2.Converters"
+        xmlns:validation="clr-namespace:WPFBakeryShopAdminV2.LocalValidationRules"
+        xmlns:viewmodels="clr-namespace:WPFBakeryShopAdminV2.MVVM.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:NewAccountViewModel}"
+        mc:Ignorable="d"
+        TextElement.FontSize="15"
+        Title="Tạo tài khoản mới"
+        Icon="/Resources/Images/favicon.ico"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Height="620"
+        Width="600"
+        ShowInTaskbar="False">
+    <Window.Resources>
+        <converter:LargeUserImageConverter x:Key="imageConverter"></converter:LargeUserImageConverter>
+        <converter:ReverseVisibilityToBoolConverter x:Key="reverseVisConverter"></converter:ReverseVisibilityToBoolConverter>
+    </Window.Resources>
+    <Border Padding="30"
+            VerticalAlignment="Center">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="0" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1"
+                  IsEnabled="{Binding LoadingPageVis, Converter={StaticResource reverseVisConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="12">
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                               FontWeight="SemiBold"
+                               Margin="{StaticResource TitleMargin}"
+                               Text="{DynamicResource CreateNewAccount}" />
+                </StackPanel>
+
+                <Grid Grid.Row="0"
+                      Grid.ColumnSpan="12"
+                      HorizontalAlignment="Center">
+                    <materialDesign:Snackbar HorizontalAlignment="Center"
+                                             VerticalAlignment="Top"
+                                             Grid.ColumnSpan="12"
+                                             x:Name="GreenSB"
+                                             Background="#00b4d8"
+                                             MessageQueue="{materialDesign:MessageQueue}">
+                        <materialDesign:SnackbarMessage>
+                            <StackPanel Orientation="Horizontal"
+                                        x:Name="GreenContent">
+                                <materialDesign:PackIcon Kind="CheckCircle"
+                                                         Margin="0 3 10 0"
+                                                         VerticalAlignment="Center" />
+                                <TextBlock x:Name="GreenMessage"
+                                           Text="Cập nhật trạng thái thành công"
+                                           FontWeight="SemiBold" />
+                            </StackPanel>
+                        </materialDesign:SnackbarMessage>
+                    </materialDesign:Snackbar>
+
+                    <materialDesign:Snackbar HorizontalAlignment="Center"
+                                             VerticalAlignment="Top"
+                                             Grid.ColumnSpan="12"
+                                             x:Name="RedSB"
+                                             Background="#e63946"
+                                             MessageQueue="{materialDesign:MessageQueue}">
+                        <materialDesign:SnackbarMessage>
+                            <StackPanel Orientation="Horizontal"
+                                        x:Name="RedContent">
+                                <materialDesign:PackIcon Kind="CheckCircle"
+                                                         Margin="0 3 10 0"
+                                                         VerticalAlignment="Center" />
+                                <TextBlock x:Name="RedMessage"
+                                           Text="Xảy ra lỗi khi cập nhật"
+                                           FontWeight="Bold" />
+                            </StackPanel>
+                        </materialDesign:SnackbarMessage>
+                    </materialDesign:Snackbar>
+                </Grid>
+
+                <TextBox x:Name="txtLastName"
+                         Grid.Column="0"
+                         Grid.Row="2"
+                         Grid.ColumnSpan="4"
+                         Margin="0 0 15 15"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         materialDesign:HintAssist.Hint="{DynamicResource LastName2}"
+                         materialDesign:HintAssist.Background="White"
+                         materialDesign:TextFieldAssist.HasClearButton="False">
+                    <TextBox.Text>
+                        <Binding Path="PersonalAccount.LastName">
+                            <Binding.ValidationRules>
+                                <validation:NotEmptyValidationRule Message="Vui lòng nhập họ và tên lót" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="txtFirstName"
+                         Grid.Column="4"
+                         Grid.Row="2"
+                         Grid.ColumnSpan="4"
+                         Margin="15 0 0 15"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         materialDesign:HintAssist.Hint="{DynamicResource FirstName2}"
+                         materialDesign:HintAssist.Background="White"
+                         materialDesign:TextFieldAssist.HasClearButton="False">
+                    <TextBox.Text>
+                        <Binding Path="PersonalAccount.FirstName">
+                            <Binding.ValidationRules>
+                                <validation:NotEmptyValidationRule Message="Vui lòng nhập tên" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+                <TextBox x:Name="txtEmail"
+                         Grid.Column="0"
+                         Grid.Row="4"
+                         Grid.ColumnSpan="8"
+                         Margin="0 15"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         materialDesign:HintAssist.Hint="{DynamicResource Email2}"
+                         materialDesign:HintAssist.Background="White"
+                         materialDesign:TextFieldAssist.HasClearButton="False">
+                    <TextBox.Text>
+                        <Binding Path="PersonalAccount.Email">
+                            <Binding.ValidationRules>
+                                <validation:NotEmptyValidationRule Message="Vui lòng nhập địa chỉ email" />
+                                <validation:EmailFormatValidationRule Message="Email không đúng định dạng" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+
+
+                <TextBox x:Name="PersonalAccount_Address"
+                         Grid.Column="0"
+                         Grid.Row="3"
+                         Grid.ColumnSpan="8"
+                         Margin="0 15"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         materialDesign:HintAssist.Hint="{DynamicResource Address}"
+                         materialDesign:HintAssist.Background="White"
+                         materialDesign:TextFieldAssist.HasClearButton="False" />
+
+                <TextBox x:Name="txtPhone"
+                         Grid.Column="0"
+                         Grid.Row="5"
+                         Grid.ColumnSpan="5"
+                         Margin="0 15 15 15"
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         materialDesign:HintAssist.Hint="{DynamicResource Phone2}"
+                         materialDesign:HintAssist.Background="White"
+                         materialDesign:TextFieldAssist.HasClearButton="False">
+                    <TextBox.Text>
+                        <Binding Path="PersonalAccount.Phone">
+                            <Binding.ValidationRules>
+                                <validation:NotEmptyValidationRule Message="Vui lòng nhập số điện thoại" />
+                                <validation:PhoneFormatValidationRule Message="Số điện thoại không đúng định dạng" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+
+
+                <ComboBox x:Name="LanguageList"
+                          SelectedItem="{Binding SelectedItemLanguage, Mode=OneWayToSource}"
+                          SelectedIndex="{Binding Path=PersonalAccount.LanguageIndex}"
+                          Grid.Column="5"
+                          Grid.Row="5"
+                          Grid.ColumnSpan="3"
+                          Margin="15 15 0 15"
+                          Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                          materialDesign:HintAssist.Hint="{DynamicResource Language}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding LanguageFlagURL}"
+                                       RenderOptions.BitmapScalingMode="HighQuality"
+                                       RenderOptions.EdgeMode="Aliased"
+                                       MaxWidth="25"
+                                       Margin="0 0 7 0" />
+                                <TextBlock Text="{Binding LanguageName}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+
+                <ListBox x:Name="RoleList"
+                         Grid.Column="0"
+                         Grid.Row="6"
+                         Grid.ColumnSpan="8"
+                         Margin="0 15"
+                         Style="{StaticResource MaterialDesignFilterChipPrimaryListBox}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding DisplayName}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}"
+                               BasedOn="{StaticResource MaterialDesignFilterChipPrimaryListBoxItem}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsLockedRole}"
+                                             Value="True">
+                                    <Setter Property="IsEnabled"
+                                            Value="False" />
+                                    <Setter Property="IsSelected"
+                                            Value="True" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                            <Setter Property="Margin"
+                                    Value="0 0 15 0" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+
+                <StackPanel Margin="0 15"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="10"
+                            Grid.Row="7"
+                            Orientation="Horizontal"
+                            FlowDirection="RightToLeft">
+
+                    <Button x:Name="CancelAdding"
+                            Style="{StaticResource CustomSecondaryButton}"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                            Content="{DynamicResource Cancel}"
+                            Margin="0 0 20 0" />
+
+                    <Button x:Name="AddNewAccount"
+                            Style="{StaticResource CustomPrimaryButton}"
+                            Content="{DynamicResource CreateAccount}"
+                            materialDesign:ShadowAssist.ShadowDepth="Depth0" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

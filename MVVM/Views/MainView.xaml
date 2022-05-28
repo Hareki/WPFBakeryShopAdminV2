@@ -1,0 +1,223 @@
+﻿<Window x:Class="WPFBakeryShopAdminV2.MVVM.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFBakeryShopAdminV2.MVVM.Views"
+        mc:Ignorable="d"
+        Title="MainView"
+        Height="700"
+        Width="882"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewmodels="clr-namespace:WPFBakeryShopAdminV2.MVVM.ViewModels"
+        xmlns:converter="clr-namespace:WPFBakeryShopAdminV2.Converters"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+        Background="#F5F5FA"
+        TextElement.FontSize="15"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Resources/Images/favicon.ico"
+        WindowState="Maximized">
+    <Window.Resources>
+        <converter:SmallUserImageConverter x:Key="imageConverter"></converter:SmallUserImageConverter>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="260" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0"
+              Grid.Row="1"
+              Panel.ZIndex="3"
+              Background="White" />
+        <Grid  Grid.Column="1"
+               Grid.Row="1"
+               Panel.ZIndex="3">
+            <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                 UniformCornerRadius="12"
+                                 Background="#fda144">
+                <!--#fd9935 orig-->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="140" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0">
+                        <Border Padding="10"
+                                Margin="0 0 0 0">
+                            <Image RenderOptions.BitmapScalingMode="HighQuality"
+                                   RenderOptions.EdgeMode="Aliased"
+                                   Source="/Resources/Images/logo-light.png"
+                                   Width="200" />
+                        </Border>
+
+                        <Border Background="White"
+                                CornerRadius="4"
+                                HorizontalAlignment="Center"
+                                Padding="15 0 15 5"
+                                MinWidth="140">
+                            <Grid>
+                                <ComboBox x:Name="LanguageList"
+                                          SelectedItem="{Binding SelectedLanguage}"
+                                          materialDesign:HintAssist.Hint="Language"
+                                          VerticalAlignment="Bottom"
+                                          Grid.Column="0"
+                                          FontSize="12"
+                                          materialDesign:ComboBoxAssist.ClassicMode="False"
+                                          Foreground="#fd9935"
+                                          materialDesign:TextFieldAssist.UnderlineBrush="#fd9935"
+                                          materialDesign:TextFieldAssist.UnderlineCornerRadius="10"
+                                          FontWeight="Bold"
+                                          SelectionChanged="LanguageList_SelectionChanged">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="{Binding LanguageFlagURL}"
+                                                       RenderOptions.BitmapScalingMode="HighQuality"
+                                                       RenderOptions.EdgeMode="Aliased"
+                                                       MaxWidth="25"
+                                                       Margin="0 0 7 0" />
+                                                <TextBlock Text="{Binding LanguageName}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </Grid>
+
+                        </Border>
+
+                    </StackPanel>
+
+                    <!--ImageSource="D:\Images\Genshin\paimap.jpg"-->
+                    <Border Grid.Row="1"
+                            Padding="10 0"
+                            Margin="0 15 0 15">
+
+                        <RadioButton Style="{StaticResource CustomMenuItemAccount}"
+                                     GroupName="MenuGroup"
+                                     x:Name="LoadPersonalAccount">
+                            <DockPanel>
+                                <Ellipse  Width="50"
+                                          Height="50"
+                                          x:Name="ellipse"
+                                          DockPanel.Dock="Left"
+                                          Margin="0 0 10 0">
+                                    <Ellipse.Fill>
+                                        <ImageBrush x:Name="UserImageUrl"
+                                                    ImageSource="{Binding PersonalAccount.ImageUrl, Converter={StaticResource imageConverter}}"
+                                                    RenderOptions.BitmapScalingMode="HighQuality"
+                                                    RenderOptions.EdgeMode="Unspecified">
+                                        </ImageBrush>
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <Grid DockPanel.Dock="Right">
+                                    <StackPanel VerticalAlignment="Center">
+                                        <TextBlock x:Name="PersonalAccount_FullName"
+                                                   Text="Nguyễn Ngọc Minh Tú"
+                                                   TextWrapping="Wrap"
+                                                   DockPanel.Dock="Top"
+                                                   FontWeight="Bold"
+                                                   HorizontalAlignment="Left"
+                                                   Margin="0 0 0 5" />
+                                        <TextBlock x:Name="PersonalAccount_Email"
+                                                   Text="minhtu1392000@gmail.com"
+                                                   HorizontalAlignment="Left"
+                                                   FontSize="12"
+                                                   FontWeight="Medium" />
+                                    </StackPanel>
+
+                                </Grid>
+
+                            </DockPanel>
+                        </RadioButton>
+
+                    </Border>
+
+                    <Border Grid.Row="2"
+                            Padding="10">
+                        <StackPanel>
+                            <RadioButton Style="{StaticResource CustomMenuItem}"
+                                         GroupName="MenuGroup"
+                                         x:Name="LoadDashboard">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                                           RenderOptions.EdgeMode="Aliased"
+                                           Source="/Resources/Images/dashboard-icon-512.png" />
+                                    <TextBlock Margin="15 0 0 0"
+                                               VerticalAlignment="Center"
+                                               Text="{DynamicResource Dashboard}" />
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource CustomMenuItem}"
+                                         GroupName="MenuGroup"
+                                         x:Name="LoadProduct">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                                           RenderOptions.EdgeMode="Aliased"
+                                           Source="/Resources/Images/product-icon-512.png" />
+                                    <TextBlock Margin="15 0 0 0"
+                                               VerticalAlignment="Center"
+                                               Text="{DynamicResource Products}" />
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource CustomMenuItem}"
+                                         GroupName="MenuGroup"
+                                         x:Name="LoadBill">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                                           RenderOptions.EdgeMode="Aliased"
+                                           Source="/Resources/Images/bill-icon-512.png" />
+                                    <TextBlock Margin="15 0 0 0"
+                                               VerticalAlignment="Center"
+                                               Text="{DynamicResource Orders}" />
+                                </StackPanel>
+                            </RadioButton>
+                            <RadioButton Style="{StaticResource CustomMenuItem}"
+                                         GroupName="MenuGroup"
+                                         x:Name="LoadAccount">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image RenderOptions.BitmapScalingMode="HighQuality"
+                                           RenderOptions.EdgeMode="Aliased"
+                                           Source="/Resources/Images/account-icon-512.png" />
+                                    <TextBlock Margin="15 0 0 0"
+                                               VerticalAlignment="Center"
+                                               Text="{DynamicResource Accounts}" />
+                                </StackPanel>
+                            </RadioButton>
+
+                        </StackPanel>
+
+                    </Border>
+                    <Border Grid.Row="3">
+                        <Button x:Name="LogOut"
+                                Style="{StaticResource CustomPrimaryButton}"
+                                Content="{DynamicResource Logout}"
+                                VerticalAlignment="Bottom"
+                                Background="#E63946"
+                                Margin="20" />
+                    </Border>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+
+        <ContentControl x:Name="ActiveItem"
+                        Grid.Row="1"
+                        Padding="10"
+                        Grid.Column="2"
+                        Margin="30 0 0 0" />
+
+
+
+
+    </Grid>
+</Window>

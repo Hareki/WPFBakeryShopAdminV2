@@ -1,0 +1,93 @@
+﻿<Application x:Class="WPFBakeryShopAdminV2.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WPFBakeryShopAdminV2"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:clr="clr-namespace:System;assembly=mscorlib">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+
+
+                <materialDesign:CustomColorTheme BaseTheme="Light"
+                                                 PrimaryColor="#CA6702"
+                                                 SecondaryColor="#E0E0E0" />
+
+                <ResourceDictionary>
+                    <Style x:Key="DataGrid"
+                           TargetType="DataGrid">
+                        <Setter Property="CellStyle">
+                            <Setter.Value>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="BorderThickness"
+                                            Value="0" />
+                                    <Setter Property="Foreground"
+                                            Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}" />
+                                    <Setter Property="Background"
+                                            Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}" />
+                                </Style>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ResourceDictionary>
+
+                <ResourceDictionary>
+                    <SolidColorBrush x:Key="SecondaryHueDarkBrush"
+                                     Color="#FDF0E6" />
+
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <clr:String x:Key="SecondaryColor">#fda144</clr:String>
+
+                    <clr:String x:Key="PendingColor">#0DA012</clr:String>
+                    <clr:String x:Key="ShippingColor">#4C82AF</clr:String>
+                    <clr:String x:Key="ShippedColor">#AF4C8E</clr:String>
+                    <clr:String x:Key="CancelledColor">#E63946</clr:String>
+
+                    <clr:String x:Key="SuccessColor">#00b4d8</clr:String>
+                    <clr:String x:Key="ErrorColor">#E63946</clr:String>
+                    <clr:String x:Key="InfoColor">#3a86ff</clr:String>
+                    <clr:String x:Key="WarningColor">#e9c46a</clr:String>
+                </ResourceDictionary>
+
+                <ResourceDictionary>
+                    <SolidColorBrush x:Key="SecondaryColorBrush"
+                                     Color="#fda144" />
+                    <SolidColorBrush x:Key="PendingColorBrush"
+                                     Color="#0DA012" />
+                    <SolidColorBrush x:Key="ShippingColorBrush"
+                                     Color="#4C82AF" />
+                    <SolidColorBrush x:Key="ShippedColorBrush"
+                                     Color="#AF4C8E" />
+                    <SolidColorBrush x:Key="CancelledColorBrush"
+                                     Color="#E63946" />
+
+                    <SolidColorBrush x:Key="SuccessColorBrush"
+                                     Color="#00b4d8" />
+                    <SolidColorBrush x:Key="ErrorColorBrush"
+                                     Color="#E63946" />
+                    <SolidColorBrush x:Key="InfoColorBrush"
+                                     Color="#3a86ff" />
+                    <SolidColorBrush x:Key="WarningColorBrush"
+                                     Color="#e9c46a" />
+
+                </ResourceDictionary>
+
+
+                <ResourceDictionary>
+                    <local:Bootstrapper x:Key="Bootstrapper" />
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <Thickness x:Key="TitleMargin"
+                       Left="0"
+                       Top="0"
+                       Right="0"
+                       Bottom="30" />
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
