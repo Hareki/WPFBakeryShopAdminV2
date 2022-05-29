@@ -10,7 +10,7 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:DialogViewModel}"
         Title="DialogView"
         Height="auto"
-        Width="auto"
+        MaxWidth="400"
         SizeToContent="WidthAndHeight"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -19,8 +19,10 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="{x:Null}">
     <Grid>
-        <materialDesign:Card UniformCornerRadius="12"
-                             materialDesign:ShadowAssist.ShadowDepth="Depth3">
+        <materialDesign:Card UniformCornerRadius="6"
+                             Margin="25"
+                             materialDesign:ShadowAssist.ShadowDepth="Depth4"
+                             Background="#FAFAFA">
             <Border x:Name="DialogContent"
                     Padding="20"
                     CornerRadius="12"

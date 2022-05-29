@@ -83,7 +83,9 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 
         private bool ProductInfoHasErrors()
         {
-            return string.IsNullOrEmpty(ProductDetails.Name);
+            return string.IsNullOrEmpty(ProductDetails.Name) ||
+                string.IsNullOrEmpty(ProductDetails.Allergens) ||
+                string.IsNullOrEmpty(ProductDetails.Ingredients) ||
         }
 
         private void ResetFields()
