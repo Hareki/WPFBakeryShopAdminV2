@@ -274,7 +274,7 @@ namespace WPFBakeryShopAdminV2.MVVM.Views {
             this.image = ((System.Windows.Media.ImageBrush)(target));
             
             #line 200 "..\..\..\..\MVVM\Views\AccountView.xaml"
-            this.image.Changed += new System.EventHandler(this.image_Changed);
+            this.image.Changed += new System.EventHandler(this.Image_Changed);
             
             #line default
             #line hidden

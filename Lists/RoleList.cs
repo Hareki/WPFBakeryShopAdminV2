@@ -8,9 +8,11 @@ namespace WPFBakeryShopAdminV2.Lists
         public static List<Role> LIST { get; set; }
         static RoleList()
         {
-            LIST = new List<Role>();
-            LIST.Add(new Role(AuthRole.ROLE_ADMIN, "Quản trị viên"));
-            LIST.Add(new Role(AuthRole.ROLE_USER, "Người dùng"));
+            LIST = new List<Role>
+            {
+                new Role(AuthRole.ROLE_ADMIN, "Quản trị viên"),
+                new Role(AuthRole.ROLE_USER, "Người dùng")
+            };
         }
     }
 }

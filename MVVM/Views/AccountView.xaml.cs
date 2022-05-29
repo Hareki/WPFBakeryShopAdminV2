@@ -20,7 +20,7 @@ namespace WPFBakeryShopAdminV2.MVVM.Views
             Console.WriteLine("Vis");
         }
 
-        private void image_Changed(object sender, EventArgs e)
+        private void Image_Changed(object sender, EventArgs e)
         {
             Dispatcher.BeginInvoke(new Action(() => HideLoading()), DispatcherPriority.ContextIdle, null);
         }

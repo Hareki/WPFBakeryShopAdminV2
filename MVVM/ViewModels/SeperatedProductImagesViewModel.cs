@@ -10,9 +10,9 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
     {
         private BindableCollection<ProductImage> _rowItemImages;
         private IList _selectedItems;
-        private ProductViewModel _productViewModel;
+        private readonly ProductViewModel _productViewModel;
 
-        public SeperatedProductImagesViewModel(BindableCollection<ProductImage> rowItemImages, IList selectedItems, ProductViewModel productViewModel, ProductImage selectedImage = null)
+        public SeperatedProductImagesViewModel(BindableCollection<ProductImage> rowItemImages, IList selectedItems, ProductViewModel productViewModel)
         {
             RowItemImages = rowItemImages;
             InnerGridSelectedItems = selectedItems;
