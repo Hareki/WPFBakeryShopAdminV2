@@ -49,7 +49,10 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 CancelAdding();
                 return;
             }
-            if (ProductInfoHasErrors()) return;
+            if (ProductInfoHasErrors()) {
+                await ShowErrorMessage("Lỗi nhập liệu", "Vui lòng nhập đầy đủ thông tin và đúng định dạng");
+                return;
+            }
 
             ProductDetails.CategoryId = SelectedCategory.Id;
             string JSonAccountInfo = StringUtils.SerializeObject(ProductDetails);

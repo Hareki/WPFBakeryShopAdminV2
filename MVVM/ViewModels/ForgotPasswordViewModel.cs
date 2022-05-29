@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using MaterialDesignThemes.Wpf;
 using RestSharp;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WPFBakeryShopAdminV2.MVVM.Views;
@@ -24,9 +25,14 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             _loginViewModel = loginViewModel;
             _windowManager = windowManager;
         }
+
         public async Task SendEmail()
         {
-            if (HasErrors()) return;
+            if (HasErrors())
+            {
+                await ShowErrorMessage("Lỗi", "Vui lòng nhập đúng định dạng email để khôi phục");
+                return;
+            }
 
             RestClient client = new RestClient(RestConnection.AUTHENTICATE_BASE_CONNECTION_STRING);
             var task = await RestConnection.ExecuteRequestAsync(client, Method.Post, "/reset-password/init", Email, "text/plain");
@@ -43,6 +49,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 await DialogHost.Show(View.DialogContent);
             }
         }
+
+        private async Task ShowErrorMessage(string title, string message)
+        {
+            await MessageUtils.ShowErrorMessageInDialog(title, message, _windowManager);
+        }
+
         public async Task SendEmail(ActionExecutionContext context)
         {
             KeyEventArgs keyArgs = context.EventArgs as KeyEventArgs;
@@ -63,7 +75,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private bool HasErrors()
         {
-            return string.IsNullOrEmpty(Email) || !StringUtils.IsValidEmail(Email);
+            return string.IsNullOrEmpty(View.txtEmail.Text) || !StringUtils.IsValidEmail(View.txtEmail.Text);
         }
         private void SetContentVisible(Content content)
         {

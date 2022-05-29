@@ -79,7 +79,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             if ((bool)open.ShowDialog())
             {
                 FileInfo fi = new FileInfo(open.FileName);
-                float fileSizeInMb = (float)fi.Length / 1000000;
+                float fileSizeInMb = (float)fi.Length / 10000000;
                 if (fileSizeInMb <= 1)
                 {
                     UserImageUrl = open.FileName;
@@ -148,7 +148,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public async Task UpdatePersonalAccountAsync()
         {
-            if (UpdateInfoHasErrors()) return;
+            if (UpdateInfoHasErrors())
+            {
+                await ShowErrorMessage("Lỗi nhập liệu", "Vui lòng nhập đầy đủ thông tin và đúng định dạng");
+                return;
+            }
 
             LoadingPageVis = Visibility.Visible;
             var task1 = UpdateAccountInfoAsync();
@@ -220,12 +224,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private bool UpdateInfoHasErrors()
         {
-            return !StringUtils.IsValidEmail(PersonalAccount.Email) ||
-                   !StringUtils.IsValidPhoneNumber(PersonalAccount.Phone) ||
-                   string.IsNullOrEmpty(PersonalAccount.FirstName) ||
-                   string.IsNullOrEmpty(PersonalAccount.LastName) ||
-                   string.IsNullOrEmpty(PersonalAccount.Email) ||
-                   string.IsNullOrEmpty(PersonalAccount.Phone);
+            return !StringUtils.IsValidEmail(View.txtEmail.Text) ||
+                   !StringUtils.IsValidPhoneNumber(View.txtPhone.Text) ||
+                   string.IsNullOrEmpty(View.txtFirstName.Text) ||
+                   string.IsNullOrEmpty(View.txtLastName.Text) ||
+                   string.IsNullOrEmpty(View.txtEmail.Text) ||
+                   string.IsNullOrEmpty(View.txtPhone.Text);
         }
         #endregion
 

@@ -152,7 +152,9 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private bool InformationHasErrors()
         {
-            return string.IsNullOrEmpty(ProductDetails.Name);
+            return string.IsNullOrEmpty(View.txtProductName.Text) ||
+                string.IsNullOrEmpty(View.txtProductAllergens.Text) ||
+                string.IsNullOrEmpty(View.txtProductIngredients.Text);
         }
         #endregion
 
@@ -227,7 +229,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public async Task UpdateInformationAsync()
         {
-            if (InformationHasErrors()) return;
+            if (InformationHasErrors())
+            {
+                await ShowErrorMessage("Lỗi nhập liệu", "Vui lòng nhập đầy đủ thông tin và đúng định dạng");
+                return;
+            }
 
             LoadingInfoVis = Visibility.Visible;
             ProductDetails.CategoryId = SelectedCategory.Id;
@@ -472,6 +478,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 _selectedProduct = value;
                 if (value != null && View.DetailExpander.IsExpanded)
                     _ = LoadDetailItemAsync(value.Id);
+                else
+                {
+                    RowItemVariants = null;
+                    RowItemImages = null;
+                }
                 NotifyOfPropertyChange(() => SelectedProduct);
             }
         }
@@ -552,10 +563,10 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 _editingProductInformation = value;
                 NotifyOfPropertyChange(() => EditingInformation);
-                NotifyOfPropertyChange(() => NotEditing);
+                NotifyOfPropertyChange(() => NotEditingInformation);
             }
         }
-        public bool NotEditing => !EditingInformation;
+        public bool NotEditingInformation => !EditingInformation;
         public int TotalVariants
         {
             get => _totalVariants;

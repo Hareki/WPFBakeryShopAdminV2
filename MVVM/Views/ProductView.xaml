@@ -89,7 +89,7 @@
                             <RowDefinition Height="2*" />
                         </Grid.RowDefinitions>
                         <DataGrid x:Name="RowItemProducts"
-                                  IsEnabled="{Binding NotEditing}"
+                                  IsEnabled="{Binding NotEditingInformation}"
                                   CanUserAddRows="False"
                                   ScrollViewer.CanContentScroll="False"
                                   IsReadOnly="True"
@@ -121,7 +121,7 @@
                         <StackPanel HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
                                     Orientation="Horizontal"
-                                    IsEnabled="{Binding NotEditing}"
+                                    IsEnabled="{Binding NotEditingInformation}"
                                     FlowDirection="RightToLeft"
                                     Grid.Row="1">
                             <Button  x:Name="LoadLastPage"
@@ -313,7 +313,7 @@
                                                                         Grid.Column="2"
                                                                         Grid.Row="0"
                                                                         HorizontalAlignment="Right"
-                                                                        Visibility="{Binding Editing, Converter={StaticResource BoolToVis}}"
+                                                                        Visibility="{Binding EditingInformation, Converter={StaticResource BoolToVis}}"
                                                                         Margin="0 0 0 30"
                                                                         Grid.ColumnSpan="2">
 
@@ -333,7 +333,7 @@
                                                             <StackPanel Orientation="Horizontal"
                                                                         Grid.Column="2"
                                                                         Grid.Row="0"
-                                                                        Visibility="{Binding NotEditing, Converter={StaticResource BoolToVis}}"
+                                                                        Visibility="{Binding NotEditingInformation, Converter={StaticResource BoolToVis}}"
                                                                         HorizontalAlignment="Right"
                                                                         VerticalAlignment="Center"
                                                                         Margin="0 0 0 30"
@@ -344,7 +344,7 @@
                                                                         Content="Cập nhật"
                                                                         IsEnabled="{Binding ProductDetails, Converter={StaticResource nullToEnabled}}"
                                                                         VerticalAlignment="Top"
-                                                                        Margin="0 0 15 0"
+                                                                        Margin="0 0 0 0"
                                                                         materialDesign:ShadowAssist.ShadowDepth="Depth0" />
 
 
@@ -356,12 +356,13 @@
                                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                                      IsEnabled="False"
                                                                      Margin="0 0 15 30" />
-                                                            <TextBox Grid.Column="1"
+                                                            <TextBox x:Name="txtProductName"
+                                                                Grid.Column="1"
                                                                      Grid.Row="1"
                                                                      Grid.ColumnSpan="2"
                                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                                      materialDesign:HintAssist.Hint="Tên sản phẩm*"
-                                                                     IsReadOnly="{Binding NotEditing}"
+                                                                     IsReadOnly="{Binding NotEditingInformation}"
                                                                      Margin="15 0 30 30">
                                                                 <TextBox.Text>
                                                                     <Binding Path="ProductDetails.Name">
@@ -389,26 +390,42 @@
                                                                     </DataTemplate>
                                                                 </ComboBox.ItemTemplate>
                                                             </ComboBox>
-                                                            <TextBox x:Name="ProductDetails_Ingredients"
+                                                            <TextBox x:Name="txtProductIngredients"
                                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                                      Grid.Column="0"
                                                                      Grid.Row="2"
                                                                      AcceptsReturn="True"
                                                                      TextWrapping="Wrap"
                                                                      materialDesign:HintAssist.Hint="Nguyên liệu"
-                                                                     IsReadOnly="{Binding NotEditing}"
+                                                                     IsReadOnly="{Binding NotEditingInformation}"
                                                                      Grid.ColumnSpan="2"
-                                                                     Margin="0 0 15 0" />
-                                                            <TextBox x:Name="ProductDetails_Allergens"
+                                                                     Margin="0 0 15 0">
+                                                                <TextBox.Text>
+                                                                    <Binding Path="ProductDetails.Ingredients">
+                                                                        <Binding.ValidationRules>
+                                                                            <validation:NotEmptyValidationRule Message="Vui lòng nhập tên sản phẩm" />
+                                                                        </Binding.ValidationRules>
+                                                                    </Binding>
+                                                                </TextBox.Text>
+                                                            </TextBox>
+                                                            <TextBox x:Name="txtProductAllergens"
                                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                                      Grid.Column="2"
                                                                      Grid.Row="2"
                                                                      AcceptsReturn="True"
                                                                      TextWrapping="Wrap"
                                                                      materialDesign:HintAssist.Hint="Chất gây dị ứng"
-                                                                     IsReadOnly="{Binding NotEditing}"
+                                                                     IsReadOnly="{Binding NotEditingInformation}"
                                                                      Grid.ColumnSpan="2"
-                                                                     Margin="15 0 0 0" />
+                                                                     Margin="15 0 0 0">
+                                                                <TextBox.Text>
+                                                                    <Binding Path="ProductDetails.Allergens">
+                                                                        <Binding.ValidationRules>
+                                                                            <validation:NotEmptyValidationRule Message="Vui lòng nhập tên sản phẩm" />
+                                                                        </Binding.ValidationRules>
+                                                                    </Binding>
+                                                                </TextBox.Text>
+                                                            </TextBox>
                                                         </Grid>
                                                     </Border>
                                                 </ScrollViewer>
@@ -543,6 +560,7 @@
 
                                                             <Button x:Name="AddImages"
                                                                     Style="{StaticResource CustomBorderButton}"
+                                                                    IsEnabled="{Binding RowItemImages, Converter={StaticResource nullToEnabled}}"
                                                                     Content="Thêm nhiều ảnh mới"
                                                                     HorizontalAlignment="Right"
                                                                     materialDesign:ShadowAssist.ShadowDepth="Depth0"

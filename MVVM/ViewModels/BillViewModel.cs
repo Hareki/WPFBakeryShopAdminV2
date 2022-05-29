@@ -162,7 +162,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 case 2:
                     text = "Đang giao";
                     background = Utilities.Constants.SHIPPING_COLOR;
-                    imageUrl = "/Utilities.Constants/Images/shipping-white.png";
+                    imageUrl = "/Resources/Images/shipping-white.png";
                     break;
                 case 3:
                     text = "Đã giao";

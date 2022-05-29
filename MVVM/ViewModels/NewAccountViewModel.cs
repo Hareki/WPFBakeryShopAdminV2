@@ -18,8 +18,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private List<Role> _roleList;
         private LanguageItem _selectedLanguageItem;
         private PersonalAccount _personalAccount;
-
+        private IWindowManager _windowManager;
         #region Base
+        public NewAccountViewModel(IWindowManager windowManager)
+        {
+            _windowManager = windowManager;
+        }
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
         {
             _restClient = RestConnection.ManagementRestClient;
@@ -30,7 +34,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public async Task AddNewAccount()
         {
-            if (HasErrors()) return;
+            if (HasErrors())
+            {
+                await ShowErrorMessage("Lỗi nhập liệu", "Vui lòng nhập đầy đủ thông tin và đúng định dạng");
+                return;
+            }
 
             SetPersonalAccountAuths();
             string JSonAccountInfo = StringUtils.SerializeObject(PersonalAccount);
@@ -43,11 +51,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             }
             else if (statusCode == 400)
             {
-                ShowFailMessage("Tạo tài khoản thất bại, email đã được sử dụng");
+                await ShowErrorMessage("Lỗi tạo tài khoản", "Tạo tài khoản thất bại, email đã được sử dụng");
             }
             else
             {
-                ShowFailMessage("Xảy ra lỗi khi tạo tài khoản");
+                await ShowErrorMessage("Lỗi tạo tài khoản", "Xảy ra lỗi không xác định khi tạo tài khoản");
             }
         }
 
@@ -67,12 +75,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private bool HasErrors()
         {
-            return !StringUtils.IsValidEmail(PersonalAccount.Email) ||
-                   !StringUtils.IsValidPhoneNumber(PersonalAccount.Phone) ||
-                   string.IsNullOrEmpty(PersonalAccount.FirstName) ||
-                   string.IsNullOrEmpty(PersonalAccount.LastName) ||
-                   string.IsNullOrEmpty(PersonalAccount.Email) ||
-                   string.IsNullOrEmpty(PersonalAccount.Phone);
+            return !StringUtils.IsValidEmail(View.txtEmail.Text) ||
+                   !StringUtils.IsValidPhoneNumber(View.txtPhone.Text) ||
+                   string.IsNullOrEmpty(View.txtFirstName.Text) ||
+                   string.IsNullOrEmpty(View.txtLastName.Text) ||
+                   string.IsNullOrEmpty(View.txtEmail.Text) ||
+                   string.IsNullOrEmpty(View.txtPhone.Text);
         }
         private void SetPersonalAccountAuths()
         {
@@ -103,21 +111,9 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             });
         }
 
-        private void ShowFailMessage(string message)
+        private async Task ShowErrorMessage(string title, string message)
         {
-            View.Dispatcher.Invoke(() =>
-            {
-                View.RedMessage.Text = message;
-
-                RedSB.MessageQueue?.Enqueue(
-                View.RedContent,
-                null,
-                null,
-                null,
-                false,
-                true,
-                TimeSpan.FromSeconds(3));
-            });
+            await MessageUtils.ShowErrorMessageInDialog(title, message, _windowManager);
         }
         #endregion
 

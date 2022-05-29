@@ -301,6 +301,7 @@
                                                  Grid.Row="3"
                                                  Grid.ColumnSpan="8"
                                                  Margin="0 15"
+                                                 IsEnabled="{Binding NotEditing}"
                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  materialDesign:HintAssist.Hint="{DynamicResource Email2}"
                                                  materialDesign:HintAssist.Background="White"

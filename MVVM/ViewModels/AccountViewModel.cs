@@ -62,7 +62,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         #region Account Management
         public void ShowAddingAccountDialog()
         {
-            _windowManager.ShowDialogAsync(new NewAccountViewModel());
+            _windowManager.ShowDialogAsync(new NewAccountViewModel(_windowManager));
         }
         #endregion
 

@@ -11,10 +11,12 @@ namespace WPFBakeryShopAdminV2.Utilities
         private static readonly Regex _phoneRegex = new Regex(@"^0[0-9]{9}$");
         public static bool IsValidEmail(string email)
         {
+            if (email == null) return false;
             return _emailRegex.IsMatch(email);
         }
         public static bool IsValidPhoneNumber(string phoneNum)
         {
+            if (phoneNum == null) return false;
             return _phoneRegex.IsMatch(phoneNum);
         }
         public static string FormatCurrency(int currency)

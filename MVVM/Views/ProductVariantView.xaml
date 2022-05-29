@@ -11,6 +11,8 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:ProductVariantViewModel}"
         mc:Ignorable="d"
         Title="ProductVariantView"
+        Icon="/Resources/Images/favicon.ico"
+        WindowStartupLocation="CenterOwner"
         Height="430"
         Width="750"
         TextElement.FontSize="15">
