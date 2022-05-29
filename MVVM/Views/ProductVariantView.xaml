@@ -4,13 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBakeryShopAdminV2.MVVM.Views"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:sysglb="clr-namespace:System.Globalization;assembly=mscorlib"
         xmlns:viewmodels="clr-namespace:WPFBakeryShopAdminV2.MVVM.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewmodels:ProductVariantViewModel}"
         mc:Ignorable="d"
         Title="ProductVariantView"
-        Height="375"
+        Height="430"
         Width="750"
         TextElement.FontSize="15">
     <Border Padding="30">
@@ -37,27 +38,73 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal"
+            <StackPanel Orientation="Vertical"
                         Grid.Row="0"
-                        Grid.ColumnSpan="12">
+                        Grid.ColumnSpan="12"
+                        Margin="{StaticResource TitleMargin}">
                 <TextBlock x:Name="DialogMainTitle"
                            Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                            FontWeight="SemiBold"
-                           Margin="{StaticResource TitleMargin}"
-                           Text="Thêm loại sản phẩm" />
+                           Text="Thêm biến thể sản phẩm"
+                           Margin="0 0 0 10" />
+                <TextBlock Text="{Binding ProductName}" />
+
             </StackPanel>
+
+            <Grid  Grid.Row="0"
+                   Grid.ColumnSpan="12">
+                <materialDesign:Snackbar HorizontalAlignment="Right"
+                                         VerticalAlignment="Top"
+                                         Grid.ColumnSpan="12"
+                                         x:Name="GreenSB"
+                                         Background="#00b4d8"
+                                         MessageQueue="{materialDesign:MessageQueue}">
+                    <materialDesign:SnackbarMessage>
+                        <StackPanel Orientation="Horizontal"
+                                    x:Name="GreenContent">
+                            <materialDesign:PackIcon Kind="CheckCircle"
+                                                     Margin="0 3 10 0"
+                                                     VerticalAlignment="Center" />
+                            <TextBlock x:Name="GreenMessage"
+                                       Text="Cập nhật trạng thái thành công"
+                                       FontWeight="SemiBold" />
+                        </StackPanel>
+                    </materialDesign:SnackbarMessage>
+                </materialDesign:Snackbar>
+
+                <materialDesign:Snackbar x:Name="RedSB"
+                                         HorizontalAlignment="Right"
+                                         VerticalAlignment="Top"
+                                         Grid.ColumnSpan="12"
+                                         Background="{StaticResource ErrorColorBrush}"
+                                         MessageQueue="{materialDesign:MessageQueue}">
+                    <materialDesign:SnackbarMessage>
+                        <StackPanel Orientation="Horizontal"
+                                    x:Name="RedContent">
+                            <materialDesign:PackIcon Kind="CheckCircle"
+                                                     Margin="0 3 10 0"
+                                                     VerticalAlignment="Center" />
+                            <TextBlock x:Name="RedMessage"
+                                       Text="Cập nhật trạng thái thành công"
+                                       FontWeight="SemiBold" />
+                        </StackPanel>
+                    </materialDesign:SnackbarMessage>
+                </materialDesign:Snackbar>
+            </Grid>
 
             <StackPanel Orientation="Horizontal"
                         Grid.Column="0"
-                        Grid.Row="3"
+                        Grid.Row="1"
                         Grid.ColumnSpan="12"
-                        Margin="0 30 0 0"
+                        Margin="0 0 0 0"
                         VerticalAlignment="Center">
-                <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                <ToggleButton x:Name="ProductVariant_Available"
+                              Style="{StaticResource MaterialDesignSwitchToggleButton}"
                               ToolTip="MaterialDesignSwitchToggleButton"
                               IsChecked="True"
-                              HorizontalAlignment="Left" />
-                <TextBlock Margin="15 0 0 0"
+                              HorizontalAlignment="Left"
+                              Margin="0 0 0 30" />
+                <TextBlock Margin="15 0 0 30"
                            Text="Tình trạng kinh doanh"
                            VerticalAlignment="Center" />
             </StackPanel>
@@ -65,33 +112,46 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right"
                         Grid.Column="0"
-                        Grid.Row="3"
+                        Grid.Row="1"
                         Grid.ColumnSpan="12"
-                        Margin="0 30 0 0">
-                <Button Style="{StaticResource CustomPrimaryButton}"
-                        Content="LƯU LOẠI SẢN PHẨM"
+                        Margin="0 0 0 30">
+                <Button x:Name="AddEditProductVariant"
+                        Style="{StaticResource CustomPrimaryButton}"
+                        Content="LƯU"
+                        MinWidth="75"
                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
                         Margin="0 0 10 0" />
-                <Button Style="{StaticResource CustomSecondaryButton}"
+                <Button x:Name="Cancel"
+                        Style="{StaticResource CustomSecondaryButton}"
                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
                         Content="HỦY"
+                        MinWidth="75"
                         Margin="10 0 0 0" />
             </StackPanel>
 
             <TextBox x:Name="ProductVariant_Id"
                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                      Grid.Column="0"
-                     Grid.ColumnSpan="3"
-                     Grid.Row="1"
+                     Grid.ColumnSpan="4"
+                     Grid.Row="2"
                      materialDesign:HintAssist.Hint="Mã loại"
+                     Margin="0 0 15 15"
+                     IsEnabled="False" />
+
+            <TextBox x:Name="DummyId"
+                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="4"
+                     Grid.Row="2"
+                     materialDesign:HintAssist.Hint="Mã loại - Tự động sinh"
                      Margin="0 0 15 15"
                      IsEnabled="False" />
 
             <ComboBox x:Name="TypeList"
                       SelectedItem="{Binding SelectedProductType}"
-                      Grid.Column="3"
+                      Grid.Column="4"
                       Grid.ColumnSpan="9"
-                      Grid.Row="1"
+                      Grid.Row="2"
                       Style="{StaticResource MaterialDesignOutlinedComboBox}"
                       materialDesign:HintAssist.Hint="Loại sản phẩm"
                       Margin="15 0 0 15">
@@ -104,34 +164,25 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
 
-            <!--<TextBox x:Name="ProductVariant_Cost"
-                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="6"
-                     Grid.Row="2"
-                     materialDesign:HintAssist.Hint="Giá gốc"
-                     Margin="0 15 15 0" />-->
+            <syncfusion:CurrencyTextBox x:Name="ProductCost"
+                                        Value="{Binding ProductVariant.Cost, Mode=TwoWay}"
+                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="6"
+                                        Grid.Row="3"
+                                        Culture="vi-VN"
+                                        materialDesign:HintAssist.Hint="Giá gốc"
+                                        Margin="0 15 15 0" />
 
-            <TextBox x:Name="ProductVariant_Cost"
-                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="6"
-                     Grid.Row="2"
-                     materialDesign:HintAssist.Hint="Giá gốc"
-                     Margin="0 15 15 0"
-                     Text="{Binding ProductVariant.Cost,
-                Mode=TwoWay,
-           UpdateSourceTrigger=PropertyChanged,
-           StringFormat=f2,
-           ConverterCulture={x:Static sysglb:CultureInfo.CurrentCulture}}" />
-
-            <TextBox x:Name="ProductVariant_Price"
-                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                     Grid.Column="6"
-                     Grid.ColumnSpan="6"
-                     Grid.Row="2"
-                     materialDesign:HintAssist.Hint="Giá bán"
-                     Margin="15 15 0 0" />
+            <syncfusion:CurrencyTextBox x:Name="ProductPrice"
+                                        Value="{Binding ProductVariant.Price, Mode=TwoWay}"
+                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        Grid.Column="6"
+                                        Grid.ColumnSpan="6"
+                                        Grid.Row="3"
+                                        Culture="vi-VN"
+                                        materialDesign:HintAssist.Hint="Giá bán"
+                                        Margin="15 15 0 0" />
         </Grid>
     </Border>
 </Window>

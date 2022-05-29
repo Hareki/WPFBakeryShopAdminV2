@@ -445,6 +445,7 @@
                                                             <Button x:Name="ShowNewVariantDialog"
                                                                     Style="{StaticResource CustomBorderButton}"
                                                                     Content="Thêm"
+                                                                    IsEnabled="{Binding SelectedProduct, Converter={StaticResource nullToEnabled}}"
                                                                     Margin="0 0 15 0"
                                                                     MinWidth="100"
                                                                     materialDesign:ShadowAssist.ShadowDepth="Depth0" />
@@ -533,12 +534,41 @@
                                                         </StackPanel>
                                                         <StackPanel Orientation="Horizontal"
                                                                     Grid.Row="0"
-                                                                    Grid.Column="1"
+                                                                    Grid.Column="0"
+                                                                    Grid.ColumnSpan="2"
                                                                     FlowDirection="RightToLeft">
-                                                            <Button Style="{StaticResource CustomBorderButton}"
-                                                                    Content="Thêm ảnh"
+
+                                                            <Button x:Name="AddImages"
+                                                                    Style="{StaticResource CustomBorderButton}"
+                                                                    Content="Thêm nhiều ảnh mới"
+                                                                    HorizontalAlignment="Right"
+                                                                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                                                    Margin="0 0 0 0" />
+
+                                                            <Button x:Name="DeleteImages"
+                                                                    Style="{StaticResource CustomBorderButton}"
+                                                                    Content="Xóa các ảnh đã chọn"
+                                                                    Margin="15 0 0 0"
                                                                     HorizontalAlignment="Right"
                                                                     materialDesign:ShadowAssist.ShadowDepth="Depth0" />
+
+                                                        </StackPanel>
+
+                                                        <StackPanel Orientation="Horizontal"
+                                                                    VerticalAlignment="Top"
+                                                                    FlowDirection="RightToLeft"
+                                                                    Margin="0 20 0 0"
+                                                                    Grid.Row="1"
+                                                                    Grid.Column="1"
+                                                                    Panel.ZIndex="3">
+                                                            <Button x:Name="OpenSeperatedProductImagesDialog"
+                                                                Style="{StaticResource MaterialDesignIconButton}"
+                                                                    Width="37"
+                                                                    Height="37">
+                                                                <materialDesign:PackIcon Kind="OpenInNew"
+                                                                                         Width="20"
+                                                                                         Height="20" />
+                                                            </Button>
                                                         </StackPanel>
                                                         <Border Background="White"
                                                                 CornerRadius="8"
@@ -554,7 +584,7 @@
                                                                       AutoGenerateColumns="False"
                                                                       Background="White"
                                                                       SelectionUnit="FullRow"
-                                                                      SelectionMode="Single"
+                                                                      SelectionMode="Extended"
                                                                       SelectedItem="{Binding Path=SelectedImage, Mode=TwoWay}">
                                                                 <DataGrid.Columns>
                                                                     <DataGridTextColumn Header="Mã ảnh"

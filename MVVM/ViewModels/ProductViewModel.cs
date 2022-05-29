@@ -13,6 +13,7 @@ using System.Windows;
 using Microsoft.Win32;
 using System.IO;
 using WPFBakeryShopAdminV2.Interfaces;
+using System.Windows.Controls;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
@@ -113,7 +114,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             }
             LoadingInfoVis = Visibility.Hidden;
         }
-        private async Task LoadVariants(int id)
+        public async Task LoadVariants(int id)
         {
             var request = new RestRequest($"products/variants/{id}", Method.Get);
             var respone = await _restClient.ExecuteAsync(request);
@@ -197,34 +198,40 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 View.RowItemProducts.SelectedIndex = selectedRow;
             });
         }
-        private void RefreshProductVariantItemGrid(ProductVariant productVariant)
-        {
-            View.Dispatcher.Invoke(() =>
-            {
-                int selectedRow = View.RowItemVariants.SelectedIndex;
-
-                RowItemVariants.RemoveAt(selectedRow);
-                NotifyOfPropertyChange(() => RowItemVariants);
-                View.RowItemVariants.Items.Refresh();
-            });
-        }
         public async Task ShowAddingProductDialog()
         {
             await _windowManager.ShowDialogAsync(new NewProductViewModel(this));
         }
-        public void FocusRowItem(ProductRowItem productRowItem)
+        public void FocusProductRowItem(ProductRowItem productRowItem)
         {
             List<ProductRowItem> currenItems = View.RowItemProducts.Items.OfType<ProductRowItem>().ToList();
             int index = currenItems.FindIndex((element) => element.Name == productRowItem.Name);
             View.RowItemProducts.SelectedIndex = index;
         }
+        public void FocusProductVariant(ProductVariant productVariant)
+        {
+            DataGrid grid = View.RowItemVariants;
+            if (productVariant != null)
+            {
+                List<ProductVariant> currenItems = grid.Items.OfType<ProductVariant>().ToList();
+                int index = currenItems.FindIndex((element) => element.Id == productVariant.Id);
+                grid.SelectedIndex = index;
+                grid.ScrollIntoView(grid.SelectedItem);
+            }
+            else
+            {
+                grid.SelectedIndex = grid.Items.Count - 1;
+                grid.ScrollIntoView(grid.SelectedItem);
+            }
+
+        }
         public void ShowNewVariantDialog()
         {
-            _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, false, null,TypeList));
+            _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, false, new ProductVariant(SelectedProduct.Id), TypeList, SelectedProduct.Name));
         }
         public void ShowEditVariantDialog()
         {
-            _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, true, SelectedVariant, TypeList));
+            _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, true, SelectedVariant, TypeList, SelectedProduct.Name));
         }
         public async Task DeleteVariant()
         {
@@ -238,15 +245,77 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 if (statusCode == 200)
                 {
                     ShowSuccessMessage("Xóa loại sản phẩm đã chọn thành công");
+                    await LoadVariants(SelectedProduct.Id);
                 }
                 else if (statusCode == 404)
                 {
                     await ShowErrorMessage("Lỗi khi xóa loại", "Loại sản phẩm muốn xóa không còn tồn tại, vui lòng làm mới dữ liệu");
-                }else if (statusCode == 400)
+                }
+                else if (statusCode == 400)
                 {
                     await ShowErrorMessage("Lỗi khi xóa loại", "Loại sản phẩm này đã được bán, không thể xóa");
                 }
             }
+        }
+        public async Task AddImages()
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
+            open.Multiselect = true;
+            var images = new List<KeyValuePair<string, string>>();
+            if ((bool)open.ShowDialog())
+            {
+                foreach (string element in open.FileNames)
+                {
+                    images.Add(new KeyValuePair<string, string>("images", element));
+                }
+                var response = await RestConnection.ExecuteFileRequestAsync(_restClient, Method.Post, $"products/{SelectedProduct.Id}/images", images);
+                int statusCode = (int)response.StatusCode;
+                if (statusCode == 201)
+                {
+                    ShowSuccessMessage("Cập nhật ảnh thành công");
+                    await LoadProductImages(SelectedProduct.Id);
+                }
+                else
+                {
+                    await ShowErrorMessage("Lỗi cập nhật ảnh", "Xảy ra lỗi không xác định khi cập nhật ảnh");
+                }
+            }
+        }
+        public async Task DeleteImages()
+        {
+            bool confirm = await ShowConfirmMessage("Xác nhận xóa", "Bạn có chắc muốn xóa các ảnh đã chọn?");
+            if (!confirm) return;
+
+            List<ProductImage> list = View.RowItemImages.SelectedItems.Cast<ProductImage>().ToList();
+
+            DeleteImagesBody deleteImagesBody = new DeleteImagesBody
+            {
+                DeletedImageIds = (from ProductImage image in list
+                                   select image.Id).ToList()
+            };
+
+            string requestBody = StringUtils.SerializeObject(deleteImagesBody);
+            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Delete, $"products/{SelectedProduct.Id}/images", requestBody, "application/json");
+
+            int statusCode = (int)response.StatusCode;
+            switch (statusCode)
+            {
+                case 200:
+                    ShowSuccessMessage("Xóa ảnh thành công");
+                    await LoadProductImages(SelectedProduct.Id);
+                    break;
+                case 404:
+                    await ShowErrorMessage("Lỗi xóa ảnh", "Ảnh muốn xóa không còn tồn tại, vui lòng tải lại trang");
+                    break;
+                case 400:
+                    await ShowErrorMessage("Lỗi xóa ảnh", "Ảnh muốn xóa không thuộc sản phẩm đã chọn");
+                    break;
+            }
+        }
+        public async Task OpenSeperatedProductImagesDialog()
+        {
+            await _windowManager.ShowDialogAsync(new SeperatedProductImagesViewModel(RowItemImages,View.RowItemImages.SelectedItems));
         }
 
         #endregion

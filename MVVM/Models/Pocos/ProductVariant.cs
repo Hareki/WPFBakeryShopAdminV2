@@ -4,6 +4,14 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
 {
     public class ProductVariant
     {
+        public ProductVariant()
+        {
+            this.Id = -1;
+        }
+        public ProductVariant(int productId)
+        {
+            this.ProductId = productId;
+        }
         public int Id { get; set; }
         public int ProductId { get; set; }
         public int TypeId { get; set; }
@@ -11,6 +19,10 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
         public int Price { get; set; }
         public bool Hot { get; set; }
         public bool Available { get; set; }
+        public bool ShouldSerializeId()
+        {
+            return Id != -1;
+        }
         [JsonIgnore]
         public string AvailableName
         {
@@ -22,7 +34,9 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
         }
         [JsonIgnore]
         public string TypeName => Lists.ProductTypeList.FindTypeNameById(TypeId);
+        [JsonIgnore]
         public string FormattedCost => Utilities.StringUtils.FormatCurrency(Cost);
+        [JsonIgnore]
         public string FormattedPrice => Utilities.StringUtils.FormatCurrency(Price);
     }
 }

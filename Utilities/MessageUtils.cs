@@ -8,12 +8,15 @@ namespace WPFBakeryShopAdminV2.Utilities
 {
     public class MessageUtils
     {
-        public static void ShowSnackBarMessage(UserControl view, TextBlock greenMessage, Snackbar greenSB, StackPanel greenContent, string message)
+        public static void ShowSnackBarMessage(UserControl view, TextBlock greenMessage, Snackbar greenSB, StackPanel greenContent, string message, Snackbar otherSB = null)
         {
             view.Dispatcher.Invoke(() =>
             {
                 greenMessage.Text = message;
+
                 ClearSnackbar(greenSB);
+                if (otherSB != null)
+                    ClearSnackbar(otherSB);
                 greenSB.MessageQueue?.Enqueue(
                 greenContent,
                null,
@@ -21,27 +24,30 @@ namespace WPFBakeryShopAdminV2.Utilities
                null,
                 false,
                 true,
-                TimeSpan.FromSeconds(4));
+                TimeSpan.FromSeconds(3));
             });
         }
         private static void ClearSnackbar(Snackbar greenSB)
         {
             greenSB.MessageQueue?.Clear();
         }
-        public static void ShowSnackBarMessage(Window view, TextBlock greenMessage, Snackbar greenSB, StackPanel greenContent, string message)
+        public static void ShowSnackBarMessage(Window view, TextBlock greenMessage, Snackbar greenSB, StackPanel greenContent, string message, Snackbar otherSB = null)
         {
             view.Dispatcher.Invoke(() =>
             {
                 greenMessage.Text = message;
+
                 ClearSnackbar(greenSB);
+                if (otherSB != null)
+                    ClearSnackbar(otherSB);
                 greenSB.MessageQueue?.Enqueue(
                 greenContent,
                null,
                 null,
-                null,
+               null,
                 false,
                 true,
-                TimeSpan.FromSeconds(4));
+                TimeSpan.FromSeconds(3));
             });
         }
         public static async Task<bool> ShowConfirmMessage(Border dialogContent, TextBlock titleTB, TextBlock messageTB, StackPanel confirmContent

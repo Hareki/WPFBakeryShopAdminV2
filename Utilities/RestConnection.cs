@@ -51,7 +51,7 @@ namespace WPFBakeryShopAdminV2.Utilities
         }
         public static Task<RestResponse> ExecuteFileRequestAsync(RestClient restClient, Method method, string requestUrl, List<KeyValuePair<string, string>> images)
         {
-            var request = new RestRequest(requestUrl, Method.Put);
+            var request = new RestRequest(requestUrl, method);
             foreach (KeyValuePair<string, string> image in images)
             {
                 request.AddFile(image.Key, image.Value, "multipart/form-data");

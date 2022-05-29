@@ -66,7 +66,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             if (statusCode == 200)
             {
                 _productViewModel.LoadLastPage();
-                _productViewModel.FocusRowItem(ProductDetails.ProductRowItem);
+                _productViewModel.FocusProductRowItem(ProductDetails.ProductRowItem);
                 ResetFields();
                 ShowSuccessMessage("Thêm sản phẩm thành công");
             }
@@ -140,11 +140,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         #region Show Messages
         private void ShowErrorMessage(string title, string message)
         {
-            MessageUtils.ShowSnackBarMessage(View, View.RedMessage, View.RedSB, View.RedContent, message);
+            MessageUtils.ShowSnackBarMessage(View, View.RedMessage, View.RedSB, View.RedContent, message, View.GreenSB);
         }
         private void ShowSuccessMessage(string message)
         {
-            MessageUtils.ShowSnackBarMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, message);
+            MessageUtils.ShowSnackBarMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, message, View.RedSB);
         }
         #endregion
     }

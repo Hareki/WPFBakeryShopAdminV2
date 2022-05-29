@@ -78,3 +78,8 @@ D:\Study\CNTT\4th year\2nd semester\Phat trien phan mem Huong dich vu\Repository
 D:\Study\CNTT\4th year\2nd semester\Phat trien phan mem Huong dich vu\Repository\WPFBakeryShopAdminV2\WPFBakeryShopAdminV2\obj\Debug\WPFBakeryShopAdminV2.pdb
 D:\Study\CNTT\4th year\2nd semester\Phat trien phan mem Huong dich vu\Repository\WPFBakeryShopAdminV2\WPFBakeryShopAdminV2\obj\Debug\MVVM\Views\ProductVariantView.g.cs
 D:\Study\CNTT\4th year\2nd semester\Phat trien phan mem Huong dich vu\Repository\WPFBakeryShopAdminV2\WPFBakeryShopAdminV2\obj\Debug\MVVM\Views\ProductVariantView.baml
+D:\Study\CNTT\4th year\2nd semester\Phat trien phan mem Huong dich vu\Repository\WPFBakeryShopAdminV2\WPFBakeryShopAdminV2\bin\Debug\Syncfusion.Licensing.dll
+D:\Study\CNTT\4th year\2nd semester\Phat trien phan mem Huong dich vu\Repository\WPFBakeryShopAdminV2\WPFBakeryShopAdminV2\bin\Debug\Syncfusion.Shared.WPF.dll
+D:\Study\CNTT\4th year\2nd semester\Phat trien phan mem Huong dich vu\Repository\WPFBakeryShopAdminV2\WPFBakeryShopAdminV2\bin\Debug\Syncfusion.Shared.WPF.xml
+D:\Study\CNTT\4th year\2nd semester\Phat trien phan mem Huong dich vu\Repository\WPFBakeryShopAdminV2\WPFBakeryShopAdminV2\obj\Debug\MVVM\Views\SeperatedProductImagesView.g.cs
+D:\Study\CNTT\4th year\2nd semester\Phat trien phan mem Huong dich vu\Repository\WPFBakeryShopAdminV2\WPFBakeryShopAdminV2\obj\Debug\MVVM\Views\SeperatedProductImagesView.baml

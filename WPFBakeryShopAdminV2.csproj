@@ -62,6 +62,12 @@
     <Reference Include="RestSharp, Version=107.3.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.107.3.0\lib\netstandard2.0\RestSharp.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=20.1460.0.57, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.20.1.0.57\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Shared.WPF, Version=20.1460.0.57, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Shared.WPF.20.1.0.57\lib\net46\Syncfusion.Shared.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -125,6 +131,7 @@
     <Compile Include="LocalValidationRules\NotEmptyValidationRule.cs" />
     <Compile Include="LocalValidationRules\PhoneFormatValidationRule.cs" />
     <Compile Include="MVVM\Models\Bodies\ChangePasswordBody.cs" />
+    <Compile Include="MVVM\Models\Bodies\DeleteImagesBody.cs" />
     <Compile Include="MVVM\Models\Bodies\LoginRequestBody.cs" />
     <Compile Include="MVVM\Models\Pocos\BillRowItem.cs" />
     <Compile Include="MVVM\Models\Pocos\Category.cs" />
@@ -149,6 +156,7 @@
     <Compile Include="MVVM\ViewModels\PersonalAccountViewModel.cs" />
     <Compile Include="MVVM\ViewModels\ProductVariantViewModel.cs" />
     <Compile Include="MVVM\ViewModels\ProductViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\SeperatedProductImagesViewModel.cs" />
     <Compile Include="MVVM\Views\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
@@ -181,6 +189,9 @@
     </Compile>
     <Compile Include="MVVM\Views\ProductView.xaml.cs">
       <DependentUpon>ProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\SeperatedProductImagesView.xaml.cs">
+      <DependentUpon>SeperatedProductImagesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Constants.cs" />
     <Compile Include="Utilities\MessageUtils.cs" />
@@ -294,6 +305,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\Views\ProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\SeperatedProductImagesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
