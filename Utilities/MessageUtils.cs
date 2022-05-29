@@ -1,8 +1,11 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using Caliburn.Micro;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using WPFBakeryShopAdminV2.MVVM.ViewModels;
+using static WPFBakeryShopAdminV2.MVVM.ViewModels.DialogViewModel;
 
 namespace WPFBakeryShopAdminV2.Utilities
 {
@@ -69,6 +72,17 @@ namespace WPFBakeryShopAdminV2.Utilities
             titleTB.Text = title;
             messageTB.Text = message;
             await DialogHost.Show(dialogContent);
+        }
+
+        public static async Task<bool> ShowConfirmMessageInDialog(string title, string message, IWindowManager windowManager)
+        {
+            bool confirm = (bool)await windowManager.ShowDialogAsync(new DialogViewModel(title, message, ContentType.Confirm));
+            return confirm;
+        }
+        public static Task ShowErrorMessageInDialog(string title, string message, IWindowManager windowManager)
+        {
+            return windowManager.ShowDialogAsync(new DialogViewModel(title, message, ContentType.Error));
+
         }
     }
 }

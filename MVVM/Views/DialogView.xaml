@@ -56,6 +56,7 @@
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Margin="0 0 15 0"
                                     Foreground="{StaticResource InfoColorBrush}"
+                                    materialDesign:RippleAssist.Feedback="{StaticResource InfoColorBrush}"
                                     Content="{DynamicResource DialogButtonConfirm}">
                                 <Button.CommandParameter>
                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
@@ -67,6 +68,7 @@
                                     Style="{StaticResource MaterialDesignFlatButton}"
                                     Margin="15 0 0 0"
                                     Foreground="{StaticResource InfoColorBrush}"
+                                    materialDesign:RippleAssist.Feedback="{StaticResource InfoColorBrush}"
                                     Content="{DynamicResource DialogButtonCancel}">
                                 <Button.CommandParameter>
                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
@@ -102,10 +104,11 @@
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Center">
                             <Button x:Name="ButtonOkayClicked"
-                                    Style="{StaticResource CustomFlatButton}"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
                                     Margin="0 0 15 0"
                                     Content="{DynamicResource DialogButtonOkay}"
-                                    Foreground="{StaticResource ErrorColorBrush}">
+                                    Foreground="{StaticResource ErrorColorBrush}"
+                                    materialDesign:RippleAssist.Feedback="{StaticResource ErrorColorBrush}">
                             </Button>
                         </StackPanel>
                     </StackPanel>

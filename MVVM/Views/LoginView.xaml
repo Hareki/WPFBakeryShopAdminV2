@@ -68,7 +68,7 @@
                             Content="{DynamicResource Login}"
                             Margin="4 12 4 12" />
                     <Button x:Name="ShowForgotPasswordDialog"
-                            Style="{StaticResource CustomFlatButton}"
+                            Style="{StaticResource MaterialDesignFlatButton}"
                             Content="{DynamicResource ForgotPassword}"
                             HorizontalAlignment="Center" />
                 </StackPanel>

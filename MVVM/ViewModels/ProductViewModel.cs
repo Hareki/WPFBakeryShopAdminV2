@@ -215,7 +215,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public async Task ShowAddingProductDialog()
         {
-            await _windowManager.ShowDialogAsync(new NewProductViewModel(this));
+            await _windowManager.ShowDialogAsync(new NewProductViewModel(this,_windowManager));
         }
         public void FocusProductRowItem(ProductRowItem productRowItem)
         {

@@ -57,6 +57,7 @@
                             <Button Style="{StaticResource MaterialDesignFlatButton}"
                                     Margin="0 0 15 0"
                                     Foreground="{StaticResource InfoColorBrush}"
+                                    materialDesign:RippleAssist.Feedback="{StaticResource InfoColorBrush}"
                                     Content="{DynamicResource DialogButtonConfirm}"
                                     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                                 <Button.CommandParameter>
@@ -69,6 +70,7 @@
                                     Margin="15 0 0 0"
                                     Foreground="{StaticResource InfoColorBrush}"
                                     Content="{DynamicResource DialogButtonCancel}"
+                                    materialDesign:RippleAssist.Feedback="{StaticResource InfoColorBrush}"
                                     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                                 <Button.CommandParameter>
                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
@@ -107,6 +109,7 @@
                                     Margin="0 0 15 0"
                                     Content="{DynamicResource DialogButtonOkay}"
                                     Foreground="{StaticResource ErrorColorBrush}"
+                                    materialDesign:RippleAssist.Feedback="{StaticResource ErrorColorBrush}"
                                     Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
                             </Button>
                         </StackPanel>

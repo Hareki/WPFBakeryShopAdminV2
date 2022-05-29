@@ -25,10 +25,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private Category _selectedCategory;
         private ProductDetails _productDetails;
         private ProductViewModel _productViewModel;
+        private IWindowManager _windowManager;
         #region Base
-        public NewProductViewModel(ProductViewModel productViewModel)
+        public NewProductViewModel(ProductViewModel productViewModel, IWindowManager windowManager)
         {
             _productViewModel = productViewModel;
+            _windowManager = windowManager;
         }
         protected override async Task OnActivateAsync(CancellationToken cancellationToken)
         {
@@ -52,8 +54,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         {
             if (SelectedCategory == null)
             {
-                ShowErrorMessage("", "Không tìm thấy danh mục nào, vui lòng thử lại sau");
-                await Task.Delay(3000);
+                await ShowErrorMessage("Lỗi tải danh mục", "Không tìm thấy danh mục nào, vui lòng thử lại sau");
                 CancelAdding();
                 return;
             }
@@ -72,11 +73,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             }
             else if (statusCode == 400)
             {
-                ShowErrorMessage("Xảy ra lỗi", "Tên sản phẩm đã tồn tại");
+                await ShowErrorMessage("Xảy ra lỗi", "Tên sản phẩm đã tồn tại");
             }
             else if (statusCode == 404)
             {
-                ShowErrorMessage("Xảy ra lỗi", "Danh mục không còn tồn tại, vui lòng khởi động lại hộp thoại này để nhận thông tin danh mục mới nhất");
+                await ShowErrorMessage("Xảy ra lỗi", "Danh mục không còn tồn tại, vui lòng khởi động lại hộp thoại này để nhận thông tin danh mục mới nhất");
             }
         }
 
@@ -138,9 +139,9 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 
 
         #region Show Messages
-        private void ShowErrorMessage(string title, string message)
+        private async Task ShowErrorMessage(string title, string message)
         {
-            MessageUtils.ShowSnackBarMessage(View, View.RedMessage, View.RedSB, View.RedContent, message, View.GreenSB);
+            await MessageUtils.ShowErrorMessageInDialog(title, message, _windowManager);
         }
         private void ShowSuccessMessage(string message)
         {
