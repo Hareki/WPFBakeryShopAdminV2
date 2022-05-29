@@ -60,6 +60,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 View.DialogMainTitle.Text = "Thêm loại sản phẩm";
             }
         }
+        
         public async Task AddEditProductVariant()
         {
             ProductVariant.Cost = (int)View.ProductCost.Value;
@@ -101,7 +102,6 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         {
             return response.Contains("product") && response.Contains("notFoundIdVariant");
         }
-
         public async Task AddProductVariant(string requestBody)
         {
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Post, "variants", requestBody, "application/json");

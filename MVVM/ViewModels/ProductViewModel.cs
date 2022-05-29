@@ -14,6 +14,8 @@ using Microsoft.Win32;
 using System.IO;
 using WPFBakeryShopAdminV2.Interfaces;
 using System.Windows.Controls;
+using System.Collections;
+using System;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
@@ -31,7 +33,20 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private ProductVariant _selectedVariant;
         private ProductImage _selectedImage;
         private ProductDetails _productDetails;
+
+
+
         private Pagination _pagination;
+
+        internal void SetSelectedItems(IList OuterSelectedItems)
+        {
+            View.RowItemImages.SelectedItems.Clear();
+            foreach (var item in OuterSelectedItems)
+            {
+                View.RowItemImages.SelectedItems.Add(item);
+            }
+        }
+
         private IWindowManager _windowManager;
         private BindableCollection<Category> _categoryList;
         private BindableCollection<ProductType> _typeList;
@@ -282,6 +297,10 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 }
             }
         }
+        public void RowItemImages_SelectionChanged()
+        {
+            View.DeleteImages.IsEnabled = (View.RowItemImages.SelectedItems.Count > 0);
+        }
         public async Task DeleteImages()
         {
             bool confirm = await ShowConfirmMessage("Xác nhận xóa", "Bạn có chắc muốn xóa các ảnh đã chọn?");
@@ -315,7 +334,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public async Task OpenSeperatedProductImagesDialog()
         {
-            await _windowManager.ShowDialogAsync(new SeperatedProductImagesViewModel(RowItemImages,View.RowItemImages.SelectedItems));
+            List<ProductImage> savedList = View.RowItemImages.SelectedItems.Cast<ProductImage>().ToList();
+            bool confirmSelecting = (bool)await _windowManager.ShowDialogAsync(new SeperatedProductImagesViewModel(RowItemImages, View.RowItemImages.SelectedItems, this));
+            if (!confirmSelecting)
+            {
+                this.SetSelectedItems(savedList);
+            }
         }
 
         #endregion

@@ -5,14 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBakeryShopAdminV2.MVVM.Views"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:cal="http://www.caliburnproject.org"
+        xmlns:viewmodels="clr-namespace:WPFBakeryShopAdminV2.MVVM.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:SeperatedProductImagesViewModel}"
         mc:Ignorable="d"
         Title="SeperatedProductImagesView"
         Height="450"
         Width="800"
         Background="#F5F5FA"
         TextElement.FontSize="15"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
->
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}">
     <Grid>
         <Border Padding="5"
                 CornerRadius="12">
@@ -42,9 +44,17 @@
                                 Grid.Row="0"
                                 Grid.Column="1"
                                 FlowDirection="RightToLeft">
-                        <Button x:Name="AddImages"
-                                Style="{StaticResource CustomBorderButton}"
+                        
+                        <Button x:Name="ConfirmSelecting"
+                                Style="{StaticResource CustomPrimaryButton}"
                                 Content="Xác nhận chọn"
+                                HorizontalAlignment="Right"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth0" />
+                        
+                        <Button x:Name="Cancel"
+                                Style="{StaticResource CustomSecondaryButton}"
+                                Content="Hủy"
+                                Margin="15 0 0 0"
                                 HorizontalAlignment="Right"
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0" />
                     </StackPanel>
@@ -63,7 +73,7 @@
                                   Background="White"
                                   SelectionUnit="FullRow"
                                   SelectionMode="Extended"
-                                  SelectedItem="{Binding Path=SelectedImage, Mode=TwoWay}">
+                                  cal:Message.Attach="[Event SelectionChanged] = [Action RowItemImages_SelectionChanged]">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Mã ảnh"
                                                     Width="1*"
@@ -98,9 +108,9 @@
                                         <DataTemplate>
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*" />
                                                     <ColumnDefinition Width="4*" />
-                                                    <ColumnDefinition Width="3*" />
-                                                    <ColumnDefinition Width="4*" />
+                                                    <ColumnDefinition Width="2*" />
                                                 </Grid.ColumnDefinitions>
                                                 <Image Source="{Binding ImagePath}"
                                                        Grid.Column="1" />

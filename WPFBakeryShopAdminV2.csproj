@@ -194,6 +194,7 @@
       <DependentUpon>SeperatedProductImagesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Constants.cs" />
+    <Compile Include="Utilities\DataGridSelectedItemsBehavior.cs" />
     <Compile Include="Utilities\MessageUtils.cs" />
     <Compile Include="Utilities\Pagination.cs" />
     <Compile Include="Utilities\PasswordHelper.cs" />

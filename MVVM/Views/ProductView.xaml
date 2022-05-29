@@ -562,7 +562,7 @@
                                                                     Grid.Column="1"
                                                                     Panel.ZIndex="3">
                                                             <Button x:Name="OpenSeperatedProductImagesDialog"
-                                                                Style="{StaticResource MaterialDesignIconButton}"
+                                                                    Style="{StaticResource MaterialDesignIconButton}"
                                                                     Width="37"
                                                                     Height="37">
                                                                 <materialDesign:PackIcon Kind="OpenInNew"
@@ -578,14 +578,22 @@
                                                                 Grid.ColumnSpan="2"
                                                                 Margin="0 15 0 0">
                                                             <DataGrid x:Name="RowItemImages"
+                                                                      cal:Message.Attach="[Event SelectionChanged] = [Action RowItemImages_SelectionChanged]"
                                                                       CanUserAddRows="False"
                                                                       ScrollViewer.CanContentScroll="False"
                                                                       IsReadOnly="True"
                                                                       AutoGenerateColumns="False"
                                                                       Background="White"
                                                                       SelectionUnit="FullRow"
-                                                                      SelectionMode="Extended"
-                                                                      SelectedItem="{Binding Path=SelectedImage, Mode=TwoWay}">
+                                                                      SelectionMode="Extended">
+
+                                                                <!--<DataGrid.Resources>
+                                                                    <Style TargetType="DataGridRow">
+                                                                        <Setter Property="IsSelected"
+                                                                                Value="{Binding IsSelected}" />
+                                                                    </Style>
+                                                                </DataGrid.Resources>-->
+
                                                                 <DataGrid.Columns>
                                                                     <DataGridTextColumn Header="Mã ảnh"
                                                                                         Width="1*"
