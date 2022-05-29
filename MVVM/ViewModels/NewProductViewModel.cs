@@ -1,20 +1,10 @@
 ﻿using Caliburn.Micro;
-using MaterialDesignThemes.Wpf;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
-using WPFBakeryShopAdminV2.MVVM.Models.Bodies;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
-using WPFBakeryShopAdminV2.MVVM.ViewModels;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
@@ -26,6 +16,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private ProductDetails _productDetails;
         private ProductViewModel _productViewModel;
         private IWindowManager _windowManager;
+
         #region Base
         public NewProductViewModel(ProductViewModel productViewModel, IWindowManager windowManager)
         {
@@ -85,7 +76,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         {
             return string.IsNullOrEmpty(ProductDetails.Name) ||
                 string.IsNullOrEmpty(ProductDetails.Allergens) ||
-                string.IsNullOrEmpty(ProductDetails.Ingredients) ||
+                string.IsNullOrEmpty(ProductDetails.Ingredients);
         }
 
         private void ResetFields()
@@ -138,7 +129,6 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public NewProductView View => (NewProductView)this.GetView();
         #endregion
-
 
         #region Show Messages
         private async Task ShowErrorMessage(string title, string message)

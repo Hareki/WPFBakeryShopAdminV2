@@ -1,12 +1,7 @@
 ﻿using Caliburn.Micro;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
@@ -60,7 +55,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 View.DialogMainTitle.Text = "Thêm loại sản phẩm";
             }
         }
-        
+
         public async Task AddEditProductVariant()
         {
             ProductVariant.Cost = (int)View.ProductCost.Value;
@@ -111,7 +106,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 case 200:
                     ShowSuccessMessage("Thêm loại sản phẩm thành công");
-                    await _productViewModel.LoadVariants(ProductVariant.ProductId);
+                    await _productViewModel.LoadVariantsAsync(ProductVariant.ProductId);
                     _productViewModel.FocusProductVariant(null);
                     ResetFields();
                     break;
@@ -142,7 +137,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 case 200:
                     ShowSuccessMessage("Cập nhật biến thể thành công");
-                    await _productViewModel.LoadVariants(ProductVariant.ProductId);
+                    await _productViewModel.LoadVariantsAsync(ProductVariant.ProductId);
                     Cancel();
                     break;
                 case 404 when ProducIdNotFound(responseBody):

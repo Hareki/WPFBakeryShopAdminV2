@@ -1,21 +1,19 @@
 ﻿using Caliburn.Micro;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using RestSharp;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using WPFBakeryShopAdminV2.Interfaces;
 using WPFBakeryShopAdminV2.MVVM.Models.Bodies;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
-using WPFBakeryShopAdminV2.Utilities;
 using WPFBakeryShopAdminV2.MVVM.Views;
-using System.Windows;
-using Microsoft.Win32;
-using System.IO;
-using WPFBakeryShopAdminV2.Interfaces;
-using System.Windows.Controls;
-using System.Collections;
-using System;
+using WPFBakeryShopAdminV2.Utilities;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
@@ -33,25 +31,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private ProductVariant _selectedVariant;
         private ProductImage _selectedImage;
         private ProductDetails _productDetails;
-
-
-
         private Pagination _pagination;
-
-        internal void SetSelectedItems(IList OuterSelectedItems)
-        {
-            View.RowItemImages.SelectedItems.Clear();
-            foreach (var item in OuterSelectedItems)
-            {
-                View.RowItemImages.SelectedItems.Add(item);
-            }
-        }
-
         private IWindowManager _windowManager;
         private BindableCollection<Category> _categoryList;
         private BindableCollection<ProductType> _typeList;
         private Category _selectedCategory;
-        private bool _editing = false;
+        private bool _editingProductInformation = false;
         private int _totalVariants;
         private int _totalImages;
         private ProductDetails _productInfoBeforeEditing;
@@ -69,6 +54,9 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             _ = LoadPageAsync();
             return Task.CompletedTask;
         }
+        #endregion
+
+        #region Loading Stuffs
         public Task LoadPageAsync()
         {
             if (RowItemProducts != null)
@@ -112,13 +100,13 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             LoadingVariantVis = Visibility.Visible;
             LoadingProductImages = Visibility.Visible;
 
-            _ = LoadProductInformation(id);
-            _ = LoadVariants(id);
-            _ = LoadProductImages(id);
+            _ = LoadProductInformationAsync(id);
+            _ = LoadVariantsAsync(id);
+            _ = LoadProductImagesAsync(id);
 
             return Task.CompletedTask;
         }
-        private async Task LoadProductInformation(int id)
+        private async Task LoadProductInformationAsync(int id)
         {
             var request = new RestRequest($"products/{id}", Method.Get);
             var respone = await _restClient.ExecuteAsync(request);
@@ -129,7 +117,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             }
             LoadingInfoVis = Visibility.Hidden;
         }
-        public async Task LoadVariants(int id)
+        public async Task LoadVariantsAsync(int id)
         {
             var request = new RestRequest($"products/variants/{id}", Method.Get);
             var respone = await _restClient.ExecuteAsync(request);
@@ -140,7 +128,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             }
             LoadingVariantVis = Visibility.Hidden;
         }
-        private async Task LoadProductImages(int id)
+        private async Task LoadProductImagesAsync(int id)
         {
             var request = new RestRequest($"products/{id}/images", Method.Get);
             var respone = await _restClient.ExecuteAsync(request);
@@ -151,44 +139,9 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             }
             LoadingProductImages = Visibility.Hidden;
         }
-        public void RequestUpdateProductInfo()
-        {
-            Editing = true;
-            _productInfoBeforeEditing = new ProductDetails(ProductDetails);
-        }
-        public async Task UpdateProductInfoAsync()
-        {
-            if (ProductInfoHasErrors()) return;
+        #endregion
 
-            LoadingInfoVis = Visibility.Visible;
-            ProductDetails.CategoryId = SelectedCategory.Id;
-            string JSonProductInfo = StringUtils.SerializeObject(ProductDetails);
-            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Put, $"products/info", JSonProductInfo, "application/json");
-            int statusCode = (int)response.StatusCode;
-            string responseBody = response.Content;
-            switch (statusCode)
-            {
-                case 200:
-                    RefreshProductRowItemGrid(ProductDetails.ProductRowItem);
-                    ShowSuccessMessage("Cập nhật sản phẩm thành công");
-                    Editing = false;
-                    break;
-                case 404 when ProductNotFound(responseBody):
-                    await ShowErrorMessage("Lỗi cập nhật", "Sản phẩm không còn tồn tại, vui lòng tải lại trang");
-                    break;
-                case 404 when CategoryNotFound(responseBody):
-                    await ShowErrorMessage("Lỗi cập nhật", "Danh mục không còn tồn tại, vui lòng tải lại trang");
-                    break;
-                case 400:
-                    await ShowErrorMessage("Lỗi cập nhật", "Tên sản phẩm đã tồn tại, vui lòng chọn tên khác");
-                    break;
-            }
-            LoadingInfoVis = Visibility.Hidden;
-        }
-        private bool ProductInfoHasErrors()
-        {
-            return string.IsNullOrEmpty(ProductDetails.Name);
-        }
+        #region Validations
         private bool ProductNotFound(string responseBody)
         {
             return responseBody.Contains("product") && responseBody.Contains("notFoundId");
@@ -197,49 +150,13 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         {
             return responseBody.Contains("category") && responseBody.Contains("notFoundId");
         }
-        public void CancelUpdate()
+        private bool InformationHasErrors()
         {
-            Editing = false;
-            ProductDetails = new ProductDetails(_productInfoBeforeEditing);
+            return string.IsNullOrEmpty(ProductDetails.Name);
         }
-        private void RefreshProductRowItemGrid(ProductRowItem productRowItem)
-        {
-            View.Dispatcher.Invoke(() =>
-            {
-                int selectedRow = View.RowItemProducts.SelectedIndex;
+        #endregion
 
-                RowItemProducts[selectedRow] = productRowItem;
-                View.RowItemProducts.Items.Refresh();
-                View.RowItemProducts.SelectedIndex = selectedRow;
-            });
-        }
-        public async Task ShowAddingProductDialog()
-        {
-            await _windowManager.ShowDialogAsync(new NewProductViewModel(this,_windowManager));
-        }
-        public void FocusProductRowItem(ProductRowItem productRowItem)
-        {
-            List<ProductRowItem> currenItems = View.RowItemProducts.Items.OfType<ProductRowItem>().ToList();
-            int index = currenItems.FindIndex((element) => element.Name == productRowItem.Name);
-            View.RowItemProducts.SelectedIndex = index;
-        }
-        public void FocusProductVariant(ProductVariant productVariant)
-        {
-            DataGrid grid = View.RowItemVariants;
-            if (productVariant != null)
-            {
-                List<ProductVariant> currenItems = grid.Items.OfType<ProductVariant>().ToList();
-                int index = currenItems.FindIndex((element) => element.Id == productVariant.Id);
-                grid.SelectedIndex = index;
-                grid.ScrollIntoView(grid.SelectedItem);
-            }
-            else
-            {
-                grid.SelectedIndex = grid.Items.Count - 1;
-                grid.ScrollIntoView(grid.SelectedItem);
-            }
-
-        }
+        #region Product Variants
         public void ShowNewVariantDialog()
         {
             _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, false, new ProductVariant(SelectedProduct.Id), TypeList, SelectedProduct.Name));
@@ -260,7 +177,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 if (statusCode == 200)
                 {
                     ShowSuccessMessage("Xóa loại sản phẩm đã chọn thành công");
-                    await LoadVariants(SelectedProduct.Id);
+                    await LoadVariantsAsync(SelectedProduct.Id);
                 }
                 else if (statusCode == 404)
                 {
@@ -272,7 +189,90 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 }
             }
         }
-        public async Task AddImages()
+        public void FocusProductVariant(ProductVariant productVariant)
+        {
+            DataGrid grid = View.RowItemVariants;
+            if (productVariant != null)
+            {
+                List<ProductVariant> currenItems = grid.Items.OfType<ProductVariant>().ToList();
+                int index = currenItems.FindIndex((element) => element.Id == productVariant.Id);
+                grid.SelectedIndex = index;
+                grid.ScrollIntoView(grid.SelectedItem);
+            }
+            else
+            {
+                grid.SelectedIndex = grid.Items.Count - 1;
+                grid.ScrollIntoView(grid.SelectedItem);
+            }
+
+        }
+        #endregion
+
+        #region Product Information
+        private void RefreshProductRowItemGrid(ProductRowItem productRowItem)
+        {
+            View.Dispatcher.Invoke(() =>
+            {
+                int selectedRow = View.RowItemProducts.SelectedIndex;
+
+                RowItemProducts[selectedRow] = productRowItem;
+                View.RowItemProducts.Items.Refresh();
+                View.RowItemProducts.SelectedIndex = selectedRow;
+            });
+        }
+        public void CancelUpdatingInformation()
+        {
+            EditingInformation = false;
+            ProductDetails = new ProductDetails(_productInfoBeforeEditing);
+        }
+        public async Task UpdateInformationAsync()
+        {
+            if (InformationHasErrors()) return;
+
+            LoadingInfoVis = Visibility.Visible;
+            ProductDetails.CategoryId = SelectedCategory.Id;
+            string JSonProductInfo = StringUtils.SerializeObject(ProductDetails);
+            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Put, $"products/info", JSonProductInfo, "application/json");
+            int statusCode = (int)response.StatusCode;
+            string responseBody = response.Content;
+            switch (statusCode)
+            {
+                case 200:
+                    RefreshProductRowItemGrid(ProductDetails.ProductRowItem);
+                    ShowSuccessMessage("Cập nhật sản phẩm thành công");
+                    EditingInformation = false;
+                    break;
+                case 404 when ProductNotFound(responseBody):
+                    await ShowErrorMessage("Lỗi cập nhật", "Sản phẩm không còn tồn tại, vui lòng tải lại trang");
+                    break;
+                case 404 when CategoryNotFound(responseBody):
+                    await ShowErrorMessage("Lỗi cập nhật", "Danh mục không còn tồn tại, vui lòng tải lại trang");
+                    break;
+                case 400:
+                    await ShowErrorMessage("Lỗi cập nhật", "Tên sản phẩm đã tồn tại, vui lòng chọn tên khác");
+                    break;
+            }
+            LoadingInfoVis = Visibility.Hidden;
+        }
+        public void RequestUpdatingInformation()
+        {
+            EditingInformation = true;
+            _productInfoBeforeEditing = new ProductDetails(ProductDetails);
+        }
+        public void FocusProductRowItem(ProductRowItem productRowItem)
+        {
+            List<ProductRowItem> currenItems = View.RowItemProducts.Items.OfType<ProductRowItem>().ToList();
+            int index = currenItems.FindIndex((element) => element.Name == productRowItem.Name);
+            View.RowItemProducts.SelectedIndex = index;
+        }
+        public async Task ShowAddingProductDialog()
+        {
+            await _windowManager.ShowDialogAsync(new NewProductViewModel(this, _windowManager));
+        }
+        #endregion
+
+        #region Product Images
+        public async Task AddImagesAsync()
         {
             OpenFileDialog open = new OpenFileDialog();
             open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
@@ -289,7 +289,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 if (statusCode == 201)
                 {
                     ShowSuccessMessage("Cập nhật ảnh thành công");
-                    await LoadProductImages(SelectedProduct.Id);
+                    await LoadProductImagesAsync(SelectedProduct.Id);
                 }
                 else
                 {
@@ -297,16 +297,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 }
             }
         }
-        public void RowItemImages_SelectionChanged()
-        {
-            View.DeleteImages.IsEnabled = (View.RowItemImages.SelectedItems.Count > 0);
-        }
-        public async Task DeleteImages()
+        public async Task DeleteImagesAsync()
         {
             bool confirm = await ShowConfirmMessage("Xác nhận xóa", "Bạn có chắc muốn xóa các ảnh đã chọn?");
             if (!confirm) return;
 
-            List<ProductImage> list = View.RowItemImages.SelectedItems.Cast<ProductImage>().ToList();
+            List<ProductImage> list = ImagesGrid.SelectedItems.Cast<ProductImage>().ToList();
 
             DeleteImagesBody deleteImagesBody = new DeleteImagesBody
             {
@@ -322,7 +318,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 case 200:
                     ShowSuccessMessage("Xóa ảnh thành công");
-                    await LoadProductImages(SelectedProduct.Id);
+                    await LoadProductImagesAsync(SelectedProduct.Id);
                     break;
                 case 404:
                     await ShowErrorMessage("Lỗi xóa ảnh", "Ảnh muốn xóa không còn tồn tại, vui lòng tải lại trang");
@@ -332,16 +328,23 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                     break;
             }
         }
-        public async Task OpenSeperatedProductImagesDialog()
+        public async Task ShowSeperatedProductImagesDialogAsync()
         {
-            List<ProductImage> savedList = View.RowItemImages.SelectedItems.Cast<ProductImage>().ToList();
-            bool confirmSelecting = (bool)await _windowManager.ShowDialogAsync(new SeperatedProductImagesViewModel(RowItemImages, View.RowItemImages.SelectedItems, this));
+            List<ProductImage> savedList = ImagesGrid.SelectedItems.Cast<ProductImage>().ToList();
+            bool confirmSelecting = (bool)await _windowManager.ShowDialogAsync(new SeperatedProductImagesViewModel(RowItemImages, ImagesGrid.SelectedItems, this));
             if (!confirmSelecting)
             {
                 this.SetSelectedItems(savedList);
             }
         }
-
+        internal void SetSelectedItems(IList OuterSelectedItems)
+        {
+            ImagesGrid.SelectedItems.Clear();
+            foreach (var item in OuterSelectedItems)
+            {
+                ImagesGrid.SelectedItems.Add(item);
+            }
+        }
         #endregion
 
         #region Events
@@ -359,6 +362,10 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                     ProductDetails = null;
                 }
             });
+        }
+        public void RowItemImages_SelectionChanged()
+        {
+            View.DeleteImages.IsEnabled = (ImagesGrid.SelectedItems.Count > 0);
         }
         #endregion
 
@@ -538,17 +545,17 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 NotifyOfPropertyChange(() => TypeList);
             }
         }
-        public bool Editing
+        public bool EditingInformation
         {
-            get => _editing;
+            get => _editingProductInformation;
             set
             {
-                _editing = value;
-                NotifyOfPropertyChange(() => Editing);
+                _editingProductInformation = value;
+                NotifyOfPropertyChange(() => EditingInformation);
                 NotifyOfPropertyChange(() => NotEditing);
             }
         }
-        public bool NotEditing => !Editing;
+        public bool NotEditing => !EditingInformation;
         public int TotalVariants
         {
             get => _totalVariants;
@@ -567,6 +574,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 NotifyOfPropertyChange(() => TotalImages);
             }
         }
+        public DataGrid ImagesGrid => View.RowItemImages;
         #endregion
 
         #region Show Messages

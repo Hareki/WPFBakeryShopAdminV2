@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WPFBakeryShopAdminV2.Utilities
+﻿namespace WPFBakeryShopAdminV2.Utilities
 {
-    internal class DataGridSelectedItemsBehavior 
+    internal class DataGridSelectedItemsBehavior
     {
     }
 }

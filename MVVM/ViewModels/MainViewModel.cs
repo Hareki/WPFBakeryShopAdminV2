@@ -5,10 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using WPFBakeryShopAdminV2.MVVM.Models.Bodies;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
-using WPFBakeryShopAdminV2.Utilities;
 using WPFBakeryShopAdminV2.MVVM.Views;
+using WPFBakeryShopAdminV2.Utilities;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {

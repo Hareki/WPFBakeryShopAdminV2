@@ -1,18 +1,17 @@
 ﻿using Caliburn.Micro;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using RestSharp;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using WPFBakeryShopAdminV2.MVVM.Models.Bodies;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
-using WPFBakeryShopAdminV2.Utilities;
 using WPFBakeryShopAdminV2.MVVM.Views;
-using System.Windows;
-using Microsoft.Win32;
-using System.IO;
-using System;
+using WPFBakeryShopAdminV2.Utilities;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {

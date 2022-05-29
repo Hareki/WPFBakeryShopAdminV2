@@ -1,5 +1,4 @@
 ﻿using Caliburn.Micro;
-using MaterialDesignThemes.Wpf;
 using Newtonsoft.Json;
 using RestSharp;
 using System;
@@ -7,12 +6,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using WPFBakeryShopAdminV2.Interfaces;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
-using WPFBakeryShopAdminV2.MVVM.Models.Bodies;
-using WPFBakeryShopAdminV2.Utilities;
 using WPFBakeryShopAdminV2.MVVM.Views;
+using WPFBakeryShopAdminV2.Utilities;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
@@ -38,6 +35,9 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             _ = LoadPageAsync();
             return Task.CompletedTask;
         }
+        #endregion
+
+        #region Orders Management
         public async Task LoadPageAsync()
         {
 
@@ -115,8 +115,6 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 await ShowErrorMessage("Lỗi hủy đơn", "Đã xảy ra lỗi không xác định trong quá trình hủy đơn hàng");
             }
         }
-
-
         #endregion
 
         #region Updating View Methods
@@ -222,6 +220,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             MessageUtils.ShowSnackBarMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, message);
         }
         #endregion
+
         #region Binding Properties
         public BindingButtonAppearance BindingButton
         {

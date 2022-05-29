@@ -301,12 +301,12 @@
                                                                         VerticalAlignment="Center">
                                                                 <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}"
                                                                               IsChecked="{Binding ProductDetails.Available}"
-                                                                              IsTabStop="{Binding Editing}"
-                                                                              IsHitTestVisible="{Binding Editing}"
+                                                                              IsTabStop="{Binding EditingInformation}"
+                                                                              IsHitTestVisible="{Binding EditingInformation}"
                                                                               HorizontalAlignment="Left" />
                                                                 <TextBlock Margin="15 0 0 0"
                                                                            Text="Tình trạng kinh doanh"
-                                                                           IsEnabled="{Binding Editing}"
+                                                                           IsEnabled="{Binding EditingInformation}"
                                                                            VerticalAlignment="Center" />
                                                             </StackPanel>
                                                             <StackPanel Orientation="Horizontal"
@@ -317,13 +317,13 @@
                                                                         Margin="0 0 0 30"
                                                                         Grid.ColumnSpan="2">
 
-                                                                <Button x:Name="UpdateProductInfoAsync"
+                                                                <Button x:Name="UpdateInformationAsync"
                                                                         Style="{StaticResource CustomPrimaryButton}"
                                                                         Content="Lưu"
                                                                         MinWidth="75"
                                                                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                                                         Margin="0 0 10 0" />
-                                                                <Button x:Name="CancelUpdate"
+                                                                <Button x:Name="CancelUpdatingInformation"
                                                                         Style="{StaticResource CustomSecondaryButton}"
                                                                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                                                         Content="Hủy"
@@ -339,7 +339,7 @@
                                                                         Margin="0 0 0 30"
                                                                         Grid.ColumnSpan="2">
 
-                                                                <Button x:Name="RequestUpdateProductInfo"
+                                                                <Button x:Name="RequestUpdatingInformation"
                                                                         Style="{StaticResource CustomBorderButton}"
                                                                         Content="Cập nhật"
                                                                         IsEnabled="{Binding ProductDetails, Converter={StaticResource nullToEnabled}}"
@@ -377,9 +377,9 @@
                                                                       Grid.Row="1"
                                                                       Style="{StaticResource MaterialDesignOutlinedComboBox}"
                                                                       materialDesign:HintAssist.Hint="Danh mục"
-                                                                      IsHitTestVisible="{Binding Editing}"
-                                                                      Focusable="{Binding Editing}"
-                                                                      IsTabStop="{Binding Editing}"
+                                                                      IsHitTestVisible="{Binding EditingInformation}"
+                                                                      Focusable="{Binding EditingInformation}"
+                                                                      IsTabStop="{Binding EditingInformation}"
                                                                       Margin="0 0 0 30">
                                                                 <ComboBox.ItemTemplate>
                                                                     <DataTemplate>
@@ -564,7 +564,7 @@
                                                                     Grid.Row="1"
                                                                     Grid.Column="1"
                                                                     Panel.ZIndex="3">
-                                                            <Button x:Name="OpenSeperatedProductImagesDialog"
+                                                            <Button x:Name="ShowSeperatedProductImagesDialog"
                                                                     Style="{StaticResource MaterialDesignIconButton}"
                                                                     Width="37"
                                                                     Height="37">

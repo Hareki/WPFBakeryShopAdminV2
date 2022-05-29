@@ -18,24 +18,25 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private BindableCollection<AccountRowItem> _rowItemAccounts;
         private AccountRowItem _selectedAccount;
         private Pagination _pagination;
-
         private IWindowManager _windowManager;
+
         #region Base
         public AccountViewModel(IWindowManager windowManager)
         {
             _windowManager = windowManager;
             Pagination = new Pagination(10, this);
         }
-
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
         {
             _restClient = RestConnection.ManagementRestClient;
             _ = LoadPageAsync();
             return Task.CompletedTask;
         }
+        #endregion
+
+        #region Loading Stuffs
         public async Task LoadPageAsync()
         {
-
             if (RowItemAccounts != null)
                 RowItemAccounts.Clear();
 
@@ -56,7 +57,9 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             NotifyOfPropertyChange(() => Pagination);
             LoadingPageVis = Visibility.Hidden;
         }
+        #endregion
 
+        #region Account Management
         public void ShowAddingAccountDialog()
         {
             _windowManager.ShowDialogAsync(new NewAccountViewModel());

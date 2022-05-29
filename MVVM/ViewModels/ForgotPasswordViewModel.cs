@@ -3,8 +3,8 @@ using MaterialDesignThemes.Wpf;
 using RestSharp;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WPFBakeryShopAdminV2.Utilities;
 using WPFBakeryShopAdminV2.MVVM.Views;
+using WPFBakeryShopAdminV2.Utilities;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
