@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:WPFBakeryShopAdminV2"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:clr="clr-namespace:System;assembly=mscorlib">
+    <!--StartupUri="MVVM/Views/DialogView.xaml"-->
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

@@ -148,6 +148,7 @@
     <Compile Include="MVVM\ViewModels\AccountViewModel.cs" />
     <Compile Include="MVVM\ViewModels\BillViewModel.cs" />
     <Compile Include="MVVM\ViewModels\DashboardViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\DialogViewModel.cs" />
     <Compile Include="MVVM\ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="MVVM\ViewModels\LoginViewModel.cs" />
     <Compile Include="MVVM\ViewModels\MainViewModel.cs" />
@@ -165,6 +166,9 @@
     </Compile>
     <Compile Include="MVVM\Views\DashboardView.xaml.cs">
       <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\Views\DialogView.xaml.cs">
+      <DependentUpon>DialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Views\ForgotPasswordView.xaml.cs">
       <DependentUpon>ForgotPasswordView.xaml</DependentUpon>
@@ -274,6 +278,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\Views\DashboardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\Views\DialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
