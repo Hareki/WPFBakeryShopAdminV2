@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Microsoft.Win32;
+using System.Windows;
 
 namespace WPFBakeryShopAdminV2.Utilities
 {
@@ -10,5 +11,17 @@ namespace WPFBakeryShopAdminV2.Utilities
         public static readonly string CANCELLED_COLOR = Application.Current.TryFindResource("CancelledColor") as string;
         public static readonly string ROLE_ADMIN = "ROLE_ADMIN";
         public static readonly string ROLE_USER = "ROLE_USER";
+        public static OpenFileDialog OpenFileDialog
+        {
+            get
+            {
+                OpenFileDialog open = new OpenFileDialog
+                {
+                    Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp",
+                    Multiselect = true
+                };
+                return open;
+            }
+        }
     }
 }

@@ -558,7 +558,7 @@
                                                                     Grid.ColumnSpan="2"
                                                                     FlowDirection="RightToLeft">
 
-                                                            <Button x:Name="AddImages"
+                                                            <Button x:Name="AddImagesAsync"
                                                                     Style="{StaticResource CustomBorderButton}"
                                                                     IsEnabled="{Binding RowItemImages, Converter={StaticResource nullToEnabled}}"
                                                                     Content="Thêm nhiều ảnh mới"
@@ -566,7 +566,7 @@
                                                                     materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                                                     Margin="0 0 0 0" />
 
-                                                            <Button x:Name="DeleteImages"
+                                                            <Button x:Name="ConfirmDeleteImages"
                                                                     Style="{StaticResource CustomBorderButton}"
                                                                     Content="Xóa các ảnh đã chọn"
                                                                     Margin="15 0 0 0"

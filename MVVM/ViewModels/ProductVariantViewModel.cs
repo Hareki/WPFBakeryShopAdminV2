@@ -15,7 +15,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private ProductVariant _productVariant;
         private BindableCollection<ProductType> _typeList;
         private ProductType _selectedProductType;
-        private RestClient _restClient;
+        internal RestClient _restClient;
         private string _productName;
 
 

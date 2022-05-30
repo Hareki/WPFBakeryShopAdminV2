@@ -1,49 +1,144 @@
 ﻿using Caliburn.Micro;
+using Microsoft.Win32;
+using RestSharp;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Controls;
+using WPFBakeryShopAdminV2.MVVM.Models.Bodies;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
+using WPFBakeryShopAdminV2.Utilities;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
     public class SeperatedProductImagesViewModel : Screen
     {
         private BindableCollection<ProductImage> _rowItemImages;
-        private IList _selectedItems;
         private readonly ProductViewModel _productViewModel;
+        private readonly IWindowManager _windowManager;
+        private readonly RestClient _restClient;
+        private string _productName;
+        private string _totalImages;
 
-        public SeperatedProductImagesViewModel(BindableCollection<ProductImage> rowItemImages, IList selectedItems, ProductViewModel productViewModel)
+        #region Base
+        public SeperatedProductImagesViewModel(ProductViewModel productViewModel,
+           string productName, int totalImages, bool isDeleteEnabled, bool isAddEnabled, IWindowManager windowManager, RestClient restClient)
         {
-            RowItemImages = rowItemImages;
-            InnerGridSelectedItems = selectedItems;
             _productViewModel = productViewModel;
+            RowItemImages = productViewModel.RowItemImages;
+            SetSelectedItemsFromInnerGrid();
+
+            ProductName = productName;
+            IsDeleteEnabled = isDeleteEnabled;
+            IsAddEnabled = isAddEnabled;
+            _windowManager = windowManager;
+            this._restClient = restClient;
+            _ = ProductName != null ? TotalImages = totalImages.ToString() : TotalImages = "_";
         }
-        public void Cancel()
+        protected override void OnViewLoaded(object view)
         {
-            this.TryCloseAsync(false);
-        }
-        public void ConfirmSelecting()
-        {
-            this.TryCloseAsync(true);//mặc định khi không truyền sẽ là false
-        }
-        protected override void OnViewReady(object view)
-        {
-            base.OnViewReady(view);
+            base.OnViewLoaded(view);
+            View.AddImagesAsync.IsEnabled = IsAddEnabled;
+            View.ConfirmDeleteImages.IsEnabled = IsDeleteEnabled;
             SetSelectedItemsFromInnerGrid();
         }
+        #endregion
 
-        public void RowItemImages_SelectionChanged()
+        #region Events
+        public async Task ConfirmDeleteImages()
         {
-            _productViewModel.SetSelectedItems(View.RowItemImages.SelectedItems);
+            bool confirm = await ShowConfirmMessage("Xác nhận xóa", "Bạn có chắc muốn xóa các ảnh đã chọn?");
+            if (!confirm) return;
+            await DeleteImagesAsync();
+
         }
-
-        private void SetSelectedItemsFromInnerGrid()
+        private async Task DeleteImagesAsync()
         {
-            foreach (var item in InnerGridSelectedItems)
+            List<ProductImage> list = _productViewModel.ImagesGrid.SelectedItems.Cast<ProductImage>().ToList();
+
+            DeleteImagesBody deleteImagesBody = new DeleteImagesBody
             {
-                Grid.SelectedItems.Add(item);
+                DeletedImageIds = (from ProductImage image in list
+                                   select image.Id).ToList()
+            };
+            string requestBody = StringUtils.SerializeObject(deleteImagesBody);
+            int productId = _productViewModel.SelectedProduct.Id;
+            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Delete, $"products/{productId}/images", requestBody, "application/json");
+
+            int statusCode = (int)response.StatusCode;
+            switch (statusCode)
+            {
+                case 200:
+                    ShowSuccessMessage("Xóa ảnh thành công");
+                    await _productViewModel.LoadProductImagesAsync(productId);
+                    RowItemImages = _productViewModel.RowItemImages;
+
+                    break;
+                case 404:
+                    await ShowErrorMessage("Lỗi xóa ảnh", "Ảnh muốn xóa không còn tồn tại, vui lòng tải lại trang");
+                    break;
+                case 400:
+                    await ShowErrorMessage("Lỗi xóa ảnh", "Ảnh muốn xóa không thuộc sản phẩm đã chọn");
+                    break;
             }
         }
+        public void RowItemImages_SelectionChanged()
+        {
+            _productViewModel.SetSelectedItems(ImagesGrid.SelectedItems);
+            View.ConfirmDeleteImages.IsEnabled = (ImagesGrid.SelectedItems.Count > 0);
+        }
+        private void SetSelectedItemsFromInnerGrid()
+        {
+            foreach (var item in _productViewModel.ImagesGrid.SelectedItems)
+            {
+                ImagesGrid?.SelectedItems.Add(item);
+            }
+        }
+        public async Task AddImagesAsync()//Tương tự như hàm ở ngoài product view, chỉ sửa lại tham số và thêm 1 dòng để refresh lại outer grid
+        {
+            OpenFileDialog open = Constants.OpenFileDialog;
+            var images = new List<KeyValuePair<string, string>>();
+            if ((bool)open.ShowDialog())
+            {
+                foreach (string element in open.FileNames)
+                {
+                    images.Add(new KeyValuePair<string, string>("images", element));
+                }
+                int productId = _productViewModel.SelectedProduct.Id;
+                var response = await RestConnection.ExecuteFileRequestAsync(_restClient, Method.Post, $"products/{productId}/images", images);
+                int statusCode = (int)response.StatusCode;
+                if (statusCode == 201)
+                {
+                    ShowSuccessMessage("Cập nhật ảnh thành công");
+                    await _productViewModel.LoadProductImagesAsync(productId);
+                    RowItemImages = _productViewModel.RowItemImages;
+                }
+                else
+                {
+                    await ShowErrorMessage("Lỗi cập nhật ảnh", "Xảy ra lỗi không xác định khi cập nhật ảnh");
+                }
+            }
+        }
+        #endregion
+
+        #region Show Messages
+        private Task<bool> ShowConfirmMessage(string title, string message)
+        {
+            return MessageUtils.ShowConfirmMessageInDialog(title, message, _windowManager);
+        }
+        private async Task ShowErrorMessage(string title, string message)
+        {
+            await MessageUtils.ShowErrorMessageInDialog(title, message, _windowManager);
+        }
+        private void ShowSuccessMessage(string message)
+        {
+            MessageUtils.ShowSnackBarMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, message);
+        }
+        #endregion
+
         public BindableCollection<ProductImage> RowItemImages
         {
             get => _rowItemImages;
@@ -53,17 +148,8 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 NotifyOfPropertyChange(() => RowItemImages);
             }
         }
-        public IList InnerGridSelectedItems
-        {
-            get => _selectedItems;
-            set
-            {
-                _selectedItems = value;
-                NotifyOfPropertyChange(() => InnerGridSelectedItems);
-            }
-        }
         public SeperatedProductImagesView View => (SeperatedProductImagesView)this.GetView();
-        public DataGrid Grid
+        public DataGrid ImagesGrid
         {
             get
             {
@@ -72,6 +158,25 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                     return View.RowItemImages;
                 }
                 else return null;
+            }
+        }
+        public string ProductName
+        {
+            get => _productName;
+            set
+            {
+                _productName = value;
+                NotifyOfPropertyChange(() => ProductName);
+            }
+        }
+        public bool IsDeleteEnabled { get; }
+        public bool IsAddEnabled { get; }
+        public string TotalImages
+        {
+            get => _totalImages; set
+            {
+                _totalImages = value;
+                NotifyOfPropertyChange(() => TotalImages);
             }
         }
     }

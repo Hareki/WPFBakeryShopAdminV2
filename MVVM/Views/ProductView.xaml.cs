@@ -10,7 +10,7 @@ namespace WPFBakeryShopAdminV2.MVVM.Views
         public ProductView()
         {
             InitializeComponent();
-            DeleteImages.IsEnabled = false;
+            ConfirmDeleteImages.IsEnabled = false;
         }
     }
 }

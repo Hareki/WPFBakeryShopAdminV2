@@ -14,8 +14,8 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private BindableCollection<Category> _categoryList;
         private Category _selectedCategory;
         private ProductDetails _productDetails;
-        private ProductViewModel _productViewModel;
-        private IWindowManager _windowManager;
+        private readonly ProductViewModel _productViewModel;
+        private readonly IWindowManager _windowManager;
 
         #region Base
         public NewProductViewModel(ProductViewModel productViewModel, IWindowManager windowManager)
@@ -55,23 +55,23 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             }
 
             ProductDetails.CategoryId = SelectedCategory.Id;
-            string JSonAccountInfo = StringUtils.SerializeObject(ProductDetails);
-            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Post, "products", JSonAccountInfo, "application/json");
+            string JsonProductInfo = StringUtils.SerializeObject(ProductDetails);
+            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Post, "products", JsonProductInfo, "application/json");
             int statusCode = (int)response.StatusCode;
-            if (statusCode == 200)
+            switch (statusCode)
             {
-                _productViewModel.LoadLastPage();
-                _productViewModel.FocusProductRowItem(ProductDetails.ProductRowItem);
-                ResetFields();
-                ShowSuccessMessage("Thêm sản phẩm thành công");
-            }
-            else if (statusCode == 400)
-            {
-                await ShowErrorMessage("Xảy ra lỗi", "Tên sản phẩm đã tồn tại");
-            }
-            else if (statusCode == 404)
-            {
-                await ShowErrorMessage("Xảy ra lỗi", "Danh mục không còn tồn tại, vui lòng khởi động lại hộp thoại này để nhận thông tin danh mục mới nhất");
+                case 200:
+                    _productViewModel.LoadLastPage();
+                    _productViewModel.FocusProductRowItem(ProductDetails.ProductRowItem);
+                    ResetFields();
+                    ShowSuccessMessage("Thêm sản phẩm thành công");
+                    break;
+                case 400:
+                    await ShowErrorMessage("Xảy ra lỗi", "Tên sản phẩm đã tồn tại");
+                    break;
+                case 404:
+                    await ShowErrorMessage("Xảy ra lỗi", "Danh mục không còn tồn tại, vui lòng khởi động lại hộp thoại này để nhận thông tin danh mục mới nhất");
+                    break;
             }
         }
 

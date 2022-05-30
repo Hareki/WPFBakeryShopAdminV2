@@ -128,7 +128,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             }
             LoadingVariantVis = Visibility.Hidden;
         }
-        private async Task LoadProductImagesAsync(int id)
+        public async Task LoadProductImagesAsync(int id)
         {
             var request = new RestRequest($"products/{id}/images", Method.Get);
             var respone = await _restClient.ExecuteAsync(request);
@@ -136,6 +136,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 var productImages = respone.Content;
                 RowItemImages = JsonConvert.DeserializeObject<BindableCollection<ProductImage>>(productImages);
+                ImagesGrid.SelectedItems.Clear();
             }
             LoadingProductImages = Visibility.Hidden;
         }
@@ -280,9 +281,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         #region Product Images
         public async Task AddImagesAsync()
         {
-            OpenFileDialog open = new OpenFileDialog();
-            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
-            open.Multiselect = true;
+            OpenFileDialog open = Constants.OpenFileDialog;
             var images = new List<KeyValuePair<string, string>>();
             if ((bool)open.ShowDialog())
             {
@@ -303,11 +302,15 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 }
             }
         }
-        public async Task DeleteImagesAsync()
+        public async Task ConfirmDeleteImages()
         {
             bool confirm = await ShowConfirmMessage("Xác nhận xóa", "Bạn có chắc muốn xóa các ảnh đã chọn?");
             if (!confirm) return;
+            await DeleteImagesAsync();
+        }
 
+        public async Task DeleteImagesAsync()
+        {
             List<ProductImage> list = ImagesGrid.SelectedItems.Cast<ProductImage>().ToList();
 
             DeleteImagesBody deleteImagesBody = new DeleteImagesBody
@@ -315,7 +318,6 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 DeletedImageIds = (from ProductImage image in list
                                    select image.Id).ToList()
             };
-
             string requestBody = StringUtils.SerializeObject(deleteImagesBody);
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Delete, $"products/{SelectedProduct.Id}/images", requestBody, "application/json");
 
@@ -334,14 +336,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                     break;
             }
         }
+
         public async Task ShowSeperatedProductImagesDialogAsync()
         {
-            List<ProductImage> savedList = ImagesGrid.SelectedItems.Cast<ProductImage>().ToList();
-            bool confirmSelecting = (bool)await _windowManager.ShowDialogAsync(new SeperatedProductImagesViewModel(RowItemImages, ImagesGrid.SelectedItems, this));
-            if (!confirmSelecting)
-            {
-                this.SetSelectedItems(savedList);
-            }
+            await _windowManager.ShowDialogAsync(new SeperatedProductImagesViewModel(this, SelectedProduct?.Name, TotalImages,
+                View.ConfirmDeleteImages.IsEnabled, View.AddImagesAsync.IsEnabled, _windowManager, _restClient));
         }
         internal void SetSelectedItems(IList OuterSelectedItems)
         {
@@ -371,7 +370,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public void RowItemImages_SelectionChanged()
         {
-            View.DeleteImages.IsEnabled = (ImagesGrid.SelectedItems.Count > 0);
+            View.ConfirmDeleteImages.IsEnabled = (ImagesGrid.SelectedItems.Count > 0);
         }
         #endregion
 

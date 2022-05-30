@@ -15,12 +15,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
     {
         private List<LanguageItem> _languageList;
 
-        private DashboardViewModel _dashboardViewModel;
-        private AccountViewModel _accountViewModel;
-        private BillViewModel _billViewModel;
-        private ProductViewModel _productViewModel;
-        private PersonalAccountViewModel _personalAccountViewModel;
-        private IEventAggregator _eventAggregator;
+        private readonlyDashboardViewModel _dashboardViewModel;
+        private readonly AccountViewModel _accountViewModel;
+        private readonly BillViewModel _billViewModel;
+        private readonly ProductViewModel _productViewModel;
+        private readonly PersonalAccountViewModel _personalAccountViewModel;
+        private readonly IEventAggregator _eventAggregator;
 
         private PersonalAccount _personalAccount;
         private RestClient _restClient;

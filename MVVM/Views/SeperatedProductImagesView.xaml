@@ -12,8 +12,9 @@
         Title="Quản lý hình ảnh"
         Icon="/Resources/Images/favicon.ico"
         WindowStartupLocation="CenterOwner"
-        WindowState="Maximized"
         Background="#F5F5FA"
+        Width="800"
+        Height="600"
         TextElement.FontSize="15"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}">
     <Grid>
@@ -24,14 +25,71 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
+
+
+                    <StackPanel Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Margin="{StaticResource TitleMargin}">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                                   FontWeight="SemiBold"
+                                   Text="Quản lý hình ảnh"
+                                   Margin="0 0 0 10"/>
+                        <TextBlock Text="{Binding ProductName}"
+                                   FontWeight="SemiBold"/>
+                    </StackPanel>
+                    <Grid  Grid.Row="0"
+                           Grid.ColumnSpan="2">
+                        <materialDesign:Snackbar HorizontalAlignment="Right"
+                                                 VerticalAlignment="Top"
+                                                 Grid.ColumnSpan="12"
+                                                 x:Name="GreenSB"
+                                                 Background="#00b4d8"
+                                                 MessageQueue="{materialDesign:MessageQueue}">
+                            <materialDesign:SnackbarMessage>
+                                <StackPanel Orientation="Horizontal"
+                                            x:Name="GreenContent">
+                                    <materialDesign:PackIcon Kind="CheckCircle"
+                                                             Margin="0 3 10 0"
+                                                             VerticalAlignment="Center" />
+                                    <TextBlock x:Name="GreenMessage"
+                                               Text="Cập nhật trạng thái thành công"
+                                               FontWeight="SemiBold" />
+                                </StackPanel>
+                            </materialDesign:SnackbarMessage>
+                        </materialDesign:Snackbar>
+
+                        <materialDesign:Snackbar x:Name="RedSB"
+                                                 HorizontalAlignment="Right"
+                                                 VerticalAlignment="Top"
+                                                 Grid.ColumnSpan="12"
+                                                 Background="{StaticResource ErrorColorBrush}"
+                                                 MessageQueue="{materialDesign:MessageQueue}">
+                            <materialDesign:SnackbarMessage>
+                                <StackPanel Orientation="Horizontal"
+                                            x:Name="RedContent">
+                                    <materialDesign:PackIcon Kind="CheckCircle"
+                                                             Margin="0 3 10 0"
+                                                             VerticalAlignment="Center" />
+                                    <TextBlock x:Name="RedMessage"
+                                               Text="Cập nhật trạng thái thành công"
+                                               FontWeight="SemiBold" />
+                                </StackPanel>
+                            </materialDesign:SnackbarMessage>
+                        </materialDesign:Snackbar>
+                    </Grid>
+
+
+
                     <StackPanel Orientation="Horizontal"
-                                Grid.Row="0"
+                                Grid.Row="1"
                                 Grid.Column="0">
                         <TextBlock VerticalAlignment="Center">
                                                             <Span>
@@ -42,19 +100,20 @@
                         </TextBlock>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal"
-                                Grid.Row="0"
+                                Grid.Row="1"
                                 Grid.Column="1"
                                 FlowDirection="RightToLeft">
-                        
-                        <Button x:Name="ConfirmSelecting"
-                                Style="{StaticResource CustomPrimaryButton}"
-                                Content="Xác nhận chọn"
+
+                        <Button x:Name="AddImagesAsync"
+                                Style="{StaticResource CustomBorderButton}"
+                                Content="Thêm nhiều ảnh mới"
                                 HorizontalAlignment="Right"
-                                materialDesign:ShadowAssist.ShadowDepth="Depth0" />
-                        
-                        <Button x:Name="Cancel"
-                                Style="{StaticResource CustomSecondaryButton}"
-                                Content="Hủy"
+                                materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                Margin="0 0 0 0" />
+
+                        <Button x:Name="ConfirmDeleteImages"
+                                Style="{StaticResource CustomBorderButton}"
+                                Content="Xóa các ảnh đã chọn"
                                 Margin="15 0 0 0"
                                 HorizontalAlignment="Right"
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0" />
@@ -62,7 +121,7 @@
                     <Border Background="White"
                             CornerRadius="8"
                             Padding="2"
-                            Grid.Row="1"
+                            Grid.Row="2"
                             Grid.Column="0"
                             Grid.ColumnSpan="2"
                             Margin="0 15 0 0">
