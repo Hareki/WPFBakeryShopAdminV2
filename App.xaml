@@ -55,6 +55,19 @@
                 </ResourceDictionary>
 
                 <ResourceDictionary>
+                    <clr:Int32 x:Key="FirstNameMaxLength">10</clr:Int32>
+                    <clr:Int32 x:Key="LastNameMaxLength">50</clr:Int32>
+                    <clr:Int32 x:Key="EmailMaxLength">50</clr:Int32>
+                    <clr:Int32 x:Key="PhoneMaxLength">10</clr:Int32>
+                    <clr:Int32 x:Key="AddressMaxLength">120</clr:Int32>
+                    
+                    <clr:Int32 x:Key="ProductNameMaxLength">50</clr:Int32>
+                    <clr:Int32 x:Key="IngredientsMaxLength">300</clr:Int32>
+                    <clr:Int32 x:Key="AllergensMaxLength">300</clr:Int32>
+                </ResourceDictionary>
+                
+
+                <ResourceDictionary>
                     <SolidColorBrush x:Key="SecondaryColorBrush"
                                      Color="#fda144" />
                     <SolidColorBrush x:Key="PendingColorBrush"

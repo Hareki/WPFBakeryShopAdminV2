@@ -76,21 +76,21 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         #endregion
 
         #region Pagination
-        public void LoadFirstPage()
+        public async Task LoadFirstPage()
         {
-            Pagination.LoadFirstPage();
+            await Pagination.LoadFirstPage();
         }
-        public void LoadPreviousPage()
+        public async Task LoadPreviousPage()
         {
-            Pagination.LoadPreviousPage();
+            await Pagination.LoadPreviousPage();
         }
-        public void LoadNextPage()
+        public async Task LoadNextPage()
         {
-            Pagination.LoadNextPage();
+            await Pagination.LoadNextPage();
         }
-        public void LoadLastPage()
+        public async Task LoadLastPage()
         {
-            Pagination.LoadLastPage();
+            await Pagination.LoadLastPage();
         }
         #endregion
 

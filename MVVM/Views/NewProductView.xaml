@@ -7,6 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:viewmodels="clr-namespace:WPFBakeryShopAdminV2.MVVM.ViewModels"
         xmlns:validation="clr-namespace:WPFBakeryShopAdminV2.LocalValidationRules"
+        xmlns:converter="clr-namespace:WPFBakeryShopAdminV2.Converters"
         d:DataContext="{d:DesignInstance Type=viewmodels:NewProductViewModel}"
         mc:Ignorable="d"
         Icon="/Resources/Images/favicon.ico"
@@ -19,7 +20,11 @@
         ShowInTaskbar="False"
         Height="375"
         Width="750">
-
+    <Window.Resources>
+        <converter:NullToVisConvereter x:Key="nullToVis" />
+        <converter:VisToZIndexConverter x:Key="visToZIndex" />
+        <converter:ReverseVisibilityToBoolConverter x:Key="reverseVisToBool" />
+    </Window.Resources>
     <Grid>
         <Border Background="White"
                 Padding="20">
@@ -49,6 +54,20 @@
                                    Margin="{StaticResource TitleMargin}"
                                    Text="Thêm sản phẩm mới" />
                     </StackPanel>
+
+                    <Border VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="14"
+                            Grid.RowSpan="6"
+                            Background="{StaticResource LoadingBackground}"
+                            Panel.ZIndex="{Binding Path=LoadingPageVis, Converter={StaticResource visToZIndex}}"
+                            Visibility="{Binding Path=LoadingPageVis}">
+                        <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                     Value="0"
+                                     IsIndeterminate="True" />
+                    </Border>
 
                     <Grid  Grid.Row="0"
                            Grid.ColumnSpan="12">
@@ -91,10 +110,12 @@
                         </materialDesign:Snackbar>
                     </Grid>
 
-                    <TextBox Grid.Column="0"
+                    <TextBox x:Name="txtName"
+                             Grid.Column="0"
                              Grid.Row="2"
                              Grid.ColumnSpan="3"
                              materialDesign:HintAssist.Hint="Tên sản phẩm*"
+                             MaxLength="{StaticResource ProductNameMaxLength}"
                              Style="{StaticResource MaterialDesignOutlinedTextBox}"
                              Margin="0 0 15 30">
                         <TextBox.Text>
@@ -122,10 +143,12 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
 
-                    <TextBox Grid.Column="0"
+                    <TextBox x:Name="txtIngredients"
+                        Grid.Column="0"
                              Grid.Row="3"
                              Grid.ColumnSpan="2"
                              materialDesign:HintAssist.Hint="Nguyên liệu"
+                             MaxLength="{StaticResource IngredientsMaxLength}"
                              Style="{StaticResource MaterialDesignOutlinedTextBox}"
                              Margin="0 0 15 30">
                         <TextBox.Text>
@@ -137,9 +160,11 @@
                         </TextBox.Text>
                     </TextBox>
 
-                    <TextBox Grid.Column="2"
+                    <TextBox x:Name="txtAllergens"
+                        Grid.Column="2"
                              Grid.Row="3"
                              materialDesign:HintAssist.Hint="Chất gây dị ứng"
+                             MaxLength="{StaticResource AllergensMaxLength}"
                              Style="{StaticResource MaterialDesignOutlinedTextBox}"
                              Grid.ColumnSpan="2"
                              Margin="15 0 0 30">

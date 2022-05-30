@@ -15,5 +15,15 @@ namespace WPFBakeryShopAdminV2.LocalValidationRules
             }
             return ValidationResult.ValidResult;
         }
+        public static bool TryNotifyEmptyField(TextBox field)
+        {
+            if (string.IsNullOrEmpty(field.Text))
+            {
+                field.Text = string.Empty;
+                field.Focus();
+                return true;
+            }
+            return false;
+        }
     }
 }

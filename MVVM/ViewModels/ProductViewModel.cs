@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using RestSharp;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WPFBakeryShopAdminV2.Interfaces;
+using WPFBakeryShopAdminV2.LocalValidationRules;
 using WPFBakeryShopAdminV2.MVVM.Models.Bodies;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
@@ -90,8 +92,14 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private async Task LoadCategoryList()
         {
+            View.CategoryList.IsEnabled = false;
+            HintAssist.SetHint(View.CategoryList, "Đang tải...");
+
             var categoryList = Lists.CategoryList.LoadCategoryList();
             CategoryList = new BindableCollection<Category>((await categoryList));
+
+            View.CategoryList.IsEnabled = true;
+            HintAssist.SetHint(View.CategoryList, "Danh mục");
         }
         private Task LoadDetailItemAsync(int id)
         {
@@ -149,34 +157,39 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private bool InformationHasErrors()
         {
-            return string.IsNullOrEmpty(View.txtProductName.Text) ||
-                string.IsNullOrEmpty(View.txtProductAllergens.Text) ||
-                string.IsNullOrEmpty(View.txtProductIngredients.Text);
+            bool test1 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtAllergens);
+            bool test2 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtIngredients);
+            bool test3 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtName);
+            View.UpdateInformationAsync.Focus();
+            return test1 && test2 && test3;
         }
         #endregion
 
         #region Product Variants
         public void ShowNewVariantDialog()
         {
-            _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, false, new ProductVariant(SelectedProduct.Id), TypeList, SelectedProduct.Name));
+            _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, false, new ProductVariant(SelectedProduct.Id), TypeList, SelectedProduct.Name,_windowManager));
         }
         public void ShowEditVariantDialog()
         {
-            _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, true, SelectedVariant, TypeList, SelectedProduct.Name));
+            _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, true, SelectedVariant, TypeList, SelectedProduct.Name,_windowManager));
         }
         public async Task DeleteVariant()
         {
             if (SelectedVariant == null) return;
 
+            
             bool confirm = await ShowConfirmMessage("Xác nhận xóa loại", $"Bạn có chắc muốn {SelectedProduct.Name} {SelectedVariant.TypeName}?");
             if (confirm)
             {
+                LoadingVariantVis = Visibility.Visible;
+
                 var result = await RestConnection.ExecuteRequestAsync(_restClient, Method.Delete, $"variants/{SelectedVariant.Id}");
                 int statusCode = (int)result.StatusCode;
                 if (statusCode == 200)
                 {
-                    ShowSuccessMessage("Xóa loại sản phẩm đã chọn thành công");
                     await LoadVariantsAsync(SelectedProduct.Id);
+                    ShowSuccessMessage("Xóa loại sản phẩm đã chọn thành công");
                 }
                 else if (statusCode == 404)
                 {
@@ -187,6 +200,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                     await ShowErrorMessage("Lỗi khi xóa loại", "Loại sản phẩm này đã được bán, không thể xóa");
                 }
             }
+            LoadingVariantVis = Visibility.Hidden;
         }
         public void FocusProductVariant(ProductVariant productVariant)
         {
@@ -270,14 +284,14 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public async Task ShowAddingProductDialog()
         {
-            await _windowManager.ShowDialogAsync(new NewProductViewModel(this, _windowManager));
+             await _windowManager.ShowDialogAsync(new NewProductViewModel(this, _windowManager, CategoryList));
         }
         #endregion
 
         #region Product Images
         public async Task AddImagesAsync()
         {
-            OpenFileDialog open = Constants.OpenFileDialog;
+            OpenFileDialog open = Utilities.Constants.OpenFileDialog;
             var images = new List<KeyValuePair<string, string>>();
             if ((bool)open.ShowDialog())
             {
@@ -371,21 +385,21 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         #endregion
 
         #region Pagination
-        public void LoadFirstPage()
+        public async Task LoadFirstPage()
         {
-            Pagination.LoadFirstPage();
+            await Pagination.LoadFirstPage();
         }
-        public void LoadPreviousPage()
+        public async Task LoadPreviousPage()
         {
-            Pagination.LoadPreviousPage();
+            await Pagination.LoadPreviousPage();
         }
-        public void LoadNextPage()
+        public async Task LoadNextPage()
         {
-            Pagination.LoadNextPage();
+            await Pagination.LoadNextPage();
         }
-        public void LoadLastPage()
+        public async Task LoadLastPage()
         {
-            Pagination.LoadLastPage();
+            await Pagination.LoadLastPage();
         }
         #endregion
 

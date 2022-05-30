@@ -123,6 +123,7 @@
                 <TextBox x:Name="txtLastName"
                          Grid.Column="0"
                          Grid.Row="2"
+                         MaxLength="{StaticResource LastNameMaxLength}"
                          Grid.ColumnSpan="4"
                          Margin="0 0 15 15"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -141,6 +142,7 @@
                 <TextBox x:Name="txtFirstName"
                          Grid.Column="4"
                          Grid.Row="2"
+                         MaxLength="{StaticResource FirstNameMaxLength}"
                          Grid.ColumnSpan="4"
                          Margin="15 0 0 15"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
@@ -148,8 +150,9 @@
                          materialDesign:HintAssist.Background="White"
                          materialDesign:TextFieldAssist.HasClearButton="False">
                     <TextBox.Text>
-                        <Binding Path="PersonalAccount.FirstName" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules >
+                        <Binding Path="PersonalAccount.FirstName"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
                                 <validation:NotEmptyValidationRule Message="Vui lòng nhập tên" />
                             </Binding.ValidationRules>
                         </Binding>
@@ -161,12 +164,14 @@
                          Grid.Row="4"
                          Grid.ColumnSpan="8"
                          Margin="0 15"
+                         MaxLength="{StaticResource EmailMaxLength}"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          materialDesign:HintAssist.Hint="{DynamicResource Email2}"
                          materialDesign:HintAssist.Background="White"
                          materialDesign:TextFieldAssist.HasClearButton="False">
                     <TextBox.Text>
-                        <Binding Path="PersonalAccount.Email">
+                        <Binding Path="PersonalAccount.Email"
+                                 UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <validation:NotEmptyValidationRule Message="Vui lòng nhập địa chỉ email" />
                                 <validation:EmailFormatValidationRule Message="Email không đúng định dạng" />
@@ -181,6 +186,7 @@
                          Grid.Column="0"
                          Grid.Row="3"
                          Grid.ColumnSpan="8"
+                         MaxLength="{StaticResource AddressMaxLength}"
                          Margin="0 15"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          materialDesign:HintAssist.Hint="{DynamicResource Address}"
@@ -192,15 +198,17 @@
                          Grid.Row="5"
                          Grid.ColumnSpan="5"
                          Margin="0 15 15 15"
+                         MaxLength="{StaticResource PhoneMaxLength}"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
                          materialDesign:HintAssist.Hint="{DynamicResource Phone2}"
                          materialDesign:HintAssist.Background="White"
                          materialDesign:TextFieldAssist.HasClearButton="False">
                     <TextBox.Text>
-                        <Binding Path="PersonalAccount.Phone">
+                        <Binding Path="PersonalAccount.Phone"
+                                 UpdateSourceTrigger="LostFocus">
                             <Binding.ValidationRules>
-                                <validation:NotEmptyValidationRule Message="Vui lòng nhập số điện thoại" />
-                                <validation:PhoneFormatValidationRule Message="Số điện thoại không đúng định dạng" />
+                                <validation:NotEmptyValidationRule Message="Vui lòng nhập địa chỉ email" />
+                                <validation:PhoneFormatValidationRule Message="SDT không đúng định dạng" />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>

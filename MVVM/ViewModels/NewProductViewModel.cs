@@ -1,8 +1,12 @@
 ﻿using Caliburn.Micro;
+using MaterialDesignThemes.Wpf;
 using RestSharp;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using WPFBakeryShopAdminV2.LocalValidationRules;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
@@ -17,44 +21,37 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private ProductDetails _productDetails;
         private readonly ProductViewModel _productViewModel;
         private readonly IWindowManager _windowManager;
+        private Visibility _loadingPageVis = Visibility.Hidden;
 
         #region Base
-        public NewProductViewModel(ProductViewModel productViewModel, IWindowManager windowManager)
+        public NewProductViewModel(ProductViewModel productViewModel, IWindowManager windowManager, BindableCollection<Category> categoryList)
         {
             _productViewModel = productViewModel;
             _windowManager = windowManager;
+            CategoryList = categoryList;
         }
-        protected override async Task OnActivateAsync(CancellationToken cancellationToken)
+        protected override Task OnActivateAsync(CancellationToken cancellationToken)
         {
             _restClient = RestConnection.ManagementRestClient;
             ProductDetails = new ProductDetails();
-            await LoadCategoryList();
-
+            return Task.CompletedTask;
         }
-        private async Task LoadCategoryList()
-        {
-            var categoryList = Lists.CategoryList.LoadCategoryList();
-            CategoryList = new BindableCollection<Category>((await categoryList));
-            if (CategoryList != null && CategoryList.Count > 0)
-            {
-                ProductDetails.CategoryId = CategoryList[0].Id;
-                SelectedCategory = CategoryList[0];
-            }
-        }
-
         public async Task AddNewProduct()
         {
+
             if (SelectedCategory == null)
             {
                 await ShowErrorMessage("Lỗi tải danh mục", "Không tìm thấy danh mục nào, vui lòng thử lại sau");
                 CancelAdding();
                 return;
             }
-            if (ProductInfoHasErrors()) {
+            if (HasErrors())
+            {
                 await ShowErrorMessage("Lỗi nhập liệu", "Vui lòng nhập đầy đủ thông tin và đúng định dạng");
                 return;
             }
 
+            LoadingPageVis = Visibility.Visible;
             ProductDetails.CategoryId = SelectedCategory.Id;
             string JsonProductInfo = StringUtils.SerializeObject(ProductDetails);
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Post, "products", JsonProductInfo, "application/json");
@@ -62,7 +59,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             switch (statusCode)
             {
                 case 200:
-                    _productViewModel.LoadLastPage();
+                    await _productViewModel.LoadLastPage();
                     _productViewModel.FocusProductRowItem(ProductDetails.ProductRowItem);
                     ResetFields();
                     ShowSuccessMessage("Thêm sản phẩm thành công");
@@ -74,15 +71,16 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                     await ShowErrorMessage("Xảy ra lỗi", "Danh mục không còn tồn tại, vui lòng khởi động lại hộp thoại này để nhận thông tin danh mục mới nhất");
                     break;
             }
+            LoadingPageVis = Visibility.Hidden;
         }
 
-        private bool ProductInfoHasErrors()
+        private bool HasErrors()
         {
-            bool result =  string.IsNullOrEmpty(ProductDetails.Name) ||
-                string.IsNullOrEmpty(ProductDetails.Allergens) ||
-                string.IsNullOrEmpty(ProductDetails.Ingredients);
-
-            return result;
+            bool test1 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtAllergens);
+            bool test2 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtIngredients);
+            bool test3 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtName);
+            View.AddNewProduct.Focus();
+            return test1 && test2 && test3;
         }
 
         private void ResetFields()
@@ -134,6 +132,16 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             }
         }
         public NewProductView View => (NewProductView)this.GetView();
+
+        public Visibility LoadingPageVis
+        {
+            get => _loadingPageVis;
+            set
+            {
+                _loadingPageVis = value;
+                NotifyOfPropertyChange(() => LoadingPageVis);
+            }
+        }
         #endregion
 
         #region Show Messages

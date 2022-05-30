@@ -100,12 +100,15 @@
 
                     <!--ImageSource="D:\Images\Genshin\paimap.jpg"-->
                     <Border Grid.Row="1"
+                            VerticalAlignment="Center"
                             Padding="10 0"
                             Margin="0 15 0 15">
 
                         <RadioButton Style="{StaticResource CustomMenuItemAccount}"
                                      GroupName="MenuGroup"
-                                     x:Name="LoadPersonalAccount">
+                                     x:Name="LoadPersonalAccount"
+                                     Height="auto"
+                                     >
                             <DockPanel>
                                 <Ellipse  Width="50"
                                           Height="50"
@@ -120,7 +123,8 @@
                                         </ImageBrush>
                                     </Ellipse.Fill>
                                 </Ellipse>
-                                <Grid DockPanel.Dock="Right">
+                                <Grid DockPanel.Dock="Right"
+                                      Margin="10">
                                     <StackPanel VerticalAlignment="Center">
                                         <TextBlock x:Name="PersonalAccount_FullName"
                                                    Text="Nguyễn Ngọc Minh Tú"

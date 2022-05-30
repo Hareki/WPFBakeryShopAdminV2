@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using WPFBakeryShopAdminV2.Interfaces;
 
 namespace WPFBakeryShopAdminV2.Utilities
@@ -60,25 +61,25 @@ namespace WPFBakeryShopAdminV2.Utilities
             int end = CurrentPage == MaxPageIndex ? TotalCount : PageSize * (CurrentPage + 1);
             PageIndicator = $"{start} - {end} của {TotalCount}";
         }
-        public void LoadFirstPage()
+        public async Task LoadFirstPage()
         {
             CurrentPage = 0;
-            ViewModel.LoadPageAsync();
+            await ViewModel.LoadPageAsync();
         }
-        public void LoadPreviousPage()
+        public async Task LoadPreviousPage()
         {
             CurrentPage--;
-            ViewModel.LoadPageAsync();
+            await ViewModel.LoadPageAsync();
         }
-        public void LoadNextPage()
+        public async Task LoadNextPage()
         {
             CurrentPage++;
-            ViewModel.LoadPageAsync();
+            await ViewModel.LoadPageAsync();
         }
-        public void LoadLastPage()
+        public async Task LoadLastPage()
         {
             CurrentPage = MaxPageIndex;
-            ViewModel.LoadPageAsync();
+            await ViewModel.LoadPageAsync();
         }
     }
 }

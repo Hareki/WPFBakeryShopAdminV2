@@ -7,6 +7,7 @@
         xmlns:syncfusion="http://schemas.syncfusion.com/wpf"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:sysglb="clr-namespace:System.Globalization;assembly=mscorlib"
+        xmlns:converter="clr-namespace:WPFBakeryShopAdminV2.Converters"
         xmlns:viewmodels="clr-namespace:WPFBakeryShopAdminV2.MVVM.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewmodels:ProductVariantViewModel}"
         mc:Ignorable="d"
@@ -16,6 +17,11 @@
         Height="430"
         Width="750"
         TextElement.FontSize="15">
+    <Window.Resources>
+        <converter:NullToVisConvereter x:Key="nullToVis" />
+        <converter:VisToZIndexConverter x:Key="visToZIndex" />
+        <converter:ReverseVisibilityToBoolConverter x:Key="reverseVisToBool" />
+    </Window.Resources>
     <Border Padding="30">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -39,6 +45,20 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
+
+            <Border VerticalAlignment="Stretch"
+                    HorizontalAlignment="Stretch"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    Grid.ColumnSpan="14"
+                    Grid.RowSpan="6"
+                    Background="{StaticResource LoadingBackground}"
+                    Panel.ZIndex="{Binding Path=LoadingPageVis, Converter={StaticResource visToZIndex}}"
+                    Visibility="{Binding Path=LoadingPageVis}">
+                <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                             Value="0"
+                             IsIndeterminate="True" />
+            </Border>
 
             <StackPanel Orientation="Vertical"
                         Grid.Row="0"

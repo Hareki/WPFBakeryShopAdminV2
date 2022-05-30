@@ -38,11 +38,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public async Task AddNewAccount()
         {
-            if (HasErrors())
-            {
-                await ShowErrorMessage("Lỗi nhập liệu", "Vui lòng nhập đầy đủ thông tin và đúng định dạng");
-                return;
-            }
+            if (HasErrors()) return;
 
             LoadingPageVis = Visibility.Visible;
             SetPersonalAccountAuths();
@@ -53,7 +49,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 case 201:
                     ResetFields();
-                    ShowSuccessMessage("Tạo tài khoản thành công, vui lòng kiểm tra email đã đăng ký");
+                    ShowSuccessMessage("Vui lòng kiểm tra email đã đăng ký để kích hoạt tài khoản");
                     break;
                 case 400:
                     await ShowErrorMessage("Lỗi tạo tài khoản", "Tạo tài khoản thất bại, email đã được sử dụng");
@@ -81,16 +77,17 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private bool HasErrors()
         {
-            bool result = !StringUtils.IsValidEmail(View.txtEmail.Text) ||
-                   !StringUtils.IsValidPhoneNumber(View.txtPhone.Text) ||
-                   string.IsNullOrEmpty(View.txtFirstName.Text) ||
-                   string.IsNullOrEmpty(View.txtLastName.Text) ||
-                   string.IsNullOrEmpty(View.txtEmail.Text) ||
-                   string.IsNullOrEmpty(View.txtPhone.Text);
+            bool test1 = !StringUtils.IsValidEmail(View.txtEmail.Text);
+            bool test2 = !StringUtils.IsValidEmail(View.txtPhone.Text);
+            bool test3 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtFirstName);
+            bool test4 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtLastName);
+            bool test5 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtEmail); ;
+            bool test6 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtPhone);
+            View.AddNewAccount.Focus();
+            return test1 && test2 && test3 && test4 && test5 && test6;
 
-            EmailFormatValidationRule.
-            return result;
         }
+
         private void SetPersonalAccountAuths()
         {
             foreach (Role item in View.RoleList.SelectedItems)

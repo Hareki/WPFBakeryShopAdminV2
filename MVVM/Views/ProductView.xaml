@@ -379,9 +379,10 @@
                                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                                      IsEnabled="False"
                                                                      Margin="0 0 15 30" />
-                                                            <TextBox x:Name="txtProductName"
+                                                            <TextBox x:Name="txtName"
                                                                      Grid.Column="2"
                                                                      Grid.Row="2"
+                                                                     MaxLength="{StaticResource ProductNameMaxLength}"
                                                                      Grid.ColumnSpan="2"
                                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                                      materialDesign:HintAssist.Hint="Tên sản phẩm*"
@@ -413,8 +414,9 @@
                                                                     </DataTemplate>
                                                                 </ComboBox.ItemTemplate>
                                                             </ComboBox>
-                                                            <TextBox x:Name="txtProductIngredients"
+                                                            <TextBox x:Name="txtIngredients"
                                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                                     MaxLength="{StaticResource IngredientsMaxLength}"
                                                                      Grid.Column="1"
                                                                      Grid.Row="3"
                                                                      AcceptsReturn="True"
@@ -431,8 +433,9 @@
                                                                     </Binding>
                                                                 </TextBox.Text>
                                                             </TextBox>
-                                                            <TextBox x:Name="txtProductAllergens"
+                                                            <TextBox x:Name="txtAllergens"
                                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                                     MaxLength="{StaticResource AllergensMaxLength}"
                                                                      Grid.Column="3"
                                                                      Grid.Row="3"
                                                                      AcceptsReturn="True"
