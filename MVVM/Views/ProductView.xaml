@@ -42,6 +42,7 @@
                                    Text="Sản phẩm" />
                         <Button x:Name="LoadPageAsync"
                                 Style="{StaticResource MaterialDesignIconForegroundButton}"
+                                IsEnabled="{Binding NotEditingInformation}"
                                 ToolTip="MaterialDesignIconForegroundButton"
                                 Foreground="{DynamicResource MaterialDesignBody}"
                                 VerticalAlignment="Top"

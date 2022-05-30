@@ -24,6 +24,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private BillDetails _billDetails;
         private Pagination _pagination;
         private Visibility _updatingStatusVis = Visibility.Hidden;
+        private bool _activated = false;
 
         #region Base
         public BillViewModel()
@@ -32,8 +33,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
         {
-            _restClient = RestConnection.ManagementRestClient;
-            _ = LoadPageAsync();
+            if (!_activated)
+            {
+                _restClient = RestConnection.ManagementRestClient;
+                _ = LoadPageAsync();
+                _activated = true;
+            }
             return Task.CompletedTask;
         }
         #endregion

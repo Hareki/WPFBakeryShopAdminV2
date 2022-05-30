@@ -27,6 +27,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private LanguageItem _selectedItemLanguage;
         private ChangePasswordBody _changePasswordBody;
         private IEventAggregator _eventAggregator;
+        private bool _activated = false;
 
         #region Base
         public PersonalAccountViewModel(IEventAggregator eventAggregator)
@@ -36,13 +37,17 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         protected override async Task OnActivateAsync(CancellationToken cancellationToken)
         {
-            _restClient = RestConnection.AccountRestClient;
-            _eventAggregator.SubscribeOnPublishedThread(this);
-            LanguageList = Lists.LanguageList.LIST;
-
-            if (PersonalAccount == null)
+            if (!_activated)
             {
-                await RefreshAccountInfo();
+                _restClient = RestConnection.AccountRestClient;
+                _eventAggregator.SubscribeOnPublishedThread(this);
+                LanguageList = Lists.LanguageList.LIST;
+
+                if (PersonalAccount == null)
+                {
+                    await RefreshAccountInfo();
+                }
+                _activated = true;  
             }
         }
         protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
@@ -94,6 +99,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         public void ReloadPage()
         {
             _ = RefreshAccountInfo();
+            ClearPasswordBox();
         }
         private async Task RefreshAccountInfo()
         {

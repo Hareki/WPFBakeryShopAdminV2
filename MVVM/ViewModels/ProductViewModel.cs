@@ -42,6 +42,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private int _totalVariants;
         private int _totalImages;
         private ProductDetails _productInfoBeforeEditing;
+        private bool _activated = false;
 
         #region Base
         public ProductViewModel(IWindowManager windowManager)
@@ -52,9 +53,13 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
         {
-            _restClient = RestConnection.ManagementRestClient;
-            return LoadPageAsync();
-
+            if (!_activated)
+            {
+                _restClient = RestConnection.ManagementRestClient;
+                _ = LoadPageAsync();
+                _activated = true;  
+            }
+            return Task.CompletedTask;
         }
         #endregion
 

@@ -18,12 +18,18 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private float _shippedPercent;
         private float _pendingPercent;
         private float _shippingPercent;
+        private bool _activated = false;
 
         #region Base
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
         {
-            _restClient = RestConnection.ManagementRestClient;
-            LoadPage();
+           
+            if (!_activated)
+            {
+                _restClient = RestConnection.ManagementRestClient;
+                LoadPage();
+                _activated = true;
+            }
             return Task.CompletedTask;
         }
         private void UpdatePercent()
