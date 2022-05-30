@@ -9,7 +9,13 @@
             CategoryName = categoryName;
             Ingredients = ingredients;
         }
-
+        public void SetProperties(ProductRowItem another)
+        {
+            Id = another.Id;
+            Name = another.Name;
+            CategoryName = another.CategoryName;
+            Ingredients = another.Ingredients;
+        }
         public int Id { get; set; }
         public string Name { get; set; }
         public string CategoryName { get; set; }

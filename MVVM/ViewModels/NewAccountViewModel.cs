@@ -5,6 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using WPFBakeryShopAdminV2.LocalValidationRules;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
@@ -18,6 +21,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private List<Role> _roleList;
         private LanguageItem _selectedLanguageItem;
         private PersonalAccount _personalAccount;
+        private Visibility _loadingPageVis = Visibility.Hidden;
         private IWindowManager _windowManager;
         #region Base
         public NewAccountViewModel(IWindowManager windowManager)
@@ -40,23 +44,25 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 return;
             }
 
+            LoadingPageVis = Visibility.Visible;
             SetPersonalAccountAuths();
             string JSonAccountInfo = StringUtils.SerializeObject(PersonalAccount);
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Post, "accounts", JSonAccountInfo, "application/json");
             int statusCode = (int)response.StatusCode;
-            if (statusCode == 201)
+            switch (statusCode)
             {
-                ResetFields();
-                ShowSuccessMessage("Tạo tài khoản thành công, vui lòng kiểm tra email đã đăng ký");
+                case 201:
+                    ResetFields();
+                    ShowSuccessMessage("Tạo tài khoản thành công, vui lòng kiểm tra email đã đăng ký");
+                    break;
+                case 400:
+                    await ShowErrorMessage("Lỗi tạo tài khoản", "Tạo tài khoản thất bại, email đã được sử dụng");
+                    break;
+                default:
+                    await ShowErrorMessage("Lỗi tạo tài khoản", "Xảy ra lỗi không xác định khi tạo tài khoản");
+                    break;
             }
-            else if (statusCode == 400)
-            {
-                await ShowErrorMessage("Lỗi tạo tài khoản", "Tạo tài khoản thất bại, email đã được sử dụng");
-            }
-            else
-            {
-                await ShowErrorMessage("Lỗi tạo tài khoản", "Xảy ra lỗi không xác định khi tạo tài khoản");
-            }
+            LoadingPageVis = Visibility.Hidden;
         }
 
         private void ResetFields()
@@ -75,12 +81,15 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private bool HasErrors()
         {
-            return !StringUtils.IsValidEmail(View.txtEmail.Text) ||
+            bool result = !StringUtils.IsValidEmail(View.txtEmail.Text) ||
                    !StringUtils.IsValidPhoneNumber(View.txtPhone.Text) ||
                    string.IsNullOrEmpty(View.txtFirstName.Text) ||
                    string.IsNullOrEmpty(View.txtLastName.Text) ||
                    string.IsNullOrEmpty(View.txtEmail.Text) ||
                    string.IsNullOrEmpty(View.txtPhone.Text);
+
+            EmailFormatValidationRule.
+            return result;
         }
         private void SetPersonalAccountAuths()
         {
@@ -182,6 +191,16 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         public Snackbar RedSB
         {
             get { return View.RedSB; }
+        }
+
+        public Visibility LoadingPageVis
+        {
+            get => _loadingPageVis;
+            set
+            {
+                _loadingPageVis = value;
+                NotifyOfPropertyChange(() => LoadingPageVis);
+            }
         }
         #endregion
 

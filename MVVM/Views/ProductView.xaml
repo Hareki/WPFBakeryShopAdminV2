@@ -289,7 +289,7 @@
                                                                 <ColumnDefinition Width="2*" />
                                                                 <ColumnDefinition Width="6*" />
                                                                 <ColumnDefinition Width="6*" />
-                                                                <ColumnDefinition Width="3*" />
+                                                                <ColumnDefinition Width="4*" />
                                                                 <ColumnDefinition Width="5px" />
                                                             </Grid.ColumnDefinitions>
                                                             <Grid.RowDefinitions>
@@ -303,15 +303,17 @@
                                                             <Border VerticalAlignment="Stretch"
                                                                     HorizontalAlignment="Stretch"
                                                                     Grid.Column="0"
+                                                                    Background="{StaticResource LoadingBackground}"
                                                                     Grid.Row="0"
                                                                     Grid.ColumnSpan="14"
                                                                     Grid.RowSpan="6"
-                                                                    Background="White"
                                                                     Panel.ZIndex="{Binding Path=LoadingInfoVis, Converter={StaticResource visToZIndex}}"
                                                                     Visibility="{Binding Path=LoadingInfoVis}">
+
                                                                 <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
                                                                              Value="0"
                                                                              IsIndeterminate="True" />
+
                                                             </Border>
 
                                                             <StackPanel Orientation="Horizontal"
@@ -475,14 +477,16 @@
                                                                 HorizontalAlignment="Stretch"
                                                                 Grid.Column="0"
                                                                 Grid.Row="0"
+                                                                Background="{StaticResource LoadingBackground}"
                                                                 Grid.ColumnSpan="14"
                                                                 Grid.RowSpan="6"
-                                                                Background="White"
                                                                 Panel.ZIndex="{Binding Path=LoadingVariantVis, Converter={StaticResource visToZIndex}}"
                                                                 Visibility="{Binding Path=LoadingVariantVis}">
+
                                                             <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
                                                                          Value="0"
                                                                          IsIndeterminate="True" />
+
                                                         </Border>
 
                                                         <StackPanel Orientation="Horizontal"
@@ -588,13 +592,15 @@
 
                                                         <Border VerticalAlignment="Stretch"
                                                                 HorizontalAlignment="Stretch"
+                                                                Background="{StaticResource LoadingBackground}"
                                                                 Grid.Column="1"
                                                                 Grid.Row="1"
                                                                 Grid.ColumnSpan="14"
                                                                 Grid.RowSpan="6"
-                                                                Background="White"
                                                                 Panel.ZIndex="{Binding Path=LoadingProductImages, Converter={StaticResource visToZIndex}}"
                                                                 Visibility="{Binding Path=LoadingProductImages}">
+
+
                                                             <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
                                                                          Value="0"
                                                                          IsIndeterminate="True" />

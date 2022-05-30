@@ -21,6 +21,7 @@
         Width="600"
         ShowInTaskbar="False">
     <Window.Resources>
+        <converter:VisToZIndexConverter x:Key="visToZIndex" />
         <converter:LargeUserImageConverter x:Key="imageConverter"></converter:LargeUserImageConverter>
         <converter:ReverseVisibilityToBoolConverter x:Key="reverseVisConverter"></converter:ReverseVisibilityToBoolConverter>
     </Window.Resources>
@@ -64,6 +65,19 @@
                                Text="{DynamicResource CreateNewAccount}" />
                 </StackPanel>
 
+                <Border VerticalAlignment="Stretch"
+                        HorizontalAlignment="Stretch"
+                        Grid.Column="0"
+                        Grid.Row="0"
+                        Grid.ColumnSpan="14"
+                        Grid.RowSpan="6"
+                        Background="{StaticResource LoadingBackground}"
+                        Panel.ZIndex="{Binding Path=LoadingPageVis, Converter={StaticResource visToZIndex}}"
+                        Visibility="{Binding Path=LoadingPageVis}">
+                    <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                 Value="0"
+                                 IsIndeterminate="True" />
+                </Border>
                 <Grid Grid.Row="0"
                       Grid.ColumnSpan="12"
                       HorizontalAlignment="Center">
@@ -134,8 +148,8 @@
                          materialDesign:HintAssist.Background="White"
                          materialDesign:TextFieldAssist.HasClearButton="False">
                     <TextBox.Text>
-                        <Binding Path="PersonalAccount.FirstName">
-                            <Binding.ValidationRules>
+                        <Binding Path="PersonalAccount.FirstName" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules >
                                 <validation:NotEmptyValidationRule Message="Vui lòng nhập tên" />
                             </Binding.ValidationRules>
                         </Binding>

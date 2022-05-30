@@ -214,9 +214,9 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 int selectedRow = View.RowItemProducts.SelectedIndex;
 
-                RowItemProducts[selectedRow] = productRowItem;
+                RowItemProducts[selectedRow].SetProperties(productRowItem);
                 View.RowItemProducts.Items.Refresh();
-                View.RowItemProducts.SelectedIndex = selectedRow;
+                //View.RowItemProducts.SelectedIndex = selectedRow; tắt dòng này để tránh call lại API, để selectedRow ko đổi thì item tại row đó ko dc gán = object mới, mà chỉ dc sửa lại thuộc tính
             });
         }
         public void CancelUpdatingInformation()

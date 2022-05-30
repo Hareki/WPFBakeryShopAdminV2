@@ -75,6 +75,10 @@
                     <SolidColorBrush x:Key="WarningColorBrush"
                                      Color="#e9c46a" />
 
+                    <SolidColorBrush x:Key="LoadingBackground"
+                                     Color="White"
+                                     Opacity=".5" />
+
                 </ResourceDictionary>
 
 

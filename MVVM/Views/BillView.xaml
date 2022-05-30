@@ -306,7 +306,7 @@
                                                 Grid.Row="0"
                                                 Grid.ColumnSpan="14"
                                                 Grid.RowSpan="6"
-                                                Background="White"
+                                                Background="{StaticResource LoadingBackground}"
                                                 Panel.ZIndex="{Binding Path=LoadingInfoVis, Converter={StaticResource visToZIndex}}"
                                                 Visibility="{Binding Path=LoadingInfoVis}">
                                             <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
@@ -463,7 +463,7 @@
                                                                  Foreground="White"
                                                                  Margin="0 0 7 0"
                                                                  IsIndeterminate="True" />
-                                                    <TextBlock Text="Đang thăng cấp..."
+                                                    <TextBlock Text="Đang xử lý..."
                                                                VerticalAlignment="Center" />
                                                 </StackPanel>
                                             </Button>

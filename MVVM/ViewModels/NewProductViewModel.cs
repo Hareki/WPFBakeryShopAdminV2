@@ -2,6 +2,7 @@
 using RestSharp;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
@@ -77,9 +78,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 
         private bool ProductInfoHasErrors()
         {
-            return string.IsNullOrEmpty(ProductDetails.Name) ||
+            bool result =  string.IsNullOrEmpty(ProductDetails.Name) ||
                 string.IsNullOrEmpty(ProductDetails.Allergens) ||
                 string.IsNullOrEmpty(ProductDetails.Ingredients);
+
+            return result;
         }
 
         private void ResetFields()

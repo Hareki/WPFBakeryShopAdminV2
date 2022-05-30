@@ -133,7 +133,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 
                 RowItemBills[selectedRow].StatusId = newStatusId;
                 View.RowItemBills.Items.Refresh();
-                View.RowItemBills.SelectedIndex = selectedRow;
+               // View.RowItemBills.SelectedIndex = selectedRow; tương tự như giải thích ở product view model
             });
         }
         public void PreviewUpdatedStatus()
