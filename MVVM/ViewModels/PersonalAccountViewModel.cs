@@ -12,6 +12,7 @@ using WPFBakeryShopAdminV2.MVVM.Models.Bodies;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
+using Lang = WPFBakeryShopAdminV2.Utilities.Language;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
@@ -84,7 +85,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             if ((bool)open.ShowDialog())
             {
                 FileInfo fi = new FileInfo(open.FileName);
-                float fileSizeInMb = (float)fi.Length / 10000000;
+                float fileSizeInMb = (float)fi.Length / 1000000;
                 if (fileSizeInMb <= 1)
                 {
                     UserImageUrl = open.FileName;
@@ -92,7 +93,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 else
                 {
                     await Task.Delay(10);
-                    await ShowErrorMessage("Lỗi cập nhật ảnh", "Vui lòng chọn file có kích thước nhỏ hơn");
+                    await ShowErrorMessage("Lỗi cập nhật ảnh", Lang.Get("Dashboard"));
                 }
             }
         }

@@ -13,7 +13,7 @@ namespace WPFBakeryShopAdminV2.MVVM.Views
         }
         private void LanguageList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            Lists.LanguageList.SwitchLanguage(LanguageList.SelectedIndex);
+            Utilities.Language.SwitchLanguage(LanguageList.SelectedIndex);
         }
     }
 }

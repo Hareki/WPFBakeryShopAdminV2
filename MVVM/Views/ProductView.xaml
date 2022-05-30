@@ -165,7 +165,8 @@
                         <Border x:Name="DialogContent"
                                 Padding="20"
                                 CornerRadius="12"
-                                MaxWidth="400"
+                                MaxWidth="500"
+                                MinWidth="300"
                                 TextElement.Foreground="{DynamicResource MaterialDesignBody}">
                             <StackPanel>
                                 <StackPanel x:Name="ConfirmContent">

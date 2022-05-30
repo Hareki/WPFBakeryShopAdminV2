@@ -10,7 +10,8 @@
         d:DataContext="{d:DesignInstance Type=viewmodels:DialogViewModel}"
         Title="DialogView"
         Height="auto"
-        MaxWidth="400"
+        MaxWidth="500"
+        MinWidth="300"
         SizeToContent="WidthAndHeight"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -26,7 +27,8 @@
             <Border x:Name="DialogContent"
                     Padding="20"
                     CornerRadius="12"
-                    MaxWidth="400"
+                    MaxWidth="500"
+                    MinWidth="300"
                     TextElement.Foreground="{DynamicResource MaterialDesignBody}">
                 <StackPanel>
                     <StackPanel x:Name="ConfirmContent">
