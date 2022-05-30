@@ -146,24 +146,6 @@
                                 <materialDesign:PackIcon Kind="Reload" />
                             </Button>
                         </StackPanel>
-                        <materialDesign:Snackbar HorizontalAlignment="Center"
-                                                 VerticalAlignment="Top"
-                                                 Grid.ColumnSpan="12"
-                                                 x:Name="GreenSB"
-                                                 Background="#00b4d8"
-                                                 MessageQueue="{materialDesign:MessageQueue}">
-                            <materialDesign:SnackbarMessage>
-                                <StackPanel Orientation="Horizontal"
-                                            x:Name="GreenContent">
-                                    <materialDesign:PackIcon Kind="CheckCircle"
-                                                             Margin="0 3 10 0"
-                                                             VerticalAlignment="Center" />
-                                    <TextBlock Text="Cập nhật trạng thái thành công"
-                                               FontWeight="SemiBold"
-                                               x:Name="GreenMessage" />
-                                </StackPanel>
-                            </materialDesign:SnackbarMessage>
-                        </materialDesign:Snackbar>
                     </Grid>
 
 
@@ -259,6 +241,28 @@
                     </Border>
 
 
+
+                    <materialDesign:Snackbar HorizontalAlignment="Center"
+                                             Grid.Row="2"
+                                             VerticalAlignment="Bottom"
+                                             x:Name="GreenSB"
+                                             Margin="0 0 0 10"
+                                             Panel.ZIndex="3"
+                                             Background="#00b4d8"
+                                             MessageQueue="{materialDesign:MessageQueue}">
+                        <materialDesign:SnackbarMessage>
+                            <StackPanel Orientation="Horizontal"
+                                        x:Name="GreenContent">
+                                <materialDesign:PackIcon Kind="CheckCircle"
+                                                         Margin="0 3 10 0"
+                                                         VerticalAlignment="Center" />
+                                <TextBlock Text="Cập nhật trạng thái thành công"
+                                           FontWeight="SemiBold"
+                                           x:Name="GreenMessage" />
+                            </StackPanel>
+                        </materialDesign:SnackbarMessage>
+                    </materialDesign:Snackbar>
+
                     <Border HorizontalAlignment="Stretch"
                             Margin="0 30 0 0"
                             Grid.Row="2"
@@ -287,7 +291,7 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="2*" />
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>

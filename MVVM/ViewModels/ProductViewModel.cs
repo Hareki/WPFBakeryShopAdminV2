@@ -98,7 +98,8 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             var categoryList = Lists.CategoryList.LoadCategoryList();
             CategoryList = new BindableCollection<Category>((await categoryList));
 
-            View.CategoryList.IsEnabled = true;
+            if (View != null)
+                View.CategoryList.IsEnabled = true;
             HintAssist.SetHint(View.CategoryList, "Danh mục");
         }
         private Task LoadDetailItemAsync(int id)
@@ -168,17 +169,17 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         #region Product Variants
         public void ShowNewVariantDialog()
         {
-            _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, false, new ProductVariant(SelectedProduct.Id), TypeList, SelectedProduct.Name,_windowManager));
+            _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, false, new ProductVariant(SelectedProduct.Id), TypeList, SelectedProduct.Name, _windowManager));
         }
         public void ShowEditVariantDialog()
         {
-            _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, true, SelectedVariant, TypeList, SelectedProduct.Name,_windowManager));
+            _windowManager.ShowDialogAsync(new ProductVariantViewModel(this, true, SelectedVariant, TypeList, SelectedProduct.Name, _windowManager));
         }
         public async Task DeleteVariant()
         {
             if (SelectedVariant == null) return;
 
-            
+
             bool confirm = await ShowConfirmMessage("Xác nhận xóa loại", $"Bạn có chắc muốn {SelectedProduct.Name} {SelectedVariant.TypeName}?");
             if (confirm)
             {
@@ -284,7 +285,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public async Task ShowAddingProductDialog()
         {
-             await _windowManager.ShowDialogAsync(new NewProductViewModel(this, _windowManager, CategoryList));
+            await _windowManager.ShowDialogAsync(new NewProductViewModel(this, _windowManager, CategoryList));
         }
         #endregion
 
