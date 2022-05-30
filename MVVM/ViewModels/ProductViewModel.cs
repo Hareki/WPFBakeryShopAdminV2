@@ -51,13 +51,13 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         protected override Task OnActivateAsync(CancellationToken cancellationToken)
         {
             _restClient = RestConnection.ManagementRestClient;
-            _ = LoadPageAsync();
-            return Task.CompletedTask;
+            return LoadPageAsync();
+
         }
         #endregion
 
         #region Loading Stuffs
-        public Task LoadPageAsync()
+        public async Task LoadPageAsync()
         {
             if (RowItemProducts != null)
                 RowItemProducts.Clear();
@@ -71,18 +71,17 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                       new KeyValuePair<string, string>("page", Pagination.CurrentPage.ToString()),
                       new KeyValuePair<string, string>("size", Pagination.PageSize.ToString()),
                 };
-            var response = RestConnection.ExecuteParameterRequestAsync(_restClient, Method.Get, "products", list);
+            var response = await RestConnection.ExecuteParameterRequestAsync(_restClient, Method.Get, "products", list);
 
-            if ((int)response.Result.StatusCode == 200)
+            if ((int)response.StatusCode == 200)
             {
-                var products = response.Result.Content;
+                var products = response.Content;
                 RowItemProducts = JsonConvert.DeserializeObject<BindableCollection<ProductRowItem>>(products);
-                Pagination.UpdatePaginationStatus(response.Result.Headers);
+                Pagination.UpdatePaginationStatus(response.Headers);
             }
             NotifyOfPropertyChange(() => Pagination);
 
             LoadingPageVis = Visibility.Hidden;
-            return Task.CompletedTask;
         }
         private async Task LoadTypeList()
         {
@@ -108,33 +107,30 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private async Task LoadProductInformationAsync(int id)
         {
-            var request = new RestRequest($"products/{id}", Method.Get);
-            var respone = await _restClient.ExecuteAsync(request);
-            if ((int)respone.StatusCode == 200)
+            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Get, $"products/{id}");
+            if ((int)response.StatusCode == 200)
             {
-                var productDetails = respone.Content;
+                var productDetails = response.Content;
                 ProductDetails = JsonConvert.DeserializeObject<ProductDetails>(productDetails);
             }
             LoadingInfoVis = Visibility.Hidden;
         }
         public async Task LoadVariantsAsync(int id)
         {
-            var request = new RestRequest($"products/variants/{id}", Method.Get);
-            var respone = await _restClient.ExecuteAsync(request);
-            if ((int)respone.StatusCode == 200)
+            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Get, $"products/variants/{id}");
+            if ((int)response.StatusCode == 200)
             {
-                var variants = respone.Content;
+                var variants = response.Content;
                 RowItemVariants = JsonConvert.DeserializeObject<BindableCollection<ProductVariant>>(variants);
             }
             LoadingVariantVis = Visibility.Hidden;
         }
         public async Task LoadProductImagesAsync(int id)
         {
-            var request = new RestRequest($"products/{id}/images", Method.Get);
-            var respone = await _restClient.ExecuteAsync(request);
-            if ((int)respone.StatusCode == 200)
+            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Get, $"products/{id}/images");
+            if ((int)response.StatusCode == 200)
             {
-                var productImages = respone.Content;
+                var productImages = response.Content;
                 RowItemImages = JsonConvert.DeserializeObject<BindableCollection<ProductImage>>(productImages);
                 ImagesGrid.SelectedItems.Clear();
             }

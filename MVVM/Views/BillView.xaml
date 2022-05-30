@@ -130,7 +130,8 @@
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0"
-                          Grid.ColumnSpan="12">
+                          Grid.ColumnSpan="12"
+                          IsEnabled="{Binding LoadingPageVis, Converter={StaticResource reverseVisToBool}}">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                                        FontWeight="SemiBold"

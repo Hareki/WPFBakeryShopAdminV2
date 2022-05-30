@@ -19,6 +19,8 @@ namespace WPFBakeryShopAdminV2.Utilities
         private static RestClient _authRestClient;
         private static RestClient _publicRestClient;
 
+        private static int _delayTime = 1000;
+
 
         #region Base
         public static void EstablishConnection(string token)
@@ -35,7 +37,7 @@ namespace WPFBakeryShopAdminV2.Utilities
             var request = new RestRequest(requestURl, method);
             if (!string.IsNullOrEmpty(requestBody))
                 request.AddBody(requestBody, contentType);
-            await Task.Delay(2000);
+            await Task.Delay(_delayTime);
             return await restClient.ExecuteAsync(request);
         }
         public static async Task<RestResponse> ExecuteParameterRequestAsync(RestClient restClient, Method method, string requestURl, List<KeyValuePair<string, string>> parameters)
@@ -48,7 +50,7 @@ namespace WPFBakeryShopAdminV2.Utilities
                     request.AddParameter(element.Key, element.Value);
                 }
             }
-            await Task.Delay(2000);
+            await Task.Delay(_delayTime);
             return await restClient.ExecuteAsync(request);
         }
         public static async Task<RestResponse> ExecuteFileRequestAsync(RestClient restClient, Method method, string requestUrl, List<KeyValuePair<string, string>> images)
@@ -58,7 +60,7 @@ namespace WPFBakeryShopAdminV2.Utilities
             {
                 request.AddFile(image.Key, image.Value, "multipart/form-data");
             }
-            await Task.Delay(2000);
+            await Task.Delay(_delayTime);
             return await restClient.ExecuteAsync(request);
         }
         #endregion

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WPFBakeryShopAdminV2.MVVM.Views"
+             xmlns:converter="clr-namespace:WPFBakeryShopAdminV2.Converters"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800"
@@ -14,6 +15,9 @@
              Background="#F5F5FA"
              TextElement.FontSize="15"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+    <UserControl.Resources>
+        <converter:ReverseVisibilityToBoolConverter x:Key="reverseVisToBool" />
+    </UserControl.Resources>
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide"
                                              OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.3}">
@@ -26,7 +30,8 @@
 
                 <StackPanel Orientation="Horizontal"
                             Grid.Row="0"
-                            Grid.ColumnSpan="12">
+                            Grid.ColumnSpan="12"
+                            IsEnabled="{Binding LoadingPageVis, Converter={StaticResource reverseVisToBool}}">
                     <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                                FontWeight="SemiBold"
                                Margin="{StaticResource TitleMargin}"

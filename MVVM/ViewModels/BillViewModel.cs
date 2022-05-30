@@ -209,7 +209,10 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             if (SelectedBill != null)
                 _ = LoadDetailItem(SelectedBill.Id);
             await Task.Delay(300);
-            View.RowItemBills.ScrollIntoView(View.RowItemBills.SelectedItem);
+
+            var selectedItem = View.RowItemBills.SelectedItem;
+            if (selectedItem != null)
+                View.RowItemBills.ScrollIntoView((selectedItem));
         }
         #endregion
 

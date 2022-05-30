@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:WPFBakeryShopAdminV2.MVVM.Views"
+             xmlns:converter="clr-namespace:WPFBakeryShopAdminV2.Converters"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800"
@@ -13,6 +14,9 @@
              Background="#F5F5FA"
              TextElement.FontSize="15"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+    <UserControl.Resources>
+        <converter:ReverseVisibilityToBoolConverter x:Key="reverseVisToBool" />
+    </UserControl.Resources>
     <Grid>
         <materialDesign:TransitioningContent x:Name="TrainsitionigContentSlide"
                                              OpeningEffect="{materialDesign:TransitionEffect SlideInFromLeft, Duration=0:0:0.3}">
@@ -43,8 +47,8 @@
                         Grid.Row="0"
                         Grid.ColumnSpan="12"
                         Grid.RowSpan="6"
-                        Background="White"
-                        Panel.ZIndex="0"
+                        Background="Transparent"
+                        Panel.ZIndex="3"
                         Visibility="{Binding Path=LoadingPageVis}">
                     <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
                                  Value="0"
@@ -52,6 +56,7 @@
                 </Border>
 
                 <StackPanel Orientation="Horizontal"
+                            IsEnabled="{Binding LoadingPageVis, Converter={StaticResource reverseVisToBool}}"
                             Grid.Row="0"
                             Grid.ColumnSpan="12">
                     <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
@@ -68,7 +73,8 @@
                     </Button>
                 </StackPanel>
 
-                <Border Grid.Column="0"
+                <Border IsEnabled="{Binding LoadingPageVis, Converter={StaticResource reverseVisToBool}}"
+                        Grid.Column="0"
                         Grid.Row="1"
                         Grid.ColumnSpan="4"
                         Padding="20"
@@ -94,7 +100,8 @@
                     </StackPanel>
                 </Border>
 
-                <Border Grid.Column="4"
+                <Border IsEnabled="{Binding LoadingPageVis, Converter={StaticResource reverseVisToBool}}"
+                        Grid.Column="4"
                         Grid.Row="1"
                         Grid.ColumnSpan="4"
                         Padding="20"
@@ -120,7 +127,8 @@
                     </StackPanel>
                 </Border>
 
-                <Border Grid.Column="8"
+                <Border IsEnabled="{Binding LoadingPageVis, Converter={StaticResource reverseVisToBool}}"
+                        Grid.Column="8"
                         Grid.Row="1"
                         Grid.ColumnSpan="4"
                         Padding="20"
@@ -146,7 +154,8 @@
                     </StackPanel>
                 </Border>
 
-                <Border Grid.Column="0"
+                <Border IsEnabled="{Binding LoadingPageVis, Converter={StaticResource reverseVisToBool}}"
+                        Grid.Column="0"
                         Grid.Row="2"
                         Grid.ColumnSpan="4"
                         Padding="20"
@@ -325,7 +334,8 @@
 
                 </Border>
 
-                <Border Background="White"
+                <Border IsEnabled="{Binding LoadingPageVis, Converter={StaticResource reverseVisToBool}}"
+                        Background="White"
                         Padding="20"
                         Grid.Row="2"
                         Grid.Column="4"

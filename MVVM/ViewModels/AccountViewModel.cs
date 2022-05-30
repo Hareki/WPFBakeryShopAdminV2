@@ -68,7 +68,10 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         public async void Expander_Expanded()
         {
             await Task.Delay(300);
-            View.RowItemAccounts.ScrollIntoView(View.RowItemAccounts.SelectedItem);
+
+            var selectedItem = View.RowItemAccounts.SelectedItem;
+            if (selectedItem != null)
+                View.RowItemAccounts.ScrollIntoView((selectedItem));
         }
         #endregion
 
