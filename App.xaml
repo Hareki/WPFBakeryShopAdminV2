@@ -39,7 +39,6 @@
                 <ResourceDictionary>
                     <SolidColorBrush x:Key="SecondaryHueDarkBrush"
                                      Color="#FDF0E6" />
-
                 </ResourceDictionary>
                 <ResourceDictionary>
                     <clr:String x:Key="SecondaryColor">#fda144</clr:String>

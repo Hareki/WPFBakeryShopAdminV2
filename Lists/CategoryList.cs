@@ -19,7 +19,7 @@ namespace WPFBakeryShopAdminV2.Lists
         public static async Task<List<Category>> LoadCategoryList()
         {
             Loading = true;
-            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Get, "categories", null, null);
+            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Get, "categories");
 
             if ((int)response.StatusCode == 200)
             {

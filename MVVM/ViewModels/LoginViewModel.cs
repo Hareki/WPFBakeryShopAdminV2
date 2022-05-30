@@ -126,7 +126,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         {
             RestClient client = new RestClient(RestConnection.ACCOUNT_BASE_CONNECTION_STRING);
             client.Authenticator = new JwtAuthenticator(token.IdToken);
-            var task = await RestConnection.ExecuteRequestAsync(client, Method.Get, "", null, null);
+            var task = await RestConnection.ExecuteRequestAsync(client, Method.Get, "");
             PersonalAccount account = JsonConvert.DeserializeObject<PersonalAccount>(task.Content);
             return account.Authorities.Any(auth => auth == Utilities.Constants.ROLE_ADMIN);
         }

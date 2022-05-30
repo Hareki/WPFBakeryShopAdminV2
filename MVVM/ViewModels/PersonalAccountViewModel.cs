@@ -53,7 +53,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public async Task<PersonalAccount> GetPersonalAccountFromDBAsync()
         {
-            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Get, "", null, null);
+            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Get, "");
             if ((int)response.StatusCode == 200)
             {
                 var personalAccount = response.Content;

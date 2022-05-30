@@ -23,6 +23,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private BillRowItem _selectedBill;
         private BillDetails _billDetails;
         private Pagination _pagination;
+        private Visibility _updatingStatusVis = Visibility.Hidden;
 
         #region Base
         public BillViewModel()
@@ -64,55 +65,61 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private async Task LoadDetailItem(int id)
         {
             LoadingInfoVis = Visibility.Visible;
-            var request = new RestRequest($"orders/{id}", Method.Get);
-            var respone = await _restClient.ExecuteAsync(request);
-            if ((int)respone.StatusCode == 200)
+            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Get, $"orders/{id}");
+            if ((int)response.StatusCode == 200)
             {
-                var billDetails = respone.Content;
+                var billDetails = response.Content;
                 BillDetails = JsonConvert.DeserializeObject<BillDetails>(billDetails);
             }
             LoadingInfoVis = Visibility.Hidden;
         }
         public async Task UpdateOrderStatus()
         {
-
-            var request = new RestRequest($"orders/{BillDetails.Id}/status/update", Method.Put);
-            var respone = _restClient.ExecuteAsync(request);
-            if ((int)respone.Result.StatusCode == 200)
+            UpdatingStatusVis = Visibility.Visible;
+            var respone = await RestConnection.ExecuteRequestAsync(_restClient, Method.Put, $"orders/{BillDetails.Id}/status/update");
+            if ((int)respone.StatusCode == 200)
             {
                 BillDetails.StatusId++;
                 GridRefresh(BillDetails.StatusId);
                 BillDetails.CanCancel = false;//Hard code, do nếu muốn cái này thay đổi tự động theo logic của webservice thì phải load lại từ db
-                NotifyOfPropertyChange(() => BillDetails);
+                NotifyOfPropertyChange(() => BillDetails); ////Notify các trạng thái enable của 2 nút cập nhật
+                SetBindingButtonAppearance(BillDetails.StatusId);
                 MessageUtils.ShowSnackBarMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, "Cập nhật trạng thái đơn hàng thành công");
-                return;
             }
-            await ShowErrorMessage("Lỗi cập nhật", "Đã xảy ra lỗi không xác định trong quá trình cập nhật trạng thái đơn hàng");
+            else
+            {
+                await ShowErrorMessage("Lỗi cập nhật", "Đã xảy ra lỗi không xác định trong quá trình cập nhật trạng thái đơn hàng");
+            }
+            UpdatingStatusVis = Visibility.Hidden;
+
         }
         public async Task CancelOrder()
         {
+
             bool confirm = await ShowConfirmMessage("Xác nhận hủy đơn", "Bạn có chắc muốn hủy đơn hàng này? Quá trình này không thể đảo ngược");
             if (confirm)
             {
-                var request = new RestRequest($"orders/{BillDetails.Id}/cancel", Method.Put);
-                var respone = _restClient.ExecuteAsync(request);
-                int statusCode = (int)respone.Result.StatusCode;
-                if (statusCode == 200)
+                UpdatingStatusVis = Visibility.Visible;
+                var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Put, $"orders/{BillDetails.Id}/cancel");
+                int statusCode = (int)response.StatusCode;
+                switch (statusCode)
                 {
-                    BillDetails.StatusId = 4;
-                    GridRefresh(BillDetails.StatusId);
-                    BillDetails.CanCancel = false;//Hard code, do nếu muốn cái này thay đổi tự động theo logic của webservice thì phải load lại từ db
-                    NotifyOfPropertyChange(() => BillDetails);
-                    ShowSuccessMessage("Hủy đơn hàng thành công");
-
-                    return;
+                    case 200:
+                        BillDetails.StatusId = 4;
+                        GridRefresh(BillDetails.StatusId);
+                        BillDetails.CanCancel = false;//Hard code, do nếu muốn cái này thay đổi tự động theo logic của webservice thì phải load lại từ db
+                        NotifyOfPropertyChange(() => BillDetails); //Notify các trạng thái enable của 2 nút cập nhật
+                        SetBindingButtonAppearance(BillDetails.StatusId);
+                        ShowSuccessMessage("Hủy đơn hàng thành công");
+                        break;
+                    case 400:
+                        await ShowErrorMessage("Lỗi hủy đơn", "Không thể hủy đơn hàng ở trạng thái này");
+                        break;
+                    default:
+                        await ShowErrorMessage("Lỗi hủy đơn", "Đã xảy ra lỗi không xác định trong quá trình hủy đơn hàng");
+                        break;
                 }
-                else if (statusCode == 400)
-                {
-                    await ShowErrorMessage("Lỗi hủy đơn", "Không thể hủy đơn hàng ở trạng thái này");
-                    return;
-                }
-                await ShowErrorMessage("Lỗi hủy đơn", "Đã xảy ra lỗi không xác định trong quá trình hủy đơn hàng");
+                UpdatingStatusVis = Visibility.Hidden;
             }
         }
         #endregion
@@ -197,10 +204,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 }
             });
         }
-        public void Expander_Expanded()
+        public async void Expander_Expanded()
         {
             if (SelectedBill != null)
                 _ = LoadDetailItem(SelectedBill.Id);
+            await Task.Delay(300);
+            View.RowItemBills.ScrollIntoView(View.RowItemBills.SelectedItem);
         }
         #endregion
 
@@ -284,6 +293,15 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 NotifyOfPropertyChange(() => LoadingInfoVis);
             }
         }
+        public Visibility UpdatingStatusVis
+        {
+            get => _updatingStatusVis;
+            set
+            {
+                _updatingStatusVis = value;
+                NotifyOfPropertyChange(() => UpdatingStatusVis);
+            }
+        }
         public Pagination Pagination
         {
             get
@@ -297,6 +315,8 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             }
         }
         public BillView View => (BillView)this.GetView();
+
+
         #endregion
 
         #region Pagination

@@ -38,7 +38,7 @@
                                    FontWeight="SemiBold"
                                    Margin="{StaticResource TitleMargin}"
                                    Text="Sản phẩm" />
-                        <Button x:Name="LoadPage"
+                        <Button x:Name="LoadPageAsync"
                                 Style="{StaticResource MaterialDesignIconForegroundButton}"
                                 ToolTip="MaterialDesignIconForegroundButton"
                                 Foreground="{DynamicResource MaterialDesignBody}"

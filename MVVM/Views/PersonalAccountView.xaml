@@ -172,15 +172,14 @@
                             Grid.Row="1">
                         <ScrollViewer>
                             <Border>
-                                <Grid>
+                                <Grid IsEnabled="{Binding LoadingPageVis, Converter={StaticResource reverseVisConverter}}">
 
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="4*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Grid Grid.Column="1"
-                                          IsEnabled="{Binding LoadingPageVis, Converter={StaticResource reverseVisConverter}}">
+                                    <Grid Grid.Column="1">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="*" />
@@ -261,6 +260,7 @@
                                                  Grid.Row="1"
                                                  Grid.ColumnSpan="4"
                                                  Margin="0 30 15 15"
+                                                 MaxLength="50"
                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  materialDesign:HintAssist.Hint="{DynamicResource LastName2}"
                                                  materialDesign:HintAssist.Background="White"
@@ -278,6 +278,7 @@
                                         <TextBox x:Name="txtFirstName"
                                                  IsReadOnly="{Binding NotEditing}"
                                                  Grid.Column="8"
+                                                 MaxLength="10"
                                                  Grid.Row="1"
                                                  Grid.ColumnSpan="4"
                                                  Margin="15 30 0 15"
@@ -301,6 +302,7 @@
                                                  Grid.Row="3"
                                                  Grid.ColumnSpan="8"
                                                  Margin="0 15"
+                                                 MaxLength="50"
                                                  IsEnabled="{Binding NotEditing}"
                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  materialDesign:HintAssist.Hint="{DynamicResource Email2}"
@@ -323,6 +325,7 @@
                                                  Grid.Row="2"
                                                  Grid.ColumnSpan="8"
                                                  Margin="0 15"
+                                                 MaxLength="120"
                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  materialDesign:HintAssist.Hint="{DynamicResource Address}"
                                                  materialDesign:HintAssist.Background="White"
@@ -334,6 +337,7 @@
                                                  Grid.Row="4"
                                                  Grid.ColumnSpan="5"
                                                  Margin="0 15 15 15"
+                                                 MaxLength="10"
                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  materialDesign:HintAssist.Hint="{DynamicResource Phone2}"
                                                  materialDesign:HintAssist.Background="White"

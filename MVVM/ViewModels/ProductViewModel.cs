@@ -175,7 +175,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             bool confirm = await ShowConfirmMessage("Xác nhận xóa loại", $"Bạn có chắc muốn {SelectedProduct.Name} {SelectedVariant.TypeName}?");
             if (confirm)
             {
-                var result = await RestConnection.ExecuteRequestAsync(_restClient, Method.Delete, $"variants/{SelectedVariant.Id}", null, null);
+                var result = await RestConnection.ExecuteRequestAsync(_restClient, Method.Delete, $"variants/{SelectedVariant.Id}");
                 int statusCode = (int)result.StatusCode;
                 if (statusCode == 200)
                 {

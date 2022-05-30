@@ -15,7 +15,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
     {
         private List<LanguageItem> _languageList;
 
-        private readonlyDashboardViewModel _dashboardViewModel;
+        private readonly DashboardViewModel _dashboardViewModel;
         private readonly AccountViewModel _accountViewModel;
         private readonly BillViewModel _billViewModel;
         private readonly ProductViewModel _productViewModel;
@@ -64,7 +64,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public async Task<PersonalAccount> GetPersonalAccountFromDBAsync()
         {
-            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Get, "", null, null);
+            var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Get, "");
             if ((int)response.StatusCode == 200)
             {
                 var personalAccount = response.Content;

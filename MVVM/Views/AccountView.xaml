@@ -7,6 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800"
+             xmlns:cal="http://www.caliburnproject.org"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:viewmodels="clr-namespace:WPFBakeryShopAdminV2.MVVM.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:AccountViewModel}"
@@ -152,7 +153,8 @@
                               FontWeight="SemiBold"
                               Background="White"
                               ExpandDirection="Up"
-                              Padding="10 10 10 0">
+                              Padding="10 10 10 0"
+                              cal:Message.Attach="[Event Expanded] = [Action Expander_Expanded]">
                         <ScrollViewer>
                             <Border Padding="20 0">
                                 <Grid>

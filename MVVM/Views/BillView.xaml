@@ -18,6 +18,7 @@
     <UserControl.Resources>
         <converter:NullToVisConvereter x:Key="nullToVis" />
         <converter:VisToZIndexConverter x:Key="visToZIndex" />
+        <converter:ReverseVisibilityToBoolConverter x:Key="reverseVisToBool" />
     </UserControl.Resources>
 
     <materialDesign:DialogHost CloseOnClickAway="True"
@@ -398,14 +399,15 @@
                                         <StackPanel Orientation="Horizontal"
                                                     Grid.Column="10"
                                                     Grid.Row="1"
-                                                    Grid.ColumnSpan="3">
+                                                    Grid.ColumnSpan="3"
+                                                    IsEnabled="{Binding UpdatingStatusVis, Converter={StaticResource reverseVisToBool}}">
                                             <Button Style="{StaticResource CustomPrimaryButton}"
                                                     BorderBrush="{Binding Path=BindingButton.BackgroundColor}"
                                                     Background="{Binding Path=BindingButton.BackgroundColor}"
-                                                    MinWidth="140"
+                                                    MinWidth="160"
                                                     VerticalAlignment="Top"
                                                     HorizontalAlignment="Left"
-                                                    materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                                     Visibility="{Binding Path=BillDetails, Converter={StaticResource nullToVis}}">
                                                 <StackPanel Orientation="Horizontal">
                                                     <Image Source="{Binding Path=BindingButton.ImageUrl}"
@@ -418,12 +420,12 @@
                                             </Button>
 
                                             <Button Style="{StaticResource MaterialDesignIconButton}"
-                                                    Margin="7 -7 0 0"
+                                                    Margin="15 -7 0 0"
                                                     Visibility="{Binding Path=BillDetails, Converter={StaticResource nullToVis}}"
-                                                    ToolTip="Thăng cấp trạng thái đơn hàngaaa"
+                                                    ToolTip="Thăng cấp trạng thái đơn hàng"
                                                     VerticalAlignment="Top"
-                                                    HorizontalAlignment="Left"
                                                     IsEnabled="{Binding Path=BillDetails.CanUpdateOrderStatus}"
+                                                    HorizontalAlignment="Left"
                                                     cal:Message.Attach="[Event MouseEnter] = [Action PreviewUpdatedStatus];[Event MouseLeave]=[Action ClearPreview];[Event Click] = [Action UpdateOrderStatus]">
                                                 <materialDesign:PackIcon Kind="Upload" />
                                             </Button>
@@ -440,6 +442,32 @@
                                                 <materialDesign:PackIcon Kind="CloseCircle" />
                                             </Button>
                                         </StackPanel>
+
+                                        <StackPanel Orientation="Horizontal"
+                                                    Grid.Column="10"
+                                                    Visibility="{Binding UpdatingStatusVis}"
+                                                    Grid.Row="1"
+                                                    Grid.ColumnSpan="3"
+                                                    Panel.ZIndex="3">
+                                            <Button Style="{StaticResource CustomPrimaryButton}"
+                                                    MinWidth="160"
+                                                    Background="{StaticResource SecondaryColorBrush}"
+                                                    BorderBrush="{StaticResource SecondaryColorBrush}"
+                                                    VerticalAlignment="Top"
+                                                    HorizontalAlignment="Left"
+                                                    materialDesign:ShadowAssist.ShadowDepth="Depth0">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                                                 Value="0"
+                                                                 Foreground="White"
+                                                                 Margin="0 0 7 0"
+                                                                 IsIndeterminate="True" />
+                                                    <TextBlock Text="Đang thăng cấp..."
+                                                               VerticalAlignment="Center" />
+                                                </StackPanel>
+                                            </Button>
+                                        </StackPanel>
+
 
                                         <TextBlock Text="{DynamicResource PurchaseDate}"
                                                    FontWeight="Bold"

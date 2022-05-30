@@ -39,7 +39,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             new Thread(new ThreadStart(() =>
             {
                 LoadingPageVis = Visibility.Visible;
-                var response = RestConnection.ExecuteRequestAsync(_restClient, Method.Get, "home", null, null);
+                var response = RestConnection.ExecuteRequestAsync(_restClient, Method.Get, "home");
                 if ((int)response.Result.StatusCode == 200)
                 {
                     var dashboardContent = response.Result.Content;

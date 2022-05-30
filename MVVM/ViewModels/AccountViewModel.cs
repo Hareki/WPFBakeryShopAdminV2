@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using WPFBakeryShopAdminV2.Interfaces;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
+using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
@@ -63,6 +64,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         public void ShowAddingAccountDialog()
         {
             _windowManager.ShowDialogAsync(new NewAccountViewModel(_windowManager));
+        }
+        public async void Expander_Expanded()
+        {
+            await Task.Delay(300);
+            View.RowItemAccounts.ScrollIntoView(View.RowItemAccounts.SelectedItem);
         }
         #endregion
 
@@ -128,6 +134,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 NotifyOfPropertyChange(() => Pagination);
             }
         }
+        public AccountView View => (AccountView)this.GetView();
         #endregion
 
 

@@ -30,14 +30,15 @@ namespace WPFBakeryShopAdminV2.Utilities
             AuthRestClient = new RestClient(AUTHENTICATE_BASE_CONNECTION_STRING);
             PublicRestClient = new RestClient(PUBLIC_BASE_CONNECTION_STRING);
         }
-        public static Task<RestResponse> ExecuteRequestAsync(RestClient restClient, Method method, string requestURl, string requestBody, string contentType)
+        public static async Task<RestResponse> ExecuteRequestAsync(RestClient restClient, Method method, string requestURl, string requestBody = null, string contentType = null)
         {
             var request = new RestRequest(requestURl, method);
             if (!string.IsNullOrEmpty(requestBody))
                 request.AddBody(requestBody, contentType);
-            return restClient.ExecuteAsync(request);
+            await Task.Delay(2000);
+            return await restClient.ExecuteAsync(request);
         }
-        public static Task<RestResponse> ExecuteParameterRequestAsync(RestClient restClient, Method method, string requestURl, List<KeyValuePair<string, string>> parameters)
+        public static async Task<RestResponse> ExecuteParameterRequestAsync(RestClient restClient, Method method, string requestURl, List<KeyValuePair<string, string>> parameters)
         {
             var request = new RestRequest(requestURl, method);
             if (parameters != null && parameters.Count > 0)
@@ -47,17 +48,18 @@ namespace WPFBakeryShopAdminV2.Utilities
                     request.AddParameter(element.Key, element.Value);
                 }
             }
-            return restClient.ExecuteAsync(request);
+            await Task.Delay(2000);
+            return await restClient.ExecuteAsync(request);
         }
-        public static Task<RestResponse> ExecuteFileRequestAsync(RestClient restClient, Method method, string requestUrl, List<KeyValuePair<string, string>> images)
+        public static async Task<RestResponse> ExecuteFileRequestAsync(RestClient restClient, Method method, string requestUrl, List<KeyValuePair<string, string>> images)
         {
             var request = new RestRequest(requestUrl, method);
             foreach (KeyValuePair<string, string> image in images)
             {
                 request.AddFile(image.Key, image.Value, "multipart/form-data");
             }
-
-            return restClient.ExecuteAsync(request);
+            await Task.Delay(2000);
+            return await restClient.ExecuteAsync(request);
         }
         #endregion
 
