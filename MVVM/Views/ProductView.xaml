@@ -39,7 +39,7 @@
                         <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                                    FontWeight="SemiBold"
                                    Margin="{StaticResource TitleMargin}"
-                                   Text="Sản phẩm" />
+                                   Text="{DynamicResource PD_Title}" />
                         <Button x:Name="LoadPageAsync"
                                 Style="{StaticResource MaterialDesignIconForegroundButton}"
                                 IsEnabled="{Binding NotEditingInformation}"
@@ -103,16 +103,16 @@
                                   SelectedItem="{Binding Path=SelectedProduct, Mode=TwoWay}"
                                   cal:Message.Attach="[Event SelectionChanged] = [Action RowItemProducts_SelectionChanged]">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Mã"
+                                <DataGridTextColumn Header="{DynamicResource PD_ID}"
                                                     Width="*"
                                                     Binding="{Binding Path=Id}" />
-                                <DataGridTextColumn Header="Tên sản phẩm"
+                                <DataGridTextColumn Header="{DynamicResource PD_Name}"
                                                     Width="4*"
                                                     Binding="{Binding Path=Name}" />
-                                <DataGridTextColumn Header="Danh mục"
+                                <DataGridTextColumn Header="{DynamicResource PD_Category}"
                                                     Width="2*"
                                                     Binding="{Binding Path=CategoryName}" />
-                                <DataGridTextColumn Header="Nguyên liệu"
+                                <DataGridTextColumn Header="{DynamicResource PD_Ingredients}"
                                                     Width="3*"
                                                     Binding="{Binding Path=Ingredients}" />
                             </DataGrid.Columns>
@@ -265,7 +265,7 @@
                             Background="White"
                             Padding="0 0 0 0"
                             MaxHeight="350">
-                        <Expander Header="CHI TIẾT SẢN PHẨM"
+                        <Expander Header="{DynamicResource PD_ProductDetails}"
                                   FontWeight="SemiBold"
                                   Background="White"
                                   ExpandDirection="Up"
@@ -279,7 +279,7 @@
                                     <TabControl materialDesign:ColorZoneAssist.Mode="SecondaryDark"
                                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                                 Style="{StaticResource MaterialDesignFilledTabControl}">
-                                        <TabItem Header="Thông tin">
+                                        <TabItem Header="{DynamicResource PD_Information}">
                                             <Border CornerRadius="12"
                                                     Padding="0">
                                                 <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -330,7 +330,7 @@
                                                                               IsHitTestVisible="{Binding EditingInformation}"
                                                                               HorizontalAlignment="Left" />
                                                                 <TextBlock Margin="15 0 0 0"
-                                                                           Text="Tình trạng kinh doanh"
+                                                                           Text="{DynamicResource PD_Available}"
                                                                            IsEnabled="{Binding EditingInformation}"
                                                                            VerticalAlignment="Center" />
                                                             </StackPanel>
@@ -377,7 +377,7 @@
                                                             <TextBox x:Name="ProductDetails_Id"
                                                                      Grid.Column="1"
                                                                      Grid.Row="2"
-                                                                     materialDesign:HintAssist.Hint="Mã SP"
+                                                                     materialDesign:HintAssist.Hint="{DynamicResource PD_ID}"
                                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                                      IsEnabled="False"
                                                                      Margin="0 0 15 30" />
@@ -387,7 +387,7 @@
                                                                      MaxLength="{StaticResource ProductNameMaxLength}"
                                                                      Grid.ColumnSpan="2"
                                                                      Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                                     materialDesign:HintAssist.Hint="Tên sản phẩm*"
+                                                                     materialDesign:HintAssist.Hint="{DynamicResource PD_ReqName}"
                                                                      IsReadOnly="{Binding NotEditingInformation}"
                                                                      Margin="15 0 30 30">
                                                                 <TextBox.Text>
@@ -403,7 +403,7 @@
                                                                       Grid.Column="4"
                                                                       Grid.Row="2"
                                                                       Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                                      materialDesign:HintAssist.Hint="Danh mục"
+                                                                      materialDesign:HintAssist.Hint="{DynamicResource PD_Category}"
                                                                       IsHitTestVisible="{Binding EditingInformation}"
                                                                       Focusable="{Binding EditingInformation}"
                                                                       IsTabStop="{Binding EditingInformation}"
@@ -423,7 +423,7 @@
                                                                      Grid.Row="3"
                                                                      AcceptsReturn="True"
                                                                      TextWrapping="Wrap"
-                                                                     materialDesign:HintAssist.Hint="Nguyên liệu"
+                                                                     materialDesign:HintAssist.Hint="{DynamicResource PD_ReIngredients}"
                                                                      IsReadOnly="{Binding NotEditingInformation}"
                                                                      Grid.ColumnSpan="2"
                                                                      Margin="0 0 15 0">
@@ -442,7 +442,7 @@
                                                                      Grid.Row="3"
                                                                      AcceptsReturn="True"
                                                                      TextWrapping="Wrap"
-                                                                     materialDesign:HintAssist.Hint="Chất gây dị ứng"
+                                                                     materialDesign:HintAssist.Hint="{DynamicResource PD_Allergens}"
                                                                      IsReadOnly="{Binding NotEditingInformation}"
                                                                      Grid.ColumnSpan="2"
                                                                      Margin="15 0 0 0">
@@ -459,7 +459,7 @@
                                                 </ScrollViewer>
                                             </Border>
                                         </TabItem>
-                                        <TabItem Header="Các loại của sản phẩm">
+                                        <TabItem Header="{DynamicResource PD_Variants}">
                                             <Border Padding="5"
                                                     CornerRadius="12">
                                                 <Border Background="White"
@@ -576,7 +576,7 @@
                                                 </Border>
                                             </Border>
                                         </TabItem>
-                                        <TabItem Header="Hình ảnh">
+                                        <TabItem Header="{DynamicResource PD_Images}">
                                             <Border Padding="5"
                                                     CornerRadius="12">
                                                 <Border Background="White"

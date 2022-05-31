@@ -70,9 +70,41 @@
     <sys:String x:Key="DB_Status">Trạng thái</sys:String>
     <!--#endregion-->
 
+    <!--#region Product View-->
+    <sys:String x:Key="PD_Title">Sản phẩm</sys:String>
+    <sys:String x:Key="PD_ID">Mã SP</sys:String>
+    <sys:String x:Key="PD_Name">Tên</sys:String>
+    <sys:String x:Key="PD_Category">Danh mục</sys:String>
+    <sys:String x:Key="PD_Ingredients">Nguyên liệu</sys:String>
+    <sys:String x:Key="PD_Allergens">Dị ứng</sys:String>
+    <sys:String x:Key="PD_ProductDetails">Chi tiết sản phẩm</sys:String>
+    <sys:String x:Key="PD_Available">Còn hàng</sys:String>
+    <sys:String x:Key="PD_TotalMessage">Sản phẩm này có tổng cộng </sys:String>
+    <sys:String x:Key="PD_VariantTotalMessage"> biến thể</sys:String>
+    <sys:String x:Key="PD_ImageTotalMessage"> hình ảnh</sys:String>
 
-
+    <sys:String x:Key="PD_Variants">Các biến thể của sản phẩm</sys:String>
+    <sys:String x:Key="PD_Information">Thông tin sản phẩm</sys:String>
+    <sys:String x:Key="PD_Images">Hình ảnh sản phẩm</sys:String>
     
+    <sys:String x:Key="PD_VariantID">Mã biến thể</sys:String>
+    <sys:String x:Key="PD_Type">Loại</sys:String>
+    <sys:String x:Key="PD_Cost">Giá gốc</sys:String>
+    <sys:String x:Key="PD_Price">Giá bán</sys:String>
+    <sys:String x:Key="PD_Status">Tình trạng</sys:String>
+    <sys:String x:Key="PD_Create">Thêm biến thể</sys:String>
+    <sys:String x:Key="PD_Edit">Sửa biến thể đã chọn</sys:String>
+    <sys:String x:Key="PD_Delete">Xóa biến thể đã chọn</sys:String>
+
+    <sys:String x:Key="PD_ImageID">Mã ảnh</sys:String>
+    <sys:String x:Key="PD_Image">Hình ảnh</sys:String>
+    <sys:String x:Key="PD_AddImages">Thêm nhiều ảnh mới</sys:String>
+    <sys:String x:Key="PD_DeleteImages">Xóa các ảnh đã chọn</sys:String>
+    <!--#endregion-->
+
+
+
+
 
     <sys:String x:Key="CustomerName2">Tên khách hàng:</sys:String>
     <sys:String x:Key="Status2">Trạng thái:</sys:String>
