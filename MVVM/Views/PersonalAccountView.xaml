@@ -344,7 +344,9 @@
                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                  materialDesign:HintAssist.Hint="{DynamicResource Phone2}"
                                                  materialDesign:HintAssist.Background="White"
-                                                 materialDesign:TextFieldAssist.HasClearButton="False">
+                                                 materialDesign:TextFieldAssist.HasClearButton="False"
+                                                 PreviewTextInput="PreviewPhoneInput"
+                                                 PreviewKeyDown="PreviewPhoneKeyDown">
                                             <TextBox.Text>
                                                 <Binding Path="PersonalAccount.Phone">
                                                     <Binding.ValidationRules>
