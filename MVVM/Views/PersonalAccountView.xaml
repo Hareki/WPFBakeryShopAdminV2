@@ -472,7 +472,44 @@
                                                    Style="{StaticResource MaterialDesignBody1TextBlock}"
                                                    Foreground="#e63946"
                                                    Grid.ColumnSpan="2" />
-                                        <PasswordBox ph:PasswordHelper.Attach="True"
+
+
+                                        <!--#region Current Password -->
+                                        <ToggleButton x:Name="ShowCurrentPassword"
+                                                      Style="{StaticResource MaterialDesignActionToggleButton}"
+                                                      Grid.Column="0"
+                                                      Grid.Row="1"
+                                                      Grid.ColumnSpan="2"
+                                                      Background="Transparent"
+                                                      Foreground="#757575"
+                                                      HorizontalAlignment="right"
+                                                      Panel.ZIndex="3"
+                                                      Margin="0 0 10 0"
+                                                      FocusVisualStyle="{x:Null}"
+                                                      Checked="ShowCurrentPassword_Checked"
+                                                      Unchecked="ShowCurrentPassword_Unchecked">
+                                            <materialDesign:PackIcon Kind="Eye"
+                                                                     Width="25"
+                                                                     Height="25" />
+                                            <materialDesign:ToggleButtonAssist.OnContent>
+                                                <materialDesign:PackIcon Kind="EyeOff"
+                                                                         Width="25"
+                                                                         Height="25" />
+                                            </materialDesign:ToggleButtonAssist.OnContent>
+                                        </ToggleButton>
+
+                                        <TextBox  x:Name="CurrentPasswordRevealed"
+                                                  Grid.Column="0"
+                                                  Grid.Row="1"
+                                                  Grid.ColumnSpan="2"
+                                                  Text="{Binding ChangePasswordBody.CurrentPassword}"
+                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                  FontWeight="SemiBold"
+                                                  materialDesign:HintAssist.Hint="{DynamicResource CurrentPassword}"
+                                                  Margin="0,15,0,15" />
+
+                                        <PasswordBox x:Name="CurrentPasswordHidden"
+                                                     ph:PasswordHelper.Attach="True"
                                                      ph:PasswordHelper.Password="{Binding ChangePasswordBody.CurrentPassword, Mode=TwoWay}"
                                                      Grid.Column="0"
                                                      Grid.Row="1"
@@ -481,8 +518,46 @@
                                                      Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                                                      materialDesign:HintAssist.Hint="{DynamicResource CurrentPassword}"
                                                      MaxLength="100" />
+                                        <!--#endregion-->
 
-                                        <PasswordBox ph:PasswordHelper.Attach="True"
+
+
+                                        <!--#region NewPassword -->
+                                        <ToggleButton x:Name="ShowNewPassword"
+                                                      Style="{StaticResource MaterialDesignActionToggleButton}"
+                                                      Grid.Column="0"
+                                                      Grid.Row="2"
+                                                      Grid.ColumnSpan="2"
+                                                      Background="Transparent"
+                                                      Foreground="#757575"
+                                                      HorizontalAlignment="right"
+                                                      Panel.ZIndex="3"
+                                                      Margin="0 0 10 0"
+                                                      FocusVisualStyle="{x:Null}"
+                                                      Checked="ShowNewPassword_Checked"
+                                                      Unchecked="ShowNewPassword_Unchecked">
+                                            <materialDesign:PackIcon Kind="Eye"
+                                                                     Width="25"
+                                                                     Height="25" />
+                                            <materialDesign:ToggleButtonAssist.OnContent>
+                                                <materialDesign:PackIcon Kind="EyeOff"
+                                                                         Width="25"
+                                                                         Height="25" />
+                                            </materialDesign:ToggleButtonAssist.OnContent>
+                                        </ToggleButton>
+
+                                        <TextBox  x:Name="NewPasswordRevealed"
+                                                  Grid.Column="0"
+                                                  Grid.Row="2"
+                                                  Grid.ColumnSpan="2"
+                                                  Text="{Binding ChangePasswordBody.NewPassword}"
+                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                  FontWeight="SemiBold"
+                                                  materialDesign:HintAssist.Hint="{DynamicResource NewPassword}"
+                                                  Margin="0,15,0,15" />
+
+                                        <PasswordBox x:Name="NewPasswordHidden"
+                                                     ph:PasswordHelper.Attach="True"
                                                      ph:PasswordHelper.Password="{Binding ChangePasswordBody.NewPassword, Mode=TwoWay}"
                                                      Grid.Column="0"
                                                      Grid.Row="2"
@@ -491,8 +566,44 @@
                                                      Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                                                      materialDesign:HintAssist.Hint="{DynamicResource NewPassword}"
                                                      MaxLength="100" />
+                                        <!--#endregion-->
 
-                                        <PasswordBox ph:PasswordHelper.Attach="True"
+                                        <!--#region  ConfirmNewPassword-->
+                                        <ToggleButton x:Name="ShowConfirmNewPassword"
+                                                      Style="{StaticResource MaterialDesignActionToggleButton}"
+                                                      Grid.Column="0"
+                                                      Grid.Row="3"
+                                                      Grid.ColumnSpan="2"
+                                                      Background="Transparent"
+                                                      Foreground="#757575"
+                                                      HorizontalAlignment="right"
+                                                      Panel.ZIndex="3"
+                                                      Margin="0 0 10 0"
+                                                      FocusVisualStyle="{x:Null}"
+                                                      Checked="ShowConfirmNewPassword_Checked"
+                                                      Unchecked="ShowConfirmNewPassword_Unchecked">
+                                            <materialDesign:PackIcon Kind="Eye"
+                                                                     Width="25"
+                                                                     Height="25" />
+                                            <materialDesign:ToggleButtonAssist.OnContent>
+                                                <materialDesign:PackIcon Kind="EyeOff"
+                                                                         Width="25"
+                                                                         Height="25" />
+                                            </materialDesign:ToggleButtonAssist.OnContent>
+                                        </ToggleButton>
+
+                                        <TextBox  x:Name="ConfirmNewPasswordRevealed"
+                                                  Grid.Column="0"
+                                                  Grid.Row="3"
+                                                  Grid.ColumnSpan="2"
+                                                  Text="{Binding ChangePasswordBody.ConfirmNewPassword}"
+                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                                  FontWeight="SemiBold"
+                                                  materialDesign:HintAssist.Hint="{DynamicResource ConfirmNewPassword}"
+                                                  Margin="0,15,0,15" />
+
+                                        <PasswordBox x:Name="ConfirmNewPasswordHidden"
+                                            ph:PasswordHelper.Attach="True"
                                                      ph:PasswordHelper.Password="{Binding ChangePasswordBody.ConfirmNewPassword, Mode=TwoWay}"
                                                      Grid.Column="0"
                                                      Grid.Row="3"
@@ -501,6 +612,7 @@
                                                      Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                                                      materialDesign:HintAssist.Hint="{DynamicResource ConfirmNewPassword}"
                                                      MaxLength="100" />
+                                        <!--#endregion-->
 
                                         <Button x:Name="ChangePassword"
                                                 Style="{StaticResource CustomPrimaryButton}"

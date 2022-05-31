@@ -43,35 +43,81 @@
                 <TextBlock HorizontalAlignment="Center"
                            Text="{DynamicResource LoginGreeting2}"
                            FontWeight="SemiBold" />
-                <StackPanel Width="400"
-                            Margin="0 20">
+                <Grid Width="400"
+                      Margin="0 20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
                     <TextBox  x:Name="LoginInfo_Email"
+                              Grid.Row="0"
                               cal:Message.Attach="[Event KeyDown] = [Action LoginAsync($executionContext)]"
                               Style="{StaticResource MaterialDesignOutlinedTextBox}"
                               FontWeight="SemiBold"
                               materialDesign:HintAssist.Hint="{DynamicResource Email}"
                               Margin="4 12 4 12" />
-                    <PasswordBox ph:PasswordHelper.Attach="True"
+
+                    <ToggleButton x:Name="ShowPassword"
+                                  Style="{StaticResource MaterialDesignActionToggleButton}"
+                                  Grid.Row="1"
+                                  Background="Transparent"
+                                  Foreground="#757575"
+                                  HorizontalAlignment="right"
+                                  Panel.ZIndex="3"
+                                  Margin="0 0 10 0"
+                                  FocusVisualStyle="{x:Null}"
+                                  Checked="ShowPassword_Checked"
+                                  Unchecked="ShowPassword_Unchecked">
+                        <materialDesign:PackIcon Kind="Eye"
+                                                 Width="25"
+                                                 Height="25" />
+                        <materialDesign:ToggleButtonAssist.OnContent>
+                            <materialDesign:PackIcon Kind="EyeOff"
+                                                     Width="25"
+                                                     Height="25" />
+                        </materialDesign:ToggleButtonAssist.OnContent>
+                    </ToggleButton>
+
+                    <TextBox  x:Name="PasswordRevealed"
+                              Grid.Row="1"
+                              Text="{Binding LoginInfo.Password}"
+                              cal:Message.Attach="[Event KeyDown] = [Action LoginAsync($executionContext)]"
+                              Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                              FontWeight="SemiBold"
+                              materialDesign:HintAssist.Hint="{DynamicResource Password}"
+                              Margin="4 12 4 12" />
+
+
+                    <PasswordBox x:Name="PasswordHidden"
+                                 ph:PasswordHelper.Attach="True"
                                  ph:PasswordHelper.Password="{Binding LoginInfo.Password, Mode=TwoWay}"
                                  cal:Message.Attach="[Event KeyDown] = [Action LoginAsync($executionContext)]"
                                  Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
                                  materialDesign:HintAssist.Hint="{DynamicResource Password}"
                                  FontWeight="SemiBold"
+                                 Grid.Row="1"
                                  Margin="4 12 4 12" />
                     <CheckBox   x:Name="Login_RememberMe"
+                                Grid.Row="2"
                                 IsChecked="{Binding LoginInfo.RememberMe}"
                                 Content="{DynamicResource RememberMe}"
                                 materialDesign:CheckBoxAssist.CheckBoxSize="20"
                                 Margin="4 12 4 12" />
                     <Button x:Name="LoginAsync"
+                            Grid.Row="3"
                             Style="{StaticResource CustomPrimaryButton}"
                             Content="{DynamicResource Login}"
                             Margin="4 12 4 12" />
                     <Button x:Name="ShowForgotPasswordDialog"
+                            Grid.Row="4"
                             Style="{StaticResource MaterialDesignFlatButton}"
                             Content="{DynamicResource ForgotPassword}"
                             HorizontalAlignment="Center" />
-                </StackPanel>
+                </Grid>
 
             </StackPanel>
 
