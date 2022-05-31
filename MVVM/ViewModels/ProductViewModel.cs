@@ -167,7 +167,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             bool test2 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtIngredients);
             bool test3 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtName);
             View.UpdateInformationAsync.Focus();
-            return test1 && test2 && test3;
+            return test1 || test2 || test3;
         }
         #endregion
 

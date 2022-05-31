@@ -82,7 +82,7 @@
                             </Button>
                         </StackPanel>
                     </StackPanel>
-
+                    
                     <StackPanel x:Name="ErrorContent">
                         <Grid>
                             <materialDesign:PackIcon Kind="AlertCircle"
@@ -113,6 +113,40 @@
                                     Content="{DynamicResource DialogButtonOkay}"
                                     Foreground="{StaticResource ErrorColorBrush}"
                                     materialDesign:RippleAssist.Feedback="{StaticResource ErrorColorBrush}">
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel x:Name="InfoContent">
+                        <Grid>
+                            <materialDesign:PackIcon Kind="InfoCircle"
+                                                     HorizontalAlignment="Right"
+                                                     Margin="0 0 0 20"
+                                                     Width="25"
+                                                     Height="25"
+                                                     Foreground="{StaticResource InfoColorBrush}" />
+                            <TextBlock x:Name="InfoTitleTB"
+                                       Text="Title confirm"
+                                       FontWeight="Bold"
+                                       FontSize="18"
+                                       Margin="0 0 0 20" />
+                        </Grid>
+                        <TextBlock x:Name="InfoMessageTB"
+                                   TextWrapping="Wrap"
+                                   Padding="0"
+                                   Margin="0"
+                                   LineHeight="25"
+                                   Text="Are you sure want to cancel this order? You can't undo this action ABC">
+                        </TextBlock>
+                        <StackPanel Margin="0 20 0 0"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Center">
+                            <Button x:Name="ButtonInfoOkayClicked"
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Margin="0 0 15 0"
+                                    Content="{DynamicResource DialogButtonOkay}"
+                                    Foreground="{StaticResource InfoColorBrush}"
+                                    materialDesign:RippleAssist.Feedback="{StaticResource InfoColorBrush}">
                             </Button>
                         </StackPanel>
                     </StackPanel>

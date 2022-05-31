@@ -60,6 +60,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 Pagination.UpdatePaginationStatus(response.Headers);
             }
             NotifyOfPropertyChange(() => Pagination);
+
             LoadingPageVis = Visibility.Hidden;
         }
         #endregion

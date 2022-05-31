@@ -84,7 +84,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             bool test5 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtEmail); ;
             bool test6 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtPhone);
             View.AddNewAccount.Focus();
-            return test1 && test2 && test3 && test4 && test5 && test6;
+            return test1 || test2 || test3 || test4 || test5 || test6;
 
         }
 

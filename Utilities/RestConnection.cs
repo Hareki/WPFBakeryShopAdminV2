@@ -19,7 +19,7 @@ namespace WPFBakeryShopAdminV2.Utilities
         private static RestClient _authRestClient;
         private static RestClient _publicRestClient;
 
-        private static int _delayTime = 1000;
+        private static int _delayTime = 0;
 
 
         #region Base

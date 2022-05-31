@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WPFBakeryShopAdminV2.MVVM.Views"
         xmlns:converter="clr-namespace:WPFBakeryShopAdminV2.Converters"
         mc:Ignorable="d"
-        Title="Login"
+        Title="Đăng nhập"
         Height="630"
         Width="500"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -37,11 +37,11 @@
                        RenderOptions.EdgeMode="Aliased" />
                 <TextBlock Margin="0 25 0 0"
                            HorizontalAlignment="Center"
-                           Text="{DynamicResource LoginGreeting1}"
+                           Text="{DynamicResource Login_Greeting1}"
                            FontSize="28"
                            FontWeight="Bold" />
                 <TextBlock HorizontalAlignment="Center"
-                           Text="{DynamicResource LoginGreeting2}"
+                           Text="{DynamicResource Login_Greeting2}"
                            FontWeight="SemiBold" />
                 <Grid Width="400"
                       Margin="0 20">
@@ -58,7 +58,7 @@
                               cal:Message.Attach="[Event KeyDown] = [Action LoginAsync($executionContext)]"
                               Style="{StaticResource MaterialDesignOutlinedTextBox}"
                               FontWeight="SemiBold"
-                              materialDesign:HintAssist.Hint="{DynamicResource Email}"
+                              materialDesign:HintAssist.Hint="{DynamicResource Login_Email}"
                               Margin="4 12 4 12" />
 
                     <ToggleButton x:Name="ShowPassword"
@@ -88,7 +88,7 @@
                               cal:Message.Attach="[Event KeyDown] = [Action LoginAsync($executionContext)]"
                               Style="{StaticResource MaterialDesignOutlinedTextBox}"
                               FontWeight="SemiBold"
-                              materialDesign:HintAssist.Hint="{DynamicResource Password}"
+                              materialDesign:HintAssist.Hint="{DynamicResource Login_Password}"
                               Margin="4 12 4 12" />
 
 
@@ -97,25 +97,25 @@
                                  ph:PasswordHelper.Password="{Binding LoginInfo.Password, Mode=TwoWay}"
                                  cal:Message.Attach="[Event KeyDown] = [Action LoginAsync($executionContext)]"
                                  Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
-                                 materialDesign:HintAssist.Hint="{DynamicResource Password}"
+                                 materialDesign:HintAssist.Hint="{DynamicResource Login_Password}"
                                  FontWeight="SemiBold"
                                  Grid.Row="1"
                                  Margin="4 12 4 12" />
                     <CheckBox   x:Name="Login_RememberMe"
                                 Grid.Row="2"
                                 IsChecked="{Binding LoginInfo.RememberMe}"
-                                Content="{DynamicResource RememberMe}"
+                                Content="{DynamicResource Login_RememberMe}"
                                 materialDesign:CheckBoxAssist.CheckBoxSize="20"
                                 Margin="4 12 4 12" />
                     <Button x:Name="LoginAsync"
                             Grid.Row="3"
                             Style="{StaticResource CustomPrimaryButton}"
-                            Content="{DynamicResource Login}"
+                            Content="{DynamicResource Login_LoginButton}"
                             Margin="4 12 4 12" />
                     <Button x:Name="ShowForgotPasswordDialog"
                             Grid.Row="4"
                             Style="{StaticResource MaterialDesignFlatButton}"
-                            Content="{DynamicResource ForgotPassword}"
+                            Content="{DynamicResource Login_ForgotPassword}"
                             HorizontalAlignment="Center" />
                 </Grid>
 

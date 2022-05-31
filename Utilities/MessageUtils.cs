@@ -54,10 +54,16 @@ namespace WPFBakeryShopAdminV2.Utilities
             });
         }
         public static async Task<bool> ShowConfirmMessage(Border dialogContent, TextBlock titleTB, TextBlock messageTB, StackPanel confirmContent
-            , StackPanel errorContent, string title, string message)
+            , StackPanel errorContent, string title, string message, StackPanel infoContent = null)
         {
-            confirmContent.Visibility = Visibility.Visible;
-            errorContent.Visibility = Visibility.Collapsed;
+            if (infoContent != null)
+                infoContent.Visibility = Visibility.Collapsed;
+
+            if (errorContent != null)
+                errorContent.Visibility = Visibility.Collapsed;
+
+            if (confirmContent != null)
+                confirmContent.Visibility = Visibility.Visible;
 
             titleTB.Text = title;
             messageTB.Text = message;
@@ -65,10 +71,32 @@ namespace WPFBakeryShopAdminV2.Utilities
             return System.Convert.ToBoolean(result);
         }
         public static async Task ShowErrorMessage(Border dialogContent, TextBlock titleTB, TextBlock messageTB, StackPanel confirmContent
-            , StackPanel errorContent, string title, string message)
+            , StackPanel errorContent, string title, string message, StackPanel infoContent = null)
         {
-            confirmContent.Visibility = Visibility.Collapsed;
-            errorContent.Visibility = Visibility.Visible;
+            if (confirmContent != null)
+                confirmContent.Visibility = Visibility.Collapsed;
+
+            if (infoContent != null)
+                infoContent.Visibility = Visibility.Collapsed;
+
+            if (errorContent != null)
+                errorContent.Visibility = Visibility.Visible;
+
+            titleTB.Text = title;
+            messageTB.Text = message;
+            await DialogHost.Show(dialogContent);
+        }
+        public static async Task ShowInfoMessage(Border dialogContent, TextBlock titleTB, TextBlock messageTB, StackPanel confirmContent
+            , StackPanel errorContent, string title, string message, StackPanel infoContent = null)
+        {
+            if (confirmContent != null)
+                confirmContent.Visibility = Visibility.Collapsed;
+
+            if (errorContent != null)
+                errorContent.Visibility = Visibility.Collapsed;
+
+            if (infoContent != null)
+                infoContent.Visibility = Visibility.Visible;
             titleTB.Text = title;
             messageTB.Text = message;
             await DialogHost.Show(dialogContent);
@@ -82,7 +110,6 @@ namespace WPFBakeryShopAdminV2.Utilities
         public static Task ShowErrorMessageInDialog(string title, string message, IWindowManager windowManager)
         {
             return windowManager.ShowDialogAsync(new DialogViewModel(title, message, ContentType.Error));
-
         }
     }
 }

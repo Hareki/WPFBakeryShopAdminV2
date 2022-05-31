@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 
 namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
 {
@@ -21,7 +22,7 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
         }
         public string ActivatedString
         {
-            get { return Activated ? "Đã kích hoạt" : "Chưa kích hoạt"; }
+            get { return Activated ? LangStr.Get("Activated") : LangStr.Get("NotActivated"); }
         }
         public string ActivatedColor
         {
