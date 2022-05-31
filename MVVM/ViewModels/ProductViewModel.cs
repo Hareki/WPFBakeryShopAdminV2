@@ -16,6 +16,7 @@ using WPFBakeryShopAdminV2.MVVM.Models.Bodies;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
@@ -98,14 +99,14 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private async Task LoadCategoryList()
         {
             View.CategoryList.IsEnabled = false;
-            HintAssist.SetHint(View.CategoryList, "Đang tải...");
+            HintAssist.SetHint(View.CategoryList, LangStr.Get("Product_LoadingCategory"));
 
             var categoryList = Lists.CategoryList.LoadCategoryList();
             CategoryList = new BindableCollection<Category>((await categoryList));
 
             if (View != null)
                 View.CategoryList.IsEnabled = true;
-            HintAssist.SetHint(View.CategoryList, "Danh mục");
+            HintAssist.SetHint(View.CategoryList, LangStr.Get("PD_Category"));
         }
         private Task LoadDetailItemAsync(int id)
         {
@@ -185,7 +186,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             if (SelectedVariant == null) return;
 
 
-            bool confirm = await ShowConfirmMessage("Xác nhận xóa loại", $"Bạn có chắc muốn {SelectedProduct.Name} {SelectedVariant.TypeName}?");
+            bool confirm = await ShowConfirmMessage(LangStr.Get("Message_ConfirmationTitle"), LangStr.Get("Product_ConfirmDeletingVariant") +$" {SelectedProduct.Name} {SelectedVariant.TypeName}?");
             if (confirm)
             {
                 LoadingVariantVis = Visibility.Visible;
@@ -195,15 +196,15 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 if (statusCode == 200)
                 {
                     await LoadVariantsAsync(SelectedProduct.Id);
-                    ShowSuccessMessage("Xóa loại sản phẩm đã chọn thành công");
+                    ShowSuccessMessage(LangStr.Get("Product_RemoveVariant200"));
                 }
                 else if (statusCode == 404)
                 {
-                    await ShowErrorMessage("Lỗi khi xóa loại", "Loại sản phẩm muốn xóa không còn tồn tại, vui lòng làm mới dữ liệu");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("PV_EditVariantNoExists"));
                 }
                 else if (statusCode == 400)
                 {
-                    await ShowErrorMessage("Lỗi khi xóa loại", "Loại sản phẩm này đã được bán, không thể xóa");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_SoldCantBeDeleted"));
                 }
             }
             LoadingVariantVis = Visibility.Hidden;
@@ -246,12 +247,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public async Task UpdateInformationAsync()
         {
-            if (InformationHasErrors())
-            {
-                await ShowErrorMessage("Lỗi nhập liệu", "Vui lòng nhập đầy đủ thông tin và đúng định dạng");
-                return;
-            }
-
+            if (InformationHasErrors()) return;
             LoadingInfoVis = Visibility.Visible;
             ProductDetails.CategoryId = SelectedCategory.Id;
             string JSonProductInfo = StringUtils.SerializeObject(ProductDetails);
@@ -262,17 +258,17 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 case 200:
                     RefreshProductRowItemGrid(ProductDetails.ProductRowItem);
-                    ShowSuccessMessage("Cập nhật sản phẩm thành công");
+                    ShowSuccessMessage(LangStr.Get("Product_UpdateInfor200"));
                     EditingInformation = false;
                     break;
                 case 404 when ProductNotFound(responseBody):
-                    await ShowErrorMessage("Lỗi cập nhật", "Sản phẩm không còn tồn tại, vui lòng tải lại trang");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("PV_Add404Product"));
                     break;
                 case 404 when CategoryNotFound(responseBody):
-                    await ShowErrorMessage("Lỗi cập nhật", "Danh mục không còn tồn tại, vui lòng tải lại trang");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_CategoryNoExists"));
                     break;
                 case 400:
-                    await ShowErrorMessage("Lỗi cập nhật", "Tên sản phẩm đã tồn tại, vui lòng chọn tên khác");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_NameUsed"));
                     break;
             }
             LoadingInfoVis = Visibility.Hidden;
@@ -309,18 +305,18 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 int statusCode = (int)response.StatusCode;
                 if (statusCode == 201)
                 {
-                    ShowSuccessMessage("Cập nhật ảnh thành công");
+                    ShowSuccessMessage(LangStr.Get("Product_ImageAdded200"));
                     await LoadProductImagesAsync(SelectedProduct.Id);
                 }
                 else
                 {
-                    await ShowErrorMessage("Lỗi cập nhật ảnh", "Xảy ra lỗi không xác định khi cập nhật ảnh");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
                 }
             }
         }
         public async Task ConfirmDeleteImages()
         {
-            bool confirm = await ShowConfirmMessage("Xác nhận xóa", "Bạn có chắc muốn xóa các ảnh đã chọn?");
+            bool confirm = await ShowConfirmMessage(LangStr.Get("Message_ConfirmationTitle"), LangStr.Get("Product_ConfirmDeletingImage"));
             if (!confirm) return;
             await DeleteImagesAsync();
         }
@@ -341,14 +337,14 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             switch (statusCode)
             {
                 case 200:
-                    ShowSuccessMessage("Xóa ảnh thành công");
+                    ShowSuccessMessage(LangStr.Get("Product_DeleteImage200"));
                     await LoadProductImagesAsync(SelectedProduct.Id);
                     break;
                 case 404:
-                    await ShowErrorMessage("Lỗi xóa ảnh", "Ảnh muốn xóa không còn tồn tại, vui lòng tải lại trang");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_ImageNoExists"));
                     break;
                 case 400:
-                    await ShowErrorMessage("Lỗi xóa ảnh", "Ảnh muốn xóa không thuộc sản phẩm đã chọn");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_ImageNoBelong"));
                     break;
             }
         }

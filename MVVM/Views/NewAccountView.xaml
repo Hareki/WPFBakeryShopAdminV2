@@ -133,7 +133,7 @@
                     <TextBox.Text>
                         <Binding Path="PersonalAccount.LastName">
                             <Binding.ValidationRules>
-                                <validation:NotEmptyValidationRule Message="Vui lòng nhập họ và tên lót" />
+                                <validation:NotEmptyValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -153,7 +153,7 @@
                         <Binding Path="PersonalAccount.FirstName"
                                  UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <validation:NotEmptyValidationRule Message="Vui lòng nhập tên" />
+                                <validation:NotEmptyValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -173,8 +173,8 @@
                         <Binding Path="PersonalAccount.Email"
                                  UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <validation:NotEmptyValidationRule Message="Vui lòng nhập địa chỉ email" />
-                                <validation:EmailFormatValidationRule Message="Email không đúng định dạng" />
+                                <validation:NotEmptyValidationRule  />
+                                <validation:EmailFormatValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -209,8 +209,8 @@
                         <Binding Path="PersonalAccount.Phone"
                                  UpdateSourceTrigger="LostFocus">
                             <Binding.ValidationRules>
-                                <validation:NotEmptyValidationRule Message="Vui lòng nhập địa chỉ email" />
-                                <validation:PhoneFormatValidationRule Message="SDT không đúng định dạng" />
+                                <validation:NotEmptyValidationRule/>
+                                <validation:PhoneFormatValidationRule />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>

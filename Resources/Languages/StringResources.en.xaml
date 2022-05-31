@@ -3,13 +3,12 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <!--#region Messages-->
-    <sys:String x:Key="Message_ConfirmationTitle">Confirm</sys:String>
-    <sys:String x:Key="Message_ErrorTitle">An Error Occured!</sys:String>
+    <sys:String x:Key="Message_ConfirmationTitle">Confirmation</sys:String>
+    <sys:String x:Key="Message_ErrorTitle">Error</sys:String>
     <sys:String x:Key="Message_InfoTitle">Notification</sys:String>
     <sys:String x:Key="DialogButtonConfirm">Confirm</sys:String>
     <sys:String x:Key="DialogButtonCancel">Cancel</sys:String>
     <sys:String x:Key="DialogButtonOkay">Okay</sys:String>
-
     <!--#endregion-->
 
     <!--#region Login View-->
@@ -194,5 +193,82 @@
 
     <!--#region Validation -->
     <sys:String x:Key="Validation_RequiredField">Please fill in this field</sys:String>
+    <sys:String x:Key="Validation_EmailFormat">Pleaser enter a valid email</sys:String>
+    <sys:String x:Key="Validation_PhoneFormat">Pleaser enter a valid phone number</sys:String>
     <!--#endregion-->
+
+    <sys:String x:Key="UnexpectedError">An unexpected error occured during the process, please try again later</sys:String>
+    
+    <!--#region Bill -->
+    <sys:String x:Key="Order_UpdateStatus200">Updated status successfully</sys:String>
+    <sys:String x:Key="Order_ConfirmCancelling">Are you sure want to cancel this order? This action can't be undone</sys:String>
+    <sys:String x:Key="Order_Cancel200">Canceled order successfully</sys:String>
+    <sys:String x:Key="Order_Cancel400">Can't cancel the order at this state</sys:String>
+    <!--#endregion-->
+
+    <!--#region Login -->
+    <sys:String x:Key="Login_EmailPasswordIncorrect">Your email or password is incorrect</sys:String>
+    <sys:String x:Key="Login_NotAuthorized">The account is not authorized to access</sys:String>
+    <!--#endregion-->
+
+    <!--#region New Account -->
+    <sys:String x:Key="NA_EmailSent">Please check your email to activate your account</sys:String>
+    <sys:String x:Key="NA_400">Failed to create account, the email you entered is already in use</sys:String>
+    <!--#endregion-->
+
+    <!--#region New Product -->
+    <sys:String x:Key="NP_200">Added product successfully</sys:String>
+    <sys:String x:Key="NP_400">Failed to add product, the product name is already in use</sys:String>
+    <sys:String x:Key="NP_404">Failed to add product, the selected category is no longer exists, please reload the product page to gain latest information</sys:String>
+    <!--#endregion-->
+
+    <!--#region Personal Account -->
+    <sys:String x:Key="PA_ImageTooLarge">Image size is too large, please select another image</sys:String>
+    <sys:String x:Key="PA_EmailInUse">Failed to update your account, the email you entered is already in use</sys:String>
+    <sys:String x:Key="PA_Update200">Update your account successfully</sys:String>
+    <sys:String x:Key="PA_ChangePW200">Changed password successfully, you are about to be logged out</sys:String>
+    <sys:String x:Key="PA_CurrentPWInCorrect">Current password is incorrect</sys:String>
+
+    <sys:String x:Key="PA_EmptyCurrentPW">Please enter your current password</sys:String>
+    <sys:String x:Key="PA_EmptyNewPW">>Please enter your new password</sys:String>
+    <sys:String x:Key="PA_EmptyConfirmNewPW">>Please enter confirm new password</sys:String>
+    <sys:String x:Key="PA_TooFewChars">Password must have at least 4 characters</sys:String>
+    <sys:String x:Key="PA_ConfirmNotMatch">Confirm password is not match</sys:String>
+    <!--#endregion-->
+
+    <!--#region Product Variant -->
+    <sys:String x:Key="PV_UpdateTitle">Update variant</sys:String>
+    <sys:String x:Key="PV_AddTitle">Add variant</sys:String>
+
+    <sys:String x:Key="PV_PriceSmaller">Price must be greater than cost</sys:String>
+    <sys:String x:Key="PV_Add200">Added new variant successfully</sys:String>
+
+    <sys:String x:Key="PV_Add404Product">This product is no longer exist, please reload products page to gain latest information</sys:String>
+    <sys:String x:Key="PV_Add404Type">This type is no longer exist, please reload products page to gain latest information</sys:String>
+    <sys:String x:Key="PV_Add400CombinationExists">Variant having this combination of product and type already exists</sys:String>
+
+    <sys:String x:Key="PV_Edit200">This product is no longer exist, please reload products page to gain latest information</sys:String>
+    <sys:String x:Key="PV_EditVariantNoExists">This variant is no longer exist, please reload products page to gain latest information</sys:String>
+    <!--#endregion-->
+
+    <!--#region Product -->
+    <sys:String x:Key="Product_LoadingCategory">Loading...</sys:String>
+    <sys:String x:Key="Product_ConfirmDeletingVariant">Are you sure want to delete</sys:String>
+    <sys:String x:Key="Product_RemoveVariant200">Variant deleted successfully</sys:String>
+    <sys:String x:Key="Product_SoldCantBeDeleted">Sold variant can't be deleted</sys:String>
+
+    <sys:String x:Key="Product_UpdateInfor200">Product information updated successfully</sys:String>
+    <sys:String x:Key="Product_CategoryNoExists">This category is no longer exist, please reload products page to gain latest information</sys:String>
+    <sys:String x:Key="Product_NameUsed">Product name is already in use, please try another name</sys:String>
+
+    <sys:String x:Key="Product_ImageAdded200">Image(s) added successfully</sys:String>
+    <sys:String x:Key="Product_NameUsed">Product name is already in use, please try another name</sys:String>
+    <sys:String x:Key="Product_ConfirmDeletingImage">Are you sure wnat to delete selected image(s)?</sys:String>
+
+    <sys:String x:Key="Product_ImageNoExists">The selected image(s) is no longer exist, please reload products page to gain latest information </sys:String>
+    <sys:String x:Key="Product_DeleteImage200">Image(s) deleted successfully</sys:String>
+    <sys:String x:Key="Product_ConfirmDeletingImage">Are you sure wnat to delete selected image(s)?</sys:String>
+    <sys:String x:Key="Product_ImageNoBelong">Selected image(s) doesn't belong to selected product, cant delete</sys:String>
+    <!--#endregion-->
+
 </ResourceDictionary>

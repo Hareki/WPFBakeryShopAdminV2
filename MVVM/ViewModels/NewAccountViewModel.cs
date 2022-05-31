@@ -11,6 +11,7 @@ using WPFBakeryShopAdminV2.LocalValidationRules;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
@@ -49,13 +50,13 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 case 201:
                     ResetFields();
-                    ShowSuccessMessage("Vui lòng kiểm tra email đã đăng ký để kích hoạt tài khoản");
+                    ShowSuccessMessage(LangStr.Get("NA_EmailSent"));
                     break;
                 case 400:
-                    await ShowErrorMessage("Lỗi tạo tài khoản", "Tạo tài khoản thất bại, email đã được sử dụng");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("NA_400"));
                     break;
                 default:
-                    await ShowErrorMessage("Lỗi tạo tài khoản", "Xảy ra lỗi không xác định khi tạo tài khoản");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
                     break;
             }
             LoadingPageVis = Visibility.Hidden;

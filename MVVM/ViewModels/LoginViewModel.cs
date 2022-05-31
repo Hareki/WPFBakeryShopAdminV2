@@ -14,6 +14,7 @@ using WPFBakeryShopAdminV2.MVVM.Models.Bodies;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
@@ -54,7 +55,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 }
                 else
                 {
-                    ShowFailMessage("Phiên đăng nhập quá hạn");
+                    ShowErrorMessage("Phiên đăng nhập quá hạn");
                     LoadingPageVis = Visibility.Hidden;
                 }
 
@@ -98,18 +99,17 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 }
                 else
                 {
-                    ShowFailMessage("Tài khoản không đủ quyền truy cập");
+                    ShowErrorMessage(LangStr.Get("Login_NotAuthorized"));
                 }
 
             }
             else if (statusCode == 400 || statusCode == 401)
             {
-                ShowFailMessage("Email hoặc mật khẩu không đúng");
+                ShowErrorMessage(LangStr.Get("Login_EmailPasswordIncorrect"));
             }
             else
             {
-                ShowFailMessage("Xảy ra lỗi khi đăng nhập");
-
+                ShowErrorMessage(LangStr.Get("UnexpectedError"));
             }
             LoadingPageVis = Visibility.Hidden;
         }
@@ -139,36 +139,9 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         #endregion
 
         #region Showing Messages
-        private void ShowSuccessMessage(string message)
+        private void ShowErrorMessage(string message)
         {
-            View.Dispatcher.Invoke(() =>
-            {
-                View.GreenMessage.Text = message;
-
-                GreenSB.MessageQueue?.Enqueue(
-                View.GreenContent,
-                null,
-                null,
-                null,
-                false,
-                true,
-                TimeSpan.FromSeconds(3));
-            });
-        }
-        private void ShowFailMessage(string message)
-        {
-            View.Dispatcher.Invoke(() =>
-            {
-                View.RedMessage.Text = message;
-                RedSB.MessageQueue?.Enqueue(
-                View.RedContent,
-                null,
-                null,
-                null,
-                false,
-                true,
-                TimeSpan.FromSeconds(3));
-            });
+            MessageUtils.ShowSnackBarMessage(View, View.RedMessage, View.RedSB, View.RedContent, message);
         }
         #endregion
 

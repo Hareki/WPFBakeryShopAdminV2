@@ -13,7 +13,7 @@ using WPFBakeryShopAdminV2.MVVM.Models.Bodies;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
-using Lang = WPFBakeryShopAdminV2.Utilities.Language;
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
@@ -87,14 +87,14 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 FileInfo fi = new FileInfo(open.FileName);
                 float fileSizeInMb = (float)fi.Length / 1000000;
-                if (fileSizeInMb <= 1)
+                if (fileSizeInMb <= 10)
                 {
                     UserImageUrl = open.FileName;
                 }
                 else
                 {
                     await Task.Delay(10);
-                    await ShowErrorMessage("Lỗi cập nhật ảnh", Lang.Get("Dashboard"));
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"),LangStr.Get("PA_ImageTooLarge"));
                 }
             }
         }
@@ -124,7 +124,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             }
             else if (statusCode == 400)
             {
-                await ShowErrorMessage("Lỗi cập nhật thông tin", "Địa chỉ email đã được sử dụng");
+                await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("PA_EmailInUse"));
                 return false;
             }
             return false;
@@ -142,12 +142,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 {
                     return true;
                 }
-                else if (statusCode == 400)
+                else 
                 {
-                    await ShowErrorMessage("Lỗi cập nhật ảnh", "Cập nhật ảnh thất bại");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
                     return false;
                 }
-                return false;
             }
             else
             {
@@ -173,7 +172,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             else
             {
                 await _eventAggregator.PublishOnUIThreadAsync(PersonalAccount);
-                ShowSuccessMessage("Cập nhật thông tin thành công");
+                ShowSuccessMessage(LangStr.Get("PA_Update200"));
             }
 
             Editing = false;
@@ -185,7 +184,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             string errorMessage = GetPasswordErrorMessage();
             if (!string.IsNullOrEmpty(errorMessage))
             {
-                await ShowErrorMessage("Lỗi đổi mật khẩu", errorMessage);
+                await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), errorMessage);
                 return;
             }
 
@@ -195,12 +194,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             if (statusCode == 200)
             {
                 ClearPasswordBox();
-                await ShowLogoutMessage("Đổi mật khẩu thành công, chuẩn bị đăng xuất...");
+                await ShowLogoutMessage(LangStr.Get("PA_ChangePW200"));
                 RestConnection.LogOut();
             }
             else if (statusCode == 400)
             {
-                await ShowErrorMessage("Lỗi đổi mật khẩu", "Mật khẩu hiện tại không đúng");
+                await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("PA_CurrentPWInCorrect"));
             }
         }
         private void ClearPasswordBox()
@@ -210,16 +209,16 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private string GetPasswordErrorMessage()
         {
             if (string.IsNullOrEmpty(ChangePasswordBody.CurrentPassword))
-                return "Mật hiện tại không được để trống";
+                return LangStr.Get("PA_EmptyCurrentPW");
             if (string.IsNullOrEmpty(ChangePasswordBody.NewPassword))
-                return "Mật mới không được để trống";
+                return LangStr.Get("PA_EmptyNewPW");
             if (string.IsNullOrEmpty(ChangePasswordBody.ConfirmNewPassword))
-                return "Xác nhận khẩu mới không được để trống";
+                return LangStr.Get("PA_EmptyConfirmNewPW");
             if (ChangePasswordBody.NewPassword.Length < 4)
-                return "Mật khẩu mới phải tối thiểu 4 ký tự";
+                return LangStr.Get("PA_TooFewChars");
             if (!ChangePasswordBody.NewPassword.Equals(ChangePasswordBody.ConfirmNewPassword))
             {
-                return "Xác nhận mật khẩu mới không khớp";
+                return LangStr.Get("PA_ConfirmNotMatch");
             }
             else
             {
@@ -244,11 +243,6 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         {
             await MessageUtils.ShowErrorMessage(View.DialogContent, View.ErrorTitleTB, View.ErrorMessageTB,
                    View.ConfirmContent, View.ErrorContent, title, message);
-        }
-        private async Task<bool> ShowConfirmMessage(string title, string message)
-        {
-            return await MessageUtils.ShowConfirmMessage(View.DialogContent, View.ConfirmTitleTB, View.ConfirmMessageTB, View.ConfirmContent, View.ErrorContent,
-               title, message);
         }
         private void ShowSuccessMessage(string message)
         {

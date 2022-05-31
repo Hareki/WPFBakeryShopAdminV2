@@ -10,7 +10,7 @@ using WPFBakeryShopAdminV2.LocalValidationRules;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
-
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
     public class NewProductViewModel : Screen
@@ -30,26 +30,23 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             _windowManager = windowManager;
             CategoryList = categoryList;
         }
-        protected override Task OnActivateAsync(CancellationToken cancellationToken)
+        protected override async Task OnActivateAsync(CancellationToken cancellationToken)
         {
             _restClient = RestConnection.ManagementRestClient;
             ProductDetails = new ProductDetails();
-            return Task.CompletedTask;
+
+            if (CategoryList.Count > 0)
+                SelectedCategory = CategoryList[0];
+            else
+            {
+                await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), "Không tìm thấy danh mục nào, vui lòng thử lại sau");
+                CancelAdding();
+            }
         }
         public async Task AddNewProduct()
         {
 
-            if (SelectedCategory == null)
-            {
-                await ShowErrorMessage("Lỗi tải danh mục", "Không tìm thấy danh mục nào, vui lòng thử lại sau");
-                CancelAdding();
-                return;
-            }
-            if (HasErrors())
-            {
-                await ShowErrorMessage("Lỗi nhập liệu", "Vui lòng nhập đầy đủ thông tin và đúng định dạng");
-                return;
-            }
+            if (HasErrors()) return;
 
             LoadingPageVis = Visibility.Visible;
             ProductDetails.CategoryId = SelectedCategory.Id;
@@ -62,13 +59,13 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                     await _productViewModel.LoadLastPage();
                     _productViewModel.FocusProductRowItem(ProductDetails.ProductRowItem);
                     ResetFields();
-                    ShowSuccessMessage("Thêm sản phẩm thành công");
+                    ShowSuccessMessage(LangStr.Get("NP_200"));
                     break;
                 case 400:
-                    await ShowErrorMessage("Xảy ra lỗi", "Tên sản phẩm đã tồn tại");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("NP_400"));
                     break;
                 case 404:
-                    await ShowErrorMessage("Xảy ra lỗi", "Danh mục không còn tồn tại, vui lòng khởi động lại hộp thoại này để nhận thông tin danh mục mới nhất");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("NP_404"));
                     break;
             }
             LoadingPageVis = Visibility.Hidden;

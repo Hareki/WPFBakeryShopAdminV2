@@ -10,6 +10,7 @@ using WPFBakeryShopAdminV2.Interfaces;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
@@ -89,11 +90,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 BillDetails.CanCancel = false;//Hard code, do nếu muốn cái này thay đổi tự động theo logic của webservice thì phải load lại từ db
                 NotifyOfPropertyChange(() => BillDetails); ////Notify các trạng thái enable của 2 nút cập nhật
                 SetBindingButtonAppearance(BillDetails.StatusId);
-                MessageUtils.ShowSnackBarMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, "Cập nhật trạng thái đơn hàng thành công");
+                ShowSuccessMessage(LangStr.Get("Order_UpdateStatus200"));
             }
             else
             {
-                await ShowErrorMessage("Lỗi cập nhật", "Đã xảy ra lỗi không xác định trong quá trình cập nhật trạng thái đơn hàng");
+                await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
             }
             UpdatingStatusVis = Visibility.Hidden;
 
@@ -101,7 +102,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         public async Task CancelOrder()
         {
 
-            bool confirm = await ShowConfirmMessage("Xác nhận hủy đơn", "Bạn có chắc muốn hủy đơn hàng này? Quá trình này không thể đảo ngược");
+            bool confirm = await ShowConfirmMessage(LangStr.Get("Message_ConfirmationTitle"), LangStr.Get("Order_ConfirmCancelling"));
             if (confirm)
             {
                 UpdatingStatusVis = Visibility.Visible;
@@ -115,13 +116,13 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                         BillDetails.CanCancel = false;//Hard code, do nếu muốn cái này thay đổi tự động theo logic của webservice thì phải load lại từ db
                         NotifyOfPropertyChange(() => BillDetails); //Notify các trạng thái enable của 2 nút cập nhật
                         SetBindingButtonAppearance(BillDetails.StatusId);
-                        ShowSuccessMessage("Hủy đơn hàng thành công");
+                        ShowSuccessMessage(LangStr.Get("Order_Cancel200"));
                         break;
                     case 400:
-                        await ShowErrorMessage("Lỗi hủy đơn", "Không thể hủy đơn hàng ở trạng thái này");
+                        await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Order_Cancel400"));
                         break;
                     default:
-                        await ShowErrorMessage("Lỗi hủy đơn", "Đã xảy ra lỗi không xác định trong quá trình hủy đơn hàng");
+                        await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
                         break;
                 }
                 UpdatingStatusVis = Visibility.Hidden;

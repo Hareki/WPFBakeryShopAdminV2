@@ -11,6 +11,7 @@ using WPFBakeryShopAdminV2.MVVM.Models.Bodies;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
@@ -50,7 +51,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         #region Events
         public async Task ConfirmDeleteImages()
         {
-            bool confirm = await ShowConfirmMessage("Xác nhận xóa", "Bạn có chắc muốn xóa các ảnh đã chọn?");
+            bool confirm = await ShowConfirmMessage(LangStr.Get("Message_ConfirmationTitle"), LangStr.Get("Product_ConfirmDeletingImage"));
             if (!confirm) return;
             await DeleteImagesAsync();
 
@@ -78,10 +79,10 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 
                     break;
                 case 404:
-                    await ShowErrorMessage("Lỗi xóa ảnh", "Ảnh muốn xóa không còn tồn tại, vui lòng tải lại trang");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_ImageNoExists"));
                     break;
                 case 400:
-                    await ShowErrorMessage("Lỗi xóa ảnh", "Ảnh muốn xóa không thuộc sản phẩm đã chọn");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_ImageNoBelong"));
                     break;
             }
         }
@@ -112,13 +113,13 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 int statusCode = (int)response.StatusCode;
                 if (statusCode == 201)
                 {
-                    ShowSuccessMessage("Cập nhật ảnh thành công");
+                    ShowSuccessMessage(LangStr.Get("Product_ImageAdded200"));
                     await _productViewModel.LoadProductImagesAsync(productId);
                     RowItemImages = _productViewModel.RowItemImages;
                 }
                 else
                 {
-                    await ShowErrorMessage("Lỗi cập nhật ảnh", "Xảy ra lỗi không xác định khi cập nhật ảnh");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
                 }
             }
         }

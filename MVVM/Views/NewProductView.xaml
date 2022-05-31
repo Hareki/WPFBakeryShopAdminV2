@@ -121,7 +121,7 @@
                         <TextBox.Text>
                             <Binding Path="ProductDetails.Name">
                                 <Binding.ValidationRules>
-                                    <validation:NotEmptyValidationRule Message="Vui lòng nhập tên sản phẩm" />
+                                    <validation:NotEmptyValidationRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
@@ -144,7 +144,7 @@
                     </ComboBox>
 
                     <TextBox x:Name="txtIngredients"
-                        Grid.Column="0"
+                             Grid.Column="0"
                              Grid.Row="3"
                              Grid.ColumnSpan="2"
                              materialDesign:HintAssist.Hint="{DynamicResource PD_ReIngredients}"
@@ -154,14 +154,14 @@
                         <TextBox.Text>
                             <Binding Path="ProductDetails.Ingredients">
                                 <Binding.ValidationRules>
-                                    <validation:NotEmptyValidationRule Message="Vui lòng nhập nguyên liệu" />
+                                    <validation:NotEmptyValidationRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>
 
                     <TextBox x:Name="txtAllergens"
-                        Grid.Column="2"
+                             Grid.Column="2"
                              Grid.Row="3"
                              materialDesign:HintAssist.Hint="{DynamicResource PD_Allergens}"
                              MaxLength="{StaticResource AllergensMaxLength}"
@@ -171,7 +171,7 @@
                         <TextBox.Text>
                             <Binding Path="ProductDetails.Allergens">
                                 <Binding.ValidationRules>
-                                    <validation:NotEmptyValidationRule Message="Vui lòng nhập thành phần dị ứng" />
+                                    <validation:NotEmptyValidationRule />
                                 </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>

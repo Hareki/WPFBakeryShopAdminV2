@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Controls;
 using WPFBakeryShopAdminV2.Utilities;
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 
 namespace WPFBakeryShopAdminV2.LocalValidationRules
 {
@@ -13,7 +14,7 @@ namespace WPFBakeryShopAdminV2.LocalValidationRules
             {
                 return ValidationResult.ValidResult;
             }
-            return new ValidationResult(false, Message ?? "Phone number is not valid");
+            return new ValidationResult(false, Message ?? LangStr.Get("Validation_PhoneFormat"));
         }
     }
 }

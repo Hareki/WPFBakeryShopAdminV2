@@ -5,6 +5,7 @@ using System.Windows;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
@@ -52,11 +53,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             base.OnViewReady(view);
             if (EditMode)
             {
-                View.DialogMainTitle.Text = "Sửa loại sản phẩm";
+                View.DialogMainTitle.Text = LangStr.Get("PV_UpdateTitle");
             }
             else
             {
-                View.DialogMainTitle.Text = "Thêm loại sản phẩm";
+                View.DialogMainTitle.Text = LangStr.Get("PV_AddTitle");
             }
         }
 
@@ -67,7 +68,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             ProductVariant.TypeId = SelectedProductType.Id;
             if (ProductVariant.Price <= ProductVariant.Cost)
             {
-                await ShowErrorMessage(null, "Giá bán phải lớn hơn giá gốc");
+                await ShowErrorMessage(null, LangStr.Get("PV_PriceSmaller"));
                 return;
             }
             LoadingPageVis = Visibility.Visible;
@@ -110,18 +111,18 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 case 200:
                     await _productViewModel.LoadVariantsAsync(ProductVariant.ProductId);
-                    ShowSuccessMessage("Thêm loại sản phẩm thành công");
+                    ShowSuccessMessage(LangStr.Get("PV_Add200"));
                     _productViewModel.FocusProductVariant(null);
                     ResetFields();
                     break;
                 case 404 when ProducIdNotFound(responseBody):
-                    await ShowErrorMessage("Xảy ra lỗi", "Sản phẩm này không còn tồn tại, vui lòng tải lại trang");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("PV_Add404Product"));
                     break;
                 case 404 when ProductTypeNotFound(responseBody):
-                    await ShowErrorMessage("Xảy ra lỗi", "Loại sản phẩm này không còn tồn tại, vui lòng tải lại trang");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("PV_Add404Type"));
                     break;
                 case 400 when VariantAlreadyExists(responseBody):
-                    await ShowErrorMessage("Xảy ra lỗi", "Biến thể với sản phẩm và loại sản phẩm này đã tồn tại");
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("PV_Add400CombinationExists"));
                     break;
             }
         }
@@ -141,20 +142,20 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 case 200:
                     await _productViewModel.LoadVariantsAsync(ProductVariant.ProductId);
-                    ShowSuccessMessage("Cập nhật biến thể thành công");
+                    ShowSuccessMessage(LangStr.Get("PV_Edit200"));
                     Cancel();
                     break;
                 case 404 when ProducIdNotFound(responseBody):
-                    await ShowErrorMessage(null, "Sản phẩm này không còn tồn tại, vui lòng tải lại trang");
+                    await ShowErrorMessage(null, LangStr.Get("PV_Add404Product"));
                     break;
                 case 404 when ProductTypeNotFound(responseBody):
-                    await ShowErrorMessage(null, "Loại sản phẩm này không còn tồn tại, vui lòng tải lại trang");
+                    await ShowErrorMessage(null, LangStr.Get("PV_Add404Type"));
                     break;
                 case 400 when VariantAlreadyExists(responseBody):
-                    await ShowErrorMessage(null, "Biến thể với sản phẩm và loại sản phẩm này đã tồn tại");
+                    await ShowErrorMessage(null, LangStr.Get("PV_Add400CombinationExists"));
                     break;
                 case 400 when VariantIdNotFound(responseBody):
-                    await ShowErrorMessage(null, "Biến thể này không còn tồn tại, vui lòng tải lại trang");
+                    await ShowErrorMessage(null, LangStr.Get("PV_EditVariantNoExists"));
                     break;
             }
 
@@ -224,7 +225,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         #region Show Messages
         private async Task ShowErrorMessage(string title, string message)
         {
-            MessageUtils.ShowErrorMessageInDialog(title, message, _windowManager);
+            await MessageUtils.ShowErrorMessageInDialog(title, message, _windowManager);
         }
         private void ShowSuccessMessage(string message)
         {

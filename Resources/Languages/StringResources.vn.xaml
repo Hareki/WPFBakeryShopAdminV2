@@ -193,6 +193,16 @@
 
     <!--#region Validation -->
     <sys:String x:Key="Validation_RequiredField">Vui lòng điền thông tin này</sys:String>
+    <sys:String x:Key="Validation_EmailFormat">Vui lòng nhập email hợp lệ</sys:String>
+    <sys:String x:Key="Validation_PhoneFormat">Vui lòng nhập số điện thoại hợp lệ</sys:String>
     <!--#endregion-->
 
+    <sys:String x:Key="UnexpectedError">Lỗi không xác định xảy ra trong quá trình thực hiện, vui lòng thử lại sau</sys:String>
+
+    <!--#region Bill -->
+    <sys:String x:Key="Order_UpdateStatus200">Cập nhật trạng thái thành công</sys:String>
+    <sys:String x:Key="Order_ConfirmCancelling">Bạn có chắc muốn hủy đơn hàng này? Tiến trình này không thể đảo ngược</sys:String>
+    <sys:String x:Key="Order_Cancel200">Hủy đơn hàng thành công</sys:String>
+    <sys:String x:Key="Order_Cancel400">Không thể hủy đơn hàng ở trạng thái này</sys:String>
+    <!--#endregion-->
 </ResourceDictionary>
