@@ -1,5 +1,6 @@
 ﻿using System;
 using WPFBakeryShopAdminV2.Utilities;
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 
 namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
 {
@@ -16,10 +17,10 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
             {
                 switch (StatusId)
                 {
-                    case 1: return "Chờ duyệt";
-                    case 2: return "Đang giao";
-                    case 3: return "Đã giao";
-                    case 4: return "Đã hủy";
+                    case 1: return LangStr.Get("Pending");
+                    case 2: return LangStr.Get("Shipping");
+                    case 3: return LangStr.Get("Shipped");
+                    case 4: return LangStr.Get("Cancelled");
                     default:
                         {
                             Console.WriteLine("ID: " + StatusId);

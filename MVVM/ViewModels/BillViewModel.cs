@@ -83,6 +83,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         {
             UpdatingStatusVis = Visibility.Visible;
             var respone = await RestConnection.ExecuteRequestAsync(_restClient, Method.Put, $"orders/{BillDetails.Id}/status/update");
+            UpdatingStatusVis = Visibility.Hidden;
             if ((int)respone.StatusCode == 200)
             {
                 BillDetails.StatusId++;
@@ -96,7 +97,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
             }
-            UpdatingStatusVis = Visibility.Hidden;
+            
 
         }
         public async Task CancelOrder()
@@ -108,6 +109,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 UpdatingStatusVis = Visibility.Visible;
                 var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Put, $"orders/{BillDetails.Id}/cancel");
                 int statusCode = (int)response.StatusCode;
+                UpdatingStatusVis = Visibility.Hidden;
                 switch (statusCode)
                 {
                     case 200:
@@ -125,7 +127,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                         await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
                         break;
                 }
-                UpdatingStatusVis = Visibility.Hidden;
+                
             }
         }
         #endregion
@@ -168,22 +170,22 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             switch (statusId)
             {
                 case 1:
-                    text = "Chờ duyệt";
+                    text = LangStr.Get("Pending");
                     background = Utilities.Constants.PENDING_COLOR;
                     imageUrl = "/Resources/Images/pending-white.png";
                     break;
                 case 2:
-                    text = "Đang giao";
+                    text = LangStr.Get("Shipping");
                     background = Utilities.Constants.SHIPPING_COLOR;
                     imageUrl = "/Resources/Images/shipping-white.png";
                     break;
                 case 3:
-                    text = "Đã giao";
+                    text = LangStr.Get("Shipped");
                     background = Utilities.Constants.SHIPPED_COLOR;
                     imageUrl = "/Resources/Images/shipped-white.png";
                     break;
                 case 4:
-                    text = "Đã hủy";
+                    text = LangStr.Get("Cancelled");
                     background = Utilities.Constants.CANCELLED_COLOR;
                     imageUrl = "/Resources/Images/cancelled-white.png";
                     break;

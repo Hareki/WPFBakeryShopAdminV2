@@ -55,8 +55,8 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 }
                 else
                 {
-                    ShowErrorMessage("Phiên đăng nhập quá hạn");
                     LoadingPageVis = Visibility.Hidden;
+                    ShowErrorMessage("Phiên đăng nhập quá hạn");
                 }
 
             }
@@ -84,6 +84,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 (client, Method.Post, "authenticate", requestBody, "application/json");
 
             int statusCode = (int)response.StatusCode;
+            
             if (statusCode == 200)
             {
                 var tokenJSon = response.Content;

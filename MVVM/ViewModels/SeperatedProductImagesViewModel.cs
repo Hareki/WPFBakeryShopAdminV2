@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using WPFBakeryShopAdminV2.MVVM.Models.Bodies;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
@@ -23,6 +24,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private readonly RestClient _restClient;
         private string _productName;
         private string _totalImages;
+        private Visibility _loadingPageVis = Visibility.Hidden;
 
         #region Base
         public SeperatedProductImagesViewModel(ProductViewModel productViewModel,
@@ -58,6 +60,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private async Task DeleteImagesAsync()
         {
+            LoadingPageVis = Visibility.Visible;
             List<ProductImage> list = _productViewModel.ImagesGrid.SelectedItems.Cast<ProductImage>().ToList();
 
             DeleteImagesBody deleteImagesBody = new DeleteImagesBody
@@ -70,6 +73,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Delete, $"products/{productId}/images", requestBody, "application/json");
 
             int statusCode = (int)response.StatusCode;
+            LoadingPageVis = Visibility.Hidden;
             switch (statusCode)
             {
                 case 200:
@@ -85,6 +89,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_ImageNoBelong"));
                     break;
             }
+            
         }
         public void RowItemImages_SelectionChanged()
         {
@@ -104,6 +109,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             var images = new List<KeyValuePair<string, string>>();
             if ((bool)open.ShowDialog())
             {
+                LoadingPageVis = Visibility.Visible;
                 foreach (string element in open.FileNames)
                 {
                     images.Add(new KeyValuePair<string, string>("images", element));
@@ -111,6 +117,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 int productId = _productViewModel.SelectedProduct.Id;
                 var response = await RestConnection.ExecuteFileRequestAsync(_restClient, Method.Post, $"products/{productId}/images", images);
                 int statusCode = (int)response.StatusCode;
+                LoadingPageVis = Visibility.Hidden;
                 if (statusCode == 201)
                 {
                     ShowSuccessMessage(LangStr.Get("Product_ImageAdded200"));
@@ -121,6 +128,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 {
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
                 }
+                
             }
         }
         #endregion
@@ -178,6 +186,15 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 _totalImages = value;
                 NotifyOfPropertyChange(() => TotalImages);
+            }
+        }
+
+        public Visibility LoadingPageVis
+        {
+            get => _loadingPageVis; set
+            {
+                _loadingPageVis = value;
+                NotifyOfPropertyChange(() => LoadingPageVis);
             }
         }
     }

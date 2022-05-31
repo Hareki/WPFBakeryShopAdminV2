@@ -80,7 +80,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         public void LanguageList_SelectionChanged()
         {
             Utilities.Language.SwitchLanguage(View.LanguageList.SelectedIndex);
-            MessageUtils.ShowInfoMessageInDialog(LangStr.Get("Message_ConfirmationTitle"), LangStr.Get("Main_LanguageReminder"), _windowManager);
+            MessageUtils.ShowInfoMessageInDialog(LangStr.Get("Message_InfoTitle"), LangStr.Get("Main_LanguageReminder"), _windowManager);
         }
         #endregion
 
@@ -144,6 +144,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 _personalAccount = value;
                 SelectedLanguage = LanguageList.First(s => s.LangKey == value.LangKey);
+                Utilities.Language.SwitchLanguage(View.LanguageList.SelectedIndex);
                 NotifyOfPropertyChange(() => PersonalAccount);
             }
         }

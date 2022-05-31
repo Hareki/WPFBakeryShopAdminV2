@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WPFBakeryShopAdminV2.Interfaces;
-
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 namespace WPFBakeryShopAdminV2.Utilities
 {
     public class Pagination
@@ -59,7 +59,7 @@ namespace WPFBakeryShopAdminV2.Utilities
         {
             int start = PageSize * CurrentPage + 1;
             int end = CurrentPage == MaxPageIndex ? TotalCount : PageSize * (CurrentPage + 1);
-            PageIndicator = $"{start} - {end} của {TotalCount}";
+            PageIndicator = $"{start} - {end} {LangStr.Get("of")} {TotalCount}";
         }
         public async Task LoadFirstPage()
         {

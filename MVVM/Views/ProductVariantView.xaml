@@ -123,7 +123,6 @@
                         VerticalAlignment="Center">
                 <ToggleButton x:Name="ProductVariant_Available"
                               Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                              ToolTip="MaterialDesignSwitchToggleButton"
                               IsChecked="True"
                               HorizontalAlignment="Left"
                               Margin="0 0 0 30" />

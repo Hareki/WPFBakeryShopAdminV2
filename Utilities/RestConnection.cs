@@ -8,11 +8,13 @@ namespace WPFBakeryShopAdminV2.Utilities
 {
     public class RestConnection
     {
-        public static readonly string ADMIN_BASE_CONNECTION_STRING = "http://localhost:8080/api/admin/";
-        public static readonly string ACCOUNT_BASE_CONNECTION_STRING = "http://localhost:8080/api/account/";
-        public static readonly string AUTHENTICATE_BASE_CONNECTION_STRING = "http://localhost:8080/api/";
-        public static readonly string PUBLIC_BASE_CONNECTION_STRING = "http://localhost:8080/api/public";
-        //public static readonly string AUTHENTICATE_BASE_CONNECTION_STRING = "https://bakeryshop-web-service.herokuapp.com/api/";
+      //  private static readonly string BASE_CONNECTION_STRING = "http://localhost:8080/api/public";
+        private static readonly string BASE_CONNECTION_STRING = "https://bakeryshop-web-service.herokuapp.com";
+        public static readonly string ADMIN_BASE_CONNECTION_STRING = BASE_CONNECTION_STRING + "/api/admin/";
+        public static readonly string ACCOUNT_BASE_CONNECTION_STRING = BASE_CONNECTION_STRING + "/api/account/";
+        public static readonly string AUTHENTICATE_BASE_CONNECTION_STRING = BASE_CONNECTION_STRING + "/api/";
+        public static readonly string PUBLIC_BASE_CONNECTION_STRING = BASE_CONNECTION_STRING + "/api/public";
+
 
         private static RestClient _managementRestClient;
         private static RestClient _accountRestClient;

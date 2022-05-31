@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFBakeryShopAdminV2.MVVM.Views"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:converter="clr-namespace:WPFBakeryShopAdminV2.Converters"
         xmlns:cal="http://www.caliburnproject.org"
         xmlns:viewmodels="clr-namespace:WPFBakeryShopAdminV2.MVVM.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewmodels:SeperatedProductImagesViewModel}"
@@ -17,6 +18,9 @@
         Height="600"
         TextElement.FontSize="15"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+    <Window.Resources>
+        <converter:ReverseVisibilityToBoolConverter x:Key="reverseVisToBool" />
+    </Window.Resources>
     <Grid>
         <Border Padding="5"
                 CornerRadius="12">
@@ -34,6 +38,20 @@
                     </Grid.ColumnDefinitions>
 
 
+                    <Border VerticalAlignment="Stretch"
+                            HorizontalAlignment="Stretch"
+                            Grid.Column="0"
+                            Grid.Row="0"
+                            Grid.ColumnSpan="12"
+                            Grid.RowSpan="6"
+                            Background="{StaticResource LoadingBackground}"
+                            Panel.ZIndex="3"
+                            Visibility="{Binding Path=LoadingPageVis}">
+                        <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                                     Value="0"
+                                     IsIndeterminate="True" />
+                    </Border>
+                    
                     <StackPanel Grid.Row="0"
                                 Grid.Column="0"
                                 Grid.ColumnSpan="2"

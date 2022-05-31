@@ -41,7 +41,6 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             if (EditMode)
             {
                 View.DummyId.Visibility = Visibility.Hidden;
-
             }
             else
             {

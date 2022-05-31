@@ -193,6 +193,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 
                 var result = await RestConnection.ExecuteRequestAsync(_restClient, Method.Delete, $"variants/{SelectedVariant.Id}");
                 int statusCode = (int)result.StatusCode;
+                LoadingVariantVis = Visibility.Hidden;
                 if (statusCode == 200)
                 {
                     await LoadVariantsAsync(SelectedProduct.Id);
@@ -207,7 +208,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_SoldCantBeDeleted"));
                 }
             }
-            LoadingVariantVis = Visibility.Hidden;
+            
         }
         public void FocusProductVariant(ProductVariant productVariant)
         {
@@ -293,16 +294,19 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         #region Product Images
         public async Task AddImagesAsync()
         {
+            
             OpenFileDialog open = Utilities.Constants.OpenFileDialog;
             var images = new List<KeyValuePair<string, string>>();
             if ((bool)open.ShowDialog())
             {
+                LoadingProductImages = Visibility.Visible;
                 foreach (string element in open.FileNames)
                 {
                     images.Add(new KeyValuePair<string, string>("images", element));
                 }
                 var response = await RestConnection.ExecuteFileRequestAsync(_restClient, Method.Post, $"products/{SelectedProduct.Id}/images", images);
                 int statusCode = (int)response.StatusCode;
+                LoadingProductImages = Visibility.Hidden;
                 if (statusCode == 201)
                 {
                     ShowSuccessMessage(LangStr.Get("Product_ImageAdded200"));
@@ -312,6 +316,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 {
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
                 }
+                
             }
         }
         public async Task ConfirmDeleteImages()
@@ -323,6 +328,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 
         public async Task DeleteImagesAsync()
         {
+            LoadingProductImages = Visibility.Visible;
             List<ProductImage> list = ImagesGrid.SelectedItems.Cast<ProductImage>().ToList();
 
             DeleteImagesBody deleteImagesBody = new DeleteImagesBody
@@ -333,6 +339,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             string requestBody = StringUtils.SerializeObject(deleteImagesBody);
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Delete, $"products/{SelectedProduct.Id}/images", requestBody, "application/json");
 
+            LoadingProductImages = Visibility.Hidden;
             int statusCode = (int)response.StatusCode;
             switch (statusCode)
             {
@@ -347,6 +354,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_ImageNoBelong"));
                     break;
             }
+            
         }
 
         public async Task ShowSeperatedProductImagesDialogAsync()

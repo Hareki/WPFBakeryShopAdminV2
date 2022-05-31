@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WPFBakeryShopAdminV2.Utilities;
-
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
 {
     public class Details
@@ -47,7 +47,7 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
         {
             get
             {
-                return PaidByCash ? "Thẻ" : "Tiền mặt";
+                return PaidByCash ? LangStr.Get("Cash"): LangStr.Get("Card");
             }
         }
         public bool CanUpdateOrderStatus

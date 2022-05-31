@@ -183,7 +183,6 @@
                                 Grid.ColumnSpan="2"
                                 Margin="0 0 0 30">
                         <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                                      ToolTip="MaterialDesignSwitchToggleButton"
                                       IsChecked="{Binding ProductDetails.Available}"
                                       HorizontalAlignment="Left" />
                         <TextBlock Margin="15 0 0 0"

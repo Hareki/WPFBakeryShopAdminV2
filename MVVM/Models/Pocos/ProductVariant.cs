@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
 {
     public class ProductVariant
@@ -28,8 +28,8 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
         {
             get
             {
-                if (Available) return "Còn hàng";
-                else return "Hết hàng";
+                if (Available) return LangStr.Get("AvailableStatus");
+                else return LangStr.Get("NotAvailableStatus");
             }
         }
         [JsonIgnore]

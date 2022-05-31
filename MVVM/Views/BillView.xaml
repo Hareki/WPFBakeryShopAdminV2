@@ -140,7 +140,6 @@
                                        Text="{DynamicResource Order_Title}" />
                             <Button x:Name="LoadPage"
                                     Style="{StaticResource MaterialDesignIconForegroundButton}"
-                                    ToolTip="MaterialDesignIconForegroundButton"
                                     Foreground="{DynamicResource MaterialDesignBody}"
                                     VerticalAlignment="Top"
                                     Margin="5 0 0 0 ">

@@ -46,6 +46,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             string JSonAccountInfo = StringUtils.SerializeObject(PersonalAccount);
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Post, "accounts", JSonAccountInfo, "application/json");
             int statusCode = (int)response.StatusCode;
+            LoadingPageVis = Visibility.Hidden;
             switch (statusCode)
             {
                 case 201:
@@ -59,7 +60,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
                     break;
             }
-            LoadingPageVis = Visibility.Hidden;
+           
         }
 
         private void ResetFields()

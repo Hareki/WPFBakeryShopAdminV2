@@ -53,6 +53,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             string JsonProductInfo = StringUtils.SerializeObject(ProductDetails);
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Post, "products", JsonProductInfo, "application/json");
             int statusCode = (int)response.StatusCode;
+            LoadingPageVis = Visibility.Hidden;
             switch (statusCode)
             {
                 case 200:
@@ -68,7 +69,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("NP_404"));
                     break;
             }
-            LoadingPageVis = Visibility.Hidden;
+            
         }
 
         private bool HasErrors()
@@ -77,7 +78,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             bool test2 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtIngredients);
             bool test3 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtName);
             View.AddNewProduct.Focus();
-            return test1 && test2 && test3;
+            return test1 || test2 || test3;
         }
 
         private void ResetFields()

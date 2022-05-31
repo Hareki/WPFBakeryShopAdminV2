@@ -217,7 +217,7 @@
     <!--#endregion-->
 
     <!--#region New Product -->
-    <sys:String x:Key="NP_200">Added product successfully</sys:String>
+    <sys:String x:Key="NP_200">Product added successfully</sys:String>
     <sys:String x:Key="NP_400">Failed to add product, the product name is already in use</sys:String>
     <sys:String x:Key="NP_404">Failed to add product, the selected category is no longer exists, please reload the product page to gain latest information</sys:String>
     <!--#endregion-->
@@ -230,8 +230,8 @@
     <sys:String x:Key="PA_CurrentPWInCorrect">Current password is incorrect</sys:String>
 
     <sys:String x:Key="PA_EmptyCurrentPW">Please enter your current password</sys:String>
-    <sys:String x:Key="PA_EmptyNewPW">>Please enter your new password</sys:String>
-    <sys:String x:Key="PA_EmptyConfirmNewPW">>Please enter confirm new password</sys:String>
+    <sys:String x:Key="PA_EmptyNewPW">Please enter your new password</sys:String>
+    <sys:String x:Key="PA_EmptyConfirmNewPW">Please enter confirm new password</sys:String>
     <sys:String x:Key="PA_TooFewChars">Password must have at least 4 characters</sys:String>
     <sys:String x:Key="PA_ConfirmNotMatch">Confirm password is not match</sys:String>
     <!--#endregion-->
@@ -241,14 +241,14 @@
     <sys:String x:Key="PV_AddTitle">Add variant</sys:String>
 
     <sys:String x:Key="PV_PriceSmaller">Price must be greater than cost</sys:String>
-    <sys:String x:Key="PV_Add200">Added new variant successfully</sys:String>
+    <sys:String x:Key="PV_Add200">New variant added successfully</sys:String>
 
     <sys:String x:Key="PV_Add404Product">This product is no longer exist, please reload products page to gain latest information</sys:String>
     <sys:String x:Key="PV_Add404Type">This type is no longer exist, please reload products page to gain latest information</sys:String>
     <sys:String x:Key="PV_Add400CombinationExists">Variant having this combination of product and type already exists</sys:String>
 
-    <sys:String x:Key="PV_Edit200">This product is no longer exist, please reload products page to gain latest information</sys:String>
-    <sys:String x:Key="PV_EditVariantNoExists">This variant is no longer exist, please reload products page to gain latest information</sys:String>
+    <sys:String x:Key="PV_EditVariantNoExists">This product is no longer exist, please reload products page to gain latest information</sys:String>
+    <sys:String x:Key="PV_Edit200">Variant updated successfully</sys:String>
     <!--#endregion-->
 
     <!--#region Product -->
@@ -262,13 +262,39 @@
     <sys:String x:Key="Product_NameUsed">Product name is already in use, please try another name</sys:String>
 
     <sys:String x:Key="Product_ImageAdded200">Image(s) added successfully</sys:String>
-    <sys:String x:Key="Product_NameUsed">Product name is already in use, please try another name</sys:String>
     <sys:String x:Key="Product_ConfirmDeletingImage">Are you sure wnat to delete selected image(s)?</sys:String>
 
-    <sys:String x:Key="Product_ImageNoExists">The selected image(s) is no longer exist, please reload products page to gain latest information </sys:String>
+    <sys:String x:Key="Product_ImageNoExists">At least one selected image is no longer exist, please reload products page to gain latest information </sys:String>
     <sys:String x:Key="Product_DeleteImage200">Image(s) deleted successfully</sys:String>
-    <sys:String x:Key="Product_ConfirmDeletingImage">Are you sure wnat to delete selected image(s)?</sys:String>
-    <sys:String x:Key="Product_ImageNoBelong">Selected image(s) doesn't belong to selected product, cant delete</sys:String>
+    <sys:String x:Key="Product_ImageNoBelong">At least one selected image doesn't belong to selected product, can't delete</sys:String>
     <!--#endregion-->
 
+    <!--#region AccountRowItem -->
+    <sys:String x:Key="Activated">Activated</sys:String>
+    <sys:String x:Key="NotActivated">Not Activated</sys:String>
+    <!--#endregion-->
+
+    <!--#region RoleList -->
+    <sys:String x:Key="Admin">Administrator</sys:String>
+    <sys:String x:Key="User">User</sys:String>
+    <!--#endregion-->
+
+    <!--#region RoleList -->
+    <sys:String x:Key="Cash">Cash</sys:String>
+    <sys:String x:Key="Card">Card</sys:String>
+    <!--#endregion-->
+
+    <!--#region BilLViewModel -->
+    <sys:String x:Key="Shipping">Shippping</sys:String>
+    <sys:String x:Key="Shipped">Shipped</sys:String>
+    <sys:String x:Key="Cancelled">Cancelled</sys:String>
+    <sys:String x:Key="Pending">Pending</sys:String>
+    <!--#endregion-->
+    
+    <sys:String x:Key="of">of</sys:String>
+
+    <!--#region BilLViewModel -->
+    <sys:String x:Key="AvailableStatus">Available</sys:String>
+    <sys:String x:Key="NotAvailableStatus">Not available</sys:String>
+    <!--#endregion-->
 </ResourceDictionary>

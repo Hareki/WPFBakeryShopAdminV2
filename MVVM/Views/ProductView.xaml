@@ -43,7 +43,6 @@
                         <Button x:Name="LoadPageAsync"
                                 Style="{StaticResource MaterialDesignIconForegroundButton}"
                                 IsEnabled="{Binding NotEditingInformation}"
-                                ToolTip="MaterialDesignIconForegroundButton"
                                 Foreground="{DynamicResource MaterialDesignBody}"
                                 VerticalAlignment="Top"
                                 Margin="5 0 0 0 ">
@@ -566,9 +565,9 @@
                                                                     <DataGridTextColumn Header="{DynamicResource PD_Price}"
                                                                                         Width="3*"
                                                                                         Binding="{Binding Path=FormattedPrice}" />
-                                                                    <DataGridTextColumn Header="{DynamicResource PD_Variants}"
+                                                                    <DataGridTextColumn Header="{DynamicResource PD_Status}"
                                                                                         Width="2*"
-                                                                                        Binding="{Binding Path=PD_Status}" />
+                                                                                        Binding="{Binding Path=AvailableName}" />
                                                                 </DataGrid.Columns>
                                                             </DataGrid>
                                                         </Border>

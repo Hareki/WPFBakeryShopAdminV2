@@ -141,7 +141,6 @@
                             <Button x:Name="ReloadPage"
                                     Style="{StaticResource MaterialDesignIconForegroundButton}"
                                     IsEnabled="{Binding NotEditing}"
-                                    ToolTip="MaterialDesignIconForegroundButton"
                                     Foreground="{DynamicResource MaterialDesignBody}"
                                     VerticalAlignment="Top"
                                     Margin="5 0 0 0 ">

@@ -205,4 +205,98 @@
     <sys:String x:Key="Order_Cancel200">Hủy đơn hàng thành công</sys:String>
     <sys:String x:Key="Order_Cancel400">Không thể hủy đơn hàng ở trạng thái này</sys:String>
     <!--#endregion-->
+
+    <!--#region Login -->
+    <sys:String x:Key="Login_EmailPasswordIncorrect">Tài khoản hoặc mật khẩu nhập vào không đúng</sys:String>
+    <sys:String x:Key="Login_NotAuthorized">Tài khoản không đúng quyền để truy cập</sys:String>
+    <!--#endregion-->
+
+    <!--#region New Account -->
+    <sys:String x:Key="NA_EmailSent">Vui lòng kiểm tra email để kích hoạt tài khoản</sys:String>
+    <sys:String x:Key="NA_400">Tạo tài khoản thất bại, email bạn nhập đã được sử dụng</sys:String>
+    <!--#endregion-->
+
+    <!--#region New Product -->
+    <sys:String x:Key="NP_200">Thêm sản phẩm thành công</sys:String>
+    <sys:String x:Key="NP_400">Thêm sản phẩm thất bại, tên sản phẩm đã được sử dụng</sys:String>
+    <sys:String x:Key="NP_404">Thêm sản phẩm thất bại, danh mục được chọn không còn tồn tại, vui lòng tải lại trang sản phẩm để nhận thông tin mới nhất</sys:String>
+    <!--#endregion-->
+
+    <!--#region Personal Account -->
+    <sys:String x:Key="PA_ImageTooLarge">Kích thước ảnh quá lớn, vui lòng chọn ảnh khác</sys:String>
+    <sys:String x:Key="PA_EmailInUse">Cập nhật tài khoản của bạn thất bại, email bạn nhập đã được sử dụng</sys:String>
+    <sys:String x:Key="PA_Update200">Cập nhật tài khoản của bạn thành công</sys:String>
+    <sys:String x:Key="PA_ChangePW200">Thay đổi mật khẩu thành công, bạn chuẩn bị được đăng xuất...</sys:String>
+    <sys:String x:Key="PA_CurrentPWInCorrect">Mật khẩu hiện tại không đúng</sys:String>
+
+    <sys:String x:Key="PA_EmptyCurrentPW">Vui lòng nhập vào mật khẩu hiện tại</sys:String>
+    <sys:String x:Key="PA_EmptyNewPW">Vui lòng nhập vào mật khẩu mới</sys:String>
+    <sys:String x:Key="PA_EmptyConfirmNewPW">Vui lòng nhập vào xác nhận mật khẩu</sys:String>
+    <sys:String x:Key="PA_TooFewChars">Mật khẩu cần có ít nhất 4 ký tự</sys:String>
+    <sys:String x:Key="PA_ConfirmNotMatch">Xác nhận mật khẩu không khớp</sys:String>
+    <!--#endregion-->
+
+    <!--#region Product Variant -->
+    <sys:String x:Key="PV_UpdateTitle">Cập nhật biến thể</sys:String>
+    <sys:String x:Key="PV_AddTitle">Thêm biến thể</sys:String>
+
+    <sys:String x:Key="PV_PriceSmaller">Giá bán phải lớn hơn giá gốc</sys:String>
+    <sys:String x:Key="PV_Add200">Thêm biến thể mới thành công</sys:String>
+
+    <sys:String x:Key="PV_Add404Product">Sản phẩm này không còn tồn tại, vui lòng tải lại trang sản phẩm để nhận thông tin mới nhất</sys:String>
+    <sys:String x:Key="PV_Add404Type">Loại được chọn không còn tồn tại, vui lòng tải lại trang sản phẩm để nhận thông tin mới nhất</sys:String>
+    <sys:String x:Key="PV_Add400CombinationExists">Biến thể được kết hợp bởi sản phẩm và loại được chọn đã tồn tại</sys:String>
+
+    <sys:String x:Key="PV_EditVariantNoExists">Sản phẩm này không còn tồn tại, vui lòng tải lại trang sản phẩm để nhận thông tin mới nhất</sys:String>
+    <sys:String x:Key="PV_Edit200">Cập nhật biến thể thành công</sys:String>
+    <!--#endregion-->
+
+    <!--#region Product -->
+    <sys:String x:Key="Product_LoadingCategory">Đang tải...</sys:String>
+    <sys:String x:Key="Product_ConfirmDeletingVariant">Bạn có chắc muốn xóa</sys:String>
+    <sys:String x:Key="Product_RemoveVariant200">Xóa biến thể thành công</sys:String>
+    <sys:String x:Key="Product_SoldCantBeDeleted">Biến thể đã được bán ra không thể xóa</sys:String>
+
+    <sys:String x:Key="Product_UpdateInfor200">Cập nhật thông tin sản phẩm thành công</sys:String>
+    <sys:String x:Key="Product_CategoryNoExists">Danh mục này không còn tồn tại, vui lòng tải lại trang sản phẩm để nhận thông tin mới nhất</sys:String>
+    <sys:String x:Key="Product_NameUsed">Tên sản phẩm đã được sử dụng, vui lòng thử tên khác</sys:String>
+
+    <sys:String x:Key="Product_ImageAdded200">Thêm ảnh thành công</sys:String>
+    <sys:String x:Key="Product_ConfirmDeletingImage">Bạn có chắc muốn xóa các ảnh đã chọn</sys:String>
+
+    <sys:String x:Key="Product_ImageNoExists">Ít nhất một ảnh đã chọn  không còn tồn tại, vui lòng tải lại trang sản phẩm để nhận thông tin mới nhất</sys:String>
+    <sys:String x:Key="Product_DeleteImage200">Xóa ảnh thành công</sys:String>
+    <sys:String x:Key="Product_ImageNoBelong">Ít nhất một ảnh đã chọn không thuộc về sản phẩm này, không thể xóa</sys:String>
+    <!--#endregion-->
+
+    <!--#region AccountRowItem -->
+    <sys:String x:Key="Activated">Đã kích hoạt</sys:String>
+    <sys:String x:Key="NotActivated">Chưa kích hoạt</sys:String>
+    <!--#endregion-->
+
+    <!--#region RoleList -->
+    <sys:String x:Key="Admin">Quản trị viên</sys:String>
+    <sys:String x:Key="User">Người dùng</sys:String>
+    <!--#endregion-->
+
+    <!--#region RoleList -->
+    <sys:String x:Key="Cash">Tiền mặt</sys:String>
+    <sys:String x:Key="Card">Thẻ</sys:String>
+    <!--#endregion-->
+
+    <!--#region BilLViewModel -->
+    <sys:String x:Key="Shipping">Đang giao</sys:String>
+    <sys:String x:Key="Shipped">Đã giao</sys:String>
+    <sys:String x:Key="Cancelled">Đã hủy</sys:String>
+    <sys:String x:Key="Pending">Chờ duyệt</sys:String>
+    <!--#endregion-->
+
+    <!--#region Pagination -->
+    <sys:String x:Key="of">của</sys:String>
+    <!--#endregion-->
+
+    <!--#region BilLViewModel -->
+    <sys:String x:Key="AvailableStatus">Còn hàng</sys:String>
+    <sys:String x:Key="NotAvailableStatus">Hết hàng</sys:String>
+    <!--#endregion-->
 </ResourceDictionary>
