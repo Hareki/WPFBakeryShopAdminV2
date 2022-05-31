@@ -34,37 +34,45 @@
     <sys:String x:Key="Main_Accounts">Tài khoản</sys:String>
     <sys:String x:Key="Main_Logout">Đăng xuất</sys:String>
     <!--#endregion-->
+
+    <!--#region Personal AccountView -->
+    <sys:String x:Key="PA_Title">Tài khoản của bạn</sys:String>
+    <sys:String x:Key="PA_LastName">Họ và tên lót*</sys:String>
+    <sys:String x:Key="PA_FirstName">Tên*</sys:String>
+    <sys:String x:Key="PA_Email">Email*</sys:String>
+    <sys:String x:Key="PA_Address">Địa chỉ</sys:String>
+    <sys:String x:Key="PA_Phone">Số điện thoại*</sys:String>
+    <sys:String x:Key="PA_Language">Ngôn ngữ</sys:String>
+    <sys:String x:Key="PA_Update">Cập nhật</sys:String>
+    <sys:String x:Key="PA_Cancel">Hủy</sys:String>
+    <sys:String x:Key="PA_Save">Lưu</sys:String>
+
+    <sys:String x:Key="PA_ChangePasswordExpander">Đổi mật khẩu</sys:String>
+    <sys:String x:Key="PA_CurrentPassword">Mật khẩu hiện tại*</sys:String>
+    <sys:String x:Key="PA_NewPassword">Mật khẩu mới*</sys:String>
+    <sys:String x:Key="PA_ConfirmNewPassword">Xác nhận mật khẩu mới*</sys:String>
+    <sys:String x:Key="PA_ChangePasswordWarning">Bạn sẽ cần đăng nhập lại sau khi thay đổi mật khẩu thành công</sys:String>
+    <!--#endregion-->
+
+    <!--#region Dashboard View-->
+    <sys:String x:Key="DB_Title">Bảng thống kê</sys:String>
+    <sys:String x:Key="DB_TotalOrdersNum">Tổng số đơn hàng</sys:String>
+    <sys:String x:Key="DB_TotalAvailableProductVariantsNum">Tổng số sản phẩm bày bán</sys:String>
+    <sys:String x:Key="DB_TotalSoldProductVariantsNum">Tổng số sản phẩm đã bán</sys:String>
+    <sys:String x:Key="DB_Pending">Chờ duyệt</sys:String>
+    <sys:String x:Key="DB_Shipping">Đang giao</sys:String>
+    <sys:String x:Key="DB_Shipped">Đã giao</sys:String>
+    <sys:String x:Key="DB_Cancelled">Đã hủy</sys:String>
+    <sys:String x:Key="DB_FiveMostRecentOrder">5 đơn hàng gần nhất</sys:String>
+    <sys:String x:Key="DB_OrderID">Mã HĐ</sys:String>
+    <sys:String x:Key="DB_CustomerName">Tên KH</sys:String>
+    <sys:String x:Key="DB_Total">Tổng tiền</sys:String>
+    <sys:String x:Key="DB_Status">Trạng thái</sys:String>
+    <!--#endregion-->
+
+
+
     
-    
-
-    <sys:String x:Key="PersonalAccount">Tài khoản của bạn</sys:String>
-    <sys:String x:Key="LastName">Họ và tên lót*</sys:String>
-    <sys:String x:Key="FirstName">Tên*</sys:String>
-    <sys:String x:Key="Address">Địa chỉ</sys:String>
-    <sys:String x:Key="Phone">Số điện thoại</sys:String>
-    <sys:String x:Key="Language">Ngôn ngữ</sys:String>
-    <sys:String x:Key="Update">CẬP NHẬT</sys:String>
-    <sys:String x:Key="Cancel">HỦY</sys:String>
-    <sys:String x:Key="Save">LƯU</sys:String>
-
-    <sys:String x:Key="ChangePassword">ĐỔI MẬT KHẨU</sys:String>
-    <sys:String x:Key="CurrentPassword">Mật khẩu hiện tại*</sys:String>
-    <sys:String x:Key="NewPassword">Mật khẩu mới*</sys:String>
-    <sys:String x:Key="ConfirmNewPassword">Xác nhận mật khẩu mới*</sys:String>
-    <sys:String x:Key="ChangePasswordWarning">Bạn sẽ cần đăng nhập lại sau khi thay đổi mật khẩu thành công</sys:String>
-
-    <sys:String x:Key="TotalOrdersNum">Tổng số đơn hàng</sys:String>
-    <sys:String x:Key="TotalAvailableProductVariantsNum">Tổng số sản phẩm bày bán</sys:String>
-    <sys:String x:Key="TotalSoldProductVariantsNum">Tổng số sản phẩm đã bán</sys:String>
-    <sys:String x:Key="Pending">Chờ duyệt</sys:String>
-    <sys:String x:Key="Shipping">Đang giao</sys:String>
-    <sys:String x:Key="Shipped">Đã giao</sys:String>
-    <sys:String x:Key="Cancelled">Đã hủy</sys:String>
-    <sys:String x:Key="FiveMostRecentOrder">5 đơn hàng gần nhất</sys:String>
-    <sys:String x:Key="OrderID">Mã HĐ</sys:String>
-    <sys:String x:Key="CustomerName">Tên KH</sys:String>
-    <sys:String x:Key="Total">Tổng tiền</sys:String>
-    <sys:String x:Key="Status">Trạng thái</sys:String>
 
     <sys:String x:Key="CustomerName2">Tên khách hàng:</sys:String>
     <sys:String x:Key="Status2">Trạng thái:</sys:String>

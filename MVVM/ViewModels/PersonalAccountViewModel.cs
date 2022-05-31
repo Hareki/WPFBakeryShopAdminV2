@@ -8,6 +8,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using WPFBakeryShopAdminV2.LocalValidationRules;
 using WPFBakeryShopAdminV2.MVVM.Models.Bodies;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
@@ -48,7 +49,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 {
                     await RefreshAccountInfo();
                 }
-                _activated = true;  
+                _activated = true;
             }
         }
         protected override Task OnDeactivateAsync(bool close, CancellationToken cancellationToken)
@@ -155,11 +156,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public async Task UpdatePersonalAccountAsync()
         {
-            if (UpdateInfoHasErrors())
-            {
-                await ShowErrorMessage("Lỗi nhập liệu", "Vui lòng nhập đầy đủ thông tin và đúng định dạng");
-                return;
-            }
+            if (UpdateInfoHasErrors()) return;
 
             LoadingPageVis = Visibility.Visible;
             var task1 = UpdateAccountInfoAsync();
@@ -231,12 +228,14 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private bool UpdateInfoHasErrors()
         {
-            return !StringUtils.IsValidEmail(View.txtEmail.Text) ||
-                   !StringUtils.IsValidPhoneNumber(View.txtPhone.Text) ||
-                   string.IsNullOrEmpty(View.txtFirstName.Text) ||
-                   string.IsNullOrEmpty(View.txtLastName.Text) ||
-                   string.IsNullOrEmpty(View.txtEmail.Text) ||
-                   string.IsNullOrEmpty(View.txtPhone.Text);
+            bool test1 = !StringUtils.IsValidEmail(View.txtEmail.Text);
+            bool test2 = !StringUtils.IsValidPhoneNumber(View.txtPhone.Text);
+            bool test3 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtFirstName);
+            bool test4 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtLastName);
+            bool test5 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtEmail);
+            bool test6 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtPhone);
+            View.UpdatePersonalAccountAsync.Focus();
+            return test1 || test2 || test3 || test4 || test5 || test6;
         }
         #endregion
 

@@ -136,7 +136,7 @@
                             <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                                        FontWeight="SemiBold"
                                        Margin="0 0 0 30"
-                                       Text="{DynamicResource PersonalAccount}" />
+                                       Text="{DynamicResource PA_Title}" />
 
                             <Button x:Name="ReloadPage"
                                     Style="{StaticResource MaterialDesignIconForegroundButton}"
@@ -265,7 +265,7 @@
                                                  Margin="0 30 15 15"
                                                  MaxLength="50"
                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                 materialDesign:HintAssist.Hint="{DynamicResource LastName2}"
+                                                 materialDesign:HintAssist.Hint="{DynamicResource PA_LastName}"
                                                  materialDesign:HintAssist.Background="White"
                                                  materialDesign:TextFieldAssist.HasClearButton="False">
                                             <TextBox.Text>
@@ -286,7 +286,7 @@
                                                  Grid.ColumnSpan="4"
                                                  Margin="15 30 0 15"
                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                 materialDesign:HintAssist.Hint="{DynamicResource FirstName2}"
+                                                 materialDesign:HintAssist.Hint="{DynamicResource PA_FirstName}"
                                                  materialDesign:HintAssist.Background="White"
                                                  materialDesign:TextFieldAssist.HasClearButton="False">
                                             <TextBox.Text>
@@ -308,7 +308,7 @@
                                                  MaxLength="50"
                                                  IsEnabled="{Binding NotEditing}"
                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                 materialDesign:HintAssist.Hint="{DynamicResource Email2}"
+                                                 materialDesign:HintAssist.Hint="{DynamicResource PA_Email}"
                                                  materialDesign:HintAssist.Background="White"
                                                  materialDesign:TextFieldAssist.HasClearButton="False">
                                             <TextBox.Text>
@@ -330,7 +330,7 @@
                                                  Margin="0 15"
                                                  MaxLength="120"
                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                 materialDesign:HintAssist.Hint="{DynamicResource Address}"
+                                                 materialDesign:HintAssist.Hint="{DynamicResource PA_Address}"
                                                  materialDesign:HintAssist.Background="White"
                                                  materialDesign:TextFieldAssist.HasClearButton="False" />
 
@@ -342,7 +342,7 @@
                                                  Margin="0 15 15 15"
                                                  MaxLength="10"
                                                  Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                                 materialDesign:HintAssist.Hint="{DynamicResource Phone2}"
+                                                 materialDesign:HintAssist.Hint="{DynamicResource PA_Phone}"
                                                  materialDesign:HintAssist.Background="White"
                                                  materialDesign:TextFieldAssist.HasClearButton="False"
                                                  PreviewTextInput="PreviewPhoneInput"
@@ -368,7 +368,7 @@
                                                   Grid.ColumnSpan="3"
                                                   Margin="15 15 0 15"
                                                   Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                                  materialDesign:HintAssist.Hint="{DynamicResource Language}">
+                                                  materialDesign:HintAssist.Hint="{DynamicResource PA_Language}">
                                             <ComboBox.ItemTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
@@ -396,13 +396,13 @@
                                                     materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                                     Grid.Column="11"
                                                     Grid.Row="5"
-                                                    Content="{DynamicResource Cancel}"
+                                                    Content="{DynamicResource PA_Cancel}"
                                                     Margin="0 0 10 0"
                                                     Width="{Binding ActualWidth, ElementName=RequestUpdate, Mode=OneWay}" />
 
                                             <Button x:Name="UpdatePersonalAccountAsync"
                                                     Style="{StaticResource CustomPrimaryButton}"
-                                                    Content="{DynamicResource Save}"
+                                                    Content="{DynamicResource PA_Save}"
                                                     Grid.Column="10"
                                                     Grid.Row="5"
                                                     materialDesign:ShadowAssist.ShadowDepth="Depth0"
@@ -420,7 +420,7 @@
 
                                             <Button x:Name="RequestUpdate"
                                                     Style="{StaticResource CustomBorderButton}"
-                                                    Content="{DynamicResource Update}"
+                                                    Content="{DynamicResource PA_Update}"
                                                     Grid.Column="10"
                                                     Grid.Row="5"
                                                     materialDesign:ShadowAssist.ShadowDepth="Depth0"
@@ -442,7 +442,7 @@
                             CornerRadius="12"
                             Background="White"
                             Padding="10">
-                        <Expander Header="{DynamicResource ChangePassword}"
+                        <Expander Header="{DynamicResource PA_ChangePasswordExpander}"
                                   IsEnabled="{Binding NotEditing}"
                                   FontWeight="SemiBold"
                                   Background="White"
@@ -467,7 +467,7 @@
                                             <RowDefinition Height="*" />
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
-                                        <TextBlock Text="{DynamicResource ChangePasswordWarning}"
+                                        <TextBlock Text="{DynamicResource PA_ChangePasswordWarning}"
                                                    Margin="0 0 0 10"
                                                    Style="{StaticResource MaterialDesignBody1TextBlock}"
                                                    Foreground="#e63946"
@@ -505,7 +505,7 @@
                                                   Text="{Binding ChangePasswordBody.CurrentPassword}"
                                                   Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                   FontWeight="SemiBold"
-                                                  materialDesign:HintAssist.Hint="{DynamicResource CurrentPassword}"
+                                                  materialDesign:HintAssist.Hint="{DynamicResource PA_CurrentPassword}"
                                                   Margin="0,15,0,15" />
 
                                         <PasswordBox x:Name="CurrentPasswordHidden"
@@ -516,7 +516,7 @@
                                                      Grid.ColumnSpan="2"
                                                      Margin="0,15,0,15"
                                                      Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
-                                                     materialDesign:HintAssist.Hint="{DynamicResource CurrentPassword}"
+                                                     materialDesign:HintAssist.Hint="{DynamicResource PA_CurrentPassword}"
                                                      MaxLength="100" />
                                         <!--#endregion-->
 
@@ -553,7 +553,7 @@
                                                   Text="{Binding ChangePasswordBody.NewPassword}"
                                                   Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                   FontWeight="SemiBold"
-                                                  materialDesign:HintAssist.Hint="{DynamicResource NewPassword}"
+                                                  materialDesign:HintAssist.Hint="{DynamicResource PA_NewPassword}"
                                                   Margin="0,15,0,15" />
 
                                         <PasswordBox x:Name="NewPasswordHidden"
@@ -564,7 +564,7 @@
                                                      Grid.ColumnSpan="2"
                                                      Margin="0,15,0,15"
                                                      Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
-                                                     materialDesign:HintAssist.Hint="{DynamicResource NewPassword}"
+                                                     materialDesign:HintAssist.Hint="{DynamicResource PA_NewPassword}"
                                                      MaxLength="100" />
                                         <!--#endregion-->
 
@@ -599,7 +599,7 @@
                                                   Text="{Binding ChangePasswordBody.ConfirmNewPassword}"
                                                   Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                                   FontWeight="SemiBold"
-                                                  materialDesign:HintAssist.Hint="{DynamicResource ConfirmNewPassword}"
+                                                  materialDesign:HintAssist.Hint="{DynamicResource PA_ConfirmNewPassword}"
                                                   Margin="0,15,0,15" />
 
                                         <PasswordBox x:Name="ConfirmNewPasswordHidden"
@@ -610,7 +610,7 @@
                                                      Margin="0,15,0,15"
                                                      Grid.ColumnSpan="2"
                                                      Style="{StaticResource MaterialDesignOutlinedPasswordBox}"
-                                                     materialDesign:HintAssist.Hint="{DynamicResource ConfirmNewPassword}"
+                                                     materialDesign:HintAssist.Hint="{DynamicResource PA_ConfirmNewPassword}"
                                                      MaxLength="100" />
                                         <!--#endregion-->
 
@@ -618,7 +618,7 @@
                                                 Style="{StaticResource CustomPrimaryButton}"
                                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                                 Grid.Row="5"
-                                                Content="{DynamicResource ChangePassword}"
+                                                Content="{DynamicResource PA_ChangePasswordExpander}"
                                                 Margin="0,15,0,15"
                                                 Grid.ColumnSpan="2" />
                                     </Grid>

@@ -61,7 +61,7 @@
                     <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                                FontWeight="SemiBold"
                                Margin="{StaticResource TitleMargin}"
-                               Text="{DynamicResource Dashboard}" />
+                               Text="{DynamicResource DB_Title}" />
                     <Button x:Name="LoadPage"
                             Style="{StaticResource MaterialDesignIconForegroundButton}"
                             ToolTip="MaterialDesignIconForegroundButton"
@@ -91,7 +91,7 @@
                             <TextBlock Margin="0 0 0 15"
                                        TextWrapping="Wrap"
                                        VerticalAlignment="Center"
-                                       Text="{DynamicResource TotalOrdersNum}" />
+                                       Text="{DynamicResource DB_TotalOrdersNum}" />
                             <TextBlock x:Name="Dashboard_TotalOrdersNum"
                                        Text="0"
                                        FontWeight="SemiBold" />
@@ -118,7 +118,7 @@
                             <TextBlock Margin="0 0 0 15"
                                        TextWrapping="Wrap"
                                        VerticalAlignment="Center"
-                                       Text="{DynamicResource TotalAvailableProductVariantsNum}" />
+                                       Text="{DynamicResource DB_TotalAvailableProductVariantsNum}" />
                             <TextBlock x:Name="Dashboard_TotalAvailableProductVariantsNum"
                                        Text="0"
                                        FontWeight="SemiBold" />
@@ -145,7 +145,7 @@
                             <TextBlock Margin="0 0 0 15"
                                        TextWrapping="Wrap"
                                        VerticalAlignment="Center"
-                                       Text="{DynamicResource TotalSoldProductVariantsNum}" />
+                                       Text="{DynamicResource DB_TotalSoldProductVariantsNum}" />
                             <TextBlock x:Name="Dashboard_TotalSoldProductVariantsNum"
                                        Text="0"
                                        FontWeight="SemiBold" />
@@ -192,7 +192,7 @@
                                 <TextBlock Margin="15 0 0 5"
                                            TextWrapping="Wrap"
                                            VerticalAlignment="Center"
-                                           Text="{DynamicResource Pending}" />
+                                           Text="{DynamicResource DB_Pending}" />
                                 <ProgressBar x:Name="PendingPercent"
                                              Value="50"
                                              Margin="15 0 0 0"
@@ -215,7 +215,7 @@
                                 <TextBlock Margin="15 0 0 5"
                                            TextWrapping="Wrap"
                                            VerticalAlignment="Center"
-                                           Text="{DynamicResource Shipping}" />
+                                           Text="{DynamicResource DB_Shipping}" />
                                 <ProgressBar x:Name="ShippingPercent"
                                              Value="50"
                                              Margin="15 0 0 0"
@@ -238,7 +238,7 @@
                                 <TextBlock Margin="15 0 0 5"
                                            TextWrapping="Wrap"
                                            VerticalAlignment="Center"
-                                           Text="{DynamicResource Shipped}" />
+                                           Text="{DynamicResource DB_Shipped}" />
                                 <ProgressBar x:Name="ShippedPercent"
                                              Value="50"
                                              Margin="15 0 0 0"
@@ -261,7 +261,7 @@
                                 <TextBlock Margin="15 0 0 5"
                                            TextWrapping="Wrap"
                                            VerticalAlignment="Center"
-                                           Text="{DynamicResource Cancelled}" />
+                                           Text="{DynamicResource DB_Cancelled}" />
                                 <ProgressBar x:Name="CancelledPercent"
                                              Value="50"
                                              Margin="15 0 0 0"
@@ -282,7 +282,7 @@
                             <StackPanel Margin="0 0 10 0"
                                         Grid.Column="0"
                                         HorizontalAlignment="Center">
-                                <TextBlock Text="{DynamicResource Pending}"
+                                <TextBlock Text="{DynamicResource DB_Pending}"
                                            Margin="0 0 0 5" />
                                 <TextBlock x:Name="Dashboard_TodayProcessingOrdersNum"
                                            Text="4"
@@ -294,7 +294,7 @@
                                         Grid.Column="1"
                                         HorizontalAlignment="Center">
                                 <StackPanel>
-                                    <TextBlock Text="{DynamicResource Shipping}"
+                                    <TextBlock Text="{DynamicResource DB_Shipping}"
                                                Margin="0 0 0 5" />
                                     <TextBlock x:Name="Dashboard_TodayDispatchOrdersNum"
                                                Text="5"
@@ -307,7 +307,7 @@
                                         Grid.Column="2"
                                         HorizontalAlignment="Center">
                                 <StackPanel>
-                                    <TextBlock Text="{DynamicResource Shipped}"
+                                    <TextBlock Text="{DynamicResource DB_Shipped}"
                                                Margin="0 0 0 5" />
                                     <TextBlock x:Name="Dashboard_TodayShippedOrdersNum"
                                                Text="6"
@@ -320,7 +320,7 @@
                                         Grid.Column="3"
                                         HorizontalAlignment="Center">
                                 <StackPanel>
-                                    <TextBlock Text="{DynamicResource Cancelled}"
+                                    <TextBlock Text="{DynamicResource DB_Cancelled}"
                                                Margin="0 0 0 5" />
                                     <TextBlock x:Name="Dashboard_TodayCancelOrdersNum"
                                                Text="7"
@@ -342,7 +342,7 @@
                         Margin="15 15 0 0"
                         CornerRadius="12">
                     <StackPanel>
-                        <TextBlock Text="{DynamicResource FiveMostRecentOrder}"
+                        <TextBlock Text="{DynamicResource DB_FiveMostRecentOrder}"
                                    Margin="0 0 0 15" />
 
                         <DataGrid x:Name="Dashboard_TopRecentOrders"
@@ -353,16 +353,16 @@
                                   SelectionUnit="FullRow"
                                   SelectionMode="Single">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="{DynamicResource OrderID}"
+                                <DataGridTextColumn Header="{DynamicResource DB_OrderID}"
                                                     Width="2*"
                                                     Binding="{Binding Path=OrderId}" />
-                                <DataGridTextColumn Header="{DynamicResource CustomerName}"
+                                <DataGridTextColumn Header="{DynamicResource DB_CustomerName}"
                                                     Width="3*"
                                                     Binding="{Binding Path=UserFullName}" />
-                                <DataGridTextColumn Header="{DynamicResource Total}"
+                                <DataGridTextColumn Header="{DynamicResource DB_Total}"
                                                     Width="3*"
                                                     Binding="{Binding Path=FormattedOrderTotal}" />
-                                <DataGridTextColumn Header="{DynamicResource Status}"
+                                <DataGridTextColumn Header="{DynamicResource DB_Status}"
                                                     Width="2*"
                                                     Binding="{Binding Path=StatusName}" />
                             </DataGrid.Columns>
