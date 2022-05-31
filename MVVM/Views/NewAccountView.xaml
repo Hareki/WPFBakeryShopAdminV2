@@ -62,7 +62,7 @@
                     <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                                FontWeight="SemiBold"
                                Margin="{StaticResource TitleMargin}"
-                               Text="{DynamicResource CreateNewAccount}" />
+                               Text="{DynamicResource NA_Title}" />
                 </StackPanel>
 
                 <Border VerticalAlignment="Stretch"
@@ -127,7 +127,7 @@
                          Grid.ColumnSpan="4"
                          Margin="0 0 15 15"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         materialDesign:HintAssist.Hint="{DynamicResource LastName2}"
+                         materialDesign:HintAssist.Hint="{DynamicResource PA_LastName}"
                          materialDesign:HintAssist.Background="White"
                          materialDesign:TextFieldAssist.HasClearButton="False">
                     <TextBox.Text>
@@ -146,7 +146,7 @@
                          Grid.ColumnSpan="4"
                          Margin="15 0 0 15"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         materialDesign:HintAssist.Hint="{DynamicResource FirstName2}"
+                         materialDesign:HintAssist.Hint="{DynamicResource PA_FirstName}"
                          materialDesign:HintAssist.Background="White"
                          materialDesign:TextFieldAssist.HasClearButton="False">
                     <TextBox.Text>
@@ -166,7 +166,7 @@
                          Margin="0 15"
                          MaxLength="{StaticResource EmailMaxLength}"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         materialDesign:HintAssist.Hint="{DynamicResource Email2}"
+                         materialDesign:HintAssist.Hint="{DynamicResource PA_Email}"
                          materialDesign:HintAssist.Background="White"
                          materialDesign:TextFieldAssist.HasClearButton="False">
                     <TextBox.Text>
@@ -189,7 +189,7 @@
                          MaxLength="{StaticResource AddressMaxLength}"
                          Margin="0 15"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         materialDesign:HintAssist.Hint="{DynamicResource Address}"
+                         materialDesign:HintAssist.Hint="{DynamicResource PA_Address}"
                          materialDesign:HintAssist.Background="White"
                          materialDesign:TextFieldAssist.HasClearButton="False" />
 
@@ -200,7 +200,7 @@
                          Margin="0 15 15 15"
                          MaxLength="{StaticResource PhoneMaxLength}"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         materialDesign:HintAssist.Hint="{DynamicResource Phone2}"
+                         materialDesign:HintAssist.Hint="{DynamicResource PA_Phone}"
                          materialDesign:HintAssist.Background="White"
                          materialDesign:TextFieldAssist.HasClearButton="False"
                          PreviewTextInput="PreviewPhoneInput"
@@ -225,7 +225,7 @@
                           Grid.ColumnSpan="3"
                           Margin="15 15 0 15"
                           Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                          materialDesign:HintAssist.Hint="{DynamicResource Language}">
+                          materialDesign:HintAssist.Hint="{DynamicResource PA_Language}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -283,12 +283,12 @@
                     <Button x:Name="CancelAdding"
                             Style="{StaticResource CustomSecondaryButton}"
                             materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                            Content="{DynamicResource Cancel}"
+                            Content="{DynamicResource NA_Cancel}"
                             Margin="0 0 20 0" />
 
                     <Button x:Name="AddNewAccount"
                             Style="{StaticResource CustomPrimaryButton}"
-                            Content="{DynamicResource CreateAccount}"
+                            Content="{DynamicResource NA_Save}"
                             materialDesign:ShadowAssist.ShadowDepth="Depth0" />
                 </StackPanel>
             </Grid>

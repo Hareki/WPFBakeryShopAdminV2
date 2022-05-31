@@ -52,7 +52,7 @@
                         <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                                    FontWeight="SemiBold"
                                    Margin="{StaticResource TitleMargin}"
-                                   Text="Thêm sản phẩm mới" />
+                                   Text="{DynamicResource NP_Title}" />
                     </StackPanel>
 
                     <Border VerticalAlignment="Stretch"
@@ -114,7 +114,7 @@
                              Grid.Column="0"
                              Grid.Row="2"
                              Grid.ColumnSpan="3"
-                             materialDesign:HintAssist.Hint="Tên sản phẩm*"
+                             materialDesign:HintAssist.Hint="{DynamicResource PD_ReqName}"
                              MaxLength="{StaticResource ProductNameMaxLength}"
                              Style="{StaticResource MaterialDesignOutlinedTextBox}"
                              Margin="0 0 15 30">
@@ -132,7 +132,7 @@
                               Grid.Column="4"
                               Grid.Row="2"
                               Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                              materialDesign:HintAssist.Hint="Danh mục"
+                              materialDesign:HintAssist.Hint="{DynamicResource PD_Category}"
                               Margin="15 0 0 30">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
@@ -147,7 +147,7 @@
                         Grid.Column="0"
                              Grid.Row="3"
                              Grid.ColumnSpan="2"
-                             materialDesign:HintAssist.Hint="Nguyên liệu"
+                             materialDesign:HintAssist.Hint="{DynamicResource PD_ReIngredients}"
                              MaxLength="{StaticResource IngredientsMaxLength}"
                              Style="{StaticResource MaterialDesignOutlinedTextBox}"
                              Margin="0 0 15 30">
@@ -163,7 +163,7 @@
                     <TextBox x:Name="txtAllergens"
                         Grid.Column="2"
                              Grid.Row="3"
-                             materialDesign:HintAssist.Hint="Chất gây dị ứng"
+                             materialDesign:HintAssist.Hint="{DynamicResource PD_Allergens}"
                              MaxLength="{StaticResource AllergensMaxLength}"
                              Style="{StaticResource MaterialDesignOutlinedTextBox}"
                              Grid.ColumnSpan="2"
@@ -187,7 +187,7 @@
                                       IsChecked="{Binding ProductDetails.Available}"
                                       HorizontalAlignment="Left" />
                         <TextBlock Margin="15 0 0 0"
-                                   Text="Tình trạng kinh doanh"
+                                   Text="{DynamicResource PD_Available}"
                                    VerticalAlignment="Center" />
                     </StackPanel>
 
@@ -200,12 +200,12 @@
                                 Margin="0 0 0 30">
                         <Button x:Name="AddNewProduct"
                                 Style="{StaticResource CustomPrimaryButton}"
-                                Content="Lưu"
+                                Content="{DynamicResource NP_Save}"
                                 MinWidth="75"
                                 Margin="0 0 10 0" />
                         <Button x:Name="CancelAdding"
                                 Style="{StaticResource CustomSecondaryButton}"
-                                Content="HỦY"
+                                Content="{DynamicResource NP_Cancel}"
                                 MinWidth="75"
                                 Margin="10 0 0 0" />
 

@@ -1,13 +1,17 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
-   
+
     <!--#region Messages-->
     <sys:String x:Key="Message_ConfirmationTitle">Confirm</sys:String>
     <sys:String x:Key="Message_ErrorTitle">An Error Occured!</sys:String>
     <sys:String x:Key="Message_InfoTitle">Notification</sys:String>
+    <sys:String x:Key="DialogButtonConfirm">Confirm</sys:String>
+    <sys:String x:Key="DialogButtonCancel">Cancel</sys:String>
+    <sys:String x:Key="DialogButtonOkay">Okay</sys:String>
+
     <!--#endregion-->
-    
+
     <!--#region Login View-->
     <sys:String x:Key="Login_Greeting1">Welcome back!</sys:String>
     <sys:String x:Key="Login_Greeting2">Proceed to login</sys:String>
@@ -24,7 +28,6 @@
     <sys:String x:Key="FP_Email">Proceed to login</sys:String>
     <sys:String x:Key="FP_Cancel">Cancel</sys:String>
     <sys:String x:Key="FP_Continue">Continue</sys:String>
-    <sys:String x:Key="FP_RequestSent">We have sent you an email, please check it and follow the instructions</sys:String>
     <!--#endregion-->
 
     <!--#region Main View-->
@@ -37,7 +40,7 @@
 
     <!--#region Personal AccountView -->
     <sys:String x:Key="PA_Title">Your personal account</sys:String>
-    <sys:String x:Key="PA_LastName">Last Name</sys:String>
+    <sys:String x:Key="PA_LastName">Last Name*</sys:String>
     <sys:String x:Key="PA_FirstName">First Name*</sys:String>
     <sys:String x:Key="PA_Email">Email*</sys:String>
     <sys:String x:Key="PA_Address">Address</sys:String>
@@ -72,90 +75,124 @@
 
     <!--#region Product View-->
     <sys:String x:Key="PD_Title">Products</sys:String>
+    <sys:String x:Key="PD_NewProduct">New product</sys:String>
     <sys:String x:Key="PD_ID">Product ID</sys:String>
     <sys:String x:Key="PD_Name">Name</sys:String>
     <sys:String x:Key="PD_Category">Category</sys:String>
     <sys:String x:Key="PD_Ingredients">Ingredients</sys:String>
     <sys:String x:Key="PD_Allergens">Allergens</sys:String>
-    <sys:String x:Key="PD_ProductDetails">Product Details</sys:String>
+    <sys:String x:Key="PD_ProductDetails">Product details</sys:String>
     <sys:String x:Key="PD_Available">Available</sys:String>
-    <sys:String x:Key="PD_TotalMessage">This product has </sys:String>
+    <sys:String x:Key="PD_TotalMessage">This product has</sys:String>
     <sys:String x:Key="PD_VariantTotalMessage">variant(s) in total</sys:String>
     <sys:String x:Key="PD_ImageTotalMessage">image(s) in total</sys:String>
 
     <sys:String x:Key="PD_ReqName">Name*</sys:String>
     <sys:String x:Key="PD_ReIngredients">Ingredients*</sys:String>
-    
-    <sys:String x:Key="PD_Variants">Product Variants</sys:String>
-    <sys:String x:Key="PD_Information">Product Information</sys:String>
-    <sys:String x:Key="PD_Images">Product Images</sys:String>
+
+    <sys:String x:Key="PD_Variants">Product variants</sys:String>
+    <sys:String x:Key="PD_Information">Product information</sys:String>
+    <sys:String x:Key="PD_Images">Product images</sys:String>
 
     <sys:String x:Key="PD_VariantID">Variant ID</sys:String>
     <sys:String x:Key="PD_Type">Type</sys:String>
     <sys:String x:Key="PD_Cost">Cost</sys:String>
     <sys:String x:Key="PD_Price">Price</sys:String>
     <sys:String x:Key="PD_Status">Status</sys:String>
-    <sys:String x:Key="PD_Create">New Vaiant</sys:String>
-    <sys:String x:Key="PD_Edit">Update Selected Variant</sys:String>
-    <sys:String x:Key="PD_Delete">Delete Selected Variant</sys:String>
+    <sys:String x:Key="PD_CreateVariant">New variant</sys:String>
+    <sys:String x:Key="PD_EditVariant">Update selected variant</sys:String>
+    <sys:String x:Key="PD_DeleteVariant">Delete selected variant</sys:String>
+
+    <sys:String x:Key="PD_EditInfo">Update</sys:String>
+    <sys:String x:Key="PD_Save">Save</sys:String>
+    <sys:String x:Key="PD_Cancel">Cancel</sys:String>
 
     <sys:String x:Key="PD_ImageID">Image ID</sys:String>
     <sys:String x:Key="PD_Image">Images</sys:String>
-    <sys:String x:Key="PD_AddImages">Add Images</sys:String>
-    <sys:String x:Key="PD_DeleteImages">Delete Images</sys:String>
+    <sys:String x:Key="PD_AddImages">Add images</sys:String>
+    <sys:String x:Key="PD_DeleteImages">Delete selected images</sys:String>
     <!--#endregion-->
 
+    <!--#region Product View-->
+    <sys:String x:Key="NP_Title">New product</sys:String>
+    <sys:String x:Key="NP_Save">Save</sys:String>
+    <sys:String x:Key="NP_Cancel">Cancel</sys:String>
+    <!--#endregion-->
 
+    <!--#region Variant View-->
+    <sys:String x:Key="PV_VariantID1">Variant ID</sys:String>
+    <sys:String x:Key="PV_VariantID2">Variant ID - Auto generated</sys:String>
+    <sys:String x:Key="PV_Save">Save</sys:String>
+    <sys:String x:Key="PV_Cancel">Cancel</sys:String>
+    <!--#endregion-->
 
-    <sys:String x:Key="TotalOrdersNum">Total orders number</sys:String>
-    <sys:String x:Key="TotalAvailableProductVariantsNum">Total available product variants numer</sys:String>
-    <sys:String x:Key="TotalSoldProductVariantsNum">Total sold product variants number</sys:String>
-    <sys:String x:Key="Pending">Pending</sys:String>
-    <sys:String x:Key="Shipping">Shipping</sys:String>
-    <sys:String x:Key="Shipped">Shipped</sys:String>
-    <sys:String x:Key="Cancelled">Cancelled</sys:String>
-    <sys:String x:Key="FiveMostRecentOrder">5 most recent order</sys:String>
-    <sys:String x:Key="OrderID">Order ID</sys:String>
-    <sys:String x:Key="CustomerName">Cutomer name</sys:String>
-    <sys:String x:Key="Total">Total</sys:String>
-    <sys:String x:Key="Status">Status</sys:String>
+    <!--#region Seperated Product Images View-->
+    <sys:String x:Key="SPI_Title">Quản lý hình ảnh</sys:String>
+    <!--#endregion-->
 
-    <sys:String x:Key="CustomerName2">Cutomer name:</sys:String>
-    <sys:String x:Key="Status2">Status:</sys:String>
-    <sys:String x:Key="ProductName">ProductName</sys:String>
-    <sys:String x:Key="Category">Category</sys:String>
-    <sys:String x:Key="Quanity">Quantity</sys:String>
-    <sys:String x:Key="UnitPrice">Unit Price</sys:String>
-    <sys:String x:Key="Subtotal">Subtotal</sys:String>
-    <sys:String x:Key="Total2">Total:</sys:String>
-    <sys:String x:Key="PaymentMethod">Payment Method</sys:String>
-    <sys:String x:Key="PurchaseDate">Purchase Date</sys:String>
-    <sys:String x:Key="ShipmentDetail">Shipment Detail:</sys:String>
-    <sys:String x:Key="OrderDetail">ORDER DETAIL</sys:String>
-    <sys:String x:Key="Note">Note</sys:String>
+    <!--#region Seperated Order View-->
+    <sys:String x:Key="Order_Title">Orders</sys:String>
+    <sys:String x:Key="Order_ID">Order ID</sys:String>
+    
+    <sys:String x:Key="Order_ProductName">ProductName</sys:String>
+    <sys:String x:Key="Order_Category">Category</sys:String>
+    <sys:String x:Key="Order_Quanity">Quantity</sys:String>
+    <sys:String x:Key="Order_UnitPrice">Unit price</sys:String>
+    <sys:String x:Key="Order_Subtotal">Subtotal</sys:String>
+    <sys:String x:Key="Order_OrderDetail">Order detail</sys:String>
+    <sys:String x:Key="Order_Note">Note</sys:String>
+    <sys:String x:Key="Order_Address">Address</sys:String>
+    <sys:String x:Key="Order_Phone">Phone number</sys:String>
 
-    <sys:String x:Key="AccountStatus">Account Status</sys:String>
-    <sys:String x:Key="AccountID">Account ID</sys:String>
-    <sys:String x:Key="AccountID2">ID</sys:String>
-    <sys:String x:Key="FullName">Full Name</sys:String>
-    <sys:String x:Key="Roles">Role(s)</sys:String>
-    <sys:String x:Key="AccountDetail">ACCOUNT DETAIL</sys:String>
-    <sys:String x:Key="NewAccount">New Account</sys:String>
+    <sys:String x:Key="Order_PaymentMethodColon">Payment method:&#160;</sys:String>
+    <sys:String x:Key="Order_PurchaseDateColon">Purchase date:&#160;</sys:String>
+    <sys:String x:Key="Order_StatusColon">Status:&#160;</sys:String>
+    <sys:String x:Key="Order_CustomerNameColon">Cutomer name:&#160;</sys:String>
+    <sys:String x:Key="Order_ShipmentDetailColon">Shipment detail:&#160;</sys:String>
+    <sys:String x:Key="Order_TotalColon">Total:&#160;</sys:String>
 
-    <sys:String x:Key="CreateNewAccount">Create New Account</sys:String>
-    <sys:String x:Key="CreateAccount">Create account</sys:String>
+    <sys:String x:Key="Order_PaymentMethod">Payment method</sys:String>
+    <sys:String x:Key="Order_PurchaseDate">Purchase date</sys:String>
+    <sys:String x:Key="Order_Status">Status</sys:String>
+    <sys:String x:Key="Order_CustomerName">Cutomer name</sys:String>
+    <sys:String x:Key="Order_ShipmentDetail">Shipment detail</sys:String>
+    <sys:String x:Key="Order_Total">Total</sys:String>
+    <!--#endregion-->
 
-    <sys:String x:Key="LastName2">Last Name*</sys:String>
-    <sys:String x:Key="Email2">Last Name*</sys:String>
-    <sys:String x:Key="Phone2">Phone number*</sys:String>
-    <sys:String x:Key="FirstName2">First Name*</sys:String>
+    <!--#region Account view-->
+    <sys:String x:Key="Account_Title">Accounts</sys:String>
+    <sys:String x:Key="Account_ID">ID</sys:String>
+    <sys:String x:Key="Account_AccountID">Account ID</sys:String>
+    <sys:String x:Key="Account_CustomerName">Customer name</sys:String>
+    <sys:String x:Key="Account_FullName">Customer name</sys:String>
+    <sys:String x:Key="Accoutn_Email">Email</sys:String>
+    <sys:String x:Key="AccountPhone">Phone number</sys:String>
+    <sys:String x:Key="Account_Status">Status</sys:String>
+    <sys:String x:Key="Account_AccountStatus">Account status</sys:String>
+    <sys:String x:Key="Account_Role">Role(s)</sys:String>
+    <sys:String x:Key="Account_Address">Address</sys:String>
+    <sys:String x:Key="Account_Language">Language</sys:String>
+    <sys:String x:Key="Account_Details">Account details</sys:String>
+    <sys:String x:Key="Account_NewAccount">New account</sys:String>
+    <!--#endregion-->
 
-    <sys:String x:Key="DialogButtonConfirm">CONFIRM</sys:String>
-    <sys:String x:Key="DialogButtonCancel">CANCEL</sys:String>
-    <sys:String x:Key="DialogButtonOkay">OKAY</sys:String>
+    <!--#region New Account view-->
+    <sys:String x:Key="NA_Title">Create new account</sys:String>
+    <sys:String x:Key="NA_Save">Save</sys:String>
+    <sys:String x:Key="NA_Cancel">Cancel</sys:String>
+    <!--#endregion-->
+    
+    <!--Code Behind-->
+    
+    <!--#region Forgot password-->
+    <sys:String x:Key="FP_RequestSent">We have sent you an email, please check it and follow the instructions</sys:String>
+    <!--#endregion-->
 
-   <!--#region Account-->
-    <sys:String x:Key="Activated">Activated</sys:String>
-    <sys:String x:Key="NotActivated">Not Activated</sys:String>
+    <!--#region Main -->
+    <sys:String x:Key="Main_LanguageReminder">Some language settings will only be applied after the program is restarted or the UI is refreshed</sys:String>
+    <!--#endregion-->
+
+    <!--#region Validation -->
+    <sys:String x:Key="Validation_RequiredField">Please fill in this field</sys:String>
     <!--#endregion-->
 </ResourceDictionary>

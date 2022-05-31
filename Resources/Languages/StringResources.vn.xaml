@@ -3,11 +3,14 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <!--#region Messages-->
-    <sys:String x:Key="Message_ConfirmationTitle">Confirm</sys:String>
-    <sys:String x:Key="Message_ErrorTitle">An Error Occured!</sys:String>
-    <sys:String x:Key="Message_InfoTitle">Notification</sys:String>
+    <sys:String x:Key="Message_ConfirmationTitle">Xác nhận</sys:String>
+    <sys:String x:Key="Message_ErrorTitle">Xảy ra lỗi</sys:String>
+    <sys:String x:Key="Message_InfoTitle">Thông báo</sys:String>
+    <sys:String x:Key="DialogButtonConfirm">Confirm</sys:String>
+    <sys:String x:Key="DialogButtonCancel">Cancel</sys:String>
+    <sys:String x:Key="DialogButtonOkay">Okay</sys:String>
     <!--#endregion-->
-    
+
     <!--#region Login View-->
     <sys:String x:Key="Login_Greeting1">Chào mừng trở lại!</sys:String>
     <sys:String x:Key="Login_Greeting2">Tiến hành đăng nhập</sys:String>
@@ -17,14 +20,13 @@
     <sys:String x:Key="Login_Password">Mật khẩu</sys:String>
     <sys:String x:Key="Login_RememberMe">Ghi nhớ đăng nhập</sys:String>
     <!--#endregion-->
-    
+
     <!--#region Forgot Password View-->
     <sys:String x:Key="FP_PasswordRecovery">Đặt lại mật khẩu</sys:String>
     <sys:String x:Key="FP_Instruction">Nhập email dùng để đăng nhập tài khoản của bạn, chúng tôi sẽ gửi tin nhắn xác thực</sys:String>
     <sys:String x:Key="FP_Email">Email</sys:String>
     <sys:String x:Key="FP_Cancel">Hủy</sys:String>
     <sys:String x:Key="FP_Continue">Tiếp tục</sys:String>
-    <sys:String x:Key="FP_RequestSent">Chúng tôi đã gửi bạn email xác thực, vui lòng kiểm tra và làm theo hướng dẫn</sys:String>
     <!--#endregion-->
 
     <!--#region Main View-->
@@ -72,6 +74,7 @@
 
     <!--#region Product View-->
     <sys:String x:Key="PD_Title">Sản phẩm</sys:String>
+    <sys:String x:Key="PD_NewProduct">Thêm sản phẩm mới</sys:String>
     <sys:String x:Key="PD_ID">Mã SP</sys:String>
     <sys:String x:Key="PD_Name">Tên</sys:String>
     <sys:String x:Key="PD_Category">Danh mục</sys:String>
@@ -79,22 +82,29 @@
     <sys:String x:Key="PD_Allergens">Dị ứng</sys:String>
     <sys:String x:Key="PD_ProductDetails">Chi tiết sản phẩm</sys:String>
     <sys:String x:Key="PD_Available">Còn hàng</sys:String>
-    <sys:String x:Key="PD_TotalMessage">Sản phẩm này có tổng cộng </sys:String>
-    <sys:String x:Key="PD_VariantTotalMessage"> biến thể</sys:String>
-    <sys:String x:Key="PD_ImageTotalMessage"> hình ảnh</sys:String>
+    <sys:String x:Key="PD_TotalMessage">Sản phẩm này có tổng cộng</sys:String>
+    <sys:String x:Key="PD_VariantTotalMessage">biến thể</sys:String>
+    <sys:String x:Key="PD_ImageTotalMessage">hình ảnh</sys:String>
+
+    <sys:String x:Key="PD_ReqName">Tên*</sys:String>
+    <sys:String x:Key="PD_ReIngredients">Nguyên liệu*</sys:String>
 
     <sys:String x:Key="PD_Variants">Các biến thể của sản phẩm</sys:String>
     <sys:String x:Key="PD_Information">Thông tin sản phẩm</sys:String>
     <sys:String x:Key="PD_Images">Hình ảnh sản phẩm</sys:String>
-    
+
     <sys:String x:Key="PD_VariantID">Mã biến thể</sys:String>
     <sys:String x:Key="PD_Type">Loại</sys:String>
     <sys:String x:Key="PD_Cost">Giá gốc</sys:String>
     <sys:String x:Key="PD_Price">Giá bán</sys:String>
     <sys:String x:Key="PD_Status">Tình trạng</sys:String>
-    <sys:String x:Key="PD_Create">Thêm biến thể</sys:String>
-    <sys:String x:Key="PD_Edit">Sửa biến thể đã chọn</sys:String>
-    <sys:String x:Key="PD_Delete">Xóa biến thể đã chọn</sys:String>
+    <sys:String x:Key="PD_CreateVariant">Thêm biến thể</sys:String>
+    <sys:String x:Key="PD_EditVariant">Sửa biến thể đã chọn</sys:String>
+    <sys:String x:Key="PD_DeleteVariant">Xóa biến thể đã chọn</sys:String>
+
+    <sys:String x:Key="PD_EditInfo">Cập nhật</sys:String>
+    <sys:String x:Key="PD_Save">Lưu</sys:String>
+    <sys:String x:Key="PD_Cancel">Hủy</sys:String>
 
     <sys:String x:Key="PD_ImageID">Mã ảnh</sys:String>
     <sys:String x:Key="PD_Image">Hình ảnh</sys:String>
@@ -102,46 +112,87 @@
     <sys:String x:Key="PD_DeleteImages">Xóa các ảnh đã chọn</sys:String>
     <!--#endregion-->
 
-
-
-
-
-    <sys:String x:Key="CustomerName2">Tên khách hàng:</sys:String>
-    <sys:String x:Key="Status2">Trạng thái:</sys:String>
-    <sys:String x:Key="ProductName">Tên sản phẩm</sys:String>
-    <sys:String x:Key="Category">Danh mục</sys:String>
-    <sys:String x:Key="Quantity">Số lượng</sys:String>
-    <sys:String x:Key="UnitPrice">Đơn giá</sys:String>
-    <sys:String x:Key="Subtotal">Thành tiền</sys:String>
-    <sys:String x:Key="Total2">Thành tiền:</sys:String>
-    <sys:String x:Key="PaymentMethod">Phương thức thanh toán</sys:String>
-    <sys:String x:Key="PurchaseDate">Ngày mua</sys:String>
-    <sys:String x:Key="ShipmentDetail">Thông tin giao hàng:</sys:String>
-    <sys:String x:Key="OrderDetail">CHI TIẾT THÔNG TIN ĐƠN HÀNG</sys:String>
-    <sys:String x:Key="Note">Ghi chú</sys:String>
-
-    <sys:String x:Key="AccountStatus">Trạng thái tài khoản</sys:String>
-    <sys:String x:Key="AccountID">Mã tài khoản</sys:String>
-    <sys:String x:Key="AccountID2">Mã TK</sys:String>
-    <sys:String x:Key="FullName">Họ và tên</sys:String>
-    <sys:String x:Key="Roles">Nhóm quyền</sys:String>
-    <sys:String x:Key="AccountDetail">CHI TIẾT THÔNG TIN TÀI KHOẢN</sys:String>
-    <sys:String x:Key="NewAccount">THÊM TÀI KHOẢN</sys:String>
-
-    <sys:String x:Key="CreateNewAccount">Tạo tài khoản mới</sys:String>
-    <sys:String x:Key="CreateAccount">Tạo tài khoản</sys:String>
-
-    <sys:String x:Key="LastName2">Họ và tên lót*</sys:String>
-    <sys:String x:Key="Email2">Email*</sys:String>
-    <sys:String x:Key="Phone2">Số điện thoại*</sys:String>
-    <sys:String x:Key="FirstName2">Tên*</sys:String>
-
-    <sys:String x:Key="DialogButtonConfirm">XÁC NHẬN</sys:String>
-    <sys:String x:Key="DialogButtonCancel">HỦY</sys:String>
-    <sys:String x:Key="DialogButtonOkay">ĐÃ HIỂU</sys:String>
-
-    <!--#region Account-->
-    <sys:String x:Key="Activated">Đã kích hoạt</sys:String>
-    <sys:String x:Key="NotActivated">Chưa kích hoạt</sys:String>
+    <!--#region Product View-->
+    <sys:String x:Key="NP_Title">Thêm sản phẩm mới</sys:String>
+    <sys:String x:Key="NP_Save">Lưu</sys:String>
+    <sys:String x:Key="NP_Cancel">Hủy</sys:String>
     <!--#endregion-->
+
+    <!--#region Variant View-->
+    <sys:String x:Key="PV_VariantID1">Variant ID</sys:String>
+    <sys:String x:Key="PV_VariantID2">Variant ID - Auto generated</sys:String>
+    <sys:String x:Key="PV_Save">Lưu</sys:String>
+    <sys:String x:Key="PV_Cancel">Hủy</sys:String>
+    <!--#endregion-->
+
+    <!--#region Seperated Product Images View-->
+    <sys:String x:Key="SPI_Title">Quản lý hình ảnh</sys:String>
+    <!--#endregion-->
+
+    <!--#region Seperated Order View-->
+    <sys:String x:Key="Order_Title">Đơn hàng</sys:String>
+    <sys:String x:Key="Order_ID">Mã đơn</sys:String>
+
+    <sys:String x:Key="Order_ProductName">Tên SP</sys:String>
+    <sys:String x:Key="Order_Category">Danh mục</sys:String>
+    <sys:String x:Key="Order_Quanity">Số lượng</sys:String>
+    <sys:String x:Key="Order_UnitPrice">Đơn giá</sys:String>
+    <sys:String x:Key="Order_Subtotal">Subtotal</sys:String>
+    <sys:String x:Key="Order_OrderDetail">Chi tiết đơn hàng</sys:String>
+    <sys:String x:Key="Order_Note">Ghi chú</sys:String>
+    <sys:String x:Key="Order_Address">Địa chỉ</sys:String>
+    <sys:String x:Key="Order_Phone">Số điện thoại</sys:String>
+
+    <sys:String x:Key="Order_PaymentMethodColon">Phương thức thanh toán:&#160;</sys:String>
+    <sys:String x:Key="Order_PurchaseDateColon">Ngày mua:&#160;</sys:String>
+    <sys:String x:Key="Order_StatusColon">Trạng thái:&#160;</sys:String>
+    <sys:String x:Key="Order_CustomerNameColon">Tên KH:&#160;</sys:String>
+    <sys:String x:Key="Order_ShipmentDetailColon">Thông tin vận chuyển:&#160;</sys:String>
+    <sys:String x:Key="Order_TotalColon">Tổng tiền:&#160;</sys:String>
+
+    <sys:String x:Key="Order_PaymentMethod">Phương thức thanh toán</sys:String>
+    <sys:String x:Key="Order_PurchaseDate">Ngày mua</sys:String>
+    <sys:String x:Key="Order_Status">Trạng thái</sys:String>
+    <sys:String x:Key="Order_CustomerName">Tên KH</sys:String>
+    <sys:String x:Key="Order_ShipmentDetail">Thông tin vận chuyển</sys:String>
+    <sys:String x:Key="Order_Total">Tổng tiền</sys:String>
+    <!--#endregion-->
+
+    <!--#region Account view-->
+    <sys:String x:Key="Account_Title">Tài khoản</sys:String>
+    <sys:String x:Key="Account_ID">Mã</sys:String>
+    <sys:String x:Key="Account_AccountID">Mã tài khoản</sys:String>
+    <sys:String x:Key="Account_CustomerName">Tên KH</sys:String>
+    <sys:String x:Key="Account_FullName">Họ tên khách nàng</sys:String>
+    <sys:String x:Key="Accoutn_Email">Email</sys:String>
+    <sys:String x:Key="AccountPhone">Số điện thoại</sys:String>
+    <sys:String x:Key="Account_Status">Trạng thái</sys:String>
+    <sys:String x:Key="Account_AccountStatus">Trạng thái tài khoản</sys:String>
+    <sys:String x:Key="Account_Role">Nhóm quyền</sys:String>
+    <sys:String x:Key="Account_Address">Địa chỉ</sys:String>
+    <sys:String x:Key="Account_Language">Ngôn ngữ</sys:String>
+    <sys:String x:Key="Account_Details">Chi tiết tài khoản</sys:String>
+    <sys:String x:Key="Account_NewAccount">Tạo tài khoản mới</sys:String>
+    <!--#endregion-->
+
+    <!--#region New Account view-->
+    <sys:String x:Key="NA_Title">Tạo tài khoản mới</sys:String>
+    <sys:String x:Key="NA_Save">Lưu</sys:String>
+    <sys:String x:Key="NA_Cancel">Hủy</sys:String>
+    <!--#endregion-->
+
+    <!--Code Behind-->
+
+    <!--#region Forgot password-->
+    <sys:String x:Key="FP_RequestSent">Chúng tôi đã gửi bạn email xác thực, vui lòng kiểm tra và làm theo hướng dẫn</sys:String>
+    <!--#endregion-->
+
+    <!--#region Main -->
+    <sys:String x:Key="Main_LanguageReminder">Một số thiết lập ngôn ngữ cần phải khởi động lại chương trình hoặc làm mới để có hiệu lực</sys:String>
+    <!--#endregion-->
+
+    <!--#region Validation -->
+    <sys:String x:Key="Validation_RequiredField">Vui lòng điền thông tin này</sys:String>
+    <!--#endregion-->
+
 </ResourceDictionary>

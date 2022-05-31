@@ -58,7 +58,7 @@
                                 Grid.Row="0"
                                 materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                 Style="{StaticResource CustomPrimaryButton}"
-                                Content="Thêm sản phẩm mới"
+                                Content="{DynamicResource PD_NewProduct}"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Margin="0 0 0 0" />
@@ -344,14 +344,14 @@
 
                                                                 <Button x:Name="UpdateInformationAsync"
                                                                         Style="{StaticResource CustomPrimaryButton}"
-                                                                        Content="Lưu"
+                                                                        Content="{DynamicResource PD_Save}"
                                                                         MinWidth="75"
                                                                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                                                         Margin="0 0 10 0" />
                                                                 <Button x:Name="CancelUpdatingInformation"
                                                                         Style="{StaticResource CustomSecondaryButton}"
                                                                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                                                        Content="Hủy"
+                                                                        Content="{DynamicResource PD_Cancel}"
                                                                         MinWidth="75"
                                                                         Margin="10 0 0 0" />
                                                             </StackPanel>
@@ -366,7 +366,7 @@
 
                                                                 <Button x:Name="RequestUpdatingInformation"
                                                                         Style="{StaticResource CustomBorderButton}"
-                                                                        Content="Cập nhật"
+                                                                        Content="{DynamicResource PD_EditInfo}"
                                                                         IsEnabled="{Binding ProductDetails, Converter={StaticResource nullToEnabled}}"
                                                                         VerticalAlignment="Top"
                                                                         Margin="0 0 0 0"
@@ -499,9 +499,9 @@
                                                                     Grid.Column="1">
                                                             <TextBlock VerticalAlignment="Center">
                                                             <Span>
-                                                                <Run Text="Tất cả có" />
+                                                                <Run Text="{DynamicResource PD_TotalMessage}" />
                                                                  <Run Text="{Binding TotalVariants}" />
-                                                                <Run Text="loại sản phẩm" />
+                                                                <Run Text="{DynamicResource PD_VariantTotalMessage}" />
                                                             </Span>
                                                             </TextBlock>
                                                         </StackPanel>
@@ -513,7 +513,7 @@
                                                                     Grid.Column="2">
                                                             <Button x:Name="ShowNewVariantDialog"
                                                                     Style="{StaticResource CustomBorderButton}"
-                                                                    Content="Thêm"
+                                                                    Content="{DynamicResource PD_CreateVariant}"
                                                                     IsEnabled="{Binding SelectedProduct, Converter={StaticResource nullToEnabled}}"
                                                                     Margin="0 0 15 0"
                                                                     MinWidth="100"
@@ -521,7 +521,7 @@
 
                                                             <Button x:Name="ShowEditVariantDialog"
                                                                     Style="{StaticResource CustomBorderButton}"
-                                                                    Content="Cập nhật"
+                                                                    Content="{DynamicResource PD_EditVariant}"
                                                                     IsEnabled="{Binding Path=SelectedItem, ElementName=RowItemVariants, Converter={StaticResource selectedToBoolConverter}}"
                                                                     Margin="0 0 15 0"
                                                                     MinWidth="100"
@@ -529,7 +529,7 @@
 
                                                             <Button x:Name="DeleteVariant"
                                                                     Style="{StaticResource CustomBorderButton}"
-                                                                    Content="Xóa"
+                                                                    Content="{DynamicResource PD_DeleteVariant}"
                                                                     IsEnabled="{Binding Path=SelectedItem, ElementName=RowItemVariants, Converter={StaticResource selectedToBoolConverter}}"
                                                                     Margin="0 0 15 0"
                                                                     MinWidth="100"
@@ -554,21 +554,21 @@
                                                                       SelectionMode="Single"
                                                                       SelectedItem="{Binding Path=SelectedVariant, Mode=TwoWay}">
                                                                 <DataGrid.Columns>
-                                                                    <DataGridTextColumn Header="Mã SP"
+                                                                    <DataGridTextColumn Header="{DynamicResource PD_VariantID}"
                                                                                         Width="2*"
                                                                                         Binding="{Binding Path=Id}" />
-                                                                    <DataGridTextColumn Header="Loại"
+                                                                    <DataGridTextColumn Header="{DynamicResource PD_Type}"
                                                                                         Width="3*"
                                                                                         Binding="{Binding Path=TypeName}" />
-                                                                    <DataGridTextColumn Header="Giá gốc"
+                                                                    <DataGridTextColumn Header="{DynamicResource PD_Cost}"
                                                                                         Width="3*"
                                                                                         Binding="{Binding Path=FormattedCost}" />
-                                                                    <DataGridTextColumn Header="Giá bán"
+                                                                    <DataGridTextColumn Header="{DynamicResource PD_Price}"
                                                                                         Width="3*"
                                                                                         Binding="{Binding Path=FormattedPrice}" />
-                                                                    <DataGridTextColumn Header="Tình trạng"
+                                                                    <DataGridTextColumn Header="{DynamicResource PD_Variants}"
                                                                                         Width="2*"
-                                                                                        Binding="{Binding Path=AvailableName}" />
+                                                                                        Binding="{Binding Path=PD_Status}" />
                                                                 </DataGrid.Columns>
                                                             </DataGrid>
                                                         </Border>
@@ -616,9 +616,9 @@
                                                                     Grid.Column="1">
                                                             <TextBlock VerticalAlignment="Center">
                                                             <Span>
-                                                                <Run Text="Tất cả có" />
+                                                                <Run Text="{DynamicResource PD_TotalMessage}" />
                                                                  <Run Text="{Binding TotalImages}" />
-                                                                <Run Text="hình ảnh sản phẩm" />
+                                                                <Run Text="{DynamicResource PD_ImageTotalMessage}" />
                                                             </Span>
                                                             </TextBlock>
                                                         </StackPanel>
@@ -631,14 +631,14 @@
                                                             <Button x:Name="AddImagesAsync"
                                                                     Style="{StaticResource CustomBorderButton}"
                                                                     IsEnabled="{Binding RowItemImages, Converter={StaticResource nullToEnabled}}"
-                                                                    Content="Thêm nhiều ảnh mới"
+                                                                    Content="{DynamicResource PD_AddImages}"
                                                                     HorizontalAlignment="Right"
                                                                     materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                                                     Margin="0 0 0 0" />
 
                                                             <Button x:Name="ConfirmDeleteImages"
                                                                     Style="{StaticResource CustomBorderButton}"
-                                                                    Content="Xóa các ảnh đã chọn"
+                                                                    Content="{DynamicResource PD_DeleteImages}"
                                                                     Margin="15 0 0 0"
                                                                     HorizontalAlignment="Right"
                                                                     materialDesign:ShadowAssist.ShadowDepth="Depth0" />
@@ -686,7 +686,7 @@
                                                                 </DataGrid.Resources>-->
 
                                                                 <DataGrid.Columns>
-                                                                    <DataGridTextColumn Header="Mã ảnh"
+                                                                    <DataGridTextColumn Header="{DynamicResource PD_ImageID}"
                                                                                         Width="1*"
                                                                                         Binding="{Binding Path=Id}">
                                                                         <DataGridTextColumn.ElementStyle>
@@ -705,7 +705,7 @@
                                                                             </Style>
                                                                         </DataGridTextColumn.HeaderStyle>
                                                                     </DataGridTextColumn>
-                                                                    <DataGridTemplateColumn Header="Hình ảnh"
+                                                                    <DataGridTemplateColumn Header="{DynamicResource PD_Image}"
                                                                                             Width="4*"
                                                                                             IsReadOnly="True">
                                                                         <DataGridTemplateColumn.HeaderStyle>

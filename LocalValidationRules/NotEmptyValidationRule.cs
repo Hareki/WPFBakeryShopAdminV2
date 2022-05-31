@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Windows.Controls;
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 
 namespace WPFBakeryShopAdminV2.LocalValidationRules
 {
@@ -11,7 +12,7 @@ namespace WPFBakeryShopAdminV2.LocalValidationRules
         {
             if (string.IsNullOrWhiteSpace(value?.ToString()))
             {
-                return new ValidationResult(false, Message ?? "A value is required");
+                return new ValidationResult(false, Message ?? LangStr.Get("Validation_RequiredField"));
             }
             return ValidationResult.ValidResult;
         }

@@ -11,7 +11,7 @@
         xmlns:viewmodels="clr-namespace:WPFBakeryShopAdminV2.MVVM.ViewModels"
         d:DataContext="{d:DesignInstance Type=viewmodels:ProductVariantViewModel}"
         mc:Ignorable="d"
-        Title="ProductVariantView"
+        Title="Biến thể sản phẩm"
         Icon="/Resources/Images/favicon.ico"
         WindowStartupLocation="CenterOwner"
         Height="430"
@@ -128,7 +128,7 @@
                               HorizontalAlignment="Left"
                               Margin="0 0 0 30" />
                 <TextBlock Margin="15 0 0 30"
-                           Text="Tình trạng kinh doanh"
+                           Text="{DynamicResource PD_Available}"
                            VerticalAlignment="Center" />
             </StackPanel>
 
@@ -140,14 +140,14 @@
                         Margin="0 0 0 30">
                 <Button x:Name="AddEditProductVariant"
                         Style="{StaticResource CustomPrimaryButton}"
-                        Content="LƯU"
+                        Content="{DynamicResource PV_Save}"
                         MinWidth="75"
                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
                         Margin="0 0 10 0" />
                 <Button x:Name="Cancel"
                         Style="{StaticResource CustomSecondaryButton}"
                         materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                        Content="HỦY"
+                        Content="{DynamicResource PV_Cancel}"
                         MinWidth="75"
                         Margin="10 0 0 0" />
             </StackPanel>
@@ -157,7 +157,7 @@
                      Grid.Column="0"
                      Grid.ColumnSpan="4"
                      Grid.Row="2"
-                     materialDesign:HintAssist.Hint="Mã loại"
+                     materialDesign:HintAssist.Hint="{DynamicResource PV_VariantID1}"
                      Margin="0 0 15 15"
                      IsEnabled="False" />
 
@@ -166,7 +166,7 @@
                      Grid.Column="0"
                      Grid.ColumnSpan="4"
                      Grid.Row="2"
-                     materialDesign:HintAssist.Hint="Mã loại - Tự động sinh"
+                     materialDesign:HintAssist.Hint="{DynamicResource PV_VariantID2}"
                      Margin="0 0 15 15"
                      IsEnabled="False" />
 
@@ -176,7 +176,7 @@
                       Grid.ColumnSpan="9"
                       Grid.Row="2"
                       Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                      materialDesign:HintAssist.Hint="Loại sản phẩm"
+                      materialDesign:HintAssist.Hint="{DynamicResource PD_Type}"
                       Margin="15 0 0 15">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -194,7 +194,7 @@
                                         Grid.ColumnSpan="6"
                                         Grid.Row="3"
                                         Culture="vi-VN"
-                                        materialDesign:HintAssist.Hint="Giá gốc"
+                                        materialDesign:HintAssist.Hint="{DynamicResource PD_Cost}"
                                         Margin="0 15 15 0" />
 
             <syncfusion:CurrencyTextBox x:Name="ProductPrice"
@@ -204,7 +204,7 @@
                                         Grid.ColumnSpan="6"
                                         Grid.Row="3"
                                         Culture="vi-VN"
-                                        materialDesign:HintAssist.Hint="Giá bán"
+                                        materialDesign:HintAssist.Hint="{DynamicResource PD_Price}"
                                         Margin="15 15 0 0" />
         </Grid>
     </Border>

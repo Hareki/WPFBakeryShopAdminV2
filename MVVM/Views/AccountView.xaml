@@ -35,7 +35,7 @@
                     <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                                FontWeight="SemiBold"
                                Margin="{StaticResource TitleMargin}"
-                               Text="{DynamicResource Accounts}" />
+                               Text="{DynamicResource Account_Title}" />
                     <Button x:Name="LoadPage"
                             Style="{StaticResource MaterialDesignIconForegroundButton}"
                             ToolTip="MaterialDesignIconForegroundButton"
@@ -53,7 +53,7 @@
                             Grid.Row="0"
                             materialDesign:ShadowAssist.ShadowDepth="Depth0"
                             Style="{StaticResource CustomPrimaryButton}"
-                            Content="{DynamicResource NewAccount}"
+                            Content="{DynamicResource Account_NewAccount}"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             Margin="0 0 0 0" />
@@ -79,19 +79,19 @@
                                   SelectedItem="{Binding Path=SelectedAccount, Mode=OneWayToSource}"
                                   SelectionChanged="RowItemAccounts_SelectionChanged">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="{DynamicResource AccountID2}"
+                                <DataGridTextColumn Header="{DynamicResource Account_ID}"
                                                     Width="2*"
                                                     Binding="{Binding Path=Id}" />
-                                <DataGridTextColumn Header="{DynamicResource CustomerName}"
+                                <DataGridTextColumn Header="{DynamicResource Account_CustomerName}"
                                                     Width="4*"
                                                     Binding="{Binding Path=FullName}" />
-                                <DataGridTextColumn Header="{DynamicResource Email}"
+                                <DataGridTextColumn Header="{DynamicResource Accoutn_Email}"
                                                     Width="3*"
                                                     Binding="{Binding Path=Email}" />
-                                <DataGridTextColumn Header="{DynamicResource Phone}"
+                                <DataGridTextColumn Header="{DynamicResource AccountPhone}"
                                                     Width="3*"
                                                     Binding="{Binding Path=Phone}" />
-                                <DataGridTextColumn Header="{DynamicResource Activated}"
+                                <DataGridTextColumn Header="{DynamicResource Account_Status}"
                                                     Width="3*"
                                                     Binding="{Binding Path=ActivatedString}" />
                             </DataGrid.Columns>
@@ -154,7 +154,7 @@
                         Background="White"
                         MaxHeight="350">
                     <Expander x:Name="expander"
-                              Header="{DynamicResource AccountDetail}"
+                              Header="{DynamicResource Account_Details}"
                               FontWeight="SemiBold"
                               Background="White"
                               ExpandDirection="Up"
@@ -237,7 +237,7 @@
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 15 0" />
                                         <TextBlock Grid.Column="1"
-                                                   Text="{DynamicResource AccountStatus}"
+                                                   Text="{DynamicResource Account_AccountStatus}"
                                                    FontWeight="Bold"
                                                    VerticalAlignment="Center" />
                                         <TextBlock x:Name="SelectedAccount_ActivatedString"
@@ -267,7 +267,7 @@
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 15 0" />
                                         <TextBlock Grid.Column="1"
-                                                   Text="{DynamicResource AccountID}"
+                                                   Text="{DynamicResource Account_AccountID}"
                                                    FontWeight="Bold"
                                                    VerticalAlignment="Center" />
                                         <TextBlock x:Name="SelectedAccount_Id"
@@ -295,7 +295,7 @@
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 5 0" />
                                         <TextBlock Grid.Column="1"
-                                                   Text="{DynamicResource FullName}"
+                                                   Text="{DynamicResource Account_FullName}"
                                                    FontWeight="Bold"
                                                    VerticalAlignment="Center" />
 
@@ -324,7 +324,7 @@
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 5 0" />
                                         <TextBlock Grid.Column="1"
-                                                   Text="{DynamicResource Email}"
+                                                   Text="{DynamicResource Accoutn_Email}"
                                                    FontWeight="Bold"
                                                    VerticalAlignment="Center" />
 
@@ -353,7 +353,7 @@
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 5 0" />
                                         <TextBlock Grid.Column="1"
-                                                   Text="{DynamicResource Phone}"
+                                                   Text="{DynamicResource AccountPhone}"
                                                    FontWeight="Bold"
                                                    VerticalAlignment="Center" />
 
@@ -381,7 +381,7 @@
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 5 0" />
                                         <TextBlock Grid.Column="1"
-                                                   Text="{DynamicResource Language}"
+                                                   Text="{DynamicResource Account_Language}"
                                                    FontWeight="Bold"
                                                    VerticalAlignment="Center" />
 
@@ -410,7 +410,7 @@
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 5 0" />
                                         <TextBlock Grid.Column="1"
-                                                   Text="{DynamicResource Roles}"
+                                                   Text="{DynamicResource Account_Role}"
                                                    FontWeight="Bold"
                                                    VerticalAlignment="Center" />
 
@@ -439,7 +439,7 @@
                                                                  VerticalAlignment="Center"
                                                                  Margin="0 0 5 0" />
                                         <TextBlock Grid.Column="1"
-                                                   Text="{DynamicResource Address}"
+                                                   Text="{DynamicResource Account_Address}"
                                                    FontWeight="Bold"
                                                    VerticalAlignment="Center" />
 

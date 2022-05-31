@@ -23,17 +23,28 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 View.ConfirmContent.Visibility = Visibility.Visible;
                 View.ErrorContent.Visibility = Visibility.Collapsed;
+                View.InfoContent.Visibility = Visibility.Collapsed;
 
                 View.ConfirmTitleTB.Text = _title;
                 View.ConfirmMessageTB.Text = _message;
             }
-            else
+            else if (_contentType == ContentType.Error)
             {
                 View.ConfirmContent.Visibility = Visibility.Collapsed;
                 View.ErrorContent.Visibility = Visibility.Visible;
+                View.InfoContent.Visibility = Visibility.Collapsed;
 
                 View.ErrorTitleTB.Text = _title;
                 View.ErrorMessageTB.Text = _message;
+            }
+            else if (_contentType == ContentType.Info)
+            {
+                View.ConfirmContent.Visibility = Visibility.Collapsed;
+                View.ErrorContent.Visibility = Visibility.Collapsed;
+                View.InfoContent.Visibility = Visibility.Visible;
+
+                View.InfoTitleTB.Text = _title;
+                View.InfoMessageTB.Text = _message;
             }
         }
 
@@ -49,10 +60,14 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         {
             this.TryCloseAsync(false);
         }
+        public void ButtonInfoOkayClicked()
+        {
+            this.TryCloseAsync(true);
+        }
 
         public enum ContentType
         {
-            Confirm, Error
+            Confirm, Error, Info
         }
         private DialogView View => (DialogView)this.GetView();
     }

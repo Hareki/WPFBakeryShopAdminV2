@@ -28,7 +28,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         public async Task SendEmail()
         {
             if (HasErrors()) return;
-
+            if (Email == null) Email = View.txtEmail.Text;
             RestClient client = new RestClient(RestConnection.AUTHENTICATE_BASE_CONNECTION_STRING);
             var task = await RestConnection.ExecuteRequestAsync(client, Method.Post, "/reset-password/init", Email, "text/plain");
             int statusCode = (int)task.StatusCode;

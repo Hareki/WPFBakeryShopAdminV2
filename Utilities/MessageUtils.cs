@@ -111,5 +111,9 @@ namespace WPFBakeryShopAdminV2.Utilities
         {
             return windowManager.ShowDialogAsync(new DialogViewModel(title, message, ContentType.Error));
         }
+        public static Task ShowInfoMessageInDialog(string title, string message, IWindowManager windowManager)
+        {
+            return windowManager.ShowDialogAsync(new DialogViewModel(title, message, ContentType.Info));
+        }
     }
 }

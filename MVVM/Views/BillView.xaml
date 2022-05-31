@@ -137,7 +137,7 @@
                             <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                                        FontWeight="SemiBold"
                                        Margin="{StaticResource TitleMargin}"
-                                       Text="{DynamicResource Orders}" />
+                                       Text="{DynamicResource Order_Title}" />
                             <Button x:Name="LoadPage"
                                     Style="{StaticResource MaterialDesignIconForegroundButton}"
                                     ToolTip="MaterialDesignIconForegroundButton"
@@ -171,19 +171,19 @@
                                       SelectedItem="{Binding Path=SelectedBill, Mode=TwoWay}"
                                       cal:Message.Attach="[Event SelectionChanged] = [Action RowItemBills_SelectionChanged]">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="{DynamicResource OrderID}"
+                                    <DataGridTextColumn Header="{DynamicResource Order_ID}"
                                                         Width="2*"
                                                         Binding="{Binding Path=Id}" />
-                                    <DataGridTextColumn Header="{DynamicResource CustomerName}"
+                                    <DataGridTextColumn Header="{DynamicResource Order_CustomerName}"
                                                         Width="4*"
                                                         Binding="{Binding Path=CustomerName}" />
-                                    <DataGridTextColumn Header="{DynamicResource Status}"
+                                    <DataGridTextColumn Header="{DynamicResource Order_Status}"
                                                         Width="3*"
                                                         Binding="{Binding Path=StatusString}" />
-                                    <DataGridTextColumn Header="{DynamicResource PurchaseDate}"
+                                    <DataGridTextColumn Header="{DynamicResource Order_PurchaseDate}"
                                                         Width="4*"
                                                         Binding="{Binding Path=CreatedAt}" />
-                                    <DataGridTextColumn Header="{DynamicResource Total}"
+                                    <DataGridTextColumn Header="{DynamicResource Order_Total}"
                                                         Width="4*"
                                                         Binding="{Binding Path=FormattedTotal}" />
                                 </DataGrid.Columns>
@@ -272,7 +272,7 @@
                             Padding="15"
                             MaxHeight="350">
 
-                        <Expander Header="{DynamicResource OrderDetail}"
+                        <Expander Header="{DynamicResource Order_OrderDetail}"
                                   FontWeight="SemiBold"
                                   Background="White"
                                   ExpandDirection="Up"
@@ -345,23 +345,23 @@
                                                     <!--Đã fix dc! bằng based on-->
 
                                                     <DataGrid.Columns>
-                                                        <DataGridTextColumn Header="{DynamicResource ProductName}"
+                                                        <DataGridTextColumn Header="{DynamicResource Order_ProductName}"
                                                                             FontWeight="Normal"
                                                                             Width="4*"
                                                                             Binding="{Binding Path=ProductName}" />
-                                                        <DataGridTextColumn Header="{DynamicResource Category}"
+                                                        <DataGridTextColumn Header="{DynamicResource Order_Category}"
                                                                             FontWeight="Normal"
                                                                             Width="3*"
                                                                             Binding="{Binding Path=TypeName}" />
-                                                        <DataGridTextColumn Header="{DynamicResource Quantity}"
+                                                        <DataGridTextColumn Header="{DynamicResource Order_Quanity}"
                                                                             Width="3*"
                                                                             FontWeight="Normal"
                                                                             Binding="{Binding Path=Quantity}" />
-                                                        <DataGridTextColumn Header="{DynamicResource UnitPrice}"
+                                                        <DataGridTextColumn Header="{DynamicResource Order_UnitPrice}"
                                                                             FontWeight="Normal"
                                                                             Width="4*"
                                                                             Binding="{Binding Path=FormattedUnitPrice}" />
-                                                        <DataGridTextColumn Header="{DynamicResource Subtotal}"
+                                                        <DataGridTextColumn Header="{DynamicResource Order_Subtotal}"
                                                                             FontWeight="Normal"
                                                                             Width="4*"
                                                                             Binding="{Binding Path=SubTotal}" />
@@ -370,7 +370,7 @@
                                                 <StackPanel Margin="0 10 0 0"
                                                             Orientation="Horizontal"
                                                             HorizontalAlignment="Right">
-                                                    <TextBlock Text="{DynamicResource Total2}"
+                                                    <TextBlock Text="{DynamicResource Order_TotalColon}"
                                                                FontWeight="Bold" />
                                                     <TextBlock x:Name="BillDetails_FormattedTotal"
                                                                Text="200,000 đ"
@@ -381,7 +381,7 @@
                                         </Border>
 
 
-                                        <TextBlock Text="{DynamicResource CustomerName2}"
+                                        <TextBlock Text="{DynamicResource Order_CustomerNameColon}"
                                                    FontWeight="Bold"
                                                    Grid.Column="1"
                                                    Grid.Row="1"
@@ -395,7 +395,7 @@
                                                    Grid.ColumnSpan="3"
                                                    Margin="0 0 0 30" />
 
-                                        <TextBlock Text="{DynamicResource Status2}"
+                                        <TextBlock Text="{DynamicResource Order_StatusColon}"
                                                    FontWeight="Bold"
                                                    Grid.Column="7"
                                                    Grid.Row="1"
@@ -475,7 +475,7 @@
                                         </StackPanel>
 
 
-                                        <TextBlock Text="{DynamicResource PurchaseDate}"
+                                        <TextBlock Text="{DynamicResource Order_PurchaseDateColon}"
                                                    FontWeight="Bold"
                                                    Grid.Column="1"
                                                    Grid.Row="2"
@@ -490,7 +490,7 @@
                                                    FontWeight="Normal"
                                                    Margin="0 0 0 30" />
 
-                                        <TextBlock Text="{DynamicResource PaymentMethod}"
+                                        <TextBlock Text="{DynamicResource Order_PaymentMethodColon}"
                                                    FontWeight="Bold"
                                                    Grid.Column="7"
                                                    Grid.Row="2"
@@ -504,7 +504,7 @@
                                                    FontWeight="Normal"
                                                    Margin="0 0 0 30" />
 
-                                        <TextBlock Text="{DynamicResource ShipmentDetail}"
+                                        <TextBlock Text="{DynamicResource Order_ShipmentDetailColon}"
                                                    FontWeight="Bold"
                                                    Grid.Column="1"
                                                    Grid.Row="3"
@@ -530,7 +530,7 @@
                                                                      VerticalAlignment="Center"
                                                                      Margin="0 0 5 0" />
                                             <TextBlock Grid.Column="2"
-                                                       Text="{DynamicResource Address}"
+                                                       Text="{DynamicResource Order_Address}"
                                                        FontWeight="Bold"
                                                        VerticalAlignment="Center" />
 
@@ -562,7 +562,7 @@
                                                                      VerticalAlignment="Center"
                                                                      Margin="0 0 5 0" />
                                             <TextBlock Grid.Column="2"
-                                                       Text="{DynamicResource Phone}"
+                                                       Text="{DynamicResource Order_Phone}"
                                                        FontWeight="Bold"
                                                        VerticalAlignment="Center" />
 
@@ -592,7 +592,7 @@
                                                                      VerticalAlignment="Center"
                                                                      Margin="0 0 5 0" />
                                             <TextBlock Grid.Column="2"
-                                                       Text="{DynamicResource Note}"
+                                                       Text="{DynamicResource Order_Note}"
                                                        FontWeight="Bold"
                                                        VerticalAlignment="Center" />
 

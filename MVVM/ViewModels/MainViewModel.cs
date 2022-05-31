@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using WPFBakeryShopAdminV2.MVVM.Models.Pocos;
 using WPFBakeryShopAdminV2.MVVM.Views;
 using WPFBakeryShopAdminV2.Utilities;
+using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
@@ -76,7 +77,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         {
             RestConnection.LogOut();
         }
-
+        public void LanguageList_SelectionChanged()
+        {
+            Utilities.Language.SwitchLanguage(View.LanguageList.SelectedIndex);
+            MessageUtils.ShowInfoMessageInDialog(LangStr.Get("Message_ConfirmationTitle"), LangStr.Get("Main_LanguageReminder"), _windowManager);
+        }
         #endregion
 
         #region Loading Pages
