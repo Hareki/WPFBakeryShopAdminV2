@@ -6,9 +6,9 @@
     <sys:String x:Key="Message_ConfirmationTitle">Xác nhận</sys:String>
     <sys:String x:Key="Message_ErrorTitle">Xảy ra lỗi</sys:String>
     <sys:String x:Key="Message_InfoTitle">Thông báo</sys:String>
-    <sys:String x:Key="DialogButtonConfirm">Confirm</sys:String>
-    <sys:String x:Key="DialogButtonCancel">Cancel</sys:String>
-    <sys:String x:Key="DialogButtonOkay">Okay</sys:String>
+    <sys:String x:Key="DialogButtonConfirm">XÁC NHẬN</sys:String>
+    <sys:String x:Key="DialogButtonCancel">HỦY</sys:String>
+    <sys:String x:Key="DialogButtonOkay">ĐÃ HIỂU</sys:String>
     <!--#endregion-->
 
     <!--#region Login View-->
@@ -189,6 +189,7 @@
 
     <!--#region Main -->
     <sys:String x:Key="Main_LanguageReminder">Một số thiết lập ngôn ngữ cần phải khởi động lại chương trình hoặc làm mới để có hiệu lực</sys:String>
+    <sys:String x:Key="Main_LogoutConfirmation">Bạn có chắc muốn đăng xuất</sys:String>
     <!--#endregion-->
 
     <!--#region Validation -->

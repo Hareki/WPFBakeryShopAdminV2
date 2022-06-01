@@ -73,9 +73,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             }
             return null;
         }
-        public void LogOut()
+        public async Task LogOut()
         {
-            RestConnection.LogOut();
+            bool confirm = await MessageUtils.ShowConfirmMessageInDialog(LangStr.Get("Message_ConfirmationTitle"), LangStr.Get("Main_LogoutConfirmation"), _windowManager);
+            if (confirm)
+                RestConnection.LogOut();
         }
         public void LanguageList_SelectionChanged()
         {

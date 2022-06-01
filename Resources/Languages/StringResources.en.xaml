@@ -6,9 +6,9 @@
     <sys:String x:Key="Message_ConfirmationTitle">Confirmation</sys:String>
     <sys:String x:Key="Message_ErrorTitle">Error</sys:String>
     <sys:String x:Key="Message_InfoTitle">Notification</sys:String>
-    <sys:String x:Key="DialogButtonConfirm">Confirm</sys:String>
-    <sys:String x:Key="DialogButtonCancel">Cancel</sys:String>
-    <sys:String x:Key="DialogButtonOkay">Okay</sys:String>
+    <sys:String x:Key="DialogButtonConfirm">CONFIRM</sys:String>
+    <sys:String x:Key="DialogButtonCancel">CANCEL</sys:String>
+    <sys:String x:Key="DialogButtonOkay">OKAY</sys:String>
     <!--#endregion-->
 
     <!--#region Login View-->
@@ -189,6 +189,8 @@
 
     <!--#region Main -->
     <sys:String x:Key="Main_LanguageReminder">Some language settings will only be applied after the program is restarted or the UI is refreshed</sys:String>
+    <sys:String x:Key="Main_LogoutConfirmation">Are you sure want to log out?</sys:String>
+
     <!--#endregion-->
 
     <!--#region Validation -->
