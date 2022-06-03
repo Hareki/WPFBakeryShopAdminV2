@@ -38,5 +38,14 @@ namespace WPFBakeryShopAdminV2.Lists
             }
             return null;
         }
+        public static int FindTypeIndexById(int id)
+        {
+            if (_types != null)
+            {
+                int result = _types.FindIndex((element) => element.Id == id);
+                return result;
+            }
+            return -1;
+        }
     }
 }

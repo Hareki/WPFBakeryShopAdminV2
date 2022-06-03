@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using MaterialDesignThemes.Wpf;
 using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,6 +50,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             if (HasErrors()) return;
 
             LoadingPageVis = Visibility.Visible;
+
+            ProductDetails.Name = StringUtils.Trim(ProductDetails.Name);
+            ProductDetails.Allergens = StringUtils.Trim(ProductDetails.Allergens);
+            ProductDetails.Ingredients = StringUtils.Trim(ProductDetails.Ingredients);
+            NotifyOfPropertyChange(() => ProductDetails);
+
             ProductDetails.CategoryId = SelectedCategory.Id;
             string JsonProductInfo = StringUtils.SerializeObject(ProductDetails);
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Post, "products", JsonProductInfo, "application/json");
@@ -74,20 +81,24 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 
         private bool HasErrors()
         {
-            bool test1 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtAllergens);
             bool test2 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtIngredients);
             bool test3 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtName);
             View.AddNewProduct.Focus();
-            return test1 || test2 || test3;
+            return test2 || test3;
         }
 
         private void ResetFields()
         {
             ProductDetails = new ProductDetails();
-            View.Dispatcher.Invoke(() =>
+            try
             {
-                View.CategoryList.SelectedIndex = 0;
-            });
+                View.Dispatcher.Invoke(() =>
+                {
+                    View.CategoryList.SelectedIndex = 0;
+                });
+            }
+            catch (NullReferenceException) { }
+           
 
         }
 

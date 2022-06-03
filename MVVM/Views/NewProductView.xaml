@@ -170,9 +170,6 @@
                              Margin="15 0 0 30">
                         <TextBox.Text>
                             <Binding Path="ProductDetails.Allergens">
-                                <Binding.ValidationRules>
-                                    <validation:NotEmptyValidationRule />
-                                </Binding.ValidationRules>
                             </Binding>
                         </TextBox.Text>
                     </TextBox>

@@ -75,7 +75,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         public async Task LoginAsync()
         {
+
             LoadingPageVis = Visibility.Visible;
+
+            LoginInfo.Email = StringUtils.Trim(LoginInfo.Email);
+            NotifyOfPropertyChange(() => LoginInfo);
 
             RestClient client = new RestClient(RestConnection.AUTHENTICATE_BASE_CONNECTION_STRING);
             string requestBody = StringUtils.SerializeObject(LoginInfo);

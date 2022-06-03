@@ -59,6 +59,7 @@
                                 Style="{StaticResource CustomPrimaryButton}"
                                 Content="{DynamicResource PD_NewProduct}"
                                 HorizontalAlignment="Right"
+                                IsEnabled="{Binding CategoryList, Converter={StaticResource nullToEnabled}}"
                                 VerticalAlignment="Center"
                                 Margin="0 0 0 0" />
                     </StackPanel>
@@ -85,13 +86,13 @@
                         Padding="15 0"
                         Grid.Row="1"
                         CornerRadius="12">
-                    <Grid>
+                    <Grid IsEnabled="{Binding NotEditingInformation}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="8*" />
                             <RowDefinition Height="2*" />
                         </Grid.RowDefinitions>
                         <DataGrid x:Name="RowItemProducts"
-                                  IsEnabled="{Binding NotEditingInformation}"
+                                  
                                   CanUserAddRows="False"
                                   ScrollViewer.CanContentScroll="False"
                                   IsReadOnly="True"
@@ -123,7 +124,7 @@
                         <StackPanel HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
                                     Orientation="Horizontal"
-                                    IsEnabled="{Binding NotEditingInformation}"
+                                    IsEnabled="{Binding Path=LoadingPageVis, Converter={StaticResource reverseVisToBool}}"
                                     FlowDirection="RightToLeft"
                                     Grid.Row="1">
                             <Button  x:Name="LoadLastPage"
@@ -447,9 +448,6 @@
                                                                      Margin="15 0 0 0">
                                                                 <TextBox.Text>
                                                                     <Binding Path="ProductDetails.Allergens">
-                                                                        <Binding.ValidationRules>
-                                                                            <validation:NotEmptyValidationRule />
-                                                                        </Binding.ValidationRules>
                                                                     </Binding>
                                                                 </TextBox.Text>
                                                             </TextBox>

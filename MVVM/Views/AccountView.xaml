@@ -104,7 +104,8 @@
                         <StackPanel HorizontalAlignment="Right"
                                     Orientation="Horizontal"
                                     FlowDirection="RightToLeft"
-                                    Grid.Row="1">
+                                    Grid.Row="1"
+                                    IsEnabled="{Binding Path=LoadingPageVis, Converter={StaticResource reverseVisToBool}}">
 
                             <Button  x:Name="LoadLastPage"
                                      Style="{StaticResource MaterialDesignIconForegroundButton}"

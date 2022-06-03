@@ -94,7 +94,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 else
                 {
                     await Task.Delay(10);
-                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"),LangStr.Get("PA_ImageTooLarge"));
+                    await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("PA_ImageTooLarge"));
                 }
             }
         }
@@ -114,6 +114,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private async Task<bool> UpdateAccountInfoAsync()
         {
+            PersonalAccount.LastName = StringUtils.Trim(PersonalAccount.LastName);
+            PersonalAccount.FirstName = StringUtils.Trim(PersonalAccount.FirstName);
+            PersonalAccount.Address = StringUtils.Trim(PersonalAccount.Address);
+            NotifyOfPropertyChange(() => PersonalAccount);
+
             string JSonAccountInfo = StringUtils.SerializeObject(PersonalAccount);
 
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Put, "info", JSonAccountInfo, "application/json");
@@ -142,7 +147,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 {
                     return true;
                 }
-                else 
+                else
                 {
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
                     return false;

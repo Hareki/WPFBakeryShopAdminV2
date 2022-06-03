@@ -156,6 +156,7 @@
     <sys:String x:Key="Order_CustomerName">Tên KH</sys:String>
     <sys:String x:Key="Order_ShipmentDetail">Thông tin vận chuyển</sys:String>
     <sys:String x:Key="Order_Total">Tổng tiền</sys:String>
+    <sys:String x:Key="Order_ProcessingButton">Đang xử lý...</sys:String>
     <!--#endregion-->
 
     <!--#region Account view-->

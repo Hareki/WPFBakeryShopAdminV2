@@ -35,6 +35,8 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
         [JsonIgnore]
         public string TypeName => Lists.ProductTypeList.FindTypeNameById(TypeId);
         [JsonIgnore]
+        public int TypeIndex => Lists.ProductTypeList.FindTypeIndexById(TypeId);
+        [JsonIgnore]
         public string FormattedCost => Utilities.StringUtils.FormatCurrency(Cost);
         [JsonIgnore]
         public string FormattedPrice => Utilities.StringUtils.FormatCurrency(Price);

@@ -41,6 +41,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         {
             if (HasErrors()) return;
 
+            PersonalAccount.LastName = StringUtils.Trim(PersonalAccount.LastName);
+            PersonalAccount.FirstName = StringUtils.Trim(PersonalAccount.FirstName);
+            PersonalAccount.Address = StringUtils.Trim(PersonalAccount.Address);
+            PersonalAccount.Email = StringUtils.Trim(PersonalAccount.Email);
+            NotifyOfPropertyChange(() => PersonalAccount);
+
             LoadingPageVis = Visibility.Visible;
             SetPersonalAccountAuths();
             string JSonAccountInfo = StringUtils.SerializeObject(PersonalAccount);

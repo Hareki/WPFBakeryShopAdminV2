@@ -28,5 +28,10 @@ namespace WPFBakeryShopAdminV2.Utilities
         {
             return JsonConvert.SerializeObject(obj, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
         }
+        public static string Trim(string input)
+        {
+            input = input.Trim();
+            return Regex.Replace(input, @"\s+", " ");
+        }
     }
 }

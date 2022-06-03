@@ -29,7 +29,10 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             _productViewModel = productViewModel;
             ProductVariant = productVariant;
             TypeList = typeList;
-            SelectedProductType = TypeList[0];
+            int index = EditMode ? productVariant.TypeIndex : 0;
+
+            SelectedProductType = TypeList[index];
+
             _restClient = RestConnection.ManagementRestClient;
             ProductName = productName;
             _windowManager = windowManager;
@@ -74,7 +77,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             string JSonProductVariant = StringUtils.SerializeObject(ProductVariant);
             if (EditMode)
             {
-                await EditProductVariant(JSonProductVariant);
+                await EditProductVariant(JSonProductVariant, ProductVariant.Id);
             }
             else
             {
@@ -111,7 +114,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 case 200:
                     await _productViewModel.LoadVariantsAsync(ProductVariant.ProductId);
                     ShowSuccessMessage(LangStr.Get("PV_Add200"));
-                    _productViewModel.FocusProductVariant(null);
+                    _productViewModel.FocusProductVariant(-1);
                     ResetFields();
                     break;
                 case 404 when ProducIdNotFound(responseBody):
@@ -132,7 +135,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             SelectedProductType = TypeList[0];
         }
 
-        public async Task EditProductVariant(string requestBody)
+        public async Task EditProductVariant(string requestBody, int variantId)
         {
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Put, "variants", requestBody, "application/json");
             int statusCode = (int)response.StatusCode;
@@ -141,7 +144,8 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 case 200:
                     await _productViewModel.LoadVariantsAsync(ProductVariant.ProductId);
-                    ShowSuccessMessage(LangStr.Get("PV_Edit200"));
+                    _productViewModel.FocusProductVariant(variantId);
+                    _productViewModel.ShowSuccessMessage(LangStr.Get("PV_Edit200"));
                     Cancel();
                     break;
                 case 404 when ProducIdNotFound(responseBody):

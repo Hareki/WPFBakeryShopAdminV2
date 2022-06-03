@@ -156,6 +156,7 @@
     <sys:String x:Key="Order_CustomerName">Cutomer name</sys:String>
     <sys:String x:Key="Order_ShipmentDetail">Shipment detail</sys:String>
     <sys:String x:Key="Order_Total">Total</sys:String>
+    <sys:String x:Key="Order_ProcessingButton">Processing...</sys:String>
     <!--#endregion-->
 
     <!--#region Account view-->

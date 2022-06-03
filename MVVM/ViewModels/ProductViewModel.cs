@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using RestSharp;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -58,7 +59,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             {
                 _restClient = RestConnection.ManagementRestClient;
                 _ = LoadPageAsync();
-                _activated = true;  
+                _activated = true;
             }
             return Task.CompletedTask;
         }
@@ -164,11 +165,10 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         }
         private bool InformationHasErrors()
         {
-            bool test1 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtAllergens);
             bool test2 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtIngredients);
             bool test3 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtName);
             View.UpdateInformationAsync.Focus();
-            return test1 || test2 || test3;
+            return test2 || test3;
         }
         #endregion
 
@@ -186,37 +186,41 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             if (SelectedVariant == null) return;
 
 
-            bool confirm = await ShowConfirmMessage(LangStr.Get("Message_ConfirmationTitle"), LangStr.Get("Product_ConfirmDeletingVariant") +$" {SelectedProduct.Name} {SelectedVariant.TypeName}?");
+            bool confirm = await ShowConfirmMessage(LangStr.Get("Message_ConfirmationTitle"), LangStr.Get("Product_ConfirmDeletingVariant") + $" {SelectedProduct.Name} {SelectedVariant.TypeName}?");
             if (confirm)
             {
                 LoadingVariantVis = Visibility.Visible;
 
                 var result = await RestConnection.ExecuteRequestAsync(_restClient, Method.Delete, $"variants/{SelectedVariant.Id}");
                 int statusCode = (int)result.StatusCode;
-                LoadingVariantVis = Visibility.Hidden;
+
                 if (statusCode == 200)
                 {
                     await LoadVariantsAsync(SelectedProduct.Id);
+                    LoadingVariantVis = Visibility.Hidden;
                     ShowSuccessMessage(LangStr.Get("Product_RemoveVariant200"));
                 }
                 else if (statusCode == 404)
                 {
+                    LoadingVariantVis = Visibility.Hidden;
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("PV_EditVariantNoExists"));
+
                 }
                 else if (statusCode == 400)
                 {
+                    LoadingVariantVis = Visibility.Hidden;
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_SoldCantBeDeleted"));
                 }
             }
-            
+
         }
-        public void FocusProductVariant(ProductVariant productVariant)
+        public void FocusProductVariant(int variantid)
         {
             DataGrid grid = View.RowItemVariants;
-            if (productVariant != null)
+            if (variantid != -1)
             {
                 List<ProductVariant> currenItems = grid.Items.OfType<ProductVariant>().ToList();
-                int index = currenItems.FindIndex((element) => element.Id == productVariant.Id);
+                int index = currenItems.FindIndex((element) => element.Id == variantid);
                 grid.SelectedIndex = index;
                 grid.ScrollIntoView(grid.SelectedItem);
             }
@@ -251,6 +255,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             if (InformationHasErrors()) return;
             LoadingInfoVis = Visibility.Visible;
             ProductDetails.CategoryId = SelectedCategory.Id;
+
+            ProductDetails.Name = StringUtils.Trim(ProductDetails.Name);
+            ProductDetails.Ingredients = StringUtils.Trim(ProductDetails.Ingredients);
+            ProductDetails.Allergens = StringUtils.Trim(ProductDetails.Allergens);
+            NotifyOfPropertyChange(() => ProductDetails);
+
             string JSonProductInfo = StringUtils.SerializeObject(ProductDetails);
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Put, $"products/info", JSonProductInfo, "application/json");
             int statusCode = (int)response.StatusCode;
@@ -294,7 +304,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         #region Product Images
         public async Task AddImagesAsync()
         {
-            
+
             OpenFileDialog open = Utilities.Constants.OpenFileDialog;
             var images = new List<KeyValuePair<string, string>>();
             if ((bool)open.ShowDialog())
@@ -315,8 +325,9 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 else
                 {
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
+                    Debug.Assert(false);
                 }
-                
+
             }
         }
         public async Task ConfirmDeleteImages()
@@ -354,7 +365,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_ImageNoBelong"));
                     break;
             }
-            
+
         }
 
         public async Task ShowSeperatedProductImagesDialogAsync()
@@ -618,7 +629,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             return await MessageUtils.ShowConfirmMessage(View.DialogContent, View.ConfirmTitleTB, View.ConfirmMessageTB, View.ConfirmContent, View.ErrorContent,
                title, message);
         }
-        private void ShowSuccessMessage(string message)
+        public void ShowSuccessMessage(string message)
         {
             MessageUtils.ShowSnackBarMessage(View, View.GreenMessage, View.GreenSB, View.GreenContent, message);
         }
