@@ -43,8 +43,12 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             return Task.CompletedTask;
         }
         #endregion
-
         #region Orders Management
+        public async Task ReloadPageAsync()
+        {
+            Pagination.CurrentPage = 0;
+            await LoadPageAsync();
+        }
         public async Task LoadPageAsync()
         {
 

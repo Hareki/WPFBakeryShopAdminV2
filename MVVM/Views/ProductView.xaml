@@ -40,7 +40,7 @@
                                    FontWeight="SemiBold"
                                    Margin="{StaticResource TitleMargin}"
                                    Text="{DynamicResource PD_Title}" />
-                        <Button x:Name="LoadPageAsync"
+                        <Button x:Name="ReloadPage"
                                 Style="{StaticResource MaterialDesignIconForegroundButton}"
                                 IsEnabled="{Binding NotEditingInformation}"
                                 Foreground="{DynamicResource MaterialDesignBody}"

@@ -36,7 +36,7 @@
                                FontWeight="SemiBold"
                                Margin="{StaticResource TitleMargin}"
                                Text="{DynamicResource Account_Title}" />
-                    <Button x:Name="LoadPage"
+                    <Button x:Name="ReloadPage"
                             Style="{StaticResource MaterialDesignIconForegroundButton}"
                             Foreground="{DynamicResource MaterialDesignBody}"
                             VerticalAlignment="Top"

@@ -40,6 +40,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         #endregion
 
         #region Loading Stuffs
+        public async Task ReloadPageAsync()
+        {
+            Pagination.CurrentPage = 0;
+            await LoadPageAsync();
+        }
         public async Task LoadPageAsync()
         {
             if (RowItemAccounts != null)
