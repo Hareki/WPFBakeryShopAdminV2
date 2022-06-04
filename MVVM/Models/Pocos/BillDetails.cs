@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using WPFBakeryShopAdminV2.Utilities;
 using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
@@ -43,6 +44,8 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
         public bool PaidByCash { get; set; }
         public ReceiverInfo ReceiverInfo { get; set; }
         public List<Details> Details { get; set; }
+
+        [JsonIgnore]
         public string PaidMethodName
         {
             get
@@ -50,6 +53,7 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
                 return PaidByCash ? LangStr.Get("Cash"): LangStr.Get("Card");
             }
         }
+        [JsonIgnore]
         public bool CanUpdateOrderStatus
         {
             get
@@ -57,11 +61,20 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
                 return StatusId <= 2;
             }
         }
+        [JsonIgnore]
         public string FormattedTotal
         {
             get
             {
                 return StringUtils.FormatCurrency(Total);
+            }
+        }
+        [JsonIgnore]
+        public string FormattedPurchaseDate
+        {
+            get
+            {
+                return StringUtils.ToLocalDateTime(CreatedAt).ToString(StringUtils.VN_DATE_FORMAT);
             }
         }
     }

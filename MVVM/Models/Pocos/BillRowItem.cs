@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using WPFBakeryShopAdminV2.Utilities;
 using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 
@@ -11,6 +12,7 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
         public int StatusId { get; set; }
         public int Total { get; set; }
         public string CustomerName { get; set; }
+        [JsonIgnore]
         public string StatusString
         {
             get
@@ -29,10 +31,19 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
                 }
             }
         }
+        [JsonIgnore]
         public string FormattedTotal
         {
             get
             { return StringUtils.FormatCurrency(Total); }
+        }
+        [JsonIgnore]
+        public string FormattedPurchaseDate
+        {
+            get
+            {
+                return StringUtils.ToLocalDateTime(CreatedAt).ToString(StringUtils.VN_DATE_FORMAT);
+            }
         }
     }
 }

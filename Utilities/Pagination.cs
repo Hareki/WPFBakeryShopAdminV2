@@ -31,6 +31,7 @@ namespace WPFBakeryShopAdminV2.Utilities
                 {
                     TotalCount = (Int32.Parse(header.Value.ToString()));
                     MaxPageIndex = TotalCount / PageSize;
+                    if (TotalCount % 10 == 0) MaxPageIndex--;
                     UpdatePageIndicator();
                     totalCountDone = true;
                 }

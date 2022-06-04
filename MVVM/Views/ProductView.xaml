@@ -63,24 +63,6 @@
                                 VerticalAlignment="Center"
                                 Margin="0 0 0 0" />
                     </StackPanel>
-                    <materialDesign:Snackbar HorizontalAlignment="Center"
-                                             VerticalAlignment="Top"
-                                             Grid.ColumnSpan="12"
-                                             x:Name="GreenSB"
-                                             Background="#00b4d8"
-                                             MessageQueue="{materialDesign:MessageQueue}">
-                        <materialDesign:SnackbarMessage>
-                            <StackPanel Orientation="Horizontal"
-                                        x:Name="GreenContent">
-                                <materialDesign:PackIcon Kind="CheckCircle"
-                                                         Margin="0 3 10 0"
-                                                         VerticalAlignment="Center" />
-                                <TextBlock Text="Cập nhật trạng thái thành công"
-                                           FontWeight="SemiBold"
-                                           x:Name="GreenMessage" />
-                            </StackPanel>
-                        </materialDesign:SnackbarMessage>
-                    </materialDesign:Snackbar>
                 </Grid>
                 <Border Background="White"
                         Padding="15 0"
@@ -158,6 +140,28 @@
                         </StackPanel>
                     </Grid>
                 </Border>
+
+                <materialDesign:Snackbar HorizontalAlignment="Center"
+                                         VerticalAlignment="Bottom"
+                                         Grid.ColumnSpan="12"
+                                         Grid.Row="2"
+                                         Panel.ZIndex="3"
+                                         x:Name="GreenSB"
+                                         Background="#00b4d8"
+                                         MessageQueue="{materialDesign:MessageQueue}">
+                    <materialDesign:SnackbarMessage>
+                        <StackPanel Orientation="Horizontal"
+                                    x:Name="GreenContent">
+                            <materialDesign:PackIcon Kind="CheckCircle"
+                                                     Margin="0 3 10 0"
+                                                     VerticalAlignment="Center" />
+                            <TextBlock Text="Cập nhật trạng thái thành công"
+                                       FontWeight="SemiBold"
+                                       x:Name="GreenMessage" />
+                        </StackPanel>
+                    </materialDesign:SnackbarMessage>
+                </materialDesign:Snackbar>
+                
                 <materialDesign:DialogHost CloseOnClickAway="True"
                                            OverlayBackground="Transparent"
                                            Grid.Row="2">
@@ -258,10 +262,10 @@
                         </Border>
 
                     </materialDesign:DialogHost.DialogContent>
+                    
                     <Border HorizontalAlignment="Stretch"
                             Margin="0 30 0 0"
                             CornerRadius="12"
-                            Grid.Row="2"
                             Background="White"
                             Padding="0 0 0 0"
                             MaxHeight="350">
@@ -563,9 +567,6 @@
                                                                     <DataGridTextColumn Header="{DynamicResource PD_Price}"
                                                                                         Width="3*"
                                                                                         Binding="{Binding Path=FormattedPrice}" />
-                                                                    <DataGridTextColumn Header="{DynamicResource PD_Status}"
-                                                                                        Width="2*"
-                                                                                        Binding="{Binding Path=AvailableName}" />
                                                                 </DataGrid.Columns>
                                                             </DataGrid>
                                                         </Border>

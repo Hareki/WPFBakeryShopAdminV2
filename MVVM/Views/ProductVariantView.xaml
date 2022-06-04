@@ -121,6 +121,7 @@
                         Grid.Row="1"
                         Grid.ColumnSpan="12"
                         Margin="0 0 0 0"
+                        Visibility="Hidden"
                         VerticalAlignment="Center">
                 <ToggleButton x:Name="ProductVariant_Available"
                               Style="{StaticResource MaterialDesignSwitchToggleButton}"

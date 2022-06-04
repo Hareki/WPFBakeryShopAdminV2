@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
@@ -10,6 +11,7 @@ namespace WPFBakeryShopAdminV2.Utilities
         private static readonly Regex _emailRegex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,8}$");
         private static readonly Regex _phoneRegex = new Regex(@"^0[0-9]{9}$");
         public static readonly Regex NUMERIC_REGEX = new Regex(@"^[0-9]*$");
+        public static readonly string VN_DATE_FORMAT = "dd/MM/yyyy hh:mm:ss tt";
         public static bool IsValidEmail(string email)
         {
             if (email == null) return false;
@@ -30,8 +32,13 @@ namespace WPFBakeryShopAdminV2.Utilities
         }
         public static string Trim(string input)
         {
+            if (input == null) return string.Empty;
             input = input.Trim();
             return Regex.Replace(input, @"\s+", " ");
+        }
+        public static DateTime ToLocalDateTime(DateTime time)
+        {
+            return time.ToLocalTime();
         }
     }
 }

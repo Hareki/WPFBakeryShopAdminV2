@@ -18,7 +18,7 @@ namespace WPFBakeryShopAdminV2.MVVM.Models.Pocos
         public List<string> Authorities { get; set; }
         public string FullName
         {
-            get { return FirstName + " " + LastName; }
+            get { return LastName + " " + FirstName; }
         }
         public string ActivatedString
         {
