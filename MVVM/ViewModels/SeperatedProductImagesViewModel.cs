@@ -4,6 +4,7 @@ using RestSharp;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -73,19 +74,21 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Delete, $"products/{productId}/images", requestBody, "application/json");
 
             int statusCode = (int)response.StatusCode;
-            LoadingPageVis = Visibility.Hidden;
+            
             switch (statusCode)
             {
                 case 200:
-                    ShowSuccessMessage("Xóa ảnh thành công");
                     await _productViewModel.LoadProductImagesAsync(productId);
                     RowItemImages = _productViewModel.RowItemImages;
-
+                    LoadingPageVis = Visibility.Hidden;
+                    ShowSuccessMessage("Xóa ảnh thành công");
                     break;
                 case 404:
+                    LoadingPageVis = Visibility.Hidden;
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_ImageNoExists"));
                     break;
                 case 400:
+                    LoadingPageVis = Visibility.Hidden;
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_ImageNoBelong"));
                     break;
             }
@@ -117,16 +120,20 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 int productId = _productViewModel.SelectedProduct.Id;
                 var response = await RestConnection.ExecuteFileRequestAsync(_restClient, Method.Post, $"products/{productId}/images", images);
                 int statusCode = (int)response.StatusCode;
-                LoadingPageVis = Visibility.Hidden;
+                
                 if (statusCode == 201)
                 {
-                    ShowSuccessMessage(LangStr.Get("Product_ImageAdded200"));
+                    
                     await _productViewModel.LoadProductImagesAsync(productId);
                     RowItemImages = _productViewModel.RowItemImages;
+                    LoadingPageVis = Visibility.Hidden;
+                    ShowSuccessMessage(LangStr.Get("Product_ImageAdded200"));
                 }
                 else
                 {
+                    LoadingPageVis = Visibility.Hidden;
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
+                    Debug.Assert(false);
                 }
                 
             }

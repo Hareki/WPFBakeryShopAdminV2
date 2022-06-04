@@ -137,7 +137,7 @@
     <sys:String x:Key="Order_Category">Danh mục</sys:String>
     <sys:String x:Key="Order_Quanity">Số lượng</sys:String>
     <sys:String x:Key="Order_UnitPrice">Đơn giá</sys:String>
-    <sys:String x:Key="Order_Subtotal">Subtotal</sys:String>
+    <sys:String x:Key="Order_Subtotal">Tạm tính</sys:String>
     <sys:String x:Key="Order_OrderDetail">Chi tiết đơn hàng</sys:String>
     <sys:String x:Key="Order_Note">Ghi chú</sys:String>
     <sys:String x:Key="Order_Address">Địa chỉ</sys:String>

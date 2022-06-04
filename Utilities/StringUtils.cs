@@ -7,7 +7,7 @@ namespace WPFBakeryShopAdminV2.Utilities
 {
     public class StringUtils
     {
-        private static readonly Regex _emailRegex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+        private static readonly Regex _emailRegex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,8}$");
         private static readonly Regex _phoneRegex = new Regex(@"^0[0-9]{9}$");
         public static readonly Regex NUMERIC_REGEX = new Regex(@"^[0-9]*$");
         public static bool IsValidEmail(string email)

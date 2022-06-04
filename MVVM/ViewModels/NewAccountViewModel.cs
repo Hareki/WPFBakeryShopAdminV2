@@ -86,7 +86,7 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         private bool HasErrors()
         {
             bool test1 = !StringUtils.IsValidEmail(View.txtEmail.Text);
-            bool test2 = !StringUtils.IsValidEmail(View.txtPhone.Text);
+            bool test2 = !StringUtils.IsValidPhoneNumber(View.txtPhone.Text);
             bool test3 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtFirstName);
             bool test4 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtLastName);
             bool test5 = NotEmptyValidationRule.TryNotifyEmptyField(View.txtEmail); ;

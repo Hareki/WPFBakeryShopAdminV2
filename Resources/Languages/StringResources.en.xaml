@@ -133,12 +133,12 @@
     <sys:String x:Key="Order_Title">Orders</sys:String>
     <sys:String x:Key="Order_ID">Order ID</sys:String>
     
-    <sys:String x:Key="Order_ProductName">ProductName</sys:String>
+    <sys:String x:Key="Order_ProductName">Product name</sys:String>
     <sys:String x:Key="Order_Category">Category</sys:String>
     <sys:String x:Key="Order_Quanity">Quantity</sys:String>
     <sys:String x:Key="Order_UnitPrice">Unit price</sys:String>
     <sys:String x:Key="Order_Subtotal">Subtotal</sys:String>
-    <sys:String x:Key="Order_OrderDetail">Order detail</sys:String>
+    <sys:String x:Key="Order_OrderDetail">Order details</sys:String>
     <sys:String x:Key="Order_Note">Note</sys:String>
     <sys:String x:Key="Order_Address">Address</sys:String>
     <sys:String x:Key="Order_Phone">Phone number</sys:String>
@@ -177,7 +177,7 @@
     <!--#endregion-->
 
     <!--#region New Account view-->
-    <sys:String x:Key="NA_Title">Create new account</sys:String>
+    <sys:String x:Key="NA_Title">New account</sys:String>
     <sys:String x:Key="NA_Save">Save</sys:String>
     <sys:String x:Key="NA_Cancel">Cancel</sys:String>
     <!--#endregion-->
@@ -241,7 +241,7 @@
 
     <!--#region Product Variant -->
     <sys:String x:Key="PV_UpdateTitle">Update variant</sys:String>
-    <sys:String x:Key="PV_AddTitle">Add variant</sys:String>
+    <sys:String x:Key="PV_AddTitle">New variant</sys:String>
 
     <sys:String x:Key="PV_PriceSmaller">Price must be greater than cost</sys:String>
     <sys:String x:Key="PV_Add200">New variant added successfully</sys:String>

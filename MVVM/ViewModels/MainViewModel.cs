@@ -119,11 +119,20 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             }
 
         }
+        bool firstTime = true;
+        bool selfCall = false;
         public void LoadPersonalAccount()
         {
             if (ActiveItem != _personalAccountViewModel)
             {
                 ActivateItemAsync(_personalAccountViewModel);
+                if (firstTime)
+                {
+                    _eventAggregator.PublishOnUIThreadAsync(PersonalAccount);
+                    selfCall = true;
+                    firstTime = false;
+                }
+
             }
         }
         #endregion
@@ -168,6 +177,11 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         #region Singleton handler
         public Task HandleAsync(PersonalAccount account, CancellationToken cancellationToken)
         {
+            if (selfCall)
+            {
+                selfCall = false;
+                return Task.CompletedTask;
+            }
             PersonalAccount = account;
             return Task.CompletedTask;
         }

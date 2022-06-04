@@ -17,7 +17,7 @@ using LangStr = WPFBakeryShopAdminV2.Utilities.Language;
 
 namespace WPFBakeryShopAdminV2.MVVM.ViewModels
 {
-    public class PersonalAccountViewModel : Screen
+    public class PersonalAccountViewModel : Screen, IHandle<PersonalAccount>
     {
         private RestClient _restClient;
         private Visibility _loadingPageVis = Visibility.Hidden;
@@ -45,10 +45,10 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 _eventAggregator.SubscribeOnPublishedThread(this);
                 LanguageList = Lists.LanguageList.LIST;
 
-                if (PersonalAccount == null)
-                {
-                    await RefreshAccountInfo();
-                }
+                //if (PersonalAccount == null)
+                //{
+                //    await RefreshAccountInfo();
+                //}
                 _activated = true;
             }
         }
@@ -270,6 +270,17 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 TimeSpan.FromSeconds(3));
             });
             await Task.Delay(3000);
+        }
+
+        bool firstTime = true;
+        public Task HandleAsync(PersonalAccount message, CancellationToken cancellationToken)
+        {
+            if (firstTime)
+            {
+                firstTime = false;
+                PersonalAccount = message;
+            }
+            return Task.CompletedTask;
         }
         #endregion
 

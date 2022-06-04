@@ -58,6 +58,9 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             if (!_activated)
             {
                 _restClient = RestConnection.ManagementRestClient;
+                _ = LoadCategoryList();
+                _ = LoadTypeList();
+
                 _ = LoadPageAsync();
                 _activated = true;
             }
@@ -76,9 +79,6 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 RowItemProducts.Clear();
 
             LoadingPageVis = Visibility.Visible;
-
-            _ = LoadCategoryList();
-            _ = LoadTypeList();
 
             var list = new List<KeyValuePair<string, string>>() {
                       new KeyValuePair<string, string>("page", Pagination.CurrentPage.ToString()),
@@ -320,14 +320,16 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
                 }
                 var response = await RestConnection.ExecuteFileRequestAsync(_restClient, Method.Post, $"products/{SelectedProduct.Id}/images", images);
                 int statusCode = (int)response.StatusCode;
-                LoadingProductImages = Visibility.Hidden;
+                
                 if (statusCode == 201)
                 {
-                    ShowSuccessMessage(LangStr.Get("Product_ImageAdded200"));
                     await LoadProductImagesAsync(SelectedProduct.Id);
+                    LoadingProductImages = Visibility.Hidden;
+                    ShowSuccessMessage(LangStr.Get("Product_ImageAdded200"));
                 }
                 else
                 {
+                    LoadingProductImages = Visibility.Hidden;
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("UnexpectedError"));
                     Debug.Assert(false);
                 }
@@ -354,18 +356,20 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
             string requestBody = StringUtils.SerializeObject(deleteImagesBody);
             var response = await RestConnection.ExecuteRequestAsync(_restClient, Method.Delete, $"products/{SelectedProduct.Id}/images", requestBody, "application/json");
 
-            LoadingProductImages = Visibility.Hidden;
             int statusCode = (int)response.StatusCode;
             switch (statusCode)
             {
                 case 200:
-                    ShowSuccessMessage(LangStr.Get("Product_DeleteImage200"));
                     await LoadProductImagesAsync(SelectedProduct.Id);
+                    LoadingProductImages = Visibility.Hidden;
+                    ShowSuccessMessage(LangStr.Get("Product_DeleteImage200"));
                     break;
                 case 404:
+                    LoadingProductImages = Visibility.Hidden;
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_ImageNoExists"));
                     break;
                 case 400:
+                    LoadingProductImages = Visibility.Hidden;
                     await ShowErrorMessage(LangStr.Get("Message_ErrorTitle"), LangStr.Get("Product_ImageNoBelong"));
                     break;
             }
@@ -412,18 +416,22 @@ namespace WPFBakeryShopAdminV2.MVVM.ViewModels
         #region Pagination
         public async Task LoadFirstPage()
         {
+            ProductDetails = null;
             await Pagination.LoadFirstPage();
         }
         public async Task LoadPreviousPage()
         {
+            ProductDetails = null;
             await Pagination.LoadPreviousPage();
         }
         public async Task LoadNextPage()
         {
+            ProductDetails = null;
             await Pagination.LoadNextPage();
         }
         public async Task LoadLastPage()
         {
+            ProductDetails = null;
             await Pagination.LoadLastPage();
         }
         #endregion

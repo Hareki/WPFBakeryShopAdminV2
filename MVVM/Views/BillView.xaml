@@ -139,6 +139,7 @@
                                        Margin="{StaticResource TitleMargin}"
                                        Text="{DynamicResource Order_Title}" />
                             <Button x:Name="ReloadPage"
+                                    IsEnabled="{Binding UpdatingStatusVis, Converter={StaticResource reverseVisToBool}}"
                                     Style="{StaticResource MaterialDesignIconForegroundButton}"
                                     Foreground="{DynamicResource MaterialDesignBody}"
                                     VerticalAlignment="Top"
@@ -153,7 +154,8 @@
                     <Border Background="White"
                             Padding="15 0"
                             Grid.Row="1"
-                            CornerRadius="12">
+                            CornerRadius="12"
+                            IsEnabled="{Binding UpdatingStatusVis, Converter={StaticResource reverseVisToBool}}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="8*" />
